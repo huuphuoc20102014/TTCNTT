@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TTCNTT</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <!-- Thư viện template -->
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+    <!-- Core CSS -->
+    <link type="text/css" rel="stylesheet" href="~/template/css/bootstrap.css"><!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="~/template/font-awesome/css/font-awesome.min.css"><!-- font-awesome -->
+    <link type="text/css" rel="stylesheet" href="~/template/css/animate.min.css"><!-- Animation -->
+    <link type="text/css" rel="stylesheet" href="~/template/css/flexslider.css"><!-- FlexSlider CSS -->
+    <link type="text/css" rel="stylesheet" href="~/template/css/style.css"><!-- Light Theme Core CSS -->
+    <!-- Google Fonts here -->
+    <link href="~/template/css/fonts/poppins.css" rel='stylesheet' type='text/css'>
+    <link href="~/template/css/fonts/open-sans.css" type='text/css'>
+    <link href="~/template/css/fonts/lato.css" rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <header>
+        <partial name="_header" />
+        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TTCNTT</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <partial name="_LoginPartial" />
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>*@
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <partial name="_footer" />
+
+    @*<footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2019 - TTCNTT - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>*@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+
+    <!-- lbr JS -->
+    <script type="text/javascript" src="~/template/js/jquery.js"></script>
+    <script type="text/javascript" src="~/template/js/jquery.particleground.js"></script><!-- Particle Header Js -->
+    <script type="text/javascript" src="~/template/js/particle.js"></script><!-- Particle Header Js -->
+    <script type="text/javascript" src="~/template/js/owl.carousel.js"></script><!-- Owl Carousel Js -->
+    <script type="text/javascript" src="~/template/js/owl-carousel-settings.js"></script><!-- Owl Carousel Settings Js -->
+    <script type="text/javascript" src="~/template/js/jquery.flexslider.js"></script><!-- Flexslider Settings Js -->
+    <script type="text/javascript" src="~/template/js/mini-grid.js"></script><!-- Mini Master Grid Js -->
+    <script type="text/javascript" src="~/template/js/settings.js"></script><!-- Settings Js -->
+    <script type="text/javascript" src="~/template/js/bootstrap.js"></script><!-- Bootstrap Js -->
+    <script type="text/javascript" src="~/template/js/featherlight.min.js"></script><!-- Feather-Lightbox (projects) Js -->
+    <script type="text/javascript" src="~/template/js/forms.js"></script><!-- Form Js -->
+    <script type="text/javascript" src="~/template/js/animation.js"></script><!-- Animation Js -->
+</body>
+</html>
