@@ -1,5 +1,6 @@
-﻿<!-- Preloader Area Start
-    ====================================================== -->
+﻿@inject TTCNTT.Efs.Context.WebTTCNTTContext webContext
+
+
 <div id="mask">
     <div id="loader">
     </div>
@@ -22,28 +23,12 @@ Preloader Area End -->
             <div class="menu-bar">
                 <nav>
                     <ul class="menu">
-                        <li>
-                            <a href="index.html">Trang chủ</a>
-                            <ul>
-                                <li><a href="index.html">Home 1</a></li>
-                                <li><a href="one-page.html">Home 1 One-Page</a></li>
-                                <li><a href="index-1.html">Home 2</a></li>
-                                <li><a href="one-page-1.html">Home 2 One-Page</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="about.html">Giới thiệu</a></li>
-                        <li><a href="services.html">Dịch vụ</a></li>
-                        <li><a href="pricing.html">Sản phẩm</a></li>
-                        <li>
-                            <a href="#">Tin tức - sự kiện</a>
-                            <ul>
-                                <li><a href="blog.html">Tin tức - sự kiện</a></li>
-                                <li><a href="blog-detail.html">Chi tiết tin tức</a></li>
-                                <li><a href="typography.html">Typography</a></li>
-                                <li><a href="shortcodes.html">Shortcodes</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="contact.html">Liên hệ</a></li>
+
+                        @{
+                            var menuModel = await TTCNTT.Helpers.MenuHelper.GetDataMenu(webContext);
+                            <partial name="_MenuPartial" model="menuModel" />
+                        }
+
                     </ul>
                 </nav>
             </div>

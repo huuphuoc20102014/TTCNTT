@@ -1,0 +1,57 @@
+﻿@model MenuViewModel
+
+@foreach (var item in Model.listMenu)
+{
+    if (item.SlugName == "trang-chu")
+    {
+        <li><a href="~/@item.SlugName">@item.Name</a></li>
+    }
+    else if (item.SlugName == "gioi-thieu")
+    {
+        <li><a href="~/@item.SlugName">@item.Name</a></li>
+    }
+    else if (item.SlugName == "dich-vu")
+    {
+        <li>
+            <a href="~/@item.SlugName">@item.Name</a>
+            <ul>
+                @foreach (var dichvu in Model.listService)
+                {
+                    <li><a href="#">@dichvu.ServiceName</a></li>
+                }
+            </ul>
+        </li>
+    }
+    else if (item.SlugName == "san-pham")
+    {
+        <li><a href="~/@item.SlugName">@item.Name</a></li>
+    }
+    else if (item.SlugName == "dao-tao")
+    {
+        <li>
+            <a href="~/@item.SlugName">@item.Name</a>
+            <ul>
+                @foreach (var daotao in Model.listTraining)
+                {
+                    <li><a href="#">@daotao.Name</a></li>
+                }
+            </ul>
+        </li>
+    }
+    else if (item.SlugName == "tin-tuc-su-kien")
+    {
+        <li>
+            <a href="~/@item.SlugName">@item.Name</a>
+            <ul>
+                @foreach (var loaitintuc in Model.listNewsType)
+                {
+                    <li><a href="#">@loaitintuc.Name</a></li>
+                }
+            </ul>
+        </li>
+    }
+    else if (item.SlugName == "lien-he")
+    {
+        <li><a href="~/@item.SlugName">@item.Name</a></li>
+    }
+}

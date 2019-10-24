@@ -12,6 +12,7 @@ using TTCNTT.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TTCNTT.Efs.Context;
 
 namespace TTCNTT
 {
@@ -29,7 +30,12 @@ namespace TTCNTT
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("TTCNTTConnection")));
+
+            services.AddDbContext<WebTTCNTTContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("TTCNTTConnection")));
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
