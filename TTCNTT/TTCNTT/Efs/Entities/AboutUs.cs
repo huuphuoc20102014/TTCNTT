@@ -7,12 +7,12 @@ namespace TTCNTT.Efs.Entities
     {
         public string Id { get; set; }
         public string Title { get; set; }
-        public string SlugTitle { get; set; }
+        public string Slug_Title { get; set; }
         public bool AutoSlug { get; set; }
         public string Name { get; set; }
         public string Skill { get; set; }
-        public string ShortDescriptionHtml { get; set; }
-        public string LongDescriptionHtml { get; set; }
+        public string ShortDescription_Html { get; set; }
+        public string LongDescription_Html { get; set; }
         public string ImageSlug { get; set; }
         public string Tags { get; set; }
         public string KeyWord { get; set; }

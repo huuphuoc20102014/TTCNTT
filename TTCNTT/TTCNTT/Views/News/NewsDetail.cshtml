@@ -1,0 +1,172 @@
+﻿@model NewsViewModel
+
+<section class="banner-sec">
+    <div class="main-banner inner" style=" background:url(img/banner-bg.jpg) no-repeat top center fixed; background-size:cover;">
+        <a href="#" name="scroll-top-div"></a>
+        <div class="overlay-mask">
+            <!-- Start:Slider area -->
+            <div class="container">
+                <h1>@Model.menu.Name</h1>
+                <h6>Chi tiết Tin Tức</h6>
+                <hr>
+            </div>
+            <!-- End:Slider area -->
+        </div>
+    </div>
+</section>
+
+<section class="blog-outer-area">
+    <div class="content-area">
+        <div class="blog-area-sec">
+            <!-- Start: Blog Sec -->
+            <div class="blog-sec">
+                <div class="container">
+                    <!-- Start:Blog Area -->
+                    <div class="blog-inner-area">
+                        <!-- Start:Blog Left Content-->
+                        <div class="col-md-8 left">
+                            <div class="item-box">
+                                <div class=" img-holder">
+                                    <img src="~/Images/News/@Model.news.ImageSlug" alt="">
+                                </div>
+                                <div class="info-text-holder">
+                                    <h4>@Model.news.Title.</h4>
+                                    <span> <a href="#">@Model.news.CreatedDate</a></span>
+                                    <p>
+                                        @Model.news.LongDescription_Html.
+                                    <p>
+
+                                        <ul class="social-icon-simple">
+                                            <li><a href="#"><i class="fa fa-share-alt"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                        </ul>
+                                </div>
+                            </div>
+                            <!-- Start:Comment Area-->
+                            <div class="blog-comment-sec">
+                                <h4>Bình Luận</h4>
+                                <ul class="users-list">
+                                    <li>
+                                        <!-- hình ảnh -->
+                                        @*<div class="user-pic">
+                                            <img src="~/template/img/testimonial-2.jpg" alt="">
+                                        </div>*@
+                                        <div class="user-comment">
+                                            <h6>Teena James</h6>
+                                            <span>August 4, 2016 at 10:29 pm</span>
+                                            <p>Praesent pulvinar mollis dui sed vehicula. Vestibulum posuere dolor ipsum, in  interdum velit blandit at.Nulla volutpat dolor elit.  mollis dui sed vehicula. Vestibulum posuere dolor ipsum</p>
+                                            @*<p><a href="#">Phản hồi</a></p>*@
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <!-- Start:Leave Repaly -->
+                                <div class="Reply-sec">
+                                    <h6>Để lại bình luận</h6>
+                                    <p>Địa chỉ email và số điện thoại của bạn sẽ được giữ bí mật.</p>
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <input type="text" placeholder="Họ tên" class="text-field-box borderd smoke-white ">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="text" placeholder="Email" class="text-field-box borderd smoke-white ">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="text" placeholder="Số điện thoại" class="text-field-box borderd smoke-white ">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="container">
+                                                <textarea class="text-field-box borderd smoke-white" placeholder="Nội dung bình luận"></textarea>
+                                                <button name="contact" type="submit" id="contact-submit" class="button-medium ">Gửi bình luận</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- End:Leave Repaly -->
+                            </div>
+                            <!-- End:Comment Area-->
+                        </div>
+                        <!-- End:Blog Left Content-->
+                        <!-- Start:Blog Right Content-->
+                        <div class="col-md-4 ">
+                            <div class="right">
+                                <input type="text" name="search" class="search-btn" placeholder="Tìm kiếm">
+
+                                <!-- Start:category-box-->
+                                <h5>Các loại tin tức</h5>
+                                <ul class="category-box">
+                                    @foreach (var item in Model.listNewsType)
+                                    {
+                                        <li><a href="#">@item.Name </a></li>
+                                    }
+                                </ul>
+                                <!-- End:category-box-->
+                                <!-- Start:Recent Posts-->
+                                <h5>Tin tức khác</h5>
+                                <ul class="recent-post">
+                                    @foreach (var item in Model.listNews.Take(4)) 
+                                    { 
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <img src="~/Images/News/@item.ImageSlug" alt="">
+                                            </div>
+                                            <div class="col-md-7">
+                                                <div class="text">
+                                                    <p><a href="~/news/newsdetail/@item.Id">@item.Title</a></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    }
+                                    
+                                </ul>
+                                <!-- End:Recent Posts-->
+                                <!-- Star:flikr-img-->
+                                @*<h5>Flickr</h5>
+                                <ul class="flikr-img-list">
+                                    <li><img src="img/flikr-1.jpg" alt=""></li>
+                                    <li><img src="img/flikr-2.jpg" alt=""></li>
+                                    <li><img src="img/flikr-3.jpg" alt=""></li>
+                                    <li> <img src="img/flikr-4.jpg" alt=""></li>
+                                    <li><img src="img/flikr-5.jpg" alt=""></li>
+                                    <li><img src="img/flikr-6.jpg" alt=""></li>
+                                    <li><img src="img/flikr-7.jpg" alt=""></li>
+                                    <li><img src="img/flikr-8.jpg" alt=""></li>
+                                </ul>*@
+                                <!-- End:flikr-img-->
+                                <!-- Start:tags-->
+                                @*<h5>Tags</h5>
+                                <div class="tags">
+                                    <a href="#"><span>HTML</span></a>
+                                    <a href="#"><span>Finearts</span></a>
+                                    <a href="#"><span>PHP</span></a>
+                                    <a href="#"><span>Java Script</span></a>
+                                    <a href="#"><span>Articles</span></a>
+                                    <a href="#"><span>CSS</span></a>
+                                    <a href="#"><span>Economics</span></a>
+                                    <a href="#"><span>JQuery</span></a>
+                                    <a href="#"><span>Edithing</span></a>
+                                    <a href="#"><span>Painting</span></a>
+                                </div>*@
+                                <!-- End:tags-->
+
+                            </div>
+                        </div>
+                        <!-- End:Blog Right Content-->
+                    </div>
+                    <!-- End:Blog Area -->
+                </div>
+            </div>
+            <!-- End: Blog Sec -->
+        </div>
+    </div>
+</section>
+<!-- =================================================
+Content Area End -->

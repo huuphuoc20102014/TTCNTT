@@ -5,6 +5,10 @@
     <UserSecretsId>aspnet-TTCNTT-FB3AFCE7-2126-459A-8D17-02A1898E7DA0</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="Views\News\Index.cshtml" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.0.0" />

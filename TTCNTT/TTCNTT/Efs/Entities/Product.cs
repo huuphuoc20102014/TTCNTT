@@ -14,19 +14,19 @@ namespace TTCNTT.Efs.Entities
         public string Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
-        public string SlugName { get; set; }
+        public string Slug_Name { get; set; }
         public bool AutoSlug { get; set; }
         public string FkProductId { get; set; }
-        public string SpecificationHtml { get; set; }
-        public string ShortDescriptionHtml { get; set; }
-        public string LongDescriptionHtml { get; set; }
-        public string Sku { get; set; }
+        public string Specification_Html { get; set; }
+        public string ShortDescription_Html { get; set; }
+        public string LongDescription_Html { get; set; }
+        public string SKU { get; set; }
         public string Color { get; set; }
         public string Size { get; set; }
         public string Material { get; set; }
         public string Style { get; set; }
         public double? Price { get; set; }
-        public string Ccy { get; set; }
+        public string CCY { get; set; }
         public string Country { get; set; }
         public string Producer { get; set; }
         public string Status { get; set; }

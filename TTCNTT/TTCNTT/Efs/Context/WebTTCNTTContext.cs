@@ -27,7 +27,7 @@ namespace TTCNTT.Efs.Context
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Contact> Contact { get; set; }
-        public virtual DbSet<Faq> Faq { get; set; }
+        public virtual DbSet<FAQ> FAQ { get; set; }
         public virtual DbSet<ImageSlide> ImageSlide { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<News> News { get; set; }
@@ -80,9 +80,7 @@ namespace TTCNTT.Efs.Context
 
                 entity.Property(e => e.KeyWord).HasMaxLength(1000);
 
-                entity.Property(e => e.LongDescriptionHtml)
-                    .HasColumnName("LongDescription_Html")
-                    .HasColumnType("ntext");
+                entity.Property(e => e.LongDescription_Html).HasColumnType("ntext");
 
                 entity.Property(e => e.MetaData).HasMaxLength(1000);
 
@@ -96,13 +94,10 @@ namespace TTCNTT.Efs.Context
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.ShortDescriptionHtml)
-                    .HasColumnName("ShortDescription_Html")
-                    .HasMaxLength(1000);
+                entity.Property(e => e.ShortDescription_Html).HasMaxLength(1000);
 
-                entity.Property(e => e.SlugName)
+                entity.Property(e => e.Slug_Name)
                     .IsRequired()
-                    .HasColumnName("Slug_Name")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -134,9 +129,7 @@ namespace TTCNTT.Efs.Context
 
                 entity.Property(e => e.KeyWord).HasMaxLength(1000);
 
-                entity.Property(e => e.LongDescriptionHtml)
-                    .HasColumnName("LongDescription_Html")
-                    .HasColumnType("ntext");
+                entity.Property(e => e.LongDescription_Html).HasColumnType("ntext");
 
                 entity.Property(e => e.MetaData).HasMaxLength(1000);
 
@@ -148,15 +141,12 @@ namespace TTCNTT.Efs.Context
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.ShortDescriptionHtml)
-                    .HasColumnName("ShortDescription_Html")
-                    .HasMaxLength(1000);
+                entity.Property(e => e.ShortDescription_Html).HasMaxLength(1000);
 
                 entity.Property(e => e.Skill).HasMaxLength(500);
 
-                entity.Property(e => e.SlugTitle)
+                entity.Property(e => e.Slug_Title)
                     .IsRequired()
-                    .HasColumnName("Slug_Title")
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
@@ -309,9 +299,8 @@ namespace TTCNTT.Efs.Context
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.SlugName)
+                entity.Property(e => e.Slug_Name)
                     .IsRequired()
-                    .HasColumnName("Slug_Name")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -383,22 +372,16 @@ namespace TTCNTT.Efs.Context
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<Faq>(entity =>
+            modelBuilder.Entity<FAQ>(entity =>
             {
-                entity.ToTable("FAQ");
+                entity.Property(e => e.ID).HasMaxLength(50);
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Faqquestion)
+                entity.Property(e => e.FAQQuestion)
                     .IsRequired()
-                    .HasColumnName("FAQQuestion")
                     .HasMaxLength(1000);
 
-                entity.Property(e => e.Faqreply)
+                entity.Property(e => e.FAQReply)
                     .IsRequired()
-                    .HasColumnName("FAQReply")
                     .HasMaxLength(2000);
 
                 entity.Property(e => e.RowVersion)
@@ -440,9 +423,8 @@ namespace TTCNTT.Efs.Context
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.SlugName)
+                entity.Property(e => e.Slug_Name)
                     .IsRequired()
-                    .HasColumnName("Slug_Name")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -508,9 +490,8 @@ namespace TTCNTT.Efs.Context
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.SlugName)
+                entity.Property(e => e.Slug_Name)
                     .IsRequired()
-                    .HasColumnName("Slug_Name")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -529,11 +510,6 @@ namespace TTCNTT.Efs.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Coment)
-                    .HasColumnName("coment")
-                    .HasMaxLength(100)
-                    .IsFixedLength();
-
                 entity.Property(e => e.CreatedBy)
                     .IsRequired()
                     .HasMaxLength(50)
@@ -550,9 +526,7 @@ namespace TTCNTT.Efs.Context
 
                 entity.Property(e => e.KeyWord).HasMaxLength(1000);
 
-                entity.Property(e => e.LongDescriptionHtml)
-                    .HasColumnName("LongDescription_Html")
-                    .HasColumnType("ntext");
+                entity.Property(e => e.LongDescription_Html).HasColumnType("ntext");
 
                 entity.Property(e => e.MetaData).HasMaxLength(1000);
 
@@ -562,13 +536,10 @@ namespace TTCNTT.Efs.Context
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.ShortDescriptionHtml)
-                    .HasColumnName("ShortDescription_Html")
-                    .HasMaxLength(1000);
+                entity.Property(e => e.ShortDescription_Html).HasMaxLength(1000);
 
-                entity.Property(e => e.SlugTitle)
+                entity.Property(e => e.Slug_Title)
                     .IsRequired()
-                    .HasColumnName("Slug_Title")
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
@@ -621,9 +592,8 @@ namespace TTCNTT.Efs.Context
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.SlugName)
+                entity.Property(e => e.Slug_Name)
                     .IsRequired()
-                    .HasColumnName("Slug_Name")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -691,9 +661,7 @@ namespace TTCNTT.Efs.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Ccy)
-                    .HasColumnName("CCY")
-                    .HasMaxLength(50);
+                entity.Property(e => e.CCY).HasMaxLength(50);
 
                 entity.Property(e => e.Code)
                     .IsRequired()
@@ -722,9 +690,7 @@ namespace TTCNTT.Efs.Context
 
                 entity.Property(e => e.KeyWord).HasMaxLength(1000);
 
-                entity.Property(e => e.LongDescriptionHtml)
-                    .HasColumnName("LongDescription_Html")
-                    .HasColumnType("ntext");
+                entity.Property(e => e.LongDescription_Html).HasColumnType("ntext");
 
                 entity.Property(e => e.Material).HasMaxLength(50);
 
@@ -742,25 +708,18 @@ namespace TTCNTT.Efs.Context
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.ShortDescriptionHtml)
-                    .HasColumnName("ShortDescription_Html")
-                    .HasMaxLength(1000);
+                entity.Property(e => e.SKU).HasMaxLength(50);
+
+                entity.Property(e => e.ShortDescription_Html).HasMaxLength(1000);
 
                 entity.Property(e => e.Size).HasMaxLength(50);
 
-                entity.Property(e => e.Sku)
-                    .HasColumnName("SKU")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.SlugName)
+                entity.Property(e => e.Slug_Name)
                     .IsRequired()
-                    .HasColumnName("Slug_Name")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.SpecificationHtml)
-                    .HasColumnName("Specification_Html")
-                    .HasMaxLength(1000);
+                entity.Property(e => e.Specification_Html).HasMaxLength(1000);
 
                 entity.Property(e => e.Status).HasMaxLength(50);
 
@@ -880,9 +839,8 @@ namespace TTCNTT.Efs.Context
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.SlugName)
+                entity.Property(e => e.Slug_Name)
                     .IsRequired()
-                    .HasColumnName("Slug_Name")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -927,9 +885,7 @@ namespace TTCNTT.Efs.Context
 
                 entity.Property(e => e.KeyWord).HasMaxLength(1000);
 
-                entity.Property(e => e.LongDescriptionHtml)
-                    .HasColumnName("LongDescription_Html")
-                    .HasColumnType("ntext");
+                entity.Property(e => e.LongDescription_Html).HasColumnType("ntext");
 
                 entity.Property(e => e.MetaData).HasMaxLength(1000);
 
@@ -943,13 +899,10 @@ namespace TTCNTT.Efs.Context
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.ShortDescriptionHtml)
-                    .HasColumnName("ShortDescription_Html")
-                    .HasMaxLength(1000);
+                entity.Property(e => e.ShortDescription_Html).HasMaxLength(1000);
 
-                entity.Property(e => e.SlugName)
+                entity.Property(e => e.Slug_Name)
                     .IsRequired()
-                    .HasColumnName("Slug_Name")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -1007,9 +960,8 @@ namespace TTCNTT.Efs.Context
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.SlugName)
+                entity.Property(e => e.Slug_Name)
                     .IsRequired()
-                    .HasColumnName("Slug_Name")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -1058,9 +1010,8 @@ namespace TTCNTT.Efs.Context
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.SlugName)
+                entity.Property(e => e.Slug_Name)
                     .IsRequired()
-                    .HasColumnName("Slug_Name")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -1094,9 +1045,7 @@ namespace TTCNTT.Efs.Context
 
                 entity.Property(e => e.KeyWord).HasMaxLength(1000);
 
-                entity.Property(e => e.LongDescriptionHtml)
-                    .HasColumnName("LongDescription_Html")
-                    .HasColumnType("ntext");
+                entity.Property(e => e.LongDescription_Html).HasColumnType("ntext");
 
                 entity.Property(e => e.MetaData).HasMaxLength(1000);
 
@@ -1110,13 +1059,10 @@ namespace TTCNTT.Efs.Context
                     .IsRequired()
                     .HasMaxLength(100);
 
-                entity.Property(e => e.ShortDescriptionHtml)
-                    .HasColumnName("ShortDescription_Html")
-                    .HasMaxLength(1000);
+                entity.Property(e => e.ShortDescription_Html).HasMaxLength(1000);
 
-                entity.Property(e => e.SlugName)
+                entity.Property(e => e.Slug_Name)
                     .IsRequired()
-                    .HasColumnName("Slug_Name")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -1168,8 +1114,7 @@ namespace TTCNTT.Efs.Context
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.SlugName)
-                    .HasColumnName("Slug_Name")
+                entity.Property(e => e.Slug_Name)
                     .HasMaxLength(50)
                     .IsUnicode(false);
             });

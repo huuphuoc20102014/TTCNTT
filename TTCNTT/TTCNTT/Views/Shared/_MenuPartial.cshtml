@@ -2,18 +2,18 @@
 
 @foreach (var item in Model.listMenu)
 {
-    if (item.SlugName == "trang-chu")
+    if (item.Slug_Name == "trang-chu")
     {
-        <li><a href="~/@item.SlugName">@item.Name</a></li>
+        <li><a href="~/@item.Slug_Name">@item.Name</a></li>
     }
-    else if (item.SlugName == "gioi-thieu")
+    else if (item.Slug_Name == "gioi-thieu")
     {
-        <li><a href="~/@item.SlugName">@item.Name</a></li>
+        <li><a href="~/@item.Slug_Name">@item.Name</a></li>
     }
-    else if (item.SlugName == "dich-vu")
+    else if (item.Slug_Name == "dich-vu")
     {
         <li>
-            <a href="~/@item.SlugName">@item.Name</a>
+            <a href="~/@item.Slug_Name">@item.Name</a>
             <ul>
                 @foreach (var dichvu in Model.listService)
                 {
@@ -22,14 +22,14 @@
             </ul>
         </li>
     }
-    else if (item.SlugName == "san-pham")
+    else if (item.Slug_Name == "san-pham")
     {
-        <li><a href="~/@item.SlugName">@item.Name</a></li>
+        <li><a href="~/@item.Slug_Name">@item.Name</a></li>
     }
-    else if (item.SlugName == "dao-tao")
+    else if (item.Slug_Name == "dao-tao")
     {
         <li>
-            <a href="~/@item.SlugName">@item.Name</a>
+            <a href="~/@item.Slug_Name">@item.Name</a>
             <ul>
                 @foreach (var daotao in Model.listTraining)
                 {
@@ -38,10 +38,10 @@
             </ul>
         </li>
     }
-    else if (item.SlugName == "tin-tuc-su-kien")
+    else if (item.Slug_Name == "tin-tuc-su-kien")
     {
         <li>
-            <a href="~/@item.SlugName">@item.Name</a>
+            <a href="~/@item.Slug_Name">@item.Name</a>
             <ul>
                 @foreach (var loaitintuc in Model.listNewsType)
                 {
@@ -50,8 +50,8 @@
             </ul>
         </li>
     }
-    else if (item.SlugName == "lien-he")
+    else if (item.Slug_Name == "lien-he")
     {
-        <li><a href="~/@item.SlugName">@item.Name</a></li>
+        <li><a href="~/@item.Slug_Name">@item.Name</a></li>
     }
 }
