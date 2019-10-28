@@ -31,6 +31,7 @@ namespace TTCNTT.Efs.Context
         public virtual DbSet<ImageSlide> ImageSlide { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<News> News { get; set; }
+        public virtual DbSet<NewsComment> NewsComment { get; set; }
         public virtual DbSet<NewsType> NewsType { get; set; }
         public virtual DbSet<OperationHistory> OperationHistory { get; set; }
         public virtual DbSet<People> People { get; set; }
@@ -361,9 +362,7 @@ namespace TTCNTT.Efs.Context
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.Title)
-                    .IsRequired()
-                    .HasMaxLength(1000);
+                entity.Property(e => e.Title).HasMaxLength(1000);
 
                 entity.Property(e => e.UpdatedBy)
                     .HasMaxLength(50)
@@ -558,6 +557,61 @@ namespace TTCNTT.Efs.Context
                     .HasForeignKey(d => d.FkNewsTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_News_NewsType");
+            });
+
+            modelBuilder.Entity<NewsComment>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Comment).HasMaxLength(1000);
+
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Email)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FkNewsId)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FkProductCommentId)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Note).HasMaxLength(1000);
+
+                entity.Property(e => e.Phone)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion();
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+
+                entity.HasOne(d => d.FkNews)
+                    .WithMany(p => p.NewsComment)
+                    .HasForeignKey(d => d.FkNewsId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_NewsComment_News");
             });
 
             modelBuilder.Entity<NewsType>(entity =>

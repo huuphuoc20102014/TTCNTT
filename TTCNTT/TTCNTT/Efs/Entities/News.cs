@@ -5,6 +5,11 @@ namespace TTCNTT.Efs.Entities
 {
     public partial class News
     {
+        public News()
+        {
+            NewsComment = new HashSet<NewsComment>();
+        }
+
         public string Id { get; set; }
         public string FkNewsTypeId { get; set; }
         public string Title { get; set; }
@@ -25,5 +30,6 @@ namespace TTCNTT.Efs.Entities
         public string ImageSlug { get; set; }
 
         public virtual NewsType FkNewsType { get; set; }
+        public virtual ICollection<NewsComment> NewsComment { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿@model NewsViewModel
 
-@{ 
+@{
     ViewBag.Title = "Tin tức sự kiện";
 }
 
@@ -10,7 +10,7 @@
         <div class="overlay-mask">
             <!-- Start:Slider area -->
             <div class="container">
-                <h1>@Model.menu.Name</h1>
+                <h1>@Model.newsType.Name</h1>
                 <h6>Nơi theo dõi mọi tin tức của chúng tôi.</h6>
                 <hr>
             </div>
@@ -55,7 +55,7 @@
                                     </div>
                                 </div>
                             }
-                            
+
                         </div>
                         <!-- End:Blog Items (With Mini Grid) -->
                         <!-- Start:Pagination -->

@@ -1,0 +1,136 @@
+﻿@model ContactViewModel
+@using Microsoft.AspNetCore.Http
+
+@{
+    ViewBag.Title = "Liên hệ";
+}
+
+<section class="banner-sec">
+    <div class="main-banner inner" style=" background:url(img/banner-bg.jpg) no-repeat top center fixed; background-size:cover;">
+        <a href="#" name="scroll-top-div"></a>
+        <div class="overlay-mask">
+            <!-- Start:Slider area -->
+            <div class="container">
+                <h1>@Model.menu.Name</h1>
+                <h6>Liên hệ chúng tôi bất cứ khi nào bạn cần </h6>
+                <hr>
+            </div>
+            <!-- End:Slider area -->
+        </div>
+    </div>
+</section>
+<!-- =================================================
+Banner Area End -->
+<!-- Content Area Start
+====================================================== -->
+<section class="contact-area-outer">
+    <div class="contact-form-sec ">
+        <!-- Start: Form Area -->
+        <div class="container">
+            <div class="content-area clearfix">
+                <div class="main-title">
+                    <h5>Bạn muốn nhận phản hồi nhanh</h5>
+                    <h1>Hãy gửi Email cho chúng tôi</h1>
+                </div>
+                <div class="form-sec">
+                    <form id="myform" name="contact" method="post">
+                        <div class="col-md-4">
+                            <input type="text" id="contact-name" placeholder="Tên của bạn" class="text-field-box">
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" id="contact-email" placeholder="Email" class="text-field-box">
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" id="contact-number" placeholder="Số điện thoại" class="text-field-box">
+                        </div>
+                        <div class="col-md-12">
+                            <textarea id="contact-msg" class="text-field-box" placeholder="Nội dung"></textarea>
+                            <button name="contact" type="submit" id="contact-submit" class="button-medium">Gửi ngay</button>
+                        </div>
+                        @if (TempData["LienHe"] != null)
+                        {
+                            <div id="contact-success">
+                                @TempData["LienHe"]
+                            </div>
+                        }
+                        else
+                        {
+                            <div id="contact-failed">
+                                Lỗi...!, gửi thất bại, mời bạn thử lại sau.
+                            </div>
+                        }
+                        <div class="error-item">
+                            <div id="contact-loading" style="display: none;"> Đang gửi Email... </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- End: Form Area -->
+    </div>
+    <!-- Start:Map Area -->
+    <div class="map-area">
+        <div id="map" style="text-align:center;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.5293693686504!2d106.77411361416137!3d10.847282860849482!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175270b813ba433%3A0xfda08382cc4ef5a2!2zNTAgTMOqIFbEg24gVmnhu4d0LCBIaeG7h3AgUGjDuiwgUXXhuq1uIDksIEjhu5MgQ2jDrSBNaW5oLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1569300568212!5m2!1svi!2s" width="1200" height="500" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+        </div>
+    </div>
+    <!-- End:Map Area -->
+    <!-- Start:Contact Details Area -->
+    <div class="contact-sec-contents">
+        <div class="container">
+            <div class="contact-info">
+                <!-- Start:Phone Number -->
+                <div class="col-md-4">
+                    <div class="features-box">
+                        <div class="features-icon"><i class="fa fa-building-o"></i></div>
+                        <div class="features-text">
+                            <h6>Contact Address</h6>
+                            <p>
+                                <strong>Office :</strong>  12345 Little Lonsdale St,<br>
+                                Melbourne, Australia
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- End:Phone Number -->
+                <!-- Start:Address -->
+                <div class="col-md-4">
+                    <div class="features-box">
+                        <div class="features-icon"><i class="fa fa-phone"></i></div>
+                        <div class="features-text">
+                            <h6>Phone And Fax</h6>
+                            <p><strong>Phone :</strong> (123) 123-456</p>
+                            <p><strong>Fax :</strong> (123) 123-456</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- End:Address -->
+                <!-- Start:Email -->
+                <div class="col-md-4">
+                    <div class="features-box">
+                        <div class="features-icon"> <i class="fa fa-envelope-o"></i></div>
+                        <div class="features-text">
+                            <h6>Email Address</h6>
+                            <p>
+                                <strong>E-Mail :</strong> johndoe@site.com,
+                                office@site.com
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- End:Email -->
+            </div>
+        </div>
+    </div>
+    <!-- End:Contact Details Area -->
+
+</section>
+
+@section scripts{ 
+    <script>
+        var _urlContact = '@Url.Action("NewContact", "Contact")';
+    </script>
+    <script src="~/js/contact.js"></script>
+}

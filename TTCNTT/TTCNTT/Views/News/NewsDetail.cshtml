@@ -56,34 +56,38 @@
                                             <img src="~/template/img/testimonial-2.jpg" alt="">
                                         </div>*@
                                         <div class="user-comment">
-                                            <h6>Teena James</h6>
-                                            <span>August 4, 2016 at 10:29 pm</span>
-                                            <p>Praesent pulvinar mollis dui sed vehicula. Vestibulum posuere dolor ipsum, in  interdum velit blandit at.Nulla volutpat dolor elit.  mollis dui sed vehicula. Vestibulum posuere dolor ipsum</p>
-                                            @*<p><a href="#">Phản hồi</a></p>*@
+                                            @foreach (var item in Model.listNewsComment)
+                                            {
+                                                <h6>@item.Name</h6>
+                                                <span>@item.CreatedDate</span>
+                                                <p>@item.Comment.</p>
+                                                @*<p><a href="#">Phản hồi</a></p>*@
+                                            }
                                         </div>
                                     </li>
                                 </ul>
 
                                 <!-- Start:Leave Repaly -->
                                 <div class="Reply-sec">
+                                    <input id="fk_NewsId" type="hidden" value="@Model.news.Id" />
                                     <h6>Để lại bình luận</h6>
-                                    <p>Địa chỉ email và số điện thoại của bạn sẽ được giữ bí mật.</p>
+                                    <p>Email và số điện thoại của bạn sẽ được giữ bí mật.</p>
                                     <form>
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <input type="text" placeholder="Họ tên" class="text-field-box borderd smoke-white ">
+                                                <input id="Name" type="text" placeholder="Họ tên" class="text-field-box borderd smoke-white ">
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" placeholder="Email" class="text-field-box borderd smoke-white ">
+                                                <input id="Email" type="text" placeholder="Email" class="text-field-box borderd smoke-white ">
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" placeholder="Số điện thoại" class="text-field-box borderd smoke-white ">
+                                                <input id="Phone" type="text" placeholder="Số điện thoại" class="text-field-box borderd smoke-white ">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="container">
-                                                <textarea class="text-field-box borderd smoke-white" placeholder="Nội dung bình luận"></textarea>
-                                                <button name="contact" type="submit" id="contact-submit" class="button-medium ">Gửi bình luận</button>
+                                                <textarea id="Content" class="text-field-box borderd smoke-white" placeholder="Nội dung bình luận"></textarea>
+                                                <button name="contact" type="submit" id="contact-submit submit-comment" class="button-medium ">Gửi bình luận</button>
                                             </div>
                                         </div>
                                     </form>
@@ -103,7 +107,7 @@
                                 <ul class="category-box">
                                     @foreach (var item in Model.listNewsType)
                                     {
-                                        <li><a href="#">@item.Name </a></li>
+                                        <li><a href="~/news/newstype/@item.Slug_Name">@item.Name </a></li>
                                     }
                                 </ul>
                                 <!-- End:category-box-->
@@ -119,7 +123,7 @@
                                             </div>
                                             <div class="col-md-7">
                                                 <div class="text">
-                                                    <p><a href="~/news/newsdetail/@item.Id">@item.Title</a></p>
+                                                    <p><a href="~/news/newsdetail/@item.Slug_Title">@item.Title</a></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -170,3 +174,10 @@
 </section>
 <!-- =================================================
 Content Area End -->
+
+@section scripts{ 
+    <script>
+        var _urlNewsComment = '@Url.Action("NewComment", "News")';
+    </script>
+    <script src="~/js/newscomment.js"></script>
+}

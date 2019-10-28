@@ -13,5 +13,6 @@ namespace TTCNTT.Models
         public List<NewsType> listNewsType { get; set; }
         public List<News> listNews { get; set; }
         public NewsType newsType { get; set; }
+        public List<NewsComment> listNewsComment { get; set; }
     }
 }

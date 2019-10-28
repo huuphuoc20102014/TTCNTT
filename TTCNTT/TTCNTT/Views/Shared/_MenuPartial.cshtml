@@ -4,7 +4,7 @@
 {
     if (item.Slug_Name == "trang-chu")
     {
-        <li><a href="~/@item.Slug_Name">@item.Name</a></li>
+        <li><a href="~/home">@item.Name</a></li>
     }
     else if (item.Slug_Name == "gioi-thieu")
     {
@@ -45,7 +45,7 @@
             <ul>
                 @foreach (var loaitintuc in Model.listNewsType)
                 {
-                    <li><a href="#">@loaitintuc.Name</a></li>
+                    <li><a href="~/news/newstype/@loaitintuc.Slug_Name">@loaitintuc.Name</a></li>
                 }
             </ul>
         </li>
