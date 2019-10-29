@@ -286,10 +286,6 @@ namespace TTCNTT.Efs.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.KeyWord).HasMaxLength(1000);
-
-                entity.Property(e => e.MetaData).HasMaxLength(1000);
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(100);
@@ -304,8 +300,6 @@ namespace TTCNTT.Efs.Context
                     .IsRequired()
                     .HasMaxLength(100)
                     .IsUnicode(false);
-
-                entity.Property(e => e.Tags).HasMaxLength(1000);
 
                 entity.Property(e => e.UpdatedBy)
                     .HasMaxLength(50)
@@ -715,16 +709,10 @@ namespace TTCNTT.Efs.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.CCY).HasMaxLength(50);
-
                 entity.Property(e => e.Code)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
-
-                entity.Property(e => e.Color).HasMaxLength(50);
-
-                entity.Property(e => e.Country).HasMaxLength(50);
 
                 entity.Property(e => e.CreatedBy)
                     .IsRequired()
@@ -742,44 +730,22 @@ namespace TTCNTT.Efs.Context
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.KeyWord).HasMaxLength(1000);
-
                 entity.Property(e => e.LongDescription_Html).HasColumnType("ntext");
-
-                entity.Property(e => e.Material).HasMaxLength(50);
-
-                entity.Property(e => e.MetaData).HasMaxLength(1000);
 
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(100);
 
-                entity.Property(e => e.Note).HasMaxLength(1000);
-
-                entity.Property(e => e.Producer).HasMaxLength(500);
-
                 entity.Property(e => e.RowVersion)
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.SKU).HasMaxLength(50);
-
                 entity.Property(e => e.ShortDescription_Html).HasMaxLength(1000);
-
-                entity.Property(e => e.Size).HasMaxLength(50);
 
                 entity.Property(e => e.Slug_Name)
                     .IsRequired()
                     .HasMaxLength(100)
                     .IsUnicode(false);
-
-                entity.Property(e => e.Specification_Html).HasMaxLength(1000);
-
-                entity.Property(e => e.Status).HasMaxLength(50);
-
-                entity.Property(e => e.Style).HasMaxLength(50);
-
-                entity.Property(e => e.Tags).HasMaxLength(1000);
 
                 entity.Property(e => e.UpdatedBy)
                     .HasMaxLength(50)

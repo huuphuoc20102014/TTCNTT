@@ -1,8 +1,9 @@
-﻿@model NewsViewModel
+﻿@model ProductViewModel
 
-@{
-    ViewBag.Title = Model.newsType.Name;
+@{ 
+    ViewBag.Title = Model.menu.Name;
 }
+
 
 <section class="banner-sec">
     <div class="main-banner inner" style=" background:url(img/banner-bg.jpg) no-repeat top center fixed; background-size:cover;">
@@ -10,8 +11,8 @@
         <div class="overlay-mask">
             <!-- Start:Slider area -->
             <div class="container">
-                <h1>@Model.newsType.Name</h1>
-                <h6>Danh mục tin tức.</h6>
+                <h1>@Model.menu.Name</h1>
+                <h6>Nơi theo dõi mọi sản phẩm của chúng tôi.</h6>
                 <hr>
             </div>
             <!-- End:Slider area -->
@@ -26,8 +27,8 @@
             <div class="container">
                 <div class="col-md-12">
                     <div class="main-title">
-                        <h5>Tin tức</h5>
-                        <h2>Mới cập nhật</h2>
+                        <h5>@Model.menu.Name</h5>
+                        <h2>Sản phẩm mới nhất</h2>
                     </div>
                 </div>
             </div>
@@ -38,19 +39,19 @@
                     <div class="blog-main-area">
                         <!-- Start:Blog Items (With Mini Grid) -->
                         <div class="mini-grid-area">
-                            @foreach (var item in Model.listNews)
+                            @foreach (var item in Model.listProduct)
                             {
                                 <div class="col-md-4 ">
                                     <div class="item-box">
-                                        <a href="~/news/newsdetail/@item.Slug_Title" class=" img-holder">
-                                            <img src="~/Images/News/@item.ImageSlug" alt="@item.Title">
+                                        <a href="~/product/ProductDetail/@item.Slug_Name" class=" img-holder">
+                                            <img src="~/Images/Product/@item.ImageSlug" alt="">
                                             <div class="mask"></div>
                                         </a>
                                         <div class="info-text-holder">
-                                            <h6><a href="~/news/newsdetail/@item.Slug_Title">@item.Title.</a></h6>
-                                            <span><a href="~/news/newsdetail/@item.Slug_Title">@item.CreatedDate</a></span>
+                                            <h6><a href="~/product/ProductDetail/@item.Slug_Name">@item.Name.</a></h6>
+                                            <span><a href="~/product/ProductDetail/@item.Slug_Name">@item.CreatedDate</a></span>
                                             <p>@item.ShortDescription_Html. </p>
-                                            <a href="~/news/newsdetail/@item.Slug_Title" class="button-medium">ĐỌC TIẾP</a>
+                                            <a href="~/product/ProductDetail/@item.Slug_Name" class="button-medium">ĐỌC TIẾP</a>
                                         </div>
                                     </div>
                                 </div>
@@ -91,4 +92,3 @@
         </div>
     </div>
 </section>
-

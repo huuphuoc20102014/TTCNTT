@@ -12,5 +12,6 @@ namespace TTCNTT.Models
         public List<Service> listService { get; set; }
         public List<Training> listTraining { get; set; }
         public List<NewsType> listNewsType { get; set; }
+        public List<Category> listCategory { get; set; }
     }
 }

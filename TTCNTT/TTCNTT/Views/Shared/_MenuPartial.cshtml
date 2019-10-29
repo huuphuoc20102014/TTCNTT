@@ -24,7 +24,15 @@
     }
     else if (item.Slug_Name == "san-pham")
     {
-        <li><a href="~/@item.Slug_Name">@item.Name</a></li>
+        <li>
+            <a href="~/@item.Slug_Name">@item.Name</a>
+            <ul>
+                @foreach (var cate in Model.listCategory)
+                {
+                    <li><a href="~/product/productcategory/@cate.Slug_Name">@cate.Name</a></li>
+                }
+            </ul>
+        </li>
     }
     else if (item.Slug_Name == "dao-tao")
     {

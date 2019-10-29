@@ -18,6 +18,7 @@ namespace TTCNTT.Helpers
             model.listNewsType = await webContext.NewsType.ToListAsync();
             model.listService = await webContext.Service.ToListAsync();
             model.listTraining = await webContext.Training.ToListAsync();
+            model.listCategory = await webContext.Category.ToListAsync();
 
             return model;
         }
