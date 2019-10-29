@@ -17,7 +17,7 @@
             <ul>
                 @foreach (var dichvu in Model.listService)
                 {
-                    <li><a href="#">@dichvu.ServiceName</a></li>
+                    <li><a href="~/Service/ServiceDetail/@dichvu.Slug_Name">@dichvu.ServiceName</a></li>
                 }
             </ul>
         </li>

@@ -1,6 +1,6 @@
-﻿@model ProductViewModel
+﻿@model ServiceViewModel
 
-@{ 
+@{
     ViewBag.Title = Model.menu.Name;
 }
 
@@ -12,7 +12,7 @@
             <!-- Start:Slider area -->
             <div class="container">
                 <h1>@Model.menu.Name</h1>
-                <h6>Các sản phẩm của Trung Tâm.</h6>
+                <h6>Các dịch vụ của Trung Tâm.</h6>
                 <hr>
             </div>
             <!-- End:Slider area -->
@@ -28,7 +28,7 @@
                 <div class="col-md-12">
                     <div class="main-title">
                         <h5>@Model.menu.Name</h5>
-                        <h2>Sản phẩm mới nhất</h2>
+                        <h2>Dịch vụ mới nhất</h2>
                     </div>
                 </div>
             </div>
@@ -39,19 +39,19 @@
                     <div class="blog-main-area">
                         <!-- Start:Blog Items (With Mini Grid) -->
                         <div class="mini-grid-area">
-                            @foreach (var item in Model.listProduct)
+                            @foreach (var item in Model.listService)
                             {
                                 <div class="col-md-4 ">
                                     <div class="item-box">
-                                        <a href="~/product/ProductDetail/@item.Slug_Name" class=" img-holder">
-                                            <img src="~/Images/Product/@item.ImageSlug" alt="">
+                                        <a href="~/Service/ServiceDetail/@item.Slug_Name" class=" img-holder">
+                                            <img src="~/Images/Services/@item.ImageSlug" alt="">
                                             <div class="mask"></div>
                                         </a>
                                         <div class="info-text-holder">
-                                            <h6><a href="~/product/ProductDetail/@item.Slug_Name">@item.Name.</a></h6>
-                                            <span><a href="~/product/ProductDetail/@item.Slug_Name">@item.CreatedDate</a></span>
+                                            <h6><a href="~/Service/ServiceDetail/@item.Slug_Name">@item.ServiceName.</a></h6>
+                                            <span><a href="~/Service/ServiceDetail/@item.Slug_Name">@item.CreatedDate</a></span>
                                             <p>@item.ShortDescription_Html. </p>
-                                            <a href="~/product/ProductDetail/@item.Slug_Name" class="button-medium">TÌM HIỂU THÊM</a>
+                                            <a href="~/Service/ServiceDetail/@item.Slug_Name" class="button-medium">TÌM HIỂU THÊM</a>
                                         </div>
                                     </div>
                                 </div>

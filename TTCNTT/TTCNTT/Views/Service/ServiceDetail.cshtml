@@ -1,7 +1,7 @@
-﻿@model ProductViewModel
+﻿@model ServiceViewModel
 
 @{
-    ViewBag.Title = Model.product.Name;
+    ViewBag.Title = Model.service.ServiceName;
 }
 
 <section class="banner-sec">
@@ -10,8 +10,8 @@
         <div class="overlay-mask">
             <!-- Start:Slider area -->
             <div class="container">
-                <h1>@Model.product.Name</h1>
-                <h6>Chi tiết sản phẩm</h6>
+                <h1>@Model.service.ServiceName</h1>
+                <h6>Chi tiết dịch vụ</h6>
                 <hr>
             </div>
             <!-- End:Slider area -->
@@ -31,13 +31,13 @@
                         <div class="col-md-8 left">
                             <div class="item-box">
                                 <div class=" img-holder">
-                                    <img src="~/Images/Product/@Model.product.ImageSlug" alt="">
+                                    <img src="~/Images/Services/@Model.service.ImageSlug" alt="">
                                 </div>
                                 <div class="info-text-holder">
-                                    <h4>@Model.product.Name.</h4>
-                                    <span> <a href="#">@Model.product.CreatedDate</a></span>
+                                    <h4>@Model.service.ServiceName.</h4>
+                                    <span> <a href="#">@Model.service.CreatedDate</a></span>
                                     <p>
-                                        @Model.product.LongDescription_Html.
+                                        @Model.service.LongDescription_Html.
                                     <p>
 
                                         <ul class="social-icon-simple">
@@ -50,92 +50,27 @@
                                         </ul>
                                 </div>
                             </div>
-                            <!-- Start:Comment Area-->
-                            <div class="blog-comment-sec">
-                                <h4>Bình Luận</h4>
-                                <ul class="users-list">
-                                    <li>
-                                        <!-- hình ảnh -->
-                                        @*<div class="user-pic">
-                                                <img src="~/template/img/testimonial-2.jpg" alt="">
-                                            </div>*@
-                                        @if (Model.listProductComment.Count() != 0)
-                                        {
-                                            @foreach (var item in Model.listProductComment)
-                                            {
-                                                <div class="user-comment">
-                                                    <h6>@item.Name</h6>
-                                                    <span>@item.CreatedDate</span>
-                                                    <p>@item.Comment.</p>
-                                                    @*<p><a href="#">Phản hồi</a></p>*@
-                                                </div>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <p style="text-align:center; font-size:18px;">(Hãy là người bình luận đầu tiên)</p>
-                                        }
 
-                                    </li>
-                                </ul>
-
-                                <!-- Start:Leave Repaly -->
-                                <div class="Reply-sec">
-                                    <input id="fk_ProductId" type="hidden" value="@Model.product.Id" />
-                                    <h6>Để lại bình luận</h6>
-                                    <p>Email và số điện thoại của bạn sẽ được giữ bí mật.</p>
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <input id="Name" type="text" placeholder="Họ tên" class="text-field-box borderd smoke-white ">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input id="Email" type="text" placeholder="Email" class="text-field-box borderd smoke-white ">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input id="Phone" type="text" placeholder="Số điện thoại" class="text-field-box borderd smoke-white ">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="container">
-                                                <textarea id="Content" class="text-field-box borderd smoke-white" placeholder="Nội dung bình luận"></textarea>
-                                                <button type="submit" id="contact-submit" class="button-medium submit-comment">Gửi bình luận</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- End:Leave Repaly -->
-                            </div>
-                            <!-- End:Comment Area-->
                         </div>
                         <!-- End:Blog Left Content-->
                         <!-- Start:Blog Right Content-->
                         <div class="col-md-4 ">
                             <div class="right">
                                 <input type="text" name="search" class="search-btn" placeholder="Tìm kiếm">
-
-                                <!-- Start:category-box-->
-                                <h5>Các loại tin tức</h5>
-                                <ul class="category-box">
-                                    @foreach (var item in Model.listCategory)
-                                    {
-                                        <li><a href="~/product/productcategory/@item.Slug_Name">@item.Name </a></li>
-                                    }
-                                </ul>
                                 <!-- End:category-box-->
                                 <!-- Start:Recent Posts-->
-                                <h5>Tin tức khác</h5>
+                                <h5>Dịch vụ khác</h5>
                                 <ul class="recent-post">
-                                    @foreach (var item in Model.listProduct.Take(4))
+                                    @foreach (var item in Model.listService.Take(5))
                                     {
                                         <li>
                                             <div class="row">
                                                 <div class="col-md-5">
-                                                    <img src="~/Images/Product/@item.ImageSlug" alt="">
+                                                    <img src="~/Images/Services/@item.ImageSlug" alt="@item.ServiceName">
                                                 </div>
                                                 <div class="col-md-7">
                                                     <div class="text">
-                                                        <p><a href="~/product/productdetail/@item.Slug_Name">@item.Name</a></p>
+                                                        <p><a href="~/Service/ServiceDetail/@item.Slug_Name">@item.ServiceName</a></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -172,7 +107,6 @@
                                         <a href="#"><span>Painting</span></a>
                                     </div>*@
                                 <!-- End:tags-->
-
                             </div>
                         </div>
                         <!-- End:Blog Right Content-->
@@ -187,9 +121,3 @@
 <!-- =================================================
 Content Area End -->
 
-@section scripts{
-    <script>
-        var _urlNewsComment = '@Url.Action("NewProductComment", "Product")';
-    </script>
-    <script src="~/js/productcomment.js"></script>
-}
