@@ -1,12 +1,16 @@
 ﻿@model NewsViewModel
 
+@{
+    ViewBag.Title = Model.news.Title;
+}
+
 <section class="banner-sec">
     <div class="main-banner inner" style=" background:url(img/banner-bg.jpg) no-repeat top center fixed; background-size:cover;">
         <a href="#" name="scroll-top-div"></a>
         <div class="overlay-mask">
             <!-- Start:Slider area -->
             <div class="container">
-                <h1>@Model.menu.Name</h1>
+                <h1>@Model.news.Title</h1>
                 <h6>Chi tiết Tin Tức</h6>
                 <hr>
             </div>
@@ -53,17 +57,25 @@
                                     <li>
                                         <!-- hình ảnh -->
                                         @*<div class="user-pic">
-                                            <img src="~/template/img/testimonial-2.jpg" alt="">
-                                        </div>*@
-                                        <div class="user-comment">
+                                                <img src="~/template/img/testimonial-2.jpg" alt="">
+                                            </div>*@
+                                        @if (Model.listNewsComment.Count() != 0)
+                                        {
                                             @foreach (var item in Model.listNewsComment)
                                             {
-                                                <h6>@item.Name</h6>
-                                                <span>@item.CreatedDate</span>
-                                                <p>@item.Comment.</p>
-                                                @*<p><a href="#">Phản hồi</a></p>*@
+                                                <div class="user-comment">
+                                                    <h6>@item.Name</h6>
+                                                    <span>@item.CreatedDate</span>
+                                                    <p>@item.Comment.</p>
+                                                    @*<p><a href="#">Phản hồi</a></p>*@
+                                                </div>
                                             }
-                                        </div>
+                                        }
+                                        else
+                                        {
+                                            <p style="text-align:center; font-size:18px;">(Hãy là người bình luận đầu tiên)</p>
+                                        }
+
                                     </li>
                                 </ul>
 
@@ -87,7 +99,7 @@
                                         <div class="row">
                                             <div class="container">
                                                 <textarea id="Content" class="text-field-box borderd smoke-white" placeholder="Nội dung bình luận"></textarea>
-                                                <button name="contact" type="submit" id="contact-submit submit-comment" class="button-medium ">Gửi bình luận</button>
+                                                <button type="submit" id="contact-submit" class="button-medium submit-comment">Gửi bình luận</button>
                                             </div>
                                         </div>
                                     </form>
@@ -114,51 +126,51 @@
                                 <!-- Start:Recent Posts-->
                                 <h5>Tin tức khác</h5>
                                 <ul class="recent-post">
-                                    @foreach (var item in Model.listNews.Take(4)) 
-                                    { 
-                                    <li>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <img src="~/Images/News/@item.ImageSlug" alt="">
-                                            </div>
-                                            <div class="col-md-7">
-                                                <div class="text">
-                                                    <p><a href="~/news/newsdetail/@item.Slug_Title">@item.Title</a></p>
+                                    @foreach (var item in Model.listNews.Take(4))
+                                    {
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <img src="~/Images/News/@item.ImageSlug" alt="">
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="text">
+                                                        <p><a href="~/news/newsdetail/@item.Slug_Title">@item.Title</a></p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
+                                        </li>
                                     }
-                                    
+
                                 </ul>
                                 <!-- End:Recent Posts-->
                                 <!-- Star:flikr-img-->
                                 @*<h5>Flickr</h5>
-                                <ul class="flikr-img-list">
-                                    <li><img src="img/flikr-1.jpg" alt=""></li>
-                                    <li><img src="img/flikr-2.jpg" alt=""></li>
-                                    <li><img src="img/flikr-3.jpg" alt=""></li>
-                                    <li> <img src="img/flikr-4.jpg" alt=""></li>
-                                    <li><img src="img/flikr-5.jpg" alt=""></li>
-                                    <li><img src="img/flikr-6.jpg" alt=""></li>
-                                    <li><img src="img/flikr-7.jpg" alt=""></li>
-                                    <li><img src="img/flikr-8.jpg" alt=""></li>
-                                </ul>*@
+                                    <ul class="flikr-img-list">
+                                        <li><img src="img/flikr-1.jpg" alt=""></li>
+                                        <li><img src="img/flikr-2.jpg" alt=""></li>
+                                        <li><img src="img/flikr-3.jpg" alt=""></li>
+                                        <li> <img src="img/flikr-4.jpg" alt=""></li>
+                                        <li><img src="img/flikr-5.jpg" alt=""></li>
+                                        <li><img src="img/flikr-6.jpg" alt=""></li>
+                                        <li><img src="img/flikr-7.jpg" alt=""></li>
+                                        <li><img src="img/flikr-8.jpg" alt=""></li>
+                                    </ul>*@
                                 <!-- End:flikr-img-->
                                 <!-- Start:tags-->
                                 @*<h5>Tags</h5>
-                                <div class="tags">
-                                    <a href="#"><span>HTML</span></a>
-                                    <a href="#"><span>Finearts</span></a>
-                                    <a href="#"><span>PHP</span></a>
-                                    <a href="#"><span>Java Script</span></a>
-                                    <a href="#"><span>Articles</span></a>
-                                    <a href="#"><span>CSS</span></a>
-                                    <a href="#"><span>Economics</span></a>
-                                    <a href="#"><span>JQuery</span></a>
-                                    <a href="#"><span>Edithing</span></a>
-                                    <a href="#"><span>Painting</span></a>
-                                </div>*@
+                                    <div class="tags">
+                                        <a href="#"><span>HTML</span></a>
+                                        <a href="#"><span>Finearts</span></a>
+                                        <a href="#"><span>PHP</span></a>
+                                        <a href="#"><span>Java Script</span></a>
+                                        <a href="#"><span>Articles</span></a>
+                                        <a href="#"><span>CSS</span></a>
+                                        <a href="#"><span>Economics</span></a>
+                                        <a href="#"><span>JQuery</span></a>
+                                        <a href="#"><span>Edithing</span></a>
+                                        <a href="#"><span>Painting</span></a>
+                                    </div>*@
                                 <!-- End:tags-->
 
                             </div>
@@ -175,9 +187,9 @@
 <!-- =================================================
 Content Area End -->
 
-@section scripts{ 
+@section scripts{
     <script>
-        var _urlNewsComment = '@Url.Action("NewComment", "News")';
+        var _urlNewsComment = '@Url.Action("NewsComment", "News")';
     </script>
     <script src="~/js/newscomment.js"></script>
 }

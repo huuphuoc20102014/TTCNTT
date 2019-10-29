@@ -44,24 +44,25 @@ namespace TTCNTT.Controllers
             model.newsType = await _dbContext.NewsType.Where(h => h.Id == model.news.FkNewsTypeId).FirstOrDefaultAsync();
             model.listNewsType = await _dbContext.NewsType.ToListAsync();
             model.listNews = await _dbContext.News.Where(h => h.FkNewsTypeId == model.newsType.Id).ToListAsync();
-            model.listNewsComment = await _dbContext.NewsComment.Where(h => h.FkProductCommentId == model.news.Id).ToListAsync();
+            model.listNewsComment = await _dbContext.NewsComment.Where(h => h.FkNewsId == model.news.Id).ToListAsync();
 
             return View(model);
         }
 
-        public async Task<IActionResult> NewComment(string name, string email, string phone, string content, string fknewsid)
+        [HttpPost]
+        public async Task<IActionResult> NewsComment(string name, string email, string phone, string content, string fknewsid)
         {               
             NewsComment comment = new NewsComment();
 
             try
             {
                 comment.Id = Guid.NewGuid().ToString();
-                comment.FkProductCommentId = fknewsid;
+                comment.FkNewsId = fknewsid;
                 comment.Name = name;
                 comment.Email = email;
                 comment.Phone = phone;
                 comment.Comment = content;
-                comment.CreatedBy = name;
+                comment.CreatedBy = "Customer";
                 comment.CreatedDate = DateTime.Now;
                 comment.RowStatus = 0;
 

@@ -39,7 +39,7 @@ namespace TTCNTT.Controllers
                 contact.Phone = phone;
                 contact.Body = content;
                 contact.IsRead = false;
-                contact.CreatedBy = name;
+                contact.CreatedBy = "Customer";
                 contact.CreatedDate = DateTime.Now;
                 contact.RowStatus = 0;
 

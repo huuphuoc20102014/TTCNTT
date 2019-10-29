@@ -2904,10 +2904,11 @@ a.ovelay-icon:hover {
 	width: 100%;
 }
 .users-list li .user-comment {
-	display: inline-block;
-	float: left;
-	height: auto;
-	width: 78%;
+    padding: 10px 5px 10px;
+    display: inline-block;
+    float: left;
+    height: auto;
+    width: 78%;
 }
 .users-list li .user-pic {
 	display: inline-block;

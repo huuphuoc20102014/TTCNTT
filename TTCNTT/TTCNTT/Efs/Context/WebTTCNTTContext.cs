@@ -565,7 +565,9 @@ namespace TTCNTT.Efs.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Comment).HasMaxLength(1000);
+                entity.Property(e => e.Comment)
+                    .IsRequired()
+                    .HasMaxLength(1000);
 
                 entity.Property(e => e.CreatedBy)
                     .IsRequired()
@@ -575,15 +577,12 @@ namespace TTCNTT.Efs.Context
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Email)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.FkNewsId)
                     .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.FkProductCommentId)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -594,6 +593,7 @@ namespace TTCNTT.Efs.Context
                 entity.Property(e => e.Note).HasMaxLength(1000);
 
                 entity.Property(e => e.Phone)
+                    .IsRequired()
                     .HasMaxLength(20)
                     .IsUnicode(false);
 

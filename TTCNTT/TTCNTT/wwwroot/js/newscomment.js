@@ -6,7 +6,7 @@
     var yourContent = $('#Content');
     var fkNewsId = $('#fk_NewsId');
 
-    $("#submit-comment").click(function () {
+    $(".submit-comment").click(function () {
         $.ajax({
             url: _urlNewsComment,
             type: 'POST',
@@ -43,8 +43,8 @@
                     alert('Lỗi');
                 }
                 else {
-                    $(".Reply-sec").load(location.href + " .Reply-sec>*", "");
-                    $(".user-comment").load(location.href + " .user-comment>*", "");
+                    $(".blog-comment-sec").load(location.href + " .blog-comment-sec>*", "");
+
                 }
             },
         });
