@@ -1,0 +1,122 @@
+﻿@model EmployeeViewModel
+
+@{
+    ViewBag.Title = Model.employeeType.Name;
+}
+
+<section class="banner-sec">
+    <div class="main-banner inner" style=" background:url(img/banner-bg.jpg) no-repeat top center fixed; background-size:cover;">
+        <a href="#" name="scroll-top-div"></a>
+        <div class="overlay-mask">
+            <!-- Start:Slider area -->
+            <div class="container">
+                <h1>@Model.employeeType.Name</h1>
+                <h6>Thông tin giảng viên</h6>
+                <hr>
+            </div>
+            <!-- End:Slider area -->
+        </div>
+    </div>
+</section>
+
+<section class="blog-outer-area">
+    <div class="content-area">
+        <div class="blog-area-sec">
+            <!-- Start: Blog Sec -->
+            <div class="blog-sec">
+                <div class="container">
+                    <!-- Start:Blog Area -->
+                    <div class="blog-inner-area">
+                        <!-- Start:Blog Left Content-->
+                        <div class="col-md-8 left">
+                            <div class="item-box">
+                                <div class=" img-holder">
+                                    <img src="~/Images/Employee/@Model.employee.ImageSlug" alt="">
+                                </div>
+                                <div class="info-text-holder">
+                                    <h4>@Model.employee.Name.</h4>
+                                    <span> <a href="#">@Model.employee.Specialize</a></span>
+                                    <p>
+                                        @Model.employee.LongDescription_Html.
+                                    <p>
+
+                                        <ul class="social-icon-simple">
+                                            <li><a href="#"><i class="fa fa-share-alt"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                        </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- End:Blog Left Content-->
+                        <!-- Start:Blog Right Content-->
+                        <div class="col-md-4 ">
+                            <div class="right">
+                                <input type="text" name="search" class="search-btn" placeholder="Tìm kiếm">
+                                <!-- End:category-box-->
+                                <!-- Start:Recent Posts-->
+                                <h5>Các giảng viên khác</h5>
+                                <ul class="recent-post">
+                                    @foreach (var item in Model.listEmployee.Take(5))
+                                    {
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <img src="~/Images/Employee/@item.ImageSlug" alt="@item.Name">
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="text">
+                                                        <p><a href="~/Employee/EmployeeDetail/@item.Slug_Name">@item.Name</a></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+
+                                </ul>
+                                <!-- End:Recent Posts-->
+                                <!-- Star:flikr-img-->
+                                @*<h5>Flickr</h5>
+                                    <ul class="flikr-img-list">
+                                        <li><img src="img/flikr-1.jpg" alt=""></li>
+                                        <li><img src="img/flikr-2.jpg" alt=""></li>
+                                        <li><img src="img/flikr-3.jpg" alt=""></li>
+                                        <li> <img src="img/flikr-4.jpg" alt=""></li>
+                                        <li><img src="img/flikr-5.jpg" alt=""></li>
+                                        <li><img src="img/flikr-6.jpg" alt=""></li>
+                                        <li><img src="img/flikr-7.jpg" alt=""></li>
+                                        <li><img src="img/flikr-8.jpg" alt=""></li>
+                                    </ul>*@
+                                <!-- End:flikr-img-->
+                                <!-- Start:tags-->
+                                @*<h5>Tags</h5>
+                                    <div class="tags">
+                                        <a href="#"><span>HTML</span></a>
+                                        <a href="#"><span>Finearts</span></a>
+                                        <a href="#"><span>PHP</span></a>
+                                        <a href="#"><span>Java Script</span></a>
+                                        <a href="#"><span>Articles</span></a>
+                                        <a href="#"><span>CSS</span></a>
+                                        <a href="#"><span>Economics</span></a>
+                                        <a href="#"><span>JQuery</span></a>
+                                        <a href="#"><span>Edithing</span></a>
+                                        <a href="#"><span>Painting</span></a>
+                                    </div>*@
+                                <!-- End:tags-->
+                            </div>
+                        </div>
+                        <!-- End:Blog Right Content-->
+                    </div>
+                    <!-- End:Blog Area -->
+                </div>
+            </div>
+            <!-- End: Blog Sec -->
+        </div>
+    </div>
+</section>
+<!-- =================================================
+Content Area End -->
