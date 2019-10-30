@@ -8,24 +8,33 @@
     <link rel="stylesheet" href="~/css/site.css" />
 
     <!-- Thư viện template -->
-    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="shortcut icon" href="~/template/img/favicon.ico">
 
     <!-- Core CSS -->
     <link type="text/css" rel="stylesheet" href="~/template/css/bootstrap.css"><!-- Bootstrap -->
-    <link type="text/css" rel="stylesheet" href="~/template/font-awesome/css/font-awesome.min.css"><!-- font-awesome -->
     <link type="text/css" rel="stylesheet" href="~/template/css/animate.min.css"><!-- Animation -->
     <link type="text/css" rel="stylesheet" href="~/template/css/flexslider.css"><!-- FlexSlider CSS -->
     <link type="text/css" rel="stylesheet" href="~/template/css/style.css"><!-- Light Theme Core CSS -->
+
+    <!-- font-awesome -->
+    <link href="~/template/fontawesome-free-5.11.2-web/css/fontawesome.min.css" rel="stylesheet" />
+    <link href="~/template/fontawesome-free-5.11.2-web/css/all.min.css" rel="stylesheet" />
+    <link href="~/template/fontawesome-free-5.11.2-web/css/brands.min.css" rel="stylesheet" />
+    <link href="~/template/fontawesome-free-5.11.2-web/css/regular.min.css" rel="stylesheet" />
+    <link href="~/template/fontawesome-free-5.11.2-web/css/solid.min.css" rel="stylesheet" />
+    <link href="~/template/fontawesome-free-5.11.2-web/css/svg-with-js.min.css" rel="stylesheet" />
+    <link href="~/template/fontawesome-free-5.11.2-web/css/v4-shims.min.css" rel="stylesheet" />
+
     <!-- Google Fonts here -->
     <link href="~/template/css/fonts/poppins.css" rel='stylesheet' type='text/css'>
     <link href="~/template/css/fonts/open-sans.css" type='text/css'>
     <link href="~/template/css/fonts/lato.css" rel='stylesheet' type='text/css'>
 </head>
 <body>
-        <partial name="_header" />
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <partial name="_header" />
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
     <partial name="_footer" />
 
 
@@ -33,6 +42,10 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
+
+
+
+
 
     <!-- lbr JS -->
     <script type="text/javascript" src="~/template/js/jquery.js"></script>

@@ -812,7 +812,7 @@ ol li a:hover {
 	padding: 50px 0 130px;
 }
 .home-feature-content.content-area {
-	padding: 140px 0;
+	padding: 50px 0;
 }
 .home-feature-content .features-contents {
 	width: 100%;
@@ -1498,7 +1498,7 @@ theme .owl-controls.clickable .owl-buttons div:hover {
 	display: block;
 }
 .mini-grid-area > div {
-	max-width: 365px;
+	max-width: 370px;
 	width: 100%;
 }
 /*-------------------------------    Download  Area Style        ---------------------------------------*/
@@ -2904,11 +2904,10 @@ a.ovelay-icon:hover {
 	width: 100%;
 }
 .users-list li .user-comment {
-    padding: 10px 5px 10px;
-    display: inline-block;
-    float: left;
-    height: auto;
-    width: 78%;
+	display: inline-block;
+	float: left;
+	height: auto;
+	width: 78%;
 }
 .users-list li .user-pic {
 	display: inline-block;

@@ -27,6 +27,8 @@ namespace TTCNTT.Efs.Context
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Contact> Contact { get; set; }
+        public virtual DbSet<Employee> Employee { get; set; }
+        public virtual DbSet<EmployeeType> EmployeeType { get; set; }
         public virtual DbSet<FAQ> FAQ { get; set; }
         public virtual DbSet<ImageSlide> ImageSlide { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
@@ -357,6 +359,121 @@ namespace TTCNTT.Efs.Context
                     .IsRowVersion();
 
                 entity.Property(e => e.Title).HasMaxLength(1000);
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<Employee>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Address)
+                    .IsRequired()
+                    .HasMaxLength(500);
+
+                entity.Property(e => e.BirthDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Code)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Fk_EmplyeeId)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ImageSlug)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LongDescription_Html)
+                    .IsRequired()
+                    .HasColumnType("ntext");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Note).HasMaxLength(1000);
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion();
+
+                entity.Property(e => e.ShortDescription_Html)
+                    .IsRequired()
+                    .HasMaxLength(1000);
+
+                entity.Property(e => e.Slug_Name)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Specialize).HasMaxLength(100);
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Fk_Emplyee)
+                    .WithMany(p => p.Employee)
+                    .HasForeignKey(d => d.Fk_EmplyeeId)
+                    .HasConstraintName("FK_Employee_EmployeeType");
+            });
+
+            modelBuilder.Entity<EmployeeType>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Code)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.KeyWord).HasMaxLength(1000);
+
+                entity.Property(e => e.MetaData).HasMaxLength(1000);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.Note).HasMaxLength(1000);
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion();
+
+                entity.Property(e => e.Slug_Name)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Tags).HasMaxLength(1000);
 
                 entity.Property(e => e.UpdatedBy)
                     .HasMaxLength(50)

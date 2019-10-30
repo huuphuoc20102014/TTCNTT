@@ -19,9 +19,61 @@ namespace TTCNTT.Controllers
         }
 
         [HttpGet("gioi-thieu")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            AboutUsViewModel model = new AboutUsViewModel();
+            model.about = await _dbContext.AboutUs.FirstOrDefaultAsync(p => p.Skill == "0");
+            //model.listAbout = await _dbContext.AboutUs.ToListAsync();
+            model.listAboutSkill = await _dbContext.AboutUs.Where(h => h.Skill == "1").ToListAsync();
+
+            return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetListEmployee()
+        {
+            try
+            {
+                var listEmployee = await _dbContext.Employee.AsNoTracking()
+                        .Where(h => h.Fk_EmplyeeId == "ET03")
+                        .OrderBy(h => h.Id)
+                        .Select(h => new AboutUsDto
+                        {
+                            Id = h.Id,
+                            Name = h.Name,
+                            ImageSlug = h.ImageSlug,
+                            LongDescription_Html = h.LongDescription_Html
+                        })
+                        .ToListAsync();
+
+                return Json(new TTJsonResult(true, listEmployee));
+            }
+            catch (Exception ex)
+            {
+                return Json(new TTJsonResult(false, null));
+            }
+        }
+    }
+    public class AboutUsDto
+    {
+        public string Id { get; set; }
+        public string Title { get; set; }
+        public string Slug_Title { get; set; }
+        public bool AutoSlug { get; set; }
+        public string Name { get; set; }
+        public string Skill { get; set; }
+        public string ShortDescription_Html { get; set; }
+        public string LongDescription_Html { get; set; }
+        public string ImageSlug { get; set; }
+        public string Tags { get; set; }
+        public string KeyWord { get; set; }
+        public string MetaData { get; set; }
+        public string Note { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string UpdatedBy { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public byte[] RowVersion { get; set; }
+        public int RowStatus { get; set; }
     }
 }
