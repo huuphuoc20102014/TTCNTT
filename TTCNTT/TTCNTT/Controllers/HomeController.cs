@@ -26,10 +26,12 @@ namespace TTCNTT.Controllers
         {
             HomeViewModel model = new HomeViewModel();
             model.aboutus = await _dbContext.AboutUs.FirstOrDefaultAsync(h => h.Skill == "0");
-            model.listAboutUs = await _dbContext.AboutUs.Where(p => p.Skill == "1").ToListAsync();
+            model.listAboutUsSkill = await _dbContext.AboutUs.Where(p => p.Skill == "1").ToListAsync();
             model.listNews = await _dbContext.News.ToListAsync();
             model.listProduct = await _dbContext.Product.ToListAsync();
             model.listService = await _dbContext.Service.ToListAsync();
+            model.listCourse = await _dbContext.Course.ToListAsync();
+            model.listEmployee = await _dbContext.Employee.ToListAsync();
 
             return View(model);
         }

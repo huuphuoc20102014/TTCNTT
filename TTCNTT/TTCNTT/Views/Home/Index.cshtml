@@ -112,8 +112,8 @@
         <!-- Start:Left area-->
         <div class="left-side">
             <div class="main-title left-align">
-                <h5><span>We Make Something</span></h5>
-                <h1>Different</h1>
+                <h5><span>Dịch vụ</span></h5>
+                <h1>Nổi bật</h1>
             </div>
             <div class="text-box">
                 <p>
@@ -122,12 +122,14 @@
                 </p>
                 <!-- Start:Pie Chart List Items-->
                 <ul class="list-style-calendar">
-                    <li><a href="#">Qui dolorem ipsum quia dolor sit amet, consectetur, </a></li>
-                    <li><a href="#">Adipisci velit, sed quia non numquam eius modi </a></li>
-                    <li><a href="#">Tempora incidunt ut labore et dolore magnam aliquam.</a></li>
+                    @foreach (var item in Model.listService.Take(4))
+                    {
+                        <li><a href="~/service/servicedetail/@item.Slug_Name">@item.ServiceName </a></li>
+                    }
+                    
                 </ul>
                 <!-- End:Pie Chart List Items-->
-                <a href="#" class="button-medium left-align">Explore</a>
+                <a href="~/dich-vu" class="button-medium left-align">Khám phá</a>
             </div>
         </div>
         <!-- End:Left area-->
@@ -151,19 +153,21 @@
             <div class="content-area">
                 <div class="container">
                     <div class="main-title left-align">
-                        <h5><span>We Build Awesome</span></h5>
-                        <h1>Structures</h1>
+                        <h5><span>Giới thiệu</span></h5>
+                        <h1>Khóa học</h1>
                     </div>
                     <div class="text-box">
                         <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto</p>
                         <!-- Start:Pie Chart List Items-->
                         <ul class="list-style-pie-chart">
-                            <li><a href="#">Qui dolorem ipsum quia dolor sit amet, consectetur, </a></li>
-                            <li><a href="#">Adipisci velit, sed quia non numquam eius modi </a></li>
-                            <li><a href="#">Tempora incidunt ut labore et dolore magnam aliquam.</a></li>
+                            @foreach (var item in Model.listCourse.Take(4))
+                            {
+                                <li><a href="~/course/coursedetail/@item.Slug_Name">@item.Name </a></li>
+                            }
+                            
                         </ul>
                         <!-- End:Pie Chart List Items-->
-                        <a href="#" class="button-medium left-align">Explore</a>
+                        <a href="~/khoa-hoc" class="button-medium left-align">Khám phá</a>
                     </div>
                 </div>
             </div>
@@ -185,40 +189,26 @@
     <div class="container">
         <div class="home-feature-content content-area">
             <div class="main-title">
-                <h5> Alamben can help you in many things</h5>
-                <h2>We Support Your Business</h2>
+                <h5> Những lý do</h5>
+                <h2>Bạn nên chọn Trung Tâm</h2>
             </div>
             <div class="features-contents clearfix ">
-                <div class="col-md-4">
-                    <div class="features-box">
-                        <div class="features-icon"><i class="fa fa-diamond"></i></div>
-                        <div class="features-text">
-                            <h5>Premium quality</h5>
-                            <p>doloremque laudantium, totam rem riam, eaque ipsa quae ab illo inventore veritatis lumbre. Doloremque laudantium, totam rem.</p>
+                @foreach (var item in Model.listAboutUsSkill.Take(3))
+                {
+                    <div class="col-md-4">
+                        <div class="features-box">
+                            <img height="220" width="220" src="~/Images/AboutUs/@item.ImageSlug" alt="">
+                            <div class="features-text">
+                                <h5>@item.Name</h5>
+                                <p>@item.LongDescription_Html.</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4 ">
-                    <div class="features-box">
-                        <div class="features-icon"><i class="fa fa-code"></i></div>
-                        <div class="features-text">
-                            <h5>The best codeing</h5>
-                            <p>doloremque laudantium, totam rem riam, eaque ipsa quae ab illo inventore veritatis lumbre. Doloremque laudantium, totam rem.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="features-box">
-                        <div class="features-icon"><i class="fa fa-picture-o"></i></div>
-                        <div class="features-text">
-                            <h5>Attract the people</h5>
-                            <p>doloremque laudantium, totam rem riam, eaque ipsa quae ab illo inventore veritatis lumbre. Doloremque laudantium, totam rem.</p>
-                        </div>
-                    </div>
-                </div>
+                }
+
             </div>
             <div class="main-feature-contents-btn-area">
-                <a href="about.html" class="button-large home">Learn more</a>
+                <a href="~/gioi-thieu" class="button-large home">Xem thêm</a>
             </div>
         </div>
     </div>
@@ -226,92 +216,36 @@
 </section>
 
 <section class="testimonial-area-outer">
-    <div class="testimonial-sec" style="background:url(../Template/img/testimonial-bg.jpg) no-repeat center center fixed;
+    <div class="testimonial-sec" style="background:url(../images/setting/cmt.jpg) no-repeat center center fixed;
          background-size:cover;">
         <div class="overlay">
             <div class="container">
                 <div class="content-area">
                     <div class="main-title">
-                        <h5>Our Great Supporters</h5>
-                        <h2>What People Think</h2>
-                        <p>Lorem ipsum dolor consectetur elit sed do eiusmod tempor incididunt ut labore.</p>
+                        <h5>Những nhân viên nổi bật</h5>
+                        <h2>Và những suy nghĩ của họ.</h2>
                     </div>
                     <div class="testimonial-slider-sec ">
                         <div id="demo">
                             <div id="testimonial-slider" class="owl-carousel">
+                                @foreach (var item in Model.listEmployee.Take(4))
+                                {
+                                    <div class="item">
+                                        <div class="testimonial-box">
+                                            <div class="author">
+                                                <img src="~/Images/Employee/@item.ImageSlug" alt="">
+                                            </div>
+                                            <div class="comment">
+                                                <h5>@item.Name</h5>
+                                                <span>@item.CreatedDate</span>
+                                                <p>
+                                                    “ @item.LongDescription_Html. ”
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
 
-                                <!-- Start: testimonial-item 01 -->
-                                <div class="item">
-                                    <div class="testimonial-box">
-                                        <div class="author">
-                                            <img src="~/template/img/testimonial-1.jpg" alt="">
-                                        </div>
-                                        <div class="comment">
-                                            <h5>Marc Boucher <span> [ CEO ]</span></h5>
-                                            <span>Geometricoz Inc</span>
-                                            <p>
-                                                “ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim murgangerilos
-                                                markjaskot rimmasovas veniam. ”
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End: testimonial-item 01 -->
-                                <!-- Start: testimonial-item 02 -->
-                                <div class="item">
-                                    <div class="testimonial-box">
-                                        <div class="author">
-                                            <img src="~/template/img/testimonial-2.jpg" alt="">
-                                        </div>
-                                        <div class="comment">
-                                            <h5>Marc Boucher <span> [ CEO ]</span></h5>
-                                            <span>Geometricoz Inc</span>
-                                            <p>
-                                                “ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim murgangerilos
-                                                markjaskot rimmasovas veniam. ”
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End: testimonial-item 02 -->
-                                <!-- Start: testimonial-item 03 -->
-                                <div class="item">
-                                    <div class="testimonial-box">
-                                        <div class="author">
-                                            <img src="~/template/img/testimonial-3.jpg" alt="">
-                                        </div>
-                                        <div class="comment">
-                                            <h5>Marc Boucher <span> [ CEO ]</span></h5>
-                                            <span>Geometricoz Inc</span>
-                                            <p>
-                                                “ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim murgangerilos
-                                                markjaskot rimmasovas veniam. ”
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End: testimonial-item 03 -->
-                                <!-- Start: testimonial-item 04 -->
-                                <div class="item">
-                                    <div class="testimonial-box">
-                                        <div class="author">
-                                            <img src="~/template/img/testimonial-4.jpg" alt="">
-                                        </div>
-                                        <div class="comment">
-                                            <h5>Marc Boucher <span> [ CEO ]</span></h5>
-                                            <span>Geometricoz Inc</span>
-                                            <p>
-                                                “ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim murgangerilos
-                                                markjaskot rimmasovas veniam. ”
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End: testimonial-item 04 -->
 
                             </div>
                         </div>
