@@ -5,6 +5,11 @@ namespace TTCNTT.Efs.Entities
 {
     public partial class CourseType
     {
+        public CourseType()
+        {
+            Course = new HashSet<Course>();
+        }
+
         public string Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
@@ -20,5 +25,7 @@ namespace TTCNTT.Efs.Entities
         public DateTime? UpdatedDate { get; set; }
         public byte[] RowVersion { get; set; }
         public int RowStatus { get; set; }
+
+        public virtual ICollection<Course> Course { get; set; }
     }
 }

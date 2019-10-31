@@ -1629,7 +1629,7 @@ a.down-app-btn:hover, .down-app-btn:hover {
 .awesome-structure-outer-area .main-title h5, .make-different-outer-area .main-title h5, .testimonial-sec .main-title h5, .key-skills-outer-area .main-title h5, .about-text-outer-area .main-title h5 {
 	font-weight: 400;
 }
-.main-title h5 span {
+.main-title h4 span {
 	color: #faac3a;
 }
 .main-title p {
@@ -2869,7 +2869,6 @@ a.ovelay-icon:hover {
 }
 .blog-comment-sec h3 {
     margin-bottom: 50px;
-    text-align: center;
 }
 .blog-inner-area .item-box .img-holder {
 	height: auto;
@@ -2935,11 +2934,13 @@ a.ovelay-icon:hover {
 	height: auto;
 	width: 100%;
 }
-.Reply-sec h6 {
-	margin-bottom: 10px;
+.Reply-sec h5 {
+    text-align: center;
+	margin-bottom: 0px;
 }
 .Reply-sec .button-medium {
-	width: 175px;
+    width: 175px;
+    float: right;
 }
 .Reply-sec form {
 	margin: 20px 0 0;

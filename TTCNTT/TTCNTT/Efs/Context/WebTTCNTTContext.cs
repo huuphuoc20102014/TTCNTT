@@ -327,6 +327,10 @@ namespace TTCNTT.Efs.Context
 
                 entity.Property(e => e.Body).IsRequired();
 
+                entity.Property(e => e.CourseId)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.CreatedBy)
                     .IsRequired()
                     .HasMaxLength(50)
@@ -339,7 +343,7 @@ namespace TTCNTT.Efs.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.FkProductCommentId)
+                entity.Property(e => e.FkCourseId)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -367,11 +371,18 @@ namespace TTCNTT.Efs.Context
                     .IsUnicode(false);
 
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+
+                entity.HasOne(d => d.FkCourse)
+                    .WithMany(p => p.Contact)
+                    .HasForeignKey(d => d.FkCourseId)
+                    .HasConstraintName("FK_Contact_Course");
             });
 
             modelBuilder.Entity<Course>(entity =>
             {
-                entity.HasNoKey();
+                entity.Property(e => e.Id)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.CreatedBy)
                     .IsRequired()
@@ -381,11 +392,6 @@ namespace TTCNTT.Efs.Context
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.FkProjectTypeId)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Id)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -422,11 +428,19 @@ namespace TTCNTT.Efs.Context
                     .IsUnicode(false);
 
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+
+                entity.HasOne(d => d.FkProjectType)
+                    .WithMany(p => p.Course)
+                    .HasForeignKey(d => d.FkProjectTypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Course_CourseType");
             });
 
             modelBuilder.Entity<CourseType>(entity =>
             {
-                entity.HasNoKey();
+                entity.Property(e => e.Id)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Code)
                     .IsRequired()
@@ -439,11 +453,6 @@ namespace TTCNTT.Efs.Context
                     .IsUnicode(false);
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-
-                entity.Property(e => e.Id)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.KeyWord).HasMaxLength(1000);
 

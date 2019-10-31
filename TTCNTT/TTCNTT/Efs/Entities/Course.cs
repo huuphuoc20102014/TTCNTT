@@ -5,6 +5,11 @@ namespace TTCNTT.Efs.Entities
 {
     public partial class Course
     {
+        public Course()
+        {
+            Contact = new HashSet<Contact>();
+        }
+
         public string Id { get; set; }
         public string FkProjectTypeId { get; set; }
         public string Name { get; set; }
@@ -23,5 +28,8 @@ namespace TTCNTT.Efs.Entities
         public DateTime? UpdatedDate { get; set; }
         public byte[] RowVersion { get; set; }
         public int RowStatus { get; set; }
+
+        public virtual CourseType FkProjectType { get; set; }
+        public virtual ICollection<Contact> Contact { get; set; }
     }
 }

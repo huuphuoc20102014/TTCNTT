@@ -4,7 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using TTCNTT.Efs.Context;
 using TTCNTT.Models;
 
 namespace TTCNTT.Controllers
@@ -12,15 +14,24 @@ namespace TTCNTT.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly WebTTCNTTContext _dbContext;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, WebTTCNTTContext dbContext)
         {
             _logger = logger;
+            _dbContext = dbContext;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            HomeViewModel model = new HomeViewModel();
+            model.aboutus = await _dbContext.AboutUs.FirstOrDefaultAsync(h => h.Skill == "0");
+            model.listAboutUs = await _dbContext.AboutUs.Where(p => p.Skill == "1").ToListAsync();
+            model.listNews = await _dbContext.News.ToListAsync();
+            model.listProduct = await _dbContext.Product.ToListAsync();
+            model.listService = await _dbContext.Service.ToListAsync();
+
+            return View(model);
         }
 
         public IActionResult Privacy()

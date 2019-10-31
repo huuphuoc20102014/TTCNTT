@@ -56,9 +56,9 @@
 
                                 <!-- Start:Leave Repaly -->
                                 <div class="Reply-sec">
-                                    <input id="fk_NewsId" type="hidden" value="@Model.course.Id" />
-                                    <h6>Điền thông tin vào mẫu dưới đây</h6>
-                                    <p>(Thông tin của bạn sẽ được giữ bí mật).</p>
+                                    <input id="fk_CourseId" type="hidden" value="@Model.course.Id" />
+                                    <h5>Điền thông tin vào mẫu dưới đây</h5>
+                                    <p style="text-align:center;">(Thông tin của bạn sẽ được giữ bí mật).</p>
                                     <form>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -68,23 +68,33 @@
                                                 <input id="Email" type="text" placeholder="Email" class="text-field-box borderd smoke-white ">
                                             </div>
                                         </div>
-                                            <div class="row">
-
-                                            
-                                                <div class="col-md-6">
-                                                    <input id="Phone" type="text" placeholder="Số điện thoại" class="text-field-box borderd smoke-white ">
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <input id="member" type="text" placeholder="Số người học" class="text-field-box borderd smoke-white ">
-                                                </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input id="Phone" type="text" placeholder="Số điện thoại" class="text-field-box borderd smoke-white ">
                                             </div>
-                                            <div class="row">
-                                                <div class="container">
-                                                    <textarea id="Content" class="text-field-box borderd smoke-white" placeholder="Ghi chú"></textarea>
-                                                    <button type="submit" id="contact-submit" class="button-medium submit-comment">Đăng ký</button>
-                                                </div>
+                                            <div class="col-md-6">
+                                                <input id="member" type="text" placeholder="Số người học" class="text-field-box borderd smoke-white ">
                                             </div>
-</form>
+                                        </div>
+                                        <div class="row">
+                                            <div class="container">
+                                                <textarea id="Content" class="text-field-box borderd smoke-white" placeholder="Nội dung đăng ký"></textarea>
+                                                <button type="submit" id="contact-submit" class="button-medium submit-comment">Đăng ký</button>
+                                            </div>
+                                        </div>
+                                        @if (TempData["CourseRegister"] != null)
+                                        {
+                                            <div id="contact-success">
+                                                @TempData["CourseRegister"]
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div id="contact-failed">
+                                                Lỗi...!, gửi thất bại, mời bạn thử lại sau.
+                                            </div>
+                                        }
+                                    </form>
                                 </div>
                                 <!-- End:Leave Repaly -->
                             </div>
@@ -171,7 +181,8 @@ Content Area End -->
 
 @section scripts{
     <script>
-        var _urlNewsComment = '@Url.Action("NewsComment", "News")';
+        var _urlCourseRegister = '@Url.Action("CourseRegister", "Course")';
     </script>
-    <script src="~/js/newscomment.js"></script>
+
+    <script src="~/js/CourseRegister.js"></script>
 }

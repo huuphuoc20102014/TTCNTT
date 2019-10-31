@@ -47,5 +47,36 @@ namespace TTCNTT.Controllers
 
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> CourseRegister(string name, string email, string phone, int membercount, string content, string fkcourseid)
+        {
+            Contact contact = new Contact();
+
+            try
+            {
+                contact.Id = Guid.NewGuid().ToString();
+                contact.Name = name;
+                contact.Email = email;
+                contact.Phone = phone;
+                contact.CourseMember = membercount;
+                contact.Body = content;
+                contact.FkCourseId = fkcourseid;
+                contact.CreatedBy = "Customer";
+                contact.CreatedDate = DateTime.Now;
+                contact.RowStatus = 0;
+
+                _dbContext.Contact.Add(contact);
+                await _dbContext.SaveChangesAsync();
+                TempData["CourseRegister"] = "Gửi đăng ký thành công.";
+
+                return Json(true);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { errorMessage = ex.ToString() });
+            }
+
+        }
     }
 }
