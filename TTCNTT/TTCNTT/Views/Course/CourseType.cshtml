@@ -1,7 +1,7 @@
-﻿@model EmployeeViewModel
+﻿@model CourseViewModel
 
 @{
-    ViewBag.Title = Model.employeeType.Name;
+    ViewBag.Title = Model.courseType.Name;
 }
 
 <section class="banner-sec">
@@ -10,8 +10,8 @@
         <div class="overlay-mask">
             <!-- Start:Slider area -->
             <div class="container">
-                <h1>@Model.employeeType.Name</h1>
-                <h6>Cán Bộ Giảng Viên.</h6>
+                <h1>@Model.courseType.Name</h1>
+                <h6>Danh mục Khóa học.</h6>
                 <hr>
             </div>
             <!-- End:Slider area -->
@@ -26,8 +26,8 @@
             <div class="container">
                 <div class="col-md-12">
                     <div class="main-title">
-                        <h5>Giảng Viên</h5>
-                        <h2>Danh Sách Giảng Viên</h2>
+                        <h5>@Model.courseType.Name</h5>
+                        <h2>Mới cập nhật</h2>
                     </div>
                 </div>
             </div>
@@ -38,24 +38,19 @@
                     <div class="blog-main-area">
                         <!-- Start:Blog Items (With Mini Grid) -->
                         <div class="mini-grid-area">
-                            @foreach (var item in Model.listEmployee)
+                            @foreach (var item in Model.listCourse)
                             {
-                                <div class="col-md-4">
-                                    <div class="team-member">
-                                        <div class="team-member-box">
-                                            <div class="image-holder">
-                                                <a href="~/Employee/EmployeeDetail/@item.Slug_Name">
-                                                    <img src="~/Images/Employee/@item.ImageSlug" alt="@item.Name">
-                                                </a>
-                                            </div>
-                                            <div class="text-box">
-                                                <h6>@item.Specialize</h6>
-                                                <h5><a href="~/Employee/EmployeeDetail/@item.Slug_Name">@item.Name</a> </h5>
-                                                <hr>
-                                                <p id="tt-employee-detail">@item.ShortDescription_Html. </p>
-
-                                            </div>
-
+                                <div class="col-md-4 ">
+                                    <div class="item-box">
+                                        <a href="~/Course/CourseDetail/@item.Slug_Name" class=" img-holder">
+                                            <img src="~/Images/Course/@item.ImageSlug" alt="@item.Name">
+                                            <div class="mask"></div>
+                                        </a>
+                                        <div class="info-text-holder">
+                                            <h6><a href="~/Course/CourseDetail/@item.Slug_Name">@item.Name.</a></h6>
+                                            <span><a href="~/Course/CourseDetail/@item.Slug_Name">@item.CreatedDate</a></span>
+                                            <p>@item.ShortDescription_Html. </p>
+                                            <a href="~/Course/CourseDetail/@item.Slug_Name" class="button-medium">ĐỌC TIẾP</a>
                                         </div>
                                     </div>
                                 </div>

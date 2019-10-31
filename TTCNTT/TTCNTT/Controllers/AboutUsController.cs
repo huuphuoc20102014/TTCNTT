@@ -42,6 +42,7 @@ namespace TTCNTT.Controllers
                             Id = h.Id,
                             Name = h.Name,
                             ImageSlug = h.ImageSlug,
+                            Specialize = h.Specialize,
                             LongDescription_Html = h.LongDescription_Html
                         })
                         .ToListAsync();
@@ -75,5 +76,7 @@ namespace TTCNTT.Controllers
         public DateTime? UpdatedDate { get; set; }
         public byte[] RowVersion { get; set; }
         public int RowStatus { get; set; }
+
+        public string Specialize { get; set; }
     }
 }

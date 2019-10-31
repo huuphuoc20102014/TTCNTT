@@ -2867,8 +2867,9 @@ a.ovelay-icon:hover {
 	height: auto;
 	float: left;
 }
-.blog-comment-sec h4 {
-	margin-bottom: 0px;
+.blog-comment-sec h3 {
+    margin-bottom: 50px;
+    text-align: center;
 }
 .blog-inner-area .item-box .img-holder {
 	height: auto;
