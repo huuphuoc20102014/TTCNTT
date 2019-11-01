@@ -9,16 +9,18 @@ using TTCNTT.Models;
 
 namespace TTCNTT.Helpers
 {
-    public class FooterHelper
+    public class MenuHelper
     {
-        public static async Task<FooterViewModel> GetFooterSetting(TTCNTT.Efs.Context.WebTTCNTTContext context)
+        public static async Task<MenuViewModel> GetDataMenu(WebTTCNTTContext webContext)
         {
-            var footerViewModel = new FooterViewModel();
+            MenuViewModel model = new MenuViewModel();
+            model.listMenu = await webContext.Menu.ToListAsync();
+            model.listNewsType = await webContext.NewsType.ToListAsync();
+            model.listService = await webContext.Service.ToListAsync();
+            model.listTraining = await webContext.Training.ToListAsync();
+            model.listCategory = await webContext.Category.ToListAsync();
 
-            footerViewModel.setting = await SettingHelper.ReadServerOptionAsync(context);
-
-            return footerViewModel;
-
+            return model;
         }
     }
 }

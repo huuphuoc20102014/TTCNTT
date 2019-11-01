@@ -37,7 +37,7 @@
         @RenderBody()
     </main>
     @{ 
-        var footerModel = await TTCNTT.Helpers.FooterHelper.GetFooterSetting(context);
+        var footerModel = await TTCNTT.Helpers.SettingValueHelper.GetValueSetting(context);
             <partial name="_footer" model="footerModel" />
     }
     

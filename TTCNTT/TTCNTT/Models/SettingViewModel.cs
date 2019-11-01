@@ -7,9 +7,8 @@ using TTCNTT.Helpers;
 
 namespace TTCNTT.Models
 {
-    public class FooterViewModel
+    public class SettingViewModel
     {
         public SettingHelper setting { get; set; }
-        public List<Setting> listSetting { get; set; }
     }
 }

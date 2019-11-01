@@ -23,7 +23,27 @@ namespace TTCNTT.Helpers
         public string FOOTER_LOGO { get; set; }
         public string FOOTER_YOUTUBE { get; set; }
 
+        public string CONTACT { get; set; }
+        public string CONTACT_SLOGAN { get; set; }
+        public string BANNER { get; set; }
 
+        public string NEWS { get; set; }
+        public string NEWS_SLOGAN { get; set; }
+
+        public string COURSE { get; set; }
+        public string COURSE_SLOGAN { get; set; }
+
+        public string EMPLOYEE { get; set; }
+        public string EMPLOYEE_SLOGAN { get; set; }
+
+        public string PRODUCT { get; set; }
+        public string PRODUCT_SLOGAN { get; set; }
+
+        public string SERVICE { get; set; }
+        public string SERVICE_SLOGAN { get; set; }
+
+        public string ABOUTUS { get; set; }
+        public string ABOUTUS_SLOGAN { get; set; }
 
         public static async Task<SettingHelper> ReadServerOptionAsync(WebTTCNTTContext context)
 

@@ -1,24 +1,15 @@
 ﻿@model ServiceViewModel
+@inject TTCNTT.Efs.Context.WebTTCNTTContext context
 
 @{
     ViewBag.Title = Model.menu.Name;
 }
 
+@{
+    var bannerModel = await TTCNTT.Helpers.SettingValueHelper.GetValueSetting(context);
+    <partial name="_BannerPartial" model="bannerModel" />
+}
 
-<section class="banner-sec">
-    <div class="main-banner inner" style=" background:url(img/banner-bg.jpg) no-repeat top center fixed; background-size:cover;">
-        <a href="#" name="scroll-top-div"></a>
-        <div class="overlay-mask">
-            <!-- Start:Slider area -->
-            <div class="container">
-                <h1>@Model.menu.Name</h1>
-                <h6>Các dịch vụ của Trung Tâm.</h6>
-                <hr>
-            </div>
-            <!-- End:Slider area -->
-        </div>
-    </div>
-</section>
 
 <section class="blog-outer-area">
     <div class="content-area">

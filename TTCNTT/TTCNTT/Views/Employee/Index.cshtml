@@ -1,23 +1,14 @@
 ﻿@model EmployeeViewModel
+@inject TTCNTT.Efs.Context.WebTTCNTTContext context
 
 @{
     ViewBag.Title = Model.employeeType.Name;
 }
 
-<section class="banner-sec">
-    <div class="main-banner inner" style=" background:url(img/banner-bg.jpg) no-repeat top center fixed; background-size:cover;">
-        <a href="#" name="scroll-top-div"></a>
-        <div class="overlay-mask">
-            <!-- Start:Slider area -->
-            <div class="container">
-                <h1>@Model.employeeType.Name</h1>
-                <h6>Cán Bộ Giảng Viên.</h6>
-                <hr>
-            </div>
-            <!-- End:Slider area -->
-        </div>
-    </div>
-</section>
+@{
+    var bannerModel = await TTCNTT.Helpers.SettingValueHelper.GetValueSetting(context);
+    <partial name="_BannerPartial" model="bannerModel" />
+}
 
 <section class="blog-outer-area">
     <div class="content-area">
