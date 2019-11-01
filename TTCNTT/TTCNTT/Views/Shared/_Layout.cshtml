@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@inject TTCNTT.Efs.Context.WebTTCNTTContext context
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -35,7 +36,11 @@
     <main role="main" class="pb-3">
         @RenderBody()
     </main>
-    <partial name="_footer" />
+    @{ 
+        var footerModel = await TTCNTT.Helpers.FooterHelper.GetFooterSetting(context);
+            <partial name="_footer" model="footerModel" />
+    }
+    
 
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

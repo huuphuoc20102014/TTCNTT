@@ -1,13 +1,14 @@
-﻿<!-- Footer Area Start
-    ====================================================== -->
+﻿@model FooterViewModel
+
+
 <footer class="footer-area">
     <div class="upper-area">
         <div class="container">
             <!-- Start:About Info -->
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="about-info">
-                    <div class="footer-logo"><a href="#"><img alt="" src="~/template/img/footer-logo.png"></a></div>
-                    <p>Incididunt ut labore et dolore magna aliqua. Ut enim ad minim eiusmod tempor incididunt ut labore et dolore.</p>
+                    <div class="footer-logo"><a href="#"><img alt="" src="~/Images/@Model.setting.FOOTER_LOGO"></a></div>
+                    <p>@Model.setting.FOOTER_GIOITHIEU.</p>
                     <ul class="social-media-icon-list">
                         <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                         <li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -18,30 +19,41 @@
                     </ul>
                 </div>
             </div>
-            <!-- End:About Info -->
-            <!-- Start:Useful Links -->
-            <div class="col-md-3">
-                <div class="useful-link-sec">
-                    <h5>Useful Links</h5>
-                    <ul class="useful-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="services.html">Service</a></li>
-                        <li><a href="potfolio.html">Portfolio</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="typography.html">Paragraph</a></li>
-                        <li><a href="blog-detail.html">Blog Detail</a></li>
-                        <li><a href="shortcodes.html">Shortcodes</a></li>
+
+            @*<div class="col-md-3">
+            <div class="useful-link-sec">
+                <h5>Useful Links</h5>
+                <ul class="useful-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Service</a></li>
+                    <li><a href="potfolio.html">Portfolio</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="typography.html">Paragraph</a></li>
+                    <li><a href="blog-detail.html">Blog Detail</a></li>
+                    <li><a href="shortcodes.html">Shortcodes</a></li>
+                </ul>
+            </div>
+        </div>*@
+
+            <div class="col-md-4">
+                <div class="address-sec">
+                    <h5>@Model.setting.FOOTER_CONTACT</h5>
+                    <ul>
+                        <li>@Model.setting.FOOTER_CONTACT_ADDRESS </li>
+                        <li>@Model.setting.FOOTER_CONTACT_PHONE</li>
+                        <li>@Model.setting.FOOTER_CONTACT_FAX</li>
+                        <li>@Model.setting.FOOTER_CONTACT_EMAIL</li>
+                        <li>@Model.setting.FOOTER_CONTACT_WEB</li>
                     </ul>
                 </div>
             </div>
-            <!-- End:Useful Links -->
-            <!-- Start:Newsletter -->
-            <div class="col-md-3">
+
+            <div class="col-md-4">
                 <div class="news-letter-sec new-customer-register">
-                    <h5>Đăng ký thông báo</h5>
-                    <p>Đăng ký để nhận thông báo về tin tức và các khóa học mới nhất.</p>
+                    <h5>@Model.setting.FOOTER_INFORM</h5>
+                    <p>@Model.setting.FOOTER_INFORM_DESCRIPTION.</p>
                     <form>
                         <div>
                             <input placeholder="Nhập Email của bạn" class="mail-btn">
@@ -55,28 +67,14 @@
                 @ViewBag.Customer
 
                 @*@if (ViewData["Customer"] != null)
-                {
-                    <div class="alert alert-primary">
-                        AAAAAAA
-                    </div>
-                }*@
+            {
+                <div class="alert alert-primary">
+                    AAAAAAA
+                </div>
+            }*@
 
             </div>
-            <!-- End:Newsletter -->
-            <!-- Start:Address -->
-            <div class="col-md-3">
-                <div class="address-sec">
-                    <h5>Contact</h5>
-                    <ul>
-                        <li>Office: 12345 Little Lonsdale St, Melbourne </li>
-                        <li>Phone: (123) 123-456</li>
-                        <li>Fax: (123) 123-456</li>
-                        <li>E-Mail: johndoe@site.com</li>
-                        <li>Web: www.website.com</li>
-                    </ul>
-                </div>
-            </div>
-            <!-- End:Address -->
+
 
         </div>
     </div>
@@ -84,7 +82,7 @@
     <div class="bottom-area">
         <div class="container">
             <div class="copyright">
-                <p>© Copyright 2016 Alamben <span>  | </span>  All Rights Reserved</p>
+                <p>@Model.setting.FOOTER_COPYRIGHT</p>
                 <a id="scroll-top-div" href="#"><i class="fa fa-hand-pointer-o" aria-hidden="true"></i></a>
             </div>
         </div>
