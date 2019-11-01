@@ -53,6 +53,7 @@
                 <div class="text-box">
                     <p>@Model.aboutus.LongDescription_Html</p>
                 </div>
+                <a href="~/gioi-thieu" class="button-medium left-align">Xem thêm</a>
             </div>
             <!-- End:Left area-->
             <!-- Start:Right area-->
@@ -97,7 +98,7 @@
                             </div>
                         </div>
                     }
-
+                    <a href="~/tin-tuc-su-kien" class="button-medium left-align">Xem thêm</a>
                 </div>
                 <!-- End:Home Blog items-->
             </div>
@@ -126,7 +127,7 @@
                     {
                         <li><a href="~/service/servicedetail/@item.Slug_Name">@item.ServiceName </a></li>
                     }
-                    
+
                 </ul>
                 <!-- End:Pie Chart List Items-->
                 <a href="~/dich-vu" class="button-medium left-align">Khám phá</a>
@@ -143,6 +144,43 @@
 
     </div>
     <!-- End:Make different content area -->
+</section>
+
+<section class="home-blog-area">
+    <div class="container">
+        <div class="home-blog-sec">
+            <div class="content-area">
+                <div class="main-title">
+                    <h5>Sản phẩm</h5>
+                    <h2>Mới tiêu biểu</h2>
+                </div>
+                <!-- Start:Home Blog items-->
+                <div class="home-blog-items-sec">
+                    <!-- Start:Blog item 1-->
+                    @foreach (var item in Model.listProduct.Take(3))
+                    {
+                        <div class="col-md-4">
+                            <div class="item-box">
+                                <div class=" img-holder">
+                                    <a data-featherlight="image" href="~/product/productdetail/@item.Slug_Name"><img alt="" src="~/Images/News/@item.ImageSlug"></a>
+                                </div>
+                                <div class="info-text-holder">
+                                    <h6><a href="single-article.html">@item.Name</a></h6>
+                                    <span>@item.CreatedDate</span>
+                                    <p>
+                                        @item.LongDescription_Html
+                                    </p>
+                                    <a class="button-medium" href="~/product/productdetail/@item.Slug_Name"> ĐỌC TIẾP</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <a href="~/san-pham" class="button-medium left-align">Xem thêm</a>
+                </div>
+                <!-- End:Home Blog items-->
+            </div>
+        </div>
+    </div>
 </section>
 
 <section class="awesome-structure-outer-area">
@@ -164,7 +202,7 @@
                             {
                                 <li><a href="~/course/coursedetail/@item.Slug_Name">@item.Name </a></li>
                             }
-                            
+
                         </ul>
                         <!-- End:Pie Chart List Items-->
                         <a href="~/khoa-hoc" class="button-medium left-align">Khám phá</a>
@@ -182,37 +220,6 @@
         <!-- End:Left area-->
     </div>
     <!-- End:Awesome Structure content area-->
-</section>
-
-<section class="special-features-area">
-    <!-- Start:feature contents area-->
-    <div class="container">
-        <div class="home-feature-content content-area">
-            <div class="main-title">
-                <h5> Những lý do</h5>
-                <h2>Bạn nên chọn Trung Tâm</h2>
-            </div>
-            <div class="features-contents clearfix ">
-                @foreach (var item in Model.listAboutUsSkill.Take(3))
-                {
-                    <div class="col-md-4">
-                        <div class="features-box">
-                            <img height="220" width="220" src="~/Images/AboutUs/@item.ImageSlug" alt="">
-                            <div class="features-text">
-                                <h5>@item.Name</h5>
-                                <p>@item.LongDescription_Html.</p>
-                            </div>
-                        </div>
-                    </div>
-                }
-
-            </div>
-            <div class="main-feature-contents-btn-area">
-                <a href="~/gioi-thieu" class="button-large home">Xem thêm</a>
-            </div>
-        </div>
-    </div>
-    <!-- End:feature contents area -->
 </section>
 
 <section class="testimonial-area-outer">
@@ -255,6 +262,7 @@
         </div>
     </div>
 </section>
+
 
 
 

@@ -39,14 +39,28 @@
             <!-- End:Useful Links -->
             <!-- Start:Newsletter -->
             <div class="col-md-3">
-                <div class="news-letter-sec">
-                    <h5>Newsletter</h5>
-                    <p>Lorem ipsum dolor sit amet, consectet adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+                <div class="news-letter-sec new-customer-register">
+                    <h5>Đăng ký thông báo</h5>
+                    <p>Đăng ký để nhận thông báo về tin tức và các khóa học mới nhất.</p>
                     <form>
-                        <input placeholder="Enter Your Email" class="mail-btn">
-                        <button class="send-btn">SEnd</button>
+                        <div>
+                            <input placeholder="Nhập Email của bạn" class="mail-btn">
+                            <button id="customer-register" class="send-btn">Gửi</button>
+                        </div>
                     </form>
+
                 </div>
+                @TempData["Customer"]
+                @ViewData["Customer"]
+                @ViewBag.Customer
+
+                @*@if (ViewData["Customer"] != null)
+                {
+                    <div class="alert alert-primary">
+                        AAAAAAA
+                    </div>
+                }*@
+
             </div>
             <!-- End:Newsletter -->
             <!-- Start:Address -->

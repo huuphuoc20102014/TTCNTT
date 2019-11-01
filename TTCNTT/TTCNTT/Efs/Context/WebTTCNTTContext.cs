@@ -29,6 +29,7 @@ namespace TTCNTT.Efs.Context
         public virtual DbSet<Contact> Contact { get; set; }
         public virtual DbSet<Course> Course { get; set; }
         public virtual DbSet<CourseType> CourseType { get; set; }
+        public virtual DbSet<CustomerRegister> CustomerRegister { get; set; }
         public virtual DbSet<Employee> Employee { get; set; }
         public virtual DbSet<EmployeeType> EmployeeType { get; set; }
         public virtual DbSet<FAQ> FAQ { get; set; }
@@ -474,6 +475,35 @@ namespace TTCNTT.Efs.Context
                     .IsUnicode(false);
 
                 entity.Property(e => e.Tags).HasMaxLength(1000);
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<CustomerRegister>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion();
 
                 entity.Property(e => e.UpdatedBy)
                     .HasMaxLength(50)

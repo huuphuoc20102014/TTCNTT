@@ -944,7 +944,7 @@ ol li a:hover {
 	margin: 0 0 15px;
 }
 .button-medium.left-align {
-	float: left;
+	width:200px;
 }
 /*----------------------------  fun-fact Area     ----------------------------------------------------*/
 .home-fun-fact-area-outer-sec {

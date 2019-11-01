@@ -1,0 +1,1 @@
+Scaffold-DbContext "Server=115.78.100.42,8899;Database=TTCNTT;User Id=sa;Password=1@qweQAZ" Microsoft.EntityFrameworkCore.SqlServer -force -context "WebTTCNTTContext" -ContextDir "Efs/Context" -OutputDir "Efs/Entities" –UseDatabaseNames
