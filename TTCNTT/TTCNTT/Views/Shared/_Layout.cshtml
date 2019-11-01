@@ -32,15 +32,21 @@
     <link href="~/template/css/fonts/lato.css" rel='stylesheet' type='text/css'>*@
 </head>
 <body>
-    <partial name="_header" />
+
+    @{
+        var headerModel = await TTCNTT.Helpers.SettingValueHelper.GetValueSetting(context);
+        <partial name="_header" model="headerModel" />
+    }
+
     <main role="main" class="pb-3">
         @RenderBody()
     </main>
-    @{ 
+
+    @{
         var footerModel = await TTCNTT.Helpers.SettingValueHelper.GetValueSetting(context);
-            <partial name="_footer" model="footerModel" />
+        <partial name="_footer" model="footerModel" />
     }
-    
+
 
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -67,10 +73,10 @@
     <script type="text/javascript" src="~/template/js/animation.js"></script><!-- Animation Js -->
 
 
-        <script>
+    <script>
         var _urlCustomerRegister = '@Url.Action("NewCustomerRegister", "Home")';
-        </script>
-        <script src="~/js/CustomerRegister.js"></script>
+    </script>
+    <script src="~/js/CustomerRegister.js"></script>
 
 </body>
 </html>

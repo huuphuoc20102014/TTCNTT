@@ -23,9 +23,12 @@ namespace TTCNTT.Helpers
         public string FOOTER_LOGO { get; set; }
         public string FOOTER_YOUTUBE { get; set; }
 
+        public string BANNER { get; set; }
+        public string TOP_LOGO { get; set; }
+
         public string CONTACT { get; set; }
         public string CONTACT_SLOGAN { get; set; }
-        public string BANNER { get; set; }
+
 
         public string NEWS { get; set; }
         public string NEWS_SLOGAN { get; set; }

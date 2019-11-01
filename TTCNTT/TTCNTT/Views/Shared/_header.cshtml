@@ -1,5 +1,5 @@
 ﻿@inject TTCNTT.Efs.Context.WebTTCNTTContext webContext
-
+@model SettingViewModel
 
 <div id="mask">
     <div id="loader">
@@ -14,7 +14,7 @@ Preloader Area End -->
 
         <!-- Start: Top Logo Area -->
         <div class="col-md-4 left-side">
-            <div class="logo"><a href="~/home"> <img src="~/template/img/top-logo.png" alt=""></a></div>
+            <div class="logo"><a href="~/home"> <img src="~/Images/@Model.setting.TOP_LOGO" alt=""></a></div>
         </div>
         <div class="mob-icon"><i class="fa fa-bars"></i></div>
         <!-- End: Top Logo Area -->
