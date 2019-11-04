@@ -1,8 +1,11 @@
-﻿@model ProductViewModel
+﻿
+@model ProductViewModel
 @inject TTCNTT.Efs.Context.WebTTCNTTContext context
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
 
 @{
-    ViewBag.Title = Model.menu.Name;
+    ViewBag.Title = "Model.menu.Name";
 }
 
 @{
@@ -18,7 +21,7 @@
             <div class="container">
                 <div class="col-md-12">
                     <div class="main-title">
-                        <h5>@Model.menu.Name</h5>
+                        <h5>Model.menu.Name</h5>
                         <h2>Sản phẩm mới nhất</h2>
                     </div>
                 </div>
@@ -30,7 +33,7 @@
                     <div class="blog-main-area">
                         <!-- Start:Blog Items (With Mini Grid) -->
                         <div class="mini-grid-area">
-                            @foreach (var item in Model.listProduct)
+                            @foreach (var item in ViewBag.OnePageOfProducts)
                             {
                                 <div class="col-md-4 ">
                                     <div class="item-box">
@@ -53,23 +56,28 @@
                         <!-- Start:Pagination -->
                         <div class="pagination-area">
                             <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <i class="fa fa-angle-left" aria-hidden="true"></i>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">...</a></li>
-                                <li class="page-item"><a class="page-link" href="#">15</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
+
+                                
+
+                                @Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Index", "san-pham", new { page }))
+
+                                @*<li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Previous">
+                                            <i class="fa fa-angle-left" aria-hidden="true"></i>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">...</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">15</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Next">
+                                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </li>*@
                             </ul>
                         </div>
                         <!-- End:Pagination -->

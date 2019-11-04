@@ -3138,8 +3138,8 @@ a.ovelay-icon:hover {
 	font-family: "Lato";
 }
 .pagination-area .pagination > li.active > a, .pagination-area .pagination > li.active > span, .pagination-area .pagination > li:hover a, .pagination-area .pagination > li:hover span, .pagination-area .pagination > li:active a, .pagination-area .pagination > li:active span, .pagination-area .pagination > li:focus a, .pagination-area .pagination > li:focus span {
-	background: #ccc;
-	color: #fff;
+    background: #faac3a;
+    color: #fff;
 }
 /* ===================================================================================================== */
 /* 09. About Page Styles                                                                                 */

@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using TTCNTT.Efs.Context;
 using TTCNTT.Efs.Entities;
 using TTCNTT.Models;
+using X.PagedList;
 
 namespace TTCNTT.Controllers
 {
@@ -18,15 +19,22 @@ namespace TTCNTT.Controllers
             _dbContext = dbContext;
         }
 
-        [Route("san-pham")]
-        //[HttpGet("san-pham")]
-        public async Task<IActionResult>  Index()
+        
+        [HttpGet("san-pham")]
+        public async Task<IActionResult>  Index(int? page)
         {
-            ProductViewModel model = new ProductViewModel();
-            model.menu = await _dbContext.Menu.FirstOrDefaultAsync(h => h.Slug_Name == "san-pham");
-            model.listProduct = await _dbContext.Product.ToListAsync();
+            var pageNumber = page ?? 1;
+            var onePageOfProducts = _dbContext.Product.ToPagedList(pageNumber, 3);
 
-            return View(model);
+            ViewBag.OnePageOfProducts = onePageOfProducts;
+            //var pageSize = 10;
+
+            //ProductViewModel model = new ProductViewModel();
+            //model.menu = await _dbContext.Menu.FirstOrDefaultAsync(h => h.Slug_Name == "san-pham");
+            //var listProduct = _dbContext.Product.ToPagedList(pageNumber, pageSize);
+            //ViewBag.ListProduct = listProduct;
+
+            return View();
         }
         [HttpGet("san-pham/chi-tiet-san-pham/{id}")]
         public async Task<IActionResult> ProductDetail(string id)
@@ -88,6 +96,5 @@ namespace TTCNTT.Controllers
 
             return View(model);
         }
-
     }
 }
