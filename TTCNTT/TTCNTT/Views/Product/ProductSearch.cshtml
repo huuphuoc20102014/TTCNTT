@@ -30,23 +30,31 @@
                     <div class="blog-main-area">
                         <!-- Start:Blog Items (With Mini Grid) -->
                         <div class="mini-grid-area">
-                            @foreach (var item in Model.listProduct)
+                            @if (Model.listProduct.Count() != 0)
                             {
-                                <div class="col-md-4 ">
-                                    <div class="item-box">
-                                        <a href="~/product/ProductDetail/@item.Slug_Name" class=" img-holder">
-                                            <img src="~/Images/Product/@item.ImageSlug" alt="">
-                                            <div class="mask"></div>
-                                        </a>
-                                        <div class="info-text-holder">
-                                            <h6><a href="~/product/ProductDetail/@item.Slug_Name">@item.Name.</a></h6>
-                                            <span><a href="~/product/ProductDetail/@item.Slug_Name">@item.CreatedDate</a></span>
-                                            <p>@item.ShortDescription_Html. </p>
-                                            <a href="~/product/ProductDetail/@item.Slug_Name" class="button-medium">XEM THÊM</a>
+                                @foreach (var item in Model.listProduct)
+                                {
+                                    <div class="col-md-4 ">
+                                        <div class="item-box">
+                                            <a href="~/product/ProductDetail/@item.Slug_Name" class=" img-holder">
+                                                <img src="~/Images/Product/@item.ImageSlug" alt="">
+                                                <div class="mask"></div>
+                                            </a>
+                                            <div class="info-text-holder">
+                                                <h6><a href="~/product/ProductDetail/@item.Slug_Name">@item.Name.</a></h6>
+                                                <span><a href="~/product/ProductDetail/@item.Slug_Name">@item.CreatedDate</a></span>
+                                                <p>@item.ShortDescription_Html. </p>
+                                                <a href="~/product/ProductDetail/@item.Slug_Name" class="button-medium">XEM THÊM</a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                }
                             }
+                            else
+                            {
+                                <p class="search-result">(Không có kết quả nào phù hợp)</p>
+                            }
+
 
                         </div>
                         <!-- End:Blog Items (With Mini Grid) -->
