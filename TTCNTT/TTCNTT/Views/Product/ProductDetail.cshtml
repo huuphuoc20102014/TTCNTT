@@ -112,8 +112,10 @@
                         <!-- Start:Blog Right Content-->
                         <div class="col-md-4 ">
                             <div class="right">
-                                <input type="text" name="search" class="search-btn" placeholder="Tìm kiếm">
-
+                                <form asp-controller="Product" asp-action="ProductSearch" method="get">
+                                    <input id="btn-search-event" type="text" name="search" class="search-btn" placeholder="Tìm kiếm">
+                                </form>
+                                
                                 <!-- Start:category-box-->
                                 <h5>Các loại tin tức</h5>
                                 <ul class="category-box">
@@ -190,6 +192,8 @@ Content Area End -->
 @section scripts{
     <script>
         var _urlNewsComment = '@Url.Action("NewProductComment", "Product")';
+        var _urlProductSearch = '@Url.Action("ProductSearch", "Product")';
     </script>
     <script src="~/js/productcomment.js"></script>
+    <script src="~/js/ProductSearch.js"></script>
 }

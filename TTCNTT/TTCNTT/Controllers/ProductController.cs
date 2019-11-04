@@ -78,5 +78,15 @@ namespace TTCNTT.Controllers
             }
 
         }
+
+        
+        public async Task<IActionResult> ProductSearch(string search)
+        {
+            ProductViewModel model = new ProductViewModel();
+            model.listProduct = await _dbContext.Product.Where(h => h.Name.Contains(search)).ToListAsync();
+
+            return View(model);
+        }
+
     }
 }
