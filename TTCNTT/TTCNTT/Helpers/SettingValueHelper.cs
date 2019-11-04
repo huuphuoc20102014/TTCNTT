@@ -13,11 +13,11 @@ namespace TTCNTT.Helpers
     {
         public static async Task<SettingViewModel> GetValueSetting(TTCNTT.Efs.Context.WebTTCNTTContext context)
         {
-            var footerViewModel = new SettingViewModel();
+            var settingModel = new SettingViewModel();
 
-            footerViewModel.setting = await SettingHelper.ReadServerOptionAsync(context);
+            settingModel.setting = await SettingHelper.ReadServerOptionAsync(context);
 
-            return footerViewModel;
+            return settingModel;
 
         }
     }
