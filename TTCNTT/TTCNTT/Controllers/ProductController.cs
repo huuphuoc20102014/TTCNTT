@@ -18,7 +18,8 @@ namespace TTCNTT.Controllers
             _dbContext = dbContext;
         }
 
-        [HttpGet("san-pham")]
+        [Route("san-pham")]
+        //[HttpGet("san-pham")]
         public async Task<IActionResult>  Index()
         {
             ProductViewModel model = new ProductViewModel();
@@ -27,7 +28,7 @@ namespace TTCNTT.Controllers
 
             return View(model);
         }
-
+        [HttpGet("san-pham/chi-tiet-san-pham/{id}")]
         public async Task<IActionResult> ProductDetail(string id)
         {
             ProductViewModel model = new ProductViewModel();
