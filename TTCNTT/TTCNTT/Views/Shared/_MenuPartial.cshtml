@@ -46,14 +46,14 @@
             </ul>
         </li>
     }
-    else if (item.Slug_Name == "tin-tuc-su-kien")
+    else if (item.Slug_Name == "tin-tuc")
     {
         <li>
             <a href="~/@item.Slug_Name">@item.Name</a>
             <ul>
                 @foreach (var loaitintuc in Model.listNewsType)
                 {
-                    <li><a href="~/news/newstype/@loaitintuc.Slug_Name">@loaitintuc.Name</a></li>
+                    <li><a href="~/tin-tuc/loai-tin-tuc/@loaitintuc.Slug_Name">@loaitintuc.Name</a></li>
                 }
             </ul>
         </li>

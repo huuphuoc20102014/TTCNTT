@@ -110,7 +110,7 @@
                                 <ul class="category-box">
                                     @foreach (var item in Model.listNewsType)
                                     {
-                                        <li><a href="~/news/newstype/@item.Slug_Name">@item.Name </a></li>
+                                        <li><a href="~/tin-tuc/loai-tin-tuc/@item.Slug_Name">@item.Name </a></li>
                                     }
                                 </ul>
                                 <!-- End:category-box-->
@@ -126,7 +126,7 @@
                                                 </div>
                                                 <div class="col-md-7">
                                                     <div class="text">
-                                                        <p><a href="~/news/newsdetail/@item.Slug_Title">@item.Title</a></p>
+                                                        <p><a href="~/tin-tuc/chi-tiet/@item.Slug_Title">@item.Title</a></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -180,7 +180,7 @@ Content Area End -->
 
 @section scripts{
     <script>
-        var _urlNewsComment = '@Url.Action("NewsComment", "News")';
+        var _urlNewsComment = '@Url.Action("NewsComment", "tin-tuc")';
     </script>
     <script src="~/js/newscomment.js"></script>
 }

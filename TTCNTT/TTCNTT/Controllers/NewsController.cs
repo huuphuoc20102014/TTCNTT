@@ -7,10 +7,11 @@ using Microsoft.EntityFrameworkCore;
 using TTCNTT.Efs.Context;
 using TTCNTT.Efs.Entities;
 using TTCNTT.Models;
+using X.PagedList;
 
 namespace TTCNTT.Controllers
 {
-    [Route("tin-tuc-su-kien")]
+    [Route("tin-tuc")]
     public class NewsController : Controller
     {
         private readonly WebTTCNTTContext _dbContext;
@@ -20,23 +21,32 @@ namespace TTCNTT.Controllers
         }
 
 
-        public async Task<IActionResult>  Index()
+        public async Task<IActionResult>  Index(int? page)
         {
+            var pageNumber = page ?? 1;
+            var onePageOfNews = _dbContext.News.ToPagedList(pageNumber, 9);
+            ViewBag.onePageOfNews = onePageOfNews;
+
             NewsViewModel model = new NewsViewModel();
-            model.listNews = await _dbContext.News.ToListAsync();
-            model.menu = await _dbContext.Menu.FirstOrDefaultAsync(h => h.Slug_Name == "tin-tuc-su-kien");
+            model.menu = await _dbContext.Menu.FirstOrDefaultAsync(h => h.Slug_Name == "tin-tuc");
+
             return View(model);
         }
 
-        public async Task<IActionResult> NewsType(string id)
+        [Route("loai-tin-tuc/{id}")]
+        public async Task<IActionResult> NewsType(string id, int? page)
         {
             NewsViewModel model = new NewsViewModel();
             model.newsType = await _dbContext.NewsType.FirstOrDefaultAsync(h => h.Slug_Name == id);
-            model.listNews = await _dbContext.News.Where(h => h.FkNewsTypeId == model.newsType.Id).ToListAsync();
+
+            var pageNumber = page ?? 1;
+            var onePageOfNews = _dbContext.News.Where(h => h.FkNewsTypeId == model.newsType.Id).ToPagedList(pageNumber, 9);
+            ViewBag.OnePageOfNews = onePageOfNews;
 
             return View(model);
         }
 
+        [Route("chi-tiet/{id}")]
         public async Task<IActionResult> NewsDetail(string id)
         {
             NewsViewModel model = new NewsViewModel();
