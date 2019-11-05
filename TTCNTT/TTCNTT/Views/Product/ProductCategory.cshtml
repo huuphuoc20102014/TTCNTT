@@ -1,4 +1,6 @@
 ﻿@model ProductViewModel
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
 
 @{
     ViewBag.Title = Model.category.Name;
@@ -39,19 +41,19 @@
                     <div class="blog-main-area">
                         <!-- Start:Blog Items (With Mini Grid) -->
                         <div class="mini-grid-area">
-                            @foreach (var item in Model.listProduct)
+                            @foreach (var item in ViewBag.OnePageOfProducts)
                             {
                                 <div class="col-md-4 ">
                                     <div class="item-box">
-                                        <a href="~/product/ProductDetail/@item.Slug_Name" class=" img-holder">
+                                        <a href="~/san-pham/chi-tiet-san-pham/@item.Slug_Name" class=" img-holder">
                                             <img src="~/Images/Product/@item.ImageSlug" alt="">
                                             <div class="mask"></div>
                                         </a>
                                         <div class="info-text-holder">
-                                            <h6><a href="~/product/ProductDetail/@item.Slug_Name">@item.Name.</a></h6>
-                                            <span><a href="~/product/ProductDetail/@item.Slug_Name">@item.CreatedDate</a></span>
+                                            <h6><a href="~/san-pham/chi-tiet-san-pham/@item.Slug_Name">@item.Name.</a></h6>
+                                            <span><a href="~/san-pham/chi-tiet-san-pham/@item.Slug_Name">@item.CreatedDate</a></span>
                                             <p>@item.ShortDescription_Html. </p>
-                                            <a href="~/product/ProductDetail/@item.Slug_Name" class="button-medium">XEM THÊM</a>
+                                            <a href="~/san-pham/chi-tiet-san-pham/@item.Slug_Name" class="button-medium">XEM THÊM</a>
                                         </div>
                                     </div>
                                 </div>
@@ -62,23 +64,9 @@
                         <!-- Start:Pagination -->
                         <div class="pagination-area">
                             <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <i class="fa fa-angle-left" aria-hidden="true"></i>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">...</a></li>
-                                <li class="page-item"><a class="page-link" href="#">15</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
+
+                                @Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("loai-san-pham", "san-pham", new {id = Model.category.Slug_Name,  page }))
+
                             </ul>
                         </div>
                         <!-- End:Pagination -->

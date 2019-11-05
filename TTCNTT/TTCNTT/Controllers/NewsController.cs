@@ -10,6 +10,7 @@ using TTCNTT.Models;
 
 namespace TTCNTT.Controllers
 {
+    [Route("tin-tuc-su-kien")]
     public class NewsController : Controller
     {
         private readonly WebTTCNTTContext _dbContext;
@@ -18,7 +19,7 @@ namespace TTCNTT.Controllers
             _dbContext = dbContext;
         }
 
-        [HttpGet("tin-tuc-su-kien")]
+
         public async Task<IActionResult>  Index()
         {
             NewsViewModel model = new NewsViewModel();

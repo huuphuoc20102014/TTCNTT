@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using TTCNTT.Efs.Context;
 using TTCNTT.Efs.Entities;
@@ -11,6 +12,7 @@ using X.PagedList;
 
 namespace TTCNTT.Controllers
 {
+    [Route("san-pham")]
     public class ProductController : Controller
     {
         private readonly WebTTCNTTContext _dbContext;
@@ -18,25 +20,18 @@ namespace TTCNTT.Controllers
         {
             _dbContext = dbContext;
         }
-
         
-        [HttpGet("san-pham")]
         public async Task<IActionResult>  Index(int? page)
         {
             var pageNumber = page ?? 1;
-            var onePageOfProducts = _dbContext.Product.ToPagedList(pageNumber, 3);
+            var onePageOfProducts = _dbContext.Product.ToPagedList(pageNumber, 9);
 
             ViewBag.OnePageOfProducts = onePageOfProducts;
-            //var pageSize = 10;
-
-            //ProductViewModel model = new ProductViewModel();
-            //model.menu = await _dbContext.Menu.FirstOrDefaultAsync(h => h.Slug_Name == "san-pham");
-            //var listProduct = _dbContext.Product.ToPagedList(pageNumber, pageSize);
-            //ViewBag.ListProduct = listProduct;
 
             return View();
         }
-        [HttpGet("san-pham/chi-tiet-san-pham/{id}")]
+
+        [Route("chi-tiet-san-pham/{id}")]
         public async Task<IActionResult> ProductDetail(string id)
         {
             ProductViewModel model = new ProductViewModel();
@@ -49,11 +44,17 @@ namespace TTCNTT.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> ProductCategory(string id)
+        [Route("loai-san-pham/{id}")]
+        public async Task<IActionResult> ProductCategory(string id, int? page)
         {
             ProductViewModel model = new ProductViewModel();
             model.category = await _dbContext.Category.FirstOrDefaultAsync(h => h.Slug_Name == id);
-            model.listProduct = await _dbContext.Product.Where(h => h.FkProductId == model.category.Id).ToListAsync();
+
+            var pageNumber = page ?? 1;
+            var category = await _dbContext.Category.FirstOrDefaultAsync(h => h.Slug_Name == id);
+            var onePageOfProducts = _dbContext.Product.Where(h =>h.FkProductId == category.Id.ToString()).ToPagedList(pageNumber, 9);
+
+            ViewBag.OnePageOfProducts = onePageOfProducts;
 
             return View(model);
         }
@@ -88,13 +89,22 @@ namespace TTCNTT.Controllers
 
         }
 
-        
+        [Route("ProductSearch")]
         public async Task<IActionResult> ProductSearch(string search)
         {
-            ProductViewModel model = new ProductViewModel();
-            model.listProduct = await _dbContext.Product.Where(h => h.Name.Contains(search)).ToListAsync();
+            return RedirectToAction("tim-kiem", "san-pham", new { id = search });
+        }
 
-            return View(model);
+        [Route("tim-kiem/{id}")]
+        public async Task<IActionResult> Search(string id, int? page)
+        {
+            var pageNumber = page ?? 1;
+            var onePageOfProducts = _dbContext.Product.Where(h => h.Name.Contains(id)).ToPagedList(pageNumber, 9);
+
+            ViewBag.OnePageOfProducts = onePageOfProducts;
+            ViewBag.id = id;
+
+            return View();
         }
     }
 }

@@ -10,9 +10,9 @@
                 url: _urlProductSearch,
                 type: 'POST',
                 data: {
-                    id: keyWord.val()
+                    search: keyWord.val()
                 },
-                dataType: 'html',
+                dataType: 'text',
                 error: function (jqXHR, exception) {
                     var msg = '';
                     if (jqXHR.status === 0) {

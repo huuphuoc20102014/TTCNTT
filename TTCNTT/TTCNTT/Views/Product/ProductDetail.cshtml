@@ -112,7 +112,7 @@
                         <!-- Start:Blog Right Content-->
                         <div class="col-md-4 ">
                             <div class="right">
-                                <form asp-controller="Product" asp-action="ProductSearch" method="get">
+                                <form asp-controller="san-pham" asp-action="ProductSearch" method="post">
                                     <input id="btn-search-event" type="text" name="search" class="search-btn" placeholder="Tìm kiếm">
                                 </form>
                                 
@@ -121,7 +121,7 @@
                                 <ul class="category-box">
                                     @foreach (var item in Model.listCategory)
                                     {
-                                        <li><a href="~/product/productcategory/@item.Slug_Name">@item.Name </a></li>
+                                        <li><a href="~/san-pham/loai-san-pham/@item.Slug_Name">@item.Name </a></li>
                                     }
                                 </ul>
                                 <!-- End:category-box-->
@@ -137,7 +137,7 @@
                                                 </div>
                                                 <div class="col-md-7">
                                                     <div class="text">
-                                                        <p><a href="~/product/productdetail/@item.Slug_Name">@item.Name</a></p>
+                                                        <p><a href="~/san-pham/chi-tiet-san-pham/@item.Slug_Name">@item.Name</a></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -192,8 +192,9 @@ Content Area End -->
 @section scripts{
     <script>
         var _urlNewsComment = '@Url.Action("NewProductComment", "Product")';
-        var _urlProductSearch = '@Url.Action("ProductSearch", "Product")';
+        var _urlProductSearch = '@Url.Action("ProductSearch", "san-pham")';
     </script>
     <script src="~/js/productcomment.js"></script>
     <script src="~/js/ProductSearch.js"></script>
+
 }
