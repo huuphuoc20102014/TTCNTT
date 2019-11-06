@@ -60,6 +60,7 @@ namespace TTCNTT.Controllers
         }
 
         [HttpPost]
+        [Route("NewProductComment")]
         public async Task<IActionResult> NewProductComment(string name, string email, string phone, string content, string fkProductId)
         {
             ProductComment comment = new ProductComment();

@@ -23,7 +23,7 @@ namespace TTCNTT.Controllers
         public async Task<IActionResult> Index(int? page)
         {
             var pageNumber = page ?? 1;
-            var onePageOfServices = _dbContext.Service.ToPagedList(pageNumber, 2);
+            var onePageOfServices = _dbContext.Service.ToPagedList(pageNumber, 6);
 
             ViewBag.OnePageOfServices = onePageOfServices;
 
@@ -52,7 +52,7 @@ namespace TTCNTT.Controllers
         public async Task<IActionResult> Search(string id, int? page)
         {
             var pageNumber = page ?? 1;
-            var onePageOfServices = _dbContext.Service.Where(h => h.ServiceName.Contains(id)).ToPagedList(pageNumber, 2);
+            var onePageOfServices = _dbContext.Service.Where(h => h.ServiceName.Contains(id)).ToPagedList(pageNumber, 6);
 
             ViewBag.OnePageOfServices = onePageOfServices;
             ViewBag.id = id;

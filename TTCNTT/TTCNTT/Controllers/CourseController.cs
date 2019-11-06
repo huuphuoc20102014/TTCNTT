@@ -60,6 +60,7 @@ namespace TTCNTT.Controllers
         }
 
         [HttpPost]
+        [Route("CourseRegister")]
         public async Task<IActionResult> CourseRegister(string name, string email, string phone, int membercount, string content, string fkcourseid)
         {
             Contact contact = new Contact();
