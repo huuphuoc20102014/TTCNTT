@@ -1,4 +1,6 @@
 ﻿@model CourseViewModel
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
 
 @{
     ViewBag.Title = Model.courseType.Name;
@@ -38,19 +40,19 @@
                     <div class="blog-main-area">
                         <!-- Start:Blog Items (With Mini Grid) -->
                         <div class="mini-grid-area">
-                            @foreach (var item in Model.listCourse)
+                            @foreach (var item in ViewBag.OnePageOfCourses)
                             {
                                 <div class="col-md-4 ">
                                     <div class="item-box">
-                                        <a href="~/Course/CourseDetail/@item.Slug_Name" class=" img-holder">
+                                        <a href="~/khoa-hoc/chi-tiet/@item.Slug_Name" class=" img-holder">
                                             <img src="~/Images/Course/@item.ImageSlug" alt="@item.Name">
                                             <div class="mask"></div>
                                         </a>
                                         <div class="info-text-holder">
-                                            <h6><a href="~/Course/CourseDetail/@item.Slug_Name">@item.Name.</a></h6>
-                                            <span><a href="~/Course/CourseDetail/@item.Slug_Name">@item.CreatedDate</a></span>
+                                            <h6><a href="~/khoa-hoc/chi-tiet/@item.Slug_Name">@item.Name.</a></h6>
+                                            <span><a href="~/khoa-hoc/chi-tiet/@item.Slug_Name">@item.CreatedDate</a></span>
                                             <p>@item.ShortDescription_Html. </p>
-                                            <a href="~/Course/CourseDetail/@item.Slug_Name" class="button-medium">ĐỌC TIẾP</a>
+                                            <a href="~/khoa-hoc/chi-tiet/@item.Slug_Name" class="button-medium">ĐỌC TIẾP</a>
                                         </div>
                                     </div>
                                 </div>
@@ -61,23 +63,10 @@
                         <!-- Start:Pagination -->
                         <div class="pagination-area">
                             <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <i class="fa fa-angle-left" aria-hidden="true"></i>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">...</a></li>
-                                <li class="page-item"><a class="page-link" href="#">15</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
+
+                                @Html.PagedListPager((IPagedList)ViewBag.OnePageOfCourses, page => Url.Action("loai-khoa-hoc", "khoa-hoc", new { id = Model.courseType.Slug_Name, page }))
+
+
                             </ul>
                         </div>
                         <!-- End:Pagination -->

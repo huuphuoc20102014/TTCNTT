@@ -7,9 +7,11 @@ using Microsoft.EntityFrameworkCore;
 using TTCNTT.Efs.Context;
 using TTCNTT.Efs.Entities;
 using TTCNTT.Models;
+using X.PagedList;
 
 namespace TTCNTT.Controllers
 {
+    [Route("khoa-hoc")]
     public class CourseController : Controller
     {
         private readonly WebTTCNTTContext _dbContext;
@@ -18,25 +20,34 @@ namespace TTCNTT.Controllers
             _dbContext = dbContext;
         }
 
-        [HttpGet("khoa-hoc")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page)
         {
+            var pageNumber = page ?? 1;
+            var onePageOfCourses = _dbContext.Course.ToPagedList(pageNumber, 9);
+
+            ViewBag.OnePageOfCourses = onePageOfCourses;
+
             CourseViewModel model = new CourseViewModel();
             model.khoahoc = await _dbContext.Training.FirstOrDefaultAsync(h => h.Slug_Name == "khoa-hoc");
-            model.listCourse = await _dbContext.Course.ToListAsync();
 
             return View(model);
         }
 
-        public async Task<IActionResult> CourseType(string id)
+        [Route("loai-khoa-hoc/{id}")]
+        public async Task<IActionResult> CourseType(string id, int? page)
         {
             CourseViewModel model = new CourseViewModel();
             model.courseType = await _dbContext.CourseType.FirstOrDefaultAsync(h => h.Slug_Name == id);
-            model.listCourse = await _dbContext.Course.Where(h => h.FkProjectTypeId == model.courseType.Id).ToListAsync();
+
+            var pageNumber = page ?? 1;
+            var onePageOfCourses = _dbContext.Course.Where(h => h.FkProjectTypeId == model.courseType.Id).ToPagedList(pageNumber, 9);
+
+            ViewBag.OnePageOfCourses = onePageOfCourses;
 
             return View(model);
         }
 
+        [Route("chi-tiet/{id}")]
         public async Task<IActionResult> CourseDetail(string id)
         {
             CourseViewModel model = new CourseViewModel();
@@ -77,6 +88,24 @@ namespace TTCNTT.Controllers
                 return Json(new { errorMessage = ex.ToString() });
             }
 
+        }
+
+        [Route("CourseSearch")]
+        public async Task<IActionResult> CourseSearch(string search)
+        {
+            return RedirectToAction("tim-kiem", "khoa-hoc", new { id = search });
+        }
+
+        [Route("tim-kiem/{id}")]
+        public async Task<IActionResult> Search(string id, int? page)
+        {
+            var pageNumber = page ?? 1;
+            var onePageOfCourses = _dbContext.Course.Where(h => h.Name.Contains(id)).ToPagedList(pageNumber, 9);
+
+            ViewBag.OnePageOfCourses = onePageOfCourses;
+            ViewBag.id = id;
+
+            return View();
         }
     }
 }

@@ -104,14 +104,17 @@
                         <!-- Start:Blog Right Content-->
                         <div class="col-md-4 ">
                             <div class="right">
-                                <input type="text" name="search" class="search-btn" placeholder="Tìm kiếm">
+
+                                <form asp-controller="khoa-hoc" asp-action="CourseSearch" method="post">
+                                    <input id="btn-search-event" type="text" name="search" class="search-btn" placeholder="Tìm kiếm">
+                                </form>
 
                                 <!-- Start:category-box-->
                                 <h5>Các loại khóa học</h5>
                                 <ul class="category-box">
                                     @foreach (var item in Model.listCourseType1)
                                     {
-                                        <li><a href="~/Course/CourseType/@item.Slug_Name">@item.Name </a></li>
+                                        <li><a href="~/khoa-hoc/loai-khoa-hoc/@item.Slug_Name">@item.Name </a></li>
                                     }
                                 </ul>
                                 <!-- End:category-box-->
@@ -127,7 +130,7 @@
                                                 </div>
                                                 <div class="col-md-7">
                                                     <div class="text">
-                                                        <p><a href="~/Course/CourseDetail/@item.Slug_Name">@item.Name</a></p>
+                                                        <p><a href="~/khoa-hoc/chi-tiet/@item.Slug_Name">@item.Name</a></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -181,8 +184,9 @@ Content Area End -->
 
 @section scripts{
     <script>
-        var _urlCourseRegister = '@Url.Action("CourseRegister", "Course")';
+        var _urlCourseRegister = '@Url.Action("CourseRegister", "khoa-hoc")';
+        var _urlCourseSearch = '@Url.Action("CourseSearch", "khoa-hoc")';
     </script>
-
+    <script src="~/js/CourseSearch.js"></script>
     <script src="~/js/CourseRegister.js"></script>
 }

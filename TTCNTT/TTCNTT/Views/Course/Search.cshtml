@@ -4,7 +4,7 @@
 @using X.PagedList;
 
 @{
-    ViewBag.Title = Model.khoahoc.Name;
+    ViewBag.Title = "Tìm Kiếm";
 }
 
 @{
@@ -19,8 +19,8 @@
             <div class="container">
                 <div class="col-md-12">
                     <div class="main-title">
-                        <h5>@Model.khoahoc.Name</h5>
-                        <h2>Mới cập nhật</h2>
+                        <h5>Tìm Kiếm</h5>
+                        <h2>Tin Tức</h2>
                     </div>
                 </div>
             </div>
@@ -35,15 +35,15 @@
                             {
                                 <div class="col-md-4 ">
                                     <div class="item-box">
-                                        <a href="~/khoa-hoc/chi-tiet/@item.Slug_Name" class=" img-holder">
+                                        <a href="~/Course/CourseDetail/@item.Slug_Name" class=" img-holder">
                                             <img src="~/Images/Course/@item.ImageSlug" alt="@item.Name">
                                             <div class="mask"></div>
                                         </a>
                                         <div class="info-text-holder">
-                                            <h6><a href="~/khoa-hoc/chi-tiet/@item.Slug_Name">@item.Name.</a></h6>
-                                            <span><a href="~/khoa-hoc/chi-tiet/@item.Slug_Name">@item.CreatedDate</a></span>
+                                            <h6><a href="~/Course/CourseDetail/@item.Slug_Name">@item.Name.</a></h6>
+                                            <span><a href="~/Course/CourseDetail/@item.Slug_Name">@item.CreatedDate</a></span>
                                             <p>@item.ShortDescription_Html. </p>
-                                            <a href="~/khoa-hoc/chi-tiet/@item.Slug_Name" class="button-medium">ĐỌC TIẾP</a>
+                                            <a href="~/Course/CourseDetail/@item.Slug_Name" class="button-medium">ĐỌC TIẾP</a>
                                         </div>
                                     </div>
                                 </div>
@@ -55,7 +55,7 @@
                         <div class="pagination-area">
                             <ul class="pagination">
 
-                                @Html.PagedListPager((IPagedList)ViewBag.OnePageOfCourses, page => Url.Action("Index", "khoa-hoc", new { page }))
+                                @Html.PagedListPager((IPagedList)ViewBag.OnePageOfCourses, page => Url.Action("tim-kiem", "khoa-hoc", new { id = ViewBag.id, page }))
 
 
                             </ul>
