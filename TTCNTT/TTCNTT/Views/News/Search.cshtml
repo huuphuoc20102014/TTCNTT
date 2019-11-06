@@ -1,17 +1,16 @@
-﻿@model ServiceViewModel
+﻿@model NewsViewModel
 @inject TTCNTT.Efs.Context.WebTTCNTTContext context
 @using X.PagedList.Mvc.Core;
 @using X.PagedList;
 
 @{
-    ViewBag.Title = Model.menu.Name;
+    ViewBag.Title = "Tìm kiếm";
 }
 
 @{
     var bannerModel = await TTCNTT.Helpers.SettingValueHelper.GetValueSetting(context);
     <partial name="_BannerPartial" model="bannerModel" />
 }
-
 
 <section class="blog-outer-area">
     <div class="content-area">
@@ -20,8 +19,8 @@
             <div class="container">
                 <div class="col-md-12">
                     <div class="main-title">
-                        <h5>@Model.menu.Name</h5>
-                        <h2>Dịch vụ mới nhất</h2>
+                        <h5>Tìm Kiếm</h5>
+                        <h2>Tin Tức</h2>
                     </div>
                 </div>
             </div>
@@ -32,19 +31,19 @@
                     <div class="blog-main-area">
                         <!-- Start:Blog Items (With Mini Grid) -->
                         <div class="mini-grid-area">
-                            @foreach (var item in ViewBag.OnePageOfServices)
+                            @foreach (var item in ViewBag.OnePageOfNews)
                             {
                                 <div class="col-md-4 ">
                                     <div class="item-box">
-                                        <a href="~/dich-vu/chi-tiet/@item.Slug_Name" class=" img-holder">
-                                            <img src="~/Images/Services/@item.ImageSlug" alt="">
+                                        <a href="~/tin-tuc/chi-tiet/@item.Slug_Title" class=" img-holder">
+                                            <img src="~/Images/News/@item.ImageSlug" alt="@item.Title">
                                             <div class="mask"></div>
                                         </a>
                                         <div class="info-text-holder">
-                                            <h6><a href="~/dich-vu/chi-tiet/@item.Slug_Name">@item.ServiceName.</a></h6>
-                                            <span><a href="~/dich-vu/chi-tiet/@item.Slug_Name">@item.CreatedDate</a></span>
+                                            <h6><a href="~/tin-tuc/chi-tiet/@item.Slug_Title">@item.Title.</a></h6>
+                                            <span><a href="~/tin-tuc/chi-tiet/@item.Slug_Title">@item.CreatedDate</a></span>
                                             <p>@item.ShortDescription_Html. </p>
-                                            <a href="~/dich-vu/chi-tiet/@item.Slug_Name" class="button-medium">XEM THÊM</a>
+                                            <a href="~/tin-tuc/chi-tiet/@item.Slug_Title" class="button-medium">ĐỌC TIẾP</a>
                                         </div>
                                     </div>
                                 </div>
@@ -56,7 +55,8 @@
                         <div class="pagination-area">
                             <ul class="pagination">
 
-                                @Html.PagedListPager((IPagedList)ViewBag.OnePageOfServices, page => Url.Action("Index", "dich-vu", new { page }))
+                                @Html.PagedListPager((IPagedList)ViewBag.OnePageOfNews, page => Url.Action("tim-kiem", "tin-tuc", new { id = ViewBag.id, page }))
+
 
                             </ul>
                         </div>
@@ -71,3 +71,4 @@
         </div>
     </div>
 </section>
+

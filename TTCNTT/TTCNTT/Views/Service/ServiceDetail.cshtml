@@ -56,7 +56,10 @@
                         <!-- Start:Blog Right Content-->
                         <div class="col-md-4 ">
                             <div class="right">
-                                <input type="text" name="search" class="search-btn" placeholder="Tìm kiếm">
+                                <form asp-controller="dich-vu" asp-action="ServiceSearch" method="post">
+                                    <input id="btn-search-event" type="text" name="search" class="search-btn" placeholder="Tìm kiếm">
+                                </form>
+
                                 <!-- End:category-box-->
                                 <!-- Start:Recent Posts-->
                                 <h5>Dịch vụ khác</h5>
@@ -70,7 +73,7 @@
                                                 </div>
                                                 <div class="col-md-7">
                                                     <div class="text">
-                                                        <p><a href="~/Service/ServiceDetail/@item.Slug_Name">@item.ServiceName</a></p>
+                                                        <p><a href="~/dich-vu/chi-tiet/@item.Slug_Name">@item.ServiceName</a></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -121,3 +124,10 @@
 <!-- =================================================
 Content Area End -->
 
+@section scripts{
+    <script>
+        var _urlServiceSearch = '@Url.Action("ServiceSearch", "dich-vu")';
+    </script>
+
+    <script src="~/js/ServiceSearch.js"></script>
+}

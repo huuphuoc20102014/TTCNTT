@@ -89,5 +89,23 @@ namespace TTCNTT.Controllers
             }
 
         }
+
+        [Route("NewsSearch")]
+        public async Task<IActionResult> NewsSearch(string search)
+        {
+            return RedirectToAction("tim-kiem", "tin-tuc", new { id = search });
+        }
+
+        [Route("tim-kiem/{id}")]
+        public async Task<IActionResult> Search(string id, int? page)
+        {
+            var pageNumber = page ?? 1;
+            var onePageOfNews = _dbContext.News.Where(h => h.Title.Contains(id)).ToPagedList(pageNumber, 9);
+
+            ViewBag.OnePageOfNews = onePageOfNews;
+            ViewBag.id = id;
+
+            return View();
+        }
     }
 }
