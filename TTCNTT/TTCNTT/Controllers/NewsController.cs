@@ -61,6 +61,7 @@ namespace TTCNTT.Controllers
         }
 
         [HttpPost]
+        [Route("NewsComment")]
         public async Task<IActionResult> NewsComment(string name, string email, string phone, string content, string fknewsid)
         {               
             NewsComment comment = new NewsComment();
