@@ -53,6 +53,11 @@ namespace TTCNTT
             services.AddControllersWithViews();
             services.AddRazorPages()
                 .AddRazorRuntimeCompilation();
+
+            //config send mail
+            services.AddOptions();
+            services.Configure<Models.EmailSettings>(Configuration.GetSection("EmailSettings"));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
