@@ -500,7 +500,7 @@ body::-webkit-scrollbar-thumb {
 	height: 500px;
 }
 .inner .overlay-mask {
-	background: rgba(17, 97, 132, 0.8) url(../img/globe-inner.png) no-repeat center center;
+	background: rgba(17, 97, 132, 0.8) url(../../Images/Setting/globe-inner.png) no-repeat center center;
 	height: 100%;
 	width: 100%;
 	padding: 220px 0 0;
