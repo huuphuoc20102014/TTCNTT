@@ -10,6 +10,7 @@ using TTCNTT.Models;
 
 namespace TTCNTT.Controllers
 {
+    
     public class AboutUsController : Controller
     {
         private readonly WebTTCNTTContext _dbContext;
@@ -18,7 +19,7 @@ namespace TTCNTT.Controllers
             _dbContext = dbContext;
         }
 
-        [HttpGet("gioi-thieu")]
+        [Route("gioi-thieu")]
         public async Task<IActionResult> Index()
         {
             AboutUsViewModel model = new AboutUsViewModel();

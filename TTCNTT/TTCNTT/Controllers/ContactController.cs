@@ -10,6 +10,7 @@ using TTCNTT.Models;
 
 namespace TTCNTT.Controllers
 {
+    [Route("lien-he")]
     public class ContactController : Controller
     {
         private readonly WebTTCNTTContext _dbContext;
@@ -18,7 +19,6 @@ namespace TTCNTT.Controllers
             _dbContext = dbContext;
         }
 
-        [HttpGet("lien-he")]
         public async Task<IActionResult> Index()
         {
             ContactViewModel model = new ContactViewModel();
