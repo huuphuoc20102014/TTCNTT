@@ -7,9 +7,11 @@ using Microsoft.EntityFrameworkCore;
 using TTCNTT.Efs.Context;
 using TTCNTT.Efs.Entities;
 using TTCNTT.Models;
+using X.PagedList;
 
 namespace TTCNTT.Controllers
 {
+    [Route("giang-vien")]
     public class EmployeeController : Controller
     {
         private readonly WebTTCNTTContext _dbContext;
@@ -18,22 +20,47 @@ namespace TTCNTT.Controllers
             _dbContext = dbContext;
         }
 
-        [HttpGet("doi-ngu-giang-vien")]
-        public async Task<IActionResult> Index()
+        
+        public async Task<IActionResult> Index(int? page)
         {
             EmployeeViewModel model = new EmployeeViewModel();
             model.employeeType = await _dbContext.EmployeeType.FirstOrDefaultAsync(h => h.Id == "ET03");
-            model.listEmployee = await _dbContext.Employee.Where(p => p.Fk_EmplyeeId == "ET03").ToListAsync();
+
+            var pageNumber = page ?? 1;
+            var onePageOfEmployees = _dbContext.Employee.Where(p => p.Fk_EmplyeeId == "ET03").ToPagedList(pageNumber, 6);
+
+            ViewBag.OnePageOfEmployees = onePageOfEmployees;
+
             return View(model);
         }
 
+        [Route("chi-tiet/{id}")]
         public async Task<IActionResult> EmployeeDetail(string id)
         {
             EmployeeViewModel model = new EmployeeViewModel();
             model.employee = await _dbContext.Employee.FirstOrDefaultAsync(h => h.Slug_Name == id);
             model.employeeType = await _dbContext.EmployeeType.FirstOrDefaultAsync(h => h.Id == "ET03");
             model.listEmployee = await _dbContext.Employee.Where(p => p.Fk_EmplyeeId == "ET03").ToListAsync();
+
             return View(model);
+        }
+
+        [Route("EmployeeSearch")]
+        public async Task<IActionResult> EmployeeSearch(string search)
+        {
+            return RedirectToAction("tim-kiem", "giang-vien", new { id = search });
+        }
+
+        [Route("tim-kiem/{id}")]
+        public async Task<IActionResult> Search(string id, int? page)
+        {
+            var pageNumber = page ?? 1;
+            var onePageOfEmployees = _dbContext.Employee.Where(h => h.Name.Contains(id) && h.Fk_EmplyeeId == "ET03").ToPagedList(pageNumber, 2);
+
+            ViewBag.OnePageOfEmployees = onePageOfEmployees;
+            ViewBag.id = id;
+
+            return View();
         }
     }
 }

@@ -4,7 +4,7 @@
 @using X.PagedList;
 
 @{
-    ViewBag.Title = Model.employeeType.Name;
+    ViewBag.Title = "Tìm Kiếm";
 }
 
 @{
@@ -19,8 +19,8 @@
             <div class="container">
                 <div class="col-md-12">
                     <div class="main-title">
-                        <h5>Giảng Viên</h5>
-                        <h2>Danh Sách Giảng Viên</h2>
+                        <h5>Tìm Kiếm</h5>
+                        <h2>Giảng Viên</h2>
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@
                         <div class="pagination-area">
                             <ul class="pagination">
 
-                                @Html.PagedListPager((IPagedList)ViewBag.OnePageOfEmployees, page => Url.Action("Index", "giang-vien", new { page }))
+                                @Html.PagedListPager((IPagedList)ViewBag.OnePageOfEmployees, page => Url.Action("tim-kiem", "giang-vien", new { id = ViewBag.id, page }))
 
 
                             </ul>
