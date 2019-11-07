@@ -1,15 +1,25 @@
 ﻿@model AboutUsViewModel
-@inject TTCNTT.Efs.Context.WebTTCNTTContext context
 @using TTCNTT.Controllers
 
 @{
-    ViewBag.Title = "Giới thiệu";
+    ViewBag.Title = Model.setting.ABOUTUS;
 }
 
-@{
-    var bannerModel = await TTCNTT.Helpers.SettingValueHelper.GetValueSetting(context);
-    <partial name="_BannerPartial" model="bannerModel" />
-}
+<section class="banner-sec">
+    <div class="main-banner inner" @*style=" background:url(../images/@Model.setting.BANNER); background-size:cover;"*@>
+
+        <a href="#" name="scroll-top-div"></a>
+        <div class="overlay-mask">
+            <!-- Start:Slider area -->
+            <div class="container">
+                <h1>@Model.setting.ABOUTUS</h1>
+                <h6>@Model.setting.ABOUTUS_SLOGAN</h6>
+                <hr>
+            </div>
+            <!-- End:Slider area -->
+        </div>
+    </div>
+</section>
 
 <section class="about-text-outer-area">
     <!-- Start:About Awesome content area-->

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TTCNTT.Efs.Context;
 using TTCNTT.Efs.Entities;
+using TTCNTT.Helpers;
 using TTCNTT.Models;
 using X.PagedList;
 
@@ -28,7 +29,8 @@ namespace TTCNTT.Controllers
             ViewBag.OnePageOfServices = onePageOfServices;
 
             ServiceViewModel model = new ServiceViewModel();
-            model.menu = await _dbContext.Menu.FirstOrDefaultAsync(p => p.Slug_Name == "dich-vu");
+            model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
+
 
             return View(model);
         }
@@ -39,6 +41,8 @@ namespace TTCNTT.Controllers
             ServiceViewModel model = new ServiceViewModel();
             model.service = await _dbContext.Service.FirstOrDefaultAsync(h => h.Slug_Name == id);
             model.listService = await _dbContext.Service.ToListAsync();
+            model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
+
             return View(model);
         }
 
@@ -57,7 +61,11 @@ namespace TTCNTT.Controllers
             ViewBag.OnePageOfServices = onePageOfServices;
             ViewBag.id = id;
 
-            return View();
+            ServiceViewModel model = new ServiceViewModel();
+            model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
+
+
+            return View(model);
         }
     }
 }

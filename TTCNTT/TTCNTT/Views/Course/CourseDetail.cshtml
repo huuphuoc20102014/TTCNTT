@@ -5,13 +5,13 @@
 }
 
 <section class="banner-sec">
-    <div class="main-banner inner" style=" background:url(img/banner-bg.jpg) no-repeat top center fixed; background-size:cover;">
+    <div class="main-banner inner" @*style=" background:url(img/banner-bg.jpg) no-repeat top center fixed; background-size:cover;"*@>
         <a href="#" name="scroll-top-div"></a>
         <div class="overlay-mask">
             <!-- Start:Slider area -->
             <div class="container">
                 <h1>@Model.course.Name</h1>
-                <h6>Chi tiết Khóa Học</h6>
+                <h6>@Model.setting.COURSE_DETAIL</h6>
                 <hr>
             </div>
             <!-- End:Slider area -->
@@ -34,7 +34,7 @@
                                     <img src="~/Images/Course/@Model.course.ImageSlug" alt="">
                                 </div>
                                 <div class="info-text-holder">
-                                    <h4>@Model.course.Name.</h4>
+                                    <h4>@Model.course.Name</h4>
                                     <span> <a href="#">@Model.course.CreatedDate</a></span>
                                     <p>
                                         @Model.course.LongDescription_Html.
@@ -187,6 +187,6 @@ Content Area End -->
         var _urlCourseRegister = '@Url.Action("CourseRegister", "khoa-hoc")';
         var _urlCourseSearch = '@Url.Action("CourseSearch", "khoa-hoc")';
     </script>
-    <script src="~/js/CourseSearch.js"></script>
     <script src="~/js/CourseRegister.js"></script>
+    <script src="~/js/CourseSearch.js"></script>
 }

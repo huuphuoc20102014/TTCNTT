@@ -4,7 +4,7 @@
 @using X.PagedList;
 
 @{
-    ViewBag.Title = Model.employeeType.Name;
+    ViewBag.Title = Model.setting.EMPLOYEE;
 }
 
 @{
@@ -19,8 +19,8 @@
             <div class="container">
                 <div class="col-md-12">
                     <div class="main-title">
-                        <h5>Giảng Viên</h5>
-                        <h2>Danh Sách Giảng Viên</h2>
+                        <h5>@Model.setting.EMPLOYEE</h5>
+                        <h2>@Model.setting.EMPLOYEE_SLOGAN_2</h2>
                     </div>
                 </div>
             </div>

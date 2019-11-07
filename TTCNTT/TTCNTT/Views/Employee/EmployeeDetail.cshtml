@@ -1,17 +1,17 @@
 ﻿@model EmployeeViewModel
 
 @{
-    ViewBag.Title = Model.employeeType.Name;
+    ViewBag.Title = Model.setting.EMPLOYEE;
 }
 
 <section class="banner-sec">
-    <div class="main-banner inner" style=" background:url(img/banner-bg.jpg) no-repeat top center fixed; background-size:cover;">
+    <div class="main-banner inner" @*style=" background:url(img/banner-bg.jpg) no-repeat top center fixed; background-size:cover;"*@>
         <a href="#" name="scroll-top-div"></a>
         <div class="overlay-mask">
             <!-- Start:Slider area -->
             <div class="container">
-                <h1>@Model.employeeType.Name</h1>
-                <h6>Thông tin giảng viên</h6>
+                <h1>@Model.setting.EMPLOYEE</h1>
+                <h6>@Model.setting.EMPLOYEE_DETAIL</h6>
                 <hr>
             </div>
             <!-- End:Slider area -->
@@ -34,7 +34,7 @@
                                     <img src="~/Images/Employee/@Model.employee.ImageSlug" alt="">
                                 </div>
                                 <div class="info-text-holder">
-                                    <h4>@Model.employee.Name.</h4>
+                                    <h4>@Model.employee.Name</h4>
                                     <span> <a href="#">@Model.employee.Specialize</a></span>
                                     <p>
                                         @Model.employee.LongDescription_Html.

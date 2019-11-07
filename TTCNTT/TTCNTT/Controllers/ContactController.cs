@@ -29,7 +29,6 @@ namespace TTCNTT.Controllers
         public async Task<IActionResult> Index()
         {
             ContactViewModel model = new ContactViewModel();
-            model.menu = await _dbContext.Menu.FirstOrDefaultAsync(h => h.Slug_Name == "lien-he");
             model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
             return View(model);
         }

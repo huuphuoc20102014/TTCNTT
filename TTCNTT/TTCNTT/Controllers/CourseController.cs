@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TTCNTT.Efs.Context;
 using TTCNTT.Efs.Entities;
+using TTCNTT.Helpers;
 using TTCNTT.Models;
 using X.PagedList;
 
@@ -28,7 +29,7 @@ namespace TTCNTT.Controllers
             ViewBag.OnePageOfCourses = onePageOfCourses;
 
             CourseViewModel model = new CourseViewModel();
-            model.khoahoc = await _dbContext.Training.FirstOrDefaultAsync(h => h.Slug_Name == "khoa-hoc");
+            model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
 
             return View(model);
         }
@@ -38,6 +39,8 @@ namespace TTCNTT.Controllers
         {
             CourseViewModel model = new CourseViewModel();
             model.courseType = await _dbContext.CourseType.FirstOrDefaultAsync(h => h.Slug_Name == id);
+            model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
+
 
             var pageNumber = page ?? 1;
             var onePageOfCourses = _dbContext.Course.Where(h => h.FkProjectTypeId == model.courseType.Id).ToPagedList(pageNumber, 9);
@@ -55,6 +58,9 @@ namespace TTCNTT.Controllers
             model.courseType = await _dbContext.CourseType.FirstOrDefaultAsync(p => p.Id == model.course.FkProjectTypeId);
             model.listCourse = await _dbContext.Course.Where(h => h.FkProjectTypeId == model.courseType.Id).ToListAsync();
             model.listCourseType1 = await _dbContext.CourseType.ToListAsync();
+
+            model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
+
 
             return View(model);
         }
@@ -106,7 +112,10 @@ namespace TTCNTT.Controllers
             ViewBag.OnePageOfCourses = onePageOfCourses;
             ViewBag.id = id;
 
-            return View();
+            CourseViewModel model = new CourseViewModel();
+            model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
+
+            return View(model);
         }
     }
 }

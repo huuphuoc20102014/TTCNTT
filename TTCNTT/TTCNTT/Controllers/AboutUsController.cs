@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TTCNTT.Efs.Context;
 using TTCNTT.Efs.Entities;
+using TTCNTT.Helpers;
 using TTCNTT.Models;
 
 namespace TTCNTT.Controllers
@@ -24,8 +25,8 @@ namespace TTCNTT.Controllers
         {
             AboutUsViewModel model = new AboutUsViewModel();
             model.about = await _dbContext.AboutUs.FirstOrDefaultAsync(p => p.Skill == "0");
-            //model.listAbout = await _dbContext.AboutUs.ToListAsync();
             model.listAboutSkill = await _dbContext.AboutUs.Where(h => h.Skill == "1").ToListAsync();
+            model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
 
             return View(model);
         }

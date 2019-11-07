@@ -7,13 +7,13 @@
 }
 
 <section class="banner-sec">
-    <div class="main-banner inner" style=" background:url(img/banner-bg.jpg) no-repeat top center fixed; background-size:cover;">
+    <div class="main-banner inner" @*style=" background:url(img/banner-bg.jpg) no-repeat top center fixed; background-size:cover;"*@>
         <a href="#" name="scroll-top-div"></a>
         <div class="overlay-mask">
             <!-- Start:Slider area -->
             <div class="container">
                 <h1>@Model.courseType.Name</h1>
-                <h6>Danh mục Khóa học.</h6>
+                <h6>@Model.setting.COURSE_TYPE</h6>
                 <hr>
             </div>
             <!-- End:Slider area -->
@@ -28,8 +28,8 @@
             <div class="container">
                 <div class="col-md-12">
                     <div class="main-title">
-                        <h5>@Model.courseType.Name</h5>
-                        <h2>Mới cập nhật</h2>
+                        <h5>@Model.setting.COURSE</h5>
+                        <h2>@Model.setting.COURSE_SLOGAN_2</h2>
                     </div>
                 </div>
             </div>

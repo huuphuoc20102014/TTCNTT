@@ -8,13 +8,13 @@
 
 
 <section class="banner-sec">
-    <div class="main-banner inner" style=" background:url(img/banner-bg.jpg) no-repeat top center fixed; background-size:cover;">
+    <div class="main-banner inner" @*style=" background:url(../images/@Model.setting.BANNER) no-repeat top center fixed; background-size:cover;"*@>
         <a href="#" name="scroll-top-div"></a>
         <div class="overlay-mask">
             <!-- Start:Slider area -->
             <div class="container">
                 <h1>@Model.category.Name</h1>
-                <h6>Danh mục sản phẩm.</h6>
+                <h6>@Model.setting.PRODUCT_CATEGORY_SLOGAN</h6>
                 <hr>
             </div>
             <!-- End:Slider area -->
@@ -29,8 +29,8 @@
             <div class="container">
                 <div class="col-md-12">
                     <div class="main-title">
-                        <h5>@Model.category.Name</h5>
-                        <h2>Sản phẩm mới nhất</h2>
+                        <h5>@Model.setting.PRODUCT_CATEGORY_SLOGAN</h5>
+                        <h2>@Model.setting.PRODUCT_SLOGAN_2</h2>
                     </div>
                 </div>
             </div>
@@ -45,15 +45,15 @@
                             {
                                 <div class="col-md-4 ">
                                     <div class="item-box">
-                                        <a href="~/san-pham/chi-tiet-san-pham/@item.Slug_Name" class=" img-holder">
+                                        <a href="~/san-pham/chi-tiet/@item.Slug_Name" class=" img-holder">
                                             <img src="~/Images/Product/@item.ImageSlug" alt="">
                                             <div class="mask"></div>
                                         </a>
                                         <div class="info-text-holder">
-                                            <h6><a href="~/san-pham/chi-tiet-san-pham/@item.Slug_Name">@item.Name.</a></h6>
-                                            <span><a href="~/san-pham/chi-tiet-san-pham/@item.Slug_Name">@item.CreatedDate</a></span>
+                                            <h6><a href="~/san-pham/chi-tiet/@item.Slug_Name">@item.Name.</a></h6>
+                                            <span><a href="~/san-pham/chi-tiet/@item.Slug_Name">@item.CreatedDate</a></span>
                                             <p>@item.ShortDescription_Html. </p>
-                                            <a href="~/san-pham/chi-tiet-san-pham/@item.Slug_Name" class="button-medium">XEM THÊM</a>
+                                            <a href="~/san-pham/chi-tiet/@item.Slug_Name" class="button-medium">XEM THÊM</a>
                                         </div>
                                     </div>
                                 </div>
@@ -65,7 +65,7 @@
                         <div class="pagination-area">
                             <ul class="pagination">
 
-                                @Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("loai-san-pham", "san-pham", new {id = Model.category.Slug_Name,  page }))
+                                @Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("loai-san-pham", "san-pham", new { id = Model.category.Slug_Name, page }))
 
                             </ul>
                         </div>

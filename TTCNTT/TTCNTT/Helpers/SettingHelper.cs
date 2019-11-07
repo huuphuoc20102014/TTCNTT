@@ -35,18 +35,32 @@ namespace TTCNTT.Helpers
 
         public string COURSE { get; set; }
         public string COURSE_SLOGAN { get; set; }
+        public string COURSE_SLOGAN_2 { get; set; }
+        public string COURSE_TYPE { get; set; }
+        public string COURSE_DETAIL { get; set; }
 
         public string EMPLOYEE { get; set; }
         public string EMPLOYEE_SLOGAN { get; set; }
+        public string EMPLOYEE_SLOGAN_2 { get; set; }
+        public string EMPLOYEE_DETAIL { get; set; }
 
         public string PRODUCT { get; set; }
         public string PRODUCT_SLOGAN { get; set; }
+        public string PRODUCT_DETAIL { get; set; }
+        public string PRODUCT_SLOGAN_2 { get; set; }
+        public string PRODUCT_CATEGORY_SLOGAN { get; set; }
+        
 
         public string SERVICE { get; set; }
         public string SERVICE_SLOGAN { get; set; }
+        public string SERVICE_SLOGAN_2 { get; set; }
+        public string SERVICE_TYPE { get; set; }
 
         public string ABOUTUS { get; set; }
         public string ABOUTUS_SLOGAN { get; set; }
+
+        public string SEARCH { get; set; }
+
 
         public static async Task<SettingHelper> ReadServerOptionAsync(WebTTCNTTContext context)
 

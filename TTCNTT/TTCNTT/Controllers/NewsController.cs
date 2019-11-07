@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TTCNTT.Efs.Context;
 using TTCNTT.Efs.Entities;
+using TTCNTT.Helpers;
 using TTCNTT.Models;
 using X.PagedList;
 
@@ -29,6 +30,8 @@ namespace TTCNTT.Controllers
 
             NewsViewModel model = new NewsViewModel();
             model.menu = await _dbContext.Menu.FirstOrDefaultAsync(h => h.Slug_Name == "tin-tuc");
+            model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
+
 
             return View(model);
         }

@@ -1,14 +1,23 @@
 ﻿@model ContactViewModel
-@inject TTCNTT.Efs.Context.WebTTCNTTContext context
 
 @{
-    ViewBag.Title = Model.menu.Name;
+    ViewBag.Title = Model.setting.CONTACT;
 }
 
-@{
-    var bannerModel = await TTCNTT.Helpers.SettingValueHelper.GetValueSetting(context);
-    <partial name="_BannerPartial" model="bannerModel" />
-}
+<section class="banner-sec">
+    <div class="main-banner inner" @*style=" background:url(../images/@Model.setting.BANNER) no-repeat top center fixed; background-size:cover;"*@>
+        <a href="#" name="scroll-top-div"></a>
+        <div class="overlay-mask">
+            <!-- Start:Slider area -->
+            <div class="container">
+                <h1>@Model.setting.CONTACT</h1>
+                <h6>@Model.setting.CONTACT_SLOGAN </h6>
+                <hr>
+            </div>
+            <!-- End:Slider area -->
+        </div>
+    </div>
+</section>
 
 <section class="contact-area-outer">
     <div class="contact-form-sec ">
@@ -17,7 +26,7 @@
             <div class="content-area clearfix">
                 <div class="main-title">
 
-                    <h1>@Model.menu.Name</h1>
+                    <h1>@Model.setting.CONTACT</h1>
                 </div>
                 <div class="form-sec">
                     <form id="myform" name="contact" method="post">

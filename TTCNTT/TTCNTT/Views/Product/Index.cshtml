@@ -4,7 +4,7 @@
 @using X.PagedList;
 
 @{
-    ViewBag.Title = "Model.menu.Name";
+    ViewBag.Title = @Model.setting.PRODUCT;
 }
 
 @{
@@ -20,8 +20,8 @@
             <div class="container">
                 <div class="col-md-12">
                     <div class="main-title">
-                        <h5>Model.menu.Name</h5>
-                        <h2>Sản phẩm mới nhất</h2>
+                        <h5>@Model.setting.PRODUCT</h5>
+                        <h2>@Model.setting.PRODUCT_SLOGAN_2</h2>
                     </div>
                 </div>
             </div>
@@ -36,15 +36,15 @@
                             {
                                 <div class="col-md-4 ">
                                     <div class="item-box">
-                                        <a href="~/san-pham/chi-tiet-san-pham/@item.Slug_Name" class=" img-holder">
+                                        <a href="~/san-pham/chi-tiet/@item.Slug_Name" class=" img-holder">
                                             <img src="~/Images/Product/@item.ImageSlug" alt="">
                                             <div class="mask"></div>
                                         </a>
                                         <div class="info-text-holder">
-                                            <h6><a href="~/san-pham/chi-tiet-san-pham/@item.Slug_Name">@item.Name.</a></h6>
-                                            <span><a href="~/san-pham/chi-tiet-san-pham/@item.Slug_Name">@item.CreatedDate</a></span>
+                                            <h6><a href="~/san-pham/chi-tiet/@item.Slug_Name">@item.Name.</a></h6>
+                                            <span><a href="~/san-pham/chi-tiet/@item.Slug_Name">@item.CreatedDate</a></span>
                                             <p>@item.ShortDescription_Html. </p>
-                                            <a href="~/san-pham/chi-tiet-san-pham/@item.Slug_Name" class="button-medium">XEM THÊM</a>
+                                            <a href="~/san-pham/chi-tiet/@item.Slug_Name" class="button-medium">XEM THÊM</a>
                                         </div>
                                     </div>
                                 </div>

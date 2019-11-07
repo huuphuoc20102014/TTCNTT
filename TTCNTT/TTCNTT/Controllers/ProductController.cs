@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using TTCNTT.Efs.Context;
 using TTCNTT.Efs.Entities;
+using TTCNTT.Helpers;
 using TTCNTT.Models;
 using X.PagedList;
 
@@ -28,10 +29,13 @@ namespace TTCNTT.Controllers
 
             ViewBag.OnePageOfProducts = onePageOfProducts;
 
-            return View();
+            ProductViewModel model = new ProductViewModel();
+            model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
+
+            return View(model);
         }
 
-        [Route("chi-tiet-san-pham/{id}")]
+        [Route("chi-tiet/{id}")]
         public async Task<IActionResult> ProductDetail(string id)
         {
             ProductViewModel model = new ProductViewModel();
@@ -41,6 +45,9 @@ namespace TTCNTT.Controllers
             model.listCategory = await _dbContext.Category.ToListAsync();
             model.listProductComment = await _dbContext.ProductComment.Where(h => h.FkProductId == model.product.Id).ToListAsync();
 
+            model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
+
+
             return View(model);
         }
 
@@ -49,6 +56,8 @@ namespace TTCNTT.Controllers
         {
             ProductViewModel model = new ProductViewModel();
             model.category = await _dbContext.Category.FirstOrDefaultAsync(h => h.Slug_Name == id);
+            model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
+
 
             var pageNumber = page ?? 1;
             var category = await _dbContext.Category.FirstOrDefaultAsync(h => h.Slug_Name == id);
@@ -105,7 +114,10 @@ namespace TTCNTT.Controllers
             ViewBag.OnePageOfProducts = onePageOfProducts;
             ViewBag.id = id;
 
-            return View();
+            ProductViewModel model = new ProductViewModel();
+            model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
+
+            return View(model);
         }
     }
 }

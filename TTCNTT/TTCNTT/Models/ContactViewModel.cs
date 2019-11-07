@@ -9,7 +9,6 @@ namespace TTCNTT.Models
 {
     public class ContactViewModel
     {
-        public Menu menu { get; set; }
         public SettingHelper setting { get; set; }
     }
 }
