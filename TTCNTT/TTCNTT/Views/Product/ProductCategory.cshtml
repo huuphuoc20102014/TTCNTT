@@ -1,4 +1,5 @@
 ﻿@model ProductViewModel
+@inject TTCNTT.Efs.Context.WebTTCNTTContext context
 @using X.PagedList.Mvc.Core;
 @using X.PagedList;
 
@@ -7,20 +8,10 @@
 }
 
 
-<section class="banner-sec">
-    <div class="main-banner inner" @*style=" background:url(../images/@Model.setting.BANNER) no-repeat top center fixed; background-size:cover;"*@>
-        <a href="#" name="scroll-top-div"></a>
-        <div class="overlay-mask">
-            <!-- Start:Slider area -->
-            <div class="container">
-                <h1>@Model.category.Name</h1>
-                <h6>@Model.setting.PRODUCT_CATEGORY_SLOGAN</h6>
-                <hr>
-            </div>
-            <!-- End:Slider area -->
-        </div>
-    </div>
-</section>
+@{
+    var bannerModel = await TTCNTT.Helpers.SettingValueHelper.GetValueSetting(context);
+    <partial name="_BannerPartial" model="bannerModel" />
+}
 
 <section class="blog-outer-area">
     <div class="content-area">
