@@ -10,6 +10,15 @@ namespace TTCNTT.Helpers
 {
     public class SettingHelper
     {
+        public string HOME { get; set; }
+        public string HOME_1_1 { get; set; }
+        public string HOME_1_2 { get; set; }
+        public string HOME_1_3 { get; set; }
+        public string HOME_1_4 { get; set; }
+        public string HOME_2_1 { get; set; }
+        public string HOME_2_2 { get; set; }
+        public string HOME_2_3 { get; set; }
+
         public string FOOTER_CONTACT { get; set; }
         public string FOOTER_CONTACT_ADDRESS { get; set; }
         public string FOOTER_CONTACT_EMAIL { get; set; }

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using TTCNTT.Efs.Context;
 using TTCNTT.Efs.Entities;
+using TTCNTT.Helpers;
 using TTCNTT.Models;
 
 namespace TTCNTT.Controllers
@@ -33,6 +34,9 @@ namespace TTCNTT.Controllers
             model.listService = await _dbContext.Service.ToListAsync();
             model.listCourse = await _dbContext.Course.ToListAsync();
             model.listEmployee = await _dbContext.Employee.ToListAsync();
+
+            model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
+
 
             return View(model);
         }

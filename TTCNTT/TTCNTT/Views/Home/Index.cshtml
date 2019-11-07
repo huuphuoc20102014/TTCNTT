@@ -1,7 +1,7 @@
 ﻿@model HomeViewModel
 
 @{
-    ViewBag.Title = "Trang chủ";
+    ViewBag.Title = Model.setting.HOME;
 }
 
 <section class="banner-sec-01" id="home">
@@ -16,17 +16,17 @@
                         <ul class="slides">
                             <!-- Start: Banner Slide 01 -->
                             <li>
-                                <h3>Xin chào...!!!</h3>
-                                <h1>Trung Tâm</h1>
-                                <h1>Công Nghệ Thông Tin</h1>
-                                <h5>Bệnh viện Quân Dân Y Miền Đông</h5>
+                                <h3>@Model.setting.HOME_1_1</h3>
+                                <h1>@Model.setting.HOME_1_2</h1>
+                                <h1>@Model.setting.HOME_1_3</h1>
+                                <h5>@Model.setting.HOME_1_4</h5>
                             </li>
                             <!-- End: Banner Slide 01 -->
                             <!-- Start: Banner Slide 02 -->
                             <li>
-                                <h3>Chúng tôi là ai?</h3>
-                                <h1>Chúng tôi là nơi</h1>
-                                <h5>Tạo nên những phần mềm tuyệt vời cho bạn</h5>
+                                <h3>@Model.setting.HOME_2_1</h3>
+                                <h1>@Model.setting.HOME_2_2</h1>
+                                <h5>@Model.setting.HOME_2_3</h5>
                             </li>
                             <!-- End: Banner Slide 02 -->
                         </ul>
