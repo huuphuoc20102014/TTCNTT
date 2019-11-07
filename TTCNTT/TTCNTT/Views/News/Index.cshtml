@@ -4,7 +4,7 @@
 @using X.PagedList;
 
 @{
-    ViewBag.Title = Model.menu.Name;
+    ViewBag.Title = Model.setting.NEWS;
 }
 
 @{
@@ -19,8 +19,8 @@
             <div class="container">
                 <div class="col-md-12">
                     <div class="main-title">
-                        <h5>Tin tức</h5>
-                        <h2>Mới cập nhật</h2>
+                        <h5>@Model.setting.NEWS_EVENT</h5>
+                        <h2>@Model.setting.NEWS_SLOGAN_2</h2>
                     </div>
                 </div>
             </div>

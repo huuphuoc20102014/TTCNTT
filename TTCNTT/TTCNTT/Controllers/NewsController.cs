@@ -29,9 +29,7 @@ namespace TTCNTT.Controllers
             ViewBag.onePageOfNews = onePageOfNews;
 
             NewsViewModel model = new NewsViewModel();
-            model.menu = await _dbContext.Menu.FirstOrDefaultAsync(h => h.Slug_Name == "tin-tuc");
-            model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
-
+            model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
 
             return View(model);
         }
@@ -41,6 +39,8 @@ namespace TTCNTT.Controllers
         {
             NewsViewModel model = new NewsViewModel();
             model.newsType = await _dbContext.NewsType.FirstOrDefaultAsync(h => h.Slug_Name == id);
+            model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
+
 
             var pageNumber = page ?? 1;
             var onePageOfNews = _dbContext.News.Where(h => h.FkNewsTypeId == model.newsType.Id).ToPagedList(pageNumber, 9);
@@ -54,11 +54,13 @@ namespace TTCNTT.Controllers
         {
             NewsViewModel model = new NewsViewModel();
             model.news = await _dbContext.News.SingleOrDefaultAsync(h => h.Slug_Title == id);
-            model.menu = await _dbContext.Menu.FirstOrDefaultAsync(h => h.Slug_Name == "tin-tuc-su-kien");
             model.newsType = await _dbContext.NewsType.Where(h => h.Id == model.news.FkNewsTypeId).FirstOrDefaultAsync();
             model.listNewsType = await _dbContext.NewsType.ToListAsync();
             model.listNews = await _dbContext.News.Where(h => h.FkNewsTypeId == model.newsType.Id).ToListAsync();
             model.listNewsComment = await _dbContext.NewsComment.Where(h => h.FkNewsId == model.news.Id).ToListAsync();
+
+            model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
+
 
             return View(model);
         }
@@ -109,7 +111,10 @@ namespace TTCNTT.Controllers
             ViewBag.OnePageOfNews = onePageOfNews;
             ViewBag.id = id;
 
-            return View();
+            NewsViewModel model = new NewsViewModel();
+            model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
+
+            return View(model);
         }
     }
 }

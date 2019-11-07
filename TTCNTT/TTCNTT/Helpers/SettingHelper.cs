@@ -32,6 +32,10 @@ namespace TTCNTT.Helpers
 
         public string NEWS { get; set; }
         public string NEWS_SLOGAN { get; set; }
+        public string NEWS_SLOGAN_2 { get; set; }
+        public string NEWS_EVENT { get; set; }
+        public string NEWS_TYPE { get; set; }
+        public string NEWS_DETAIL { get; set; }
 
         public string COURSE { get; set; }
         public string COURSE_SLOGAN { get; set; }
