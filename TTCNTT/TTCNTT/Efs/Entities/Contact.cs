@@ -12,7 +12,6 @@ namespace TTCNTT.Efs.Entities
         public string Title { get; set; }
         public string Body { get; set; }
         public string FkCourseId { get; set; }
-        public string CourseId { get; set; }
         public int? CourseMember { get; set; }
         public bool IsRead { get; set; }
         public string Note { get; set; }

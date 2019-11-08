@@ -11,6 +11,7 @@ using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using ATAdmin.Efs.Context;
 
 namespace ATAdmin.Controllers
 {
@@ -19,9 +20,9 @@ namespace ATAdmin.Controllers
     //FkNewsTypeId
     public class NewsController : AtBaseController
     {
-        private readonly WebAtSolutionContext _context;
+        private readonly WebTTCNTTContext _context;
 
-        public NewsController(WebAtSolutionContext context)
+        public NewsController(WebTTCNTTContext context)
         {
             _context = context;
         }
@@ -59,9 +60,9 @@ namespace ATAdmin.Controllers
                     FkNewsTypeId = h.FkNewsTypeId,
                     // Ford
                     Title = h.Title,
-                    SlugTitle = h.SlugTitle,
-                    ShortDescriptionHtml = h.ShortDescriptionHtml,
-                    LongDescriptionHtml = h.LongDescriptionHtml,
+                    SlugTitle = h.Slug_Title,
+                    ShortDescriptionHtml = h.ShortDescription_Html,
+                    LongDescriptionHtml = h.LongDescription_Html,
                     Tags = h.Tags,
                     KeyWord = h.KeyWord,
                     MetaData = h.MetaData,
@@ -91,7 +92,7 @@ namespace ATAdmin.Controllers
             var news = await _context.News.AsNoTracking()
 
                 .Include(n => n.FkNewsType)
-                    .Where(h => h.SlugTitle == id)
+                    .Where(h => h.Slug_Title == id)
                 .FirstOrDefaultAsync();
             if (news == null)
             {
@@ -152,8 +153,8 @@ namespace ATAdmin.Controllers
 
             // Check slug is existed => if existed auto get next slug
             var listExistedSlug = await _context.News.AsNoTracking()
-                    .Where(h => h.SlugTitle.StartsWith(vmItem.SlugTitle))
-                    .Select(h => h.SlugTitle).ToListAsync();
+                    .Where(h => h.Slug_Title.StartsWith(vmItem.SlugTitle))
+                    .Select(h => h.Slug_Title).ToListAsync();
             var slug = CheckAndGenNextSlug(vmItem.SlugTitle, listExistedSlug);
 
             // Create save db item
@@ -170,10 +171,10 @@ namespace ATAdmin.Controllers
 
                 FkNewsTypeId = vmItem.FkNewsTypeId,
                 Title = vmItem.Title,
-                SlugTitle = vmItem.SlugTitle,
+                Slug_Title = vmItem.SlugTitle,
                 AutoSlug = vmItem.AutoSlug,
-                ShortDescriptionHtml = vmItem.ShortDescriptionHtml,
-                LongDescriptionHtml = vmItem.LongDescriptionHtml,
+                ShortDescription_Html = vmItem.ShortDescriptionHtml,
+                LongDescription_Html = vmItem.LongDescriptionHtml,
                 Tags = vmItem.Tags,
                 KeyWord = vmItem.KeyWord,
                 MetaData = vmItem.MetaData,
@@ -188,7 +189,7 @@ namespace ATAdmin.Controllers
                 tableVersion.LastModify = DateTime.Now;
             }
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Details), new { id = dbItem.SlugTitle });
+            return RedirectToAction(nameof(Details), new { id = dbItem.Slug_Title });
         }
         
         // GET: News/Edit/5
@@ -201,16 +202,16 @@ namespace ATAdmin.Controllers
 
 
             var dbItem = await _context.News.AsNoTracking()
-                .Where(h => h.SlugTitle == id)
+                .Where(h => h.Slug_Title == id)
                 .Select(h => new NewsEditViewModel
                 {
                     Id = h.Id,
                     FkNewsTypeId = h.FkNewsTypeId,
                     Title = h.Title,
-                    SlugTitle = h.SlugTitle,
+                    SlugTitle = h.Slug_Title,
                     AutoSlug = h.AutoSlug,
-                    ShortDescriptionHtml = h.ShortDescriptionHtml,
-                    LongDescriptionHtml = h.LongDescriptionHtml,
+                    ShortDescriptionHtml = h.ShortDescription_Html,
+                    LongDescriptionHtml = h.LongDescription_Html,
                     Tags = h.Tags,
                     KeyWord = h.KeyWord,
                     MetaData = h.MetaData,
@@ -270,10 +271,10 @@ namespace ATAdmin.Controllers
 
             dbItem.FkNewsTypeId = vmItem.FkNewsTypeId;
             dbItem.Title = vmItem.Title;
-            dbItem.SlugTitle = vmItem.SlugTitle;
+            dbItem.Slug_Title = vmItem.SlugTitle;
             dbItem.AutoSlug = vmItem.AutoSlug;
-            dbItem.ShortDescriptionHtml = vmItem.ShortDescriptionHtml;
-            dbItem.LongDescriptionHtml = vmItem.LongDescriptionHtml;
+            dbItem.ShortDescription_Html = vmItem.ShortDescriptionHtml;
+            dbItem.LongDescription_Html = vmItem.LongDescriptionHtml;
             dbItem.Tags = vmItem.Tags;
             dbItem.KeyWord = vmItem.KeyWord;
             dbItem.MetaData = vmItem.MetaData;
@@ -285,7 +286,7 @@ namespace ATAdmin.Controllers
             tableVersion.LastModify = DateTime.Now;
             await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Details), new { id = dbItem.SlugTitle });
+            return RedirectToAction(nameof(Details), new { id = dbItem.Slug_Title });
         }
 
         // GET: News/Details/5
@@ -326,7 +327,7 @@ namespace ATAdmin.Controllers
             var dbItem = await _context.News
 
                 .Include(n => n.FkNewsType)
-                .Where(h => h.SlugTitle == id)
+                .Where(h => h.Slug_Title == id)
                 .FirstOrDefaultAsync();
             if (dbItem == null)
             {

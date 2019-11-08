@@ -10,14 +10,15 @@ using FluentValidation;
 using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
 using Microsoft.AspNetCore.Hosting;
+using ATAdmin.Efs.Context;
 
 namespace ATAdmin.Controllers
 {
     public class ContactsController : AtBaseController
     {
-        private readonly WebAtSolutionContext _context;
+        private readonly WebTTCNTTContext _context;
 
-        public ContactsController(WebAtSolutionContext context)
+        public ContactsController(WebTTCNTTContext context)
         {
             _context = context;
         }
@@ -58,7 +59,7 @@ namespace ATAdmin.Controllers
                     Title = h.Title,
                     Body = h.Body,
                     IsRead = h.IsRead,
-                    FkProductCommentId = h.FkProductCommentId,
+                    Fk_CourseId = h.FkCourseId,
                     Note = h.Note,
                     CreatedBy = h.CreatedBy,
                     CreatedDate = h.CreatedDate,
@@ -140,7 +141,7 @@ namespace ATAdmin.Controllers
                 Title = vmItem.Title,
                 Body = vmItem.Body,
                 IsRead = vmItem.IsRead,
-                FkProductCommentId = vmItem.FkProductCommentId,
+                FkCourseId = vmItem.Fk_CourseId,
                 Note = vmItem.Note,
             };
             _context.Add(dbItem);
@@ -174,7 +175,7 @@ namespace ATAdmin.Controllers
                     Title = h.Title,
                     Body = h.Body,
                     IsRead = h.IsRead,
-                    FkProductCommentId = h.FkProductCommentId,
+                    Fk_CourseId = h.FkCourseId,
                     Note = h.Note,
                     RowVersion = h.RowVersion,
                 })
@@ -231,7 +232,7 @@ namespace ATAdmin.Controllers
             dbItem.Title = vmItem.Title;
             dbItem.Body = vmItem.Body;
             dbItem.IsRead = vmItem.IsRead;
-            dbItem.FkProductCommentId = vmItem.FkProductCommentId;
+            dbItem.FkCourseId = vmItem.Fk_CourseId;
             dbItem.Note = vmItem.Note;
 
             _context.Entry(dbItem).Property(nameof(Contact.RowVersion)).OriginalValue = vmItem.RowVersion;
@@ -322,7 +323,7 @@ namespace ATAdmin.Controllers
         public String Title { get; set; }
         public String Body { get; set; }
         public Boolean IsRead { get; set; }
-        public String FkProductCommentId { get; set; }
+        public String Fk_CourseId { get; set; }
         public String Note { get; set; }
     }
 
@@ -384,7 +385,7 @@ namespace ATAdmin.Controllers
             RuleFor(h => h.IsRead)
                 ;
 
-            RuleFor(h => h.FkProductCommentId)
+            RuleFor(h => h.Fk_CourseId)
                         .MaximumLength(50)
                 ;
 

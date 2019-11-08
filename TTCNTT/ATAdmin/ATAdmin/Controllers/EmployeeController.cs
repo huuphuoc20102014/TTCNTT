@@ -11,28 +11,27 @@ using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using ATAdmin.Efs.Context;
 
 namespace ATAdmin.Controllers
 {
-    //Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.NavigationMetadata
-    //FkProjectType
-    //FkProjectTypeId
-    public class ProjectsController : AtBaseController
-    {
-        private readonly WebAtSolutionContext _context;
 
-        public ProjectsController(WebAtSolutionContext context)
+    public class ProductController : AtBaseController
+    {
+        private readonly WebTTCNTTContext _context;
+
+        public ProductController(WebTTCNTTContext context)
         {
             _context = context;
         }
 
-        // GET: Projects
+        // GET: Product
         public async Task<IActionResult> Index([FromRoute]string id)
         {
-            Project dbItem = null;
+            Product dbItem = null;
             if (!string.IsNullOrWhiteSpace(id))
             {
-                dbItem = await _context.Project.AsNoTracking().FirstOrDefaultAsync(h => h.Id == id);
+                dbItem = await _context.Product.AsNoTracking().FirstOrDefaultAsync(h => h.Id == id);
                 if (dbItem == null)
                 {
                     return NotFound();
@@ -40,29 +39,29 @@ namespace ATAdmin.Controllers
             }
             ViewData["ParentItem"] = dbItem;
 
-            ViewData["ControllerNameForGrid"] = nameof(ProjectsController).Replace("Controller", "");
+            ViewData["ControllerNameForGrid"] = nameof(ProductController).Replace("Controller", "");
             return View();
         }
 
         public async Task<IActionResult> Index_Read([DataSourceRequest] DataSourceRequest request, string parentId)
         {
-            var baseQuery = _context.Project.AsNoTracking();
+            var baseQuery = _context.Product.AsNoTracking();
             if (!string.IsNullOrWhiteSpace(parentId))
             {
                 baseQuery = baseQuery.Where(h => h.Id == parentId);
             }
             var query = baseQuery
                 .Where(p => p.RowStatus == (int)AtRowStatus.Normal)
-                .Select(h => new ProjectDetailsViewModel
+                .Select(h => new ProductDetailsViewModel
                 {
                     Id = h.Id,
-                    FkProjectTypeId = h.FkProjectTypeId,
+                    FkProductId = h.FkProductId,
                     // Ford
                     Name = h.Name,
-                    SlugName = h.SlugName,
+                    SlugName = h.Slug_Name,
                     ImageSlug = h.ImageSlug,
-                    ShortDescriptionHtml = h.ShortDescriptionHtml,
-                    LongDescriptionHtml = h.LongDescriptionHtml,
+                    ShortDescriptionHtml = h.ShortDescription_Html,
+                    LongDescriptionHtml = h.LongDescription_Html,
                     Tags = h.Tags,
                     KeyWord = h.KeyWord,
                     MetaData = h.MetaData,
@@ -80,7 +79,7 @@ namespace ATAdmin.Controllers
         }
 
 
-        // GET: Projects/Details/5
+        // GET: Product/Details/5
         public async Task<IActionResult> Details([FromRoute] string id)
         {
             if (id == null)
@@ -88,23 +87,23 @@ namespace ATAdmin.Controllers
                 return NotFound();
             }
 
-            var project = await _context.Project.AsNoTracking()
+            var product = await _context.Product.AsNoTracking()
 
-                .Include(p => p.FkProjectType)
+                .Include(p => p.FkProduct)
                     .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
-            if (project == null)
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(project);
+            return View(product);
         }
 
-        // GET: Projects/Create
+        // GET: Product/Create
         public async Task<IActionResult> Create()
         {
-            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserProjectController).Replace("Controller", "");
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserProductController).Replace("Controller", "");
 
             // Get list master of foreign property and set to view data
             await PrepareListMasterForeignKey();
@@ -112,14 +111,14 @@ namespace ATAdmin.Controllers
             return View();
         }
 
-        // POST: Projects/Create
+        // POST: Product/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([FromForm] ProjectCreateViewModel vmItem)
+        public async Task<IActionResult> Create([FromForm] ProductCreateViewModel vmItem)
         {
-            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserProjectController).Replace("Controller", "");
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserProductController).Replace("Controller", "");
             // Invalid model
             if (!ModelState.IsValid)
             {
@@ -129,7 +128,7 @@ namespace ATAdmin.Controllers
             }
 
             // Get time stamp for table to handle concurrency conflict
-            var tableName = nameof(Project);
+            var tableName = nameof(Product);
             var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
             // Trim white space
@@ -138,7 +137,7 @@ namespace ATAdmin.Controllers
 
 
             // Create save db item
-            var dbItem = new Project
+            var dbItem = new Product
             {
                 Id = Guid.NewGuid().ToString(),
 
@@ -149,13 +148,13 @@ namespace ATAdmin.Controllers
                 RowStatus = (int)AtRowStatus.Normal,
                 RowVersion = null,
 
-                FkProjectTypeId = vmItem.FkProjectTypeId,
+                FkProductId = vmItem.FkProductId,
                 Name = vmItem.Name,
-                SlugName = vmItem.SlugName,
+                Slug_Name = vmItem.SlugName,
                 AutoSlug = vmItem.AutoSlug,
                 ImageSlug = vmItem.ImageSlug,
-                ShortDescriptionHtml = vmItem.ShortDescriptionHtml,
-                LongDescriptionHtml = vmItem.LongDescriptionHtml,
+                ShortDescription_Html = vmItem.ShortDescriptionHtml,
+                LongDescription_Html = vmItem.LongDescriptionHtml,
                 Tags = vmItem.Tags,
                 KeyWord = vmItem.KeyWord,
                 MetaData = vmItem.MetaData,
@@ -170,30 +169,30 @@ namespace ATAdmin.Controllers
             return RedirectToAction(nameof(Details), new { id = dbItem.Id });
         }
 
-        // GET: Projects/Edit/5
+        // GET: Product/Edit/5
         public async Task<IActionResult> Edit([FromRoute] string id)
         {
-            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserProjectController).Replace("Controller", "");
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserProductController).Replace("Controller", "");
             if (id == null)
             {
                 return NotFound();
             }
 
 
-            var dbItem = await _context.Project.AsNoTracking()
+            var dbItem = await _context.Product.AsNoTracking()
 
     .Where(h => h.Id == id)
 
-                .Select(h => new ProjectEditViewModel
+                .Select(h => new ProductEditViewModel
                 {
                     Id = h.Id,
-                    FkProjectTypeId = h.FkProjectTypeId,
+                    FkProductId = h.FkProductId,
                     Name = h.Name,
-                    SlugName = h.SlugName,
+                    SlugName = h.Slug_Name,
                     AutoSlug = h.AutoSlug,
                     ImageSlug = h.ImageSlug,
-                    ShortDescriptionHtml = h.ShortDescriptionHtml,
-                    LongDescriptionHtml = h.LongDescriptionHtml,
+                    ShortDescriptionHtml = h.ShortDescription_Html,
+                    LongDescriptionHtml = h.LongDescription_Html,
                     Tags = h.Tags,
                     KeyWord = h.KeyWord,
                     MetaData = h.MetaData,
@@ -212,14 +211,14 @@ namespace ATAdmin.Controllers
             return View(dbItem);
         }
 
-        // POST: Projects/Edit/5
+        // POST: Product/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([FromForm] ProjectEditViewModel vmItem)
+        public async Task<IActionResult> Edit([FromForm] ProductEditViewModel vmItem)
         {
-            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserProjectController).Replace("Controller", "");
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserProductController).Replace("Controller", "");
             // Invalid model
             if (!ModelState.IsValid)
             {
@@ -229,10 +228,10 @@ namespace ATAdmin.Controllers
             }
 
             // Get time stamp for table to handle concurrency conflict
-            var tableName = nameof(Project);
+            var tableName = nameof(Product);
             var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
-            var dbItem = await _context.Project
+            var dbItem = await _context.Product
                 .Where(h => h.Id == vmItem.Id)
 
                 .FirstOrDefaultAsync();
@@ -251,19 +250,19 @@ namespace ATAdmin.Controllers
             dbItem.UpdatedDate = DateTime.Now;
             dbItem.RowVersion = vmItem.RowVersion;
 
-            dbItem.FkProjectTypeId = vmItem.FkProjectTypeId;
+            dbItem.FkProductId = vmItem.FkProductId;
             dbItem.Name = vmItem.Name;
-            dbItem.SlugName = vmItem.SlugName;
+            dbItem.Slug_Name = vmItem.SlugName;
             dbItem.AutoSlug = vmItem.AutoSlug;
             dbItem.ImageSlug = vmItem.ImageSlug;
-            dbItem.ShortDescriptionHtml = vmItem.ShortDescriptionHtml;
-            dbItem.LongDescriptionHtml = vmItem.LongDescriptionHtml;
+            dbItem.ShortDescription_Html = vmItem.ShortDescriptionHtml;
+            dbItem.LongDescription_Html = vmItem.LongDescriptionHtml;
             dbItem.Tags = vmItem.Tags;
             dbItem.KeyWord = vmItem.KeyWord;
             dbItem.MetaData = vmItem.MetaData;
             dbItem.Note = vmItem.Note;
 
-            _context.Entry(dbItem).Property(nameof(Project.RowVersion)).OriginalValue = vmItem.RowVersion;
+            _context.Entry(dbItem).Property(nameof(Product.RowVersion)).OriginalValue = vmItem.RowVersion;
             // Set time stamp for table to handle concurrency conflict
             tableVersion.LastModify = DateTime.Now;
             await _context.SaveChangesAsync();
@@ -271,7 +270,7 @@ namespace ATAdmin.Controllers
             return RedirectToAction(nameof(Details), new { id = dbItem.Id });
         }
 
-        // GET: Projects/Details/5
+        // GET: Product/Details/5
         public async Task<IActionResult> Delete([FromRoute] string id)
         {
             if (id == null)
@@ -279,9 +278,9 @@ namespace ATAdmin.Controllers
                 return NotFound();
             }
 
-            var dbItem = await _context.Project.AsNoTracking()
+            var dbItem = await _context.Product.AsNoTracking()
 
-                .Include(p => p.FkProjectType)
+                .Include(p => p.FkProduct)
                     .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
             if (dbItem == null)
@@ -292,7 +291,7 @@ namespace ATAdmin.Controllers
             return View(dbItem);
         }
 
-        // POST: Projects/Delete/5
+        // POST: Product/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete([FromForm] string id, [FromForm] byte[] rowVersion)
@@ -303,12 +302,12 @@ namespace ATAdmin.Controllers
             }
 
             // Get time stamp for table to handle concurrency conflict
-            var tableName = nameof(Project);
+            var tableName = nameof(Product);
             var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
-            var dbItem = await _context.Project
+            var dbItem = await _context.Product
 
-                .Include(p => p.FkProjectType)
+                .Include(p => p.FkProduct)
                 .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
             if (dbItem == null)
@@ -330,7 +329,7 @@ namespace ATAdmin.Controllers
                 dbItem.UpdatedDate = DateTime.Now;
                 dbItem.RowVersion = rowVersion;
 
-                _context.Entry(dbItem).Property(nameof(Project.RowVersion)).OriginalValue = rowVersion;
+                _context.Entry(dbItem).Property(nameof(Product.RowVersion)).OriginalValue = rowVersion;
                 // Set time stamp for table to handle concurrency conflict
                 tableVersion.LastModify = DateTime.Now;
                 await _context.SaveChangesAsync();
@@ -340,21 +339,21 @@ namespace ATAdmin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private async Task PrepareListMasterForeignKey(ProjectBaseViewModel vm = null)
+        private async Task PrepareListMasterForeignKey(ProductBaseViewModel vm = null)
         {
-            ViewData["FkProjectTypeId"] = new SelectList(
+            ViewData["FkProductId"] = new SelectList(
                 await _context.ProjectType.AsNoTracking()
                     .Select(h => new { h.Id, h.Name })
                     .OrderBy(h => h.Name)
                     .ToListAsync(),
-                "Id", "Name", vm?.FkProjectTypeId);
+                "Id", "Name", vm?.FkProductId);
         }
     }
 
 
-    public class ImageBrowserProjectController : EditorImageBrowserController
+    public class ImageBrowserProductController : EditorImageBrowserController
     {
-        public const string FOLDER_NAME = "ImagesProject";
+        public const string FOLDER_NAME = "ImagesProduct";
         public string FOLDER_ROOTPATH;
 
         /// <summary>
@@ -368,7 +367,7 @@ namespace ATAdmin.Controllers
             }
         }
 
-        public ImageBrowserProjectController(IHostingEnvironment hostingEnvironment, IConfiguration staticFileSetting)
+        public ImageBrowserProductController(IHostingEnvironment hostingEnvironment, IConfiguration staticFileSetting)
            : base(hostingEnvironment)
         {
             FOLDER_ROOTPATH = staticFileSetting.GetValue<string>("StaticFileSetting");
@@ -385,10 +384,10 @@ namespace ATAdmin.Controllers
             return path;
         }
     }
-    public class ProjectBaseViewModel
+    public class ProductBaseViewModel
     {
 
-        public String FkProjectTypeId { get; set; }
+        public String FkProductId { get; set; }
         public String Name { get; set; }
         public String SlugName { get; set; }
         public Boolean AutoSlug { get; set; }
@@ -401,7 +400,7 @@ namespace ATAdmin.Controllers
         public String Note { get; set; }
     }
 
-    public class ProjectDetailsViewModel : ProjectBaseViewModel
+    public class ProductDetailsViewModel : ProductBaseViewModel
     {
 
         public String Id { get; set; }
@@ -413,28 +412,28 @@ namespace ATAdmin.Controllers
         public AtRowStatus RowStatus { get; set; }
 
 
-        public string FkProjectType_Code { get; set; }
-        public string FkProjectType_Name { get; set; }
+        public string FkProductType_Code { get; set; }
+        public string FkProductType_Name { get; set; }
 
     }
 
-    public class ProjectCreateViewModel : ProjectBaseViewModel
+    public class ProductCreateViewModel : ProductBaseViewModel
     {
 
     }
 
-    public class ProjectEditViewModel : ProjectBaseViewModel
+    public class ProductEditViewModel : ProductBaseViewModel
     {
 
         public String Id { get; set; }
         public Byte[] RowVersion { get; set; }
     }
 
-    public class ProjectBaseValidator<T> : AtBaseValidator<T> where T : ProjectBaseViewModel
+    public class ProductBaseValidator<T> : AtBaseValidator<T> where T : ProductBaseViewModel
     {
-        public ProjectBaseValidator()
+        public ProductBaseValidator()
         {
-            RuleFor(h => h.FkProjectTypeId)
+            RuleFor(h => h.FkProductId)
                         .NotEmpty()
                         .MaximumLength(50)
                 ;
@@ -482,16 +481,16 @@ namespace ATAdmin.Controllers
         }
     }
 
-    public class ProjectCreateValidator : ProjectBaseValidator<ProjectCreateViewModel>
+    public class ProductCreateValidator : ProductBaseValidator<ProductCreateViewModel>
     {
-        public ProjectCreateValidator()
+        public ProductCreateValidator()
         {
         }
     }
 
-    public class ProjectEditValidator : ProjectBaseValidator<ProjectEditViewModel>
+    public class ProductEditValidator : ProductBaseValidator<ProductEditViewModel>
     {
-        public ProjectEditValidator()
+        public ProductEditValidator()
         {
             RuleFor(h => h.Id)
                         .NotEmpty()

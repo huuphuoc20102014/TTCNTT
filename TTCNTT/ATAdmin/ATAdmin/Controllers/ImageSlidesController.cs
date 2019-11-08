@@ -10,14 +10,15 @@ using FluentValidation;
 using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
 using Microsoft.AspNetCore.Hosting;
+using ATAdmin.Efs.Context;
 
 namespace ATAdmin.Controllers
 {
     public class ImageSlidesController : AtBaseController
     {
-        private readonly WebAtSolutionContext _context;
+        private readonly WebTTCNTTContext _context;
 
-        public ImageSlidesController(WebAtSolutionContext context)
+        public ImageSlidesController(WebTTCNTTContext context)
         {
             _context = context;
         }
@@ -52,7 +53,7 @@ namespace ATAdmin.Controllers
                 {
                     Id = h.Id,
                     Name = h.Name,
-                    SlugName = h.SlugName,
+                    SlugName = h.Slug_Name,
                     Extension = h.Extension,
                     Description = h.Description,
                     SortIndex = h.SortIndex,
@@ -86,7 +87,7 @@ namespace ATAdmin.Controllers
 
             var imageSlide = await _context.ImageSlide.AsNoTracking()
 
-                    .Where(h => h.SlugName == id)
+                    .Where(h => h.Slug_Name == id)
                 .FirstOrDefaultAsync();
             if (imageSlide == null)
             {
@@ -138,7 +139,7 @@ namespace ATAdmin.Controllers
                 RowVersion = null,
 
                 Name = vmItem.Name,
-                SlugName = vmItem.SlugName,
+                Slug_Name = vmItem.SlugName,
                 AutoSlug = vmItem.AutoSlug,
                 Extension = vmItem.Extension,
                 Description = vmItem.Description,
@@ -170,12 +171,12 @@ namespace ATAdmin.Controllers
 
 
             var dbItem = await _context.ImageSlide.AsNoTracking()
-                .Where(h => h.SlugName == id)
+                .Where(h => h.Slug_Name == id)
                 .Select(h => new ImageSlideEditViewModel
                 {
                     Id = h.Id,
                     Name = h.Name,
-                    SlugName = h.SlugName,
+                    SlugName = h.Slug_Name,
                     AutoSlug = h.AutoSlug,
                     Extension = h.Extension,
                     Description = h.Description,
@@ -237,7 +238,7 @@ namespace ATAdmin.Controllers
             dbItem.RowVersion = vmItem.RowVersion;
 
             dbItem.Name = vmItem.Name;
-            dbItem.SlugName = vmItem.SlugName;
+            dbItem.Slug_Name = vmItem.SlugName;
             dbItem.AutoSlug = vmItem.AutoSlug;
             dbItem.Extension = vmItem.Extension;
             dbItem.Description = vmItem.Description;
@@ -268,7 +269,7 @@ namespace ATAdmin.Controllers
 
             var dbItem = await _context.ImageSlide.AsNoTracking()
 
-                    .Where(h => h.SlugName == id)
+                    .Where(h => h.Slug_Name == id)
                 .FirstOrDefaultAsync();
             if (dbItem == null)
             {

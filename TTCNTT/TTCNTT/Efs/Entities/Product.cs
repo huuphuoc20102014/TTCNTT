@@ -29,6 +29,10 @@ namespace TTCNTT.Efs.Entities
         public int? CountComment { get; set; }
         public int? CountReply { get; set; }
         public int? CountView { get; set; }
+        public string Tags { get; set; }
+        public string KeyWord { get; set; }
+        public string MetaData { get; set; }
+        public string Note { get; set; }
 
         public virtual Category FkProduct { get; set; }
         public virtual ICollection<ProductComment> ProductComment { get; set; }

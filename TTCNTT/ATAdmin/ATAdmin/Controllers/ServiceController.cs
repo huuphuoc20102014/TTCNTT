@@ -11,14 +11,15 @@ using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using ATAdmin.Efs.Context;
 
 namespace ATAdmin.Controllers
 {
     public class ServiceController : AtBaseController
     {
-        private readonly WebAtSolutionContext _context;
+        private readonly WebTTCNTTContext _context;
 
-        public ServiceController(WebAtSolutionContext context)
+        public ServiceController(WebTTCNTTContext context)
         {
             _context = context;
         }
@@ -54,9 +55,9 @@ namespace ATAdmin.Controllers
                 {
                     Id = h.Id,
                     ServiceName = h.ServiceName,
-                    SlugName = h.SlugName,
-                    ShortDescriptionHtml = h.ShortDescriptionHtml,
-                    LongDescriptionHtml = h.LongDescriptionHtml,
+                    SlugName = h.Slug_Name,
+                    ShortDescriptionHtml = h.ShortDescription_Html,
+                    LongDescriptionHtml = h.LongDescription_Html,
                     ImageSlug = h.ImageSlug,
                     Tags = h.Tags,
                     KeyWord = h.KeyWord,
@@ -136,10 +137,10 @@ namespace ATAdmin.Controllers
                 RowStatus = (int)AtRowStatus.Normal,
                 RowVersion = null,
                 ServiceName = vmItem.ServiceName,
-                SlugName = vmItem.SlugName,
+                Slug_Name = vmItem.SlugName,
                 AutoSlug = vmItem.AutoSlug,
-                ShortDescriptionHtml = vmItem.ShortDescriptionHtml,
-                LongDescriptionHtml = vmItem.LongDescriptionHtml,
+                ShortDescription_Html = vmItem.ShortDescriptionHtml,
+                LongDescription_Html = vmItem.LongDescriptionHtml,
                 ImageSlug = vmItem.ImageSlug,
                 Tags = vmItem.Tags,
                 KeyWord = vmItem.KeyWord,
@@ -177,8 +178,8 @@ namespace ATAdmin.Controllers
                     Id = h.Id,
                     
                     AutoSlug = h.AutoSlug,
-                    ShortDescriptionHtml = h.ShortDescriptionHtml,
-                    LongDescriptionHtml = h.LongDescriptionHtml,
+                    ShortDescriptionHtml = h.ShortDescription_Html,
+                    LongDescriptionHtml = h.LongDescription_Html,
                     ImageSlug = h.ImageSlug,
                     Tags = h.Tags,
                     KeyWord = h.KeyWord,
@@ -229,13 +230,13 @@ namespace ATAdmin.Controllers
 
             // Update db item       
             dbItem.ServiceName = vmItem.ServiceName;
-            dbItem.SlugName = vmItem.SlugName;
+            dbItem.Slug_Name = vmItem.SlugName;
             dbItem.UpdatedBy = _loginUserId;
             dbItem.UpdatedDate = DateTime.Now;
             dbItem.RowVersion = vmItem.RowVersion;
             dbItem.AutoSlug = vmItem.AutoSlug;
-            dbItem.ShortDescriptionHtml = vmItem.ShortDescriptionHtml;
-            dbItem.LongDescriptionHtml = vmItem.LongDescriptionHtml;
+            dbItem.ShortDescription_Html = vmItem.ShortDescriptionHtml;
+            dbItem.LongDescription_Html = vmItem.LongDescriptionHtml;
             dbItem.ImageSlug = vmItem.ImageSlug;
             dbItem.Tags = vmItem.Tags;
             dbItem.KeyWord = vmItem.KeyWord;

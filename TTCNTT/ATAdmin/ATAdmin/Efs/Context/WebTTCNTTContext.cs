@@ -1,13 +1,12 @@
 ﻿using System;
+using ATAdmin.Efs.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace ATAdmin.Efs.Entities
+namespace ATAdmin.Efs.Context
 {
-    public partial class WebAtSolutionContext : DbContext
+    public partial class WebTTCNTTContext : DbContext
     {
-        internal string LoginUserId;
-
         public virtual DbSet<AboutCustomer> AboutCustomer { get; set; }
         public virtual DbSet<AboutUs> AboutUs { get; set; }
         public virtual DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
@@ -19,10 +18,16 @@ namespace ATAdmin.Efs.Entities
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Contact> Contact { get; set; }
-        public virtual DbSet<Faq> Faq { get; set; }
+        public virtual DbSet<Course> Course { get; set; }
+        public virtual DbSet<CourseType> CourseType { get; set; }
+        public virtual DbSet<CustomerRegister> CustomerRegister { get; set; }
+        public virtual DbSet<Employee> Employee { get; set; }
+        public virtual DbSet<EmployeeType> EmployeeType { get; set; }
+        public virtual DbSet<FAQ> FAQ { get; set; }
         public virtual DbSet<ImageSlide> ImageSlide { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<News> News { get; set; }
+        public virtual DbSet<NewsComment> NewsComment { get; set; }
         public virtual DbSet<NewsType> NewsType { get; set; }
         public virtual DbSet<OperationHistory> OperationHistory { get; set; }
         public virtual DbSet<People> People { get; set; }
@@ -34,11 +39,10 @@ namespace ATAdmin.Efs.Entities
         public virtual DbSet<ProjectType> ProjectType { get; set; }
         public virtual DbSet<Service> Service { get; set; }
         public virtual DbSet<Setting> Setting { get; set; }
-        public virtual DbSet<SettingType> SettingType { get; set; }
         public virtual DbSet<TableVersion> TableVersion { get; set; }
-        public virtual DbSet<ViewUserRole> ViewUserRole { get; set; }
+        public virtual DbSet<Training> Training { get; set; }
 
-        public WebAtSolutionContext(DbContextOptions<WebAtSolutionContext> options) : base(options)
+        public WebTTCNTTContext(DbContextOptions<WebTTCNTTContext> options) : base(options)
         {
         }
 
@@ -47,7 +51,7 @@ namespace ATAdmin.Efs.Entities
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=115.78.100.42,8899;Database=ATSOLUTION;User Id=sa;Password=1@qweQAZ");
+                optionsBuilder.UseSqlServer("Server=115.78.100.42,8899;Database=TTCNTT;User Id=sa;Password=1@qweQAZ");
             }
         }
 
@@ -77,9 +81,7 @@ namespace ATAdmin.Efs.Entities
 
                 entity.Property(e => e.KeyWord).HasMaxLength(1000);
 
-                entity.Property(e => e.LongDescriptionHtml)
-                    .HasColumnName("LongDescription_Html")
-                    .HasColumnType("ntext");
+                entity.Property(e => e.LongDescription_Html).HasColumnType("ntext");
 
                 entity.Property(e => e.MetaData).HasMaxLength(1000);
 
@@ -93,13 +95,10 @@ namespace ATAdmin.Efs.Entities
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.ShortDescriptionHtml)
-                    .HasColumnName("ShortDescription_Html")
-                    .HasMaxLength(1000);
+                entity.Property(e => e.ShortDescription_Html).HasMaxLength(1000);
 
-                entity.Property(e => e.SlugName)
+                entity.Property(e => e.Slug_Name)
                     .IsRequired()
-                    .HasColumnName("Slug_Name")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -131,11 +130,11 @@ namespace ATAdmin.Efs.Entities
 
                 entity.Property(e => e.KeyWord).HasMaxLength(1000);
 
-                entity.Property(e => e.LongDescriptionHtml)
-                    .HasColumnName("LongDescription_Html")
-                    .HasColumnType("ntext");
+                entity.Property(e => e.LongDescription_Html).HasColumnType("ntext");
 
                 entity.Property(e => e.MetaData).HasMaxLength(1000);
+
+                entity.Property(e => e.Name).HasMaxLength(50);
 
                 entity.Property(e => e.Note).HasMaxLength(1000);
 
@@ -143,15 +142,12 @@ namespace ATAdmin.Efs.Entities
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.ShortDescriptionHtml)
-                    .HasColumnName("ShortDescription_Html")
-                    .HasMaxLength(1000);
+                entity.Property(e => e.ShortDescription_Html).HasMaxLength(1000);
 
                 entity.Property(e => e.Skill).HasMaxLength(500);
 
-                entity.Property(e => e.SlugTitle)
+                entity.Property(e => e.Slug_Title)
                     .IsRequired()
-                    .HasColumnName("Slug_Title")
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
@@ -300,13 +296,14 @@ namespace ATAdmin.Efs.Entities
 
                 entity.Property(e => e.Note).HasMaxLength(1000);
 
+                entity.Property(e => e.Note1).HasMaxLength(1000);
+
                 entity.Property(e => e.RowVersion)
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.SlugName)
+                entity.Property(e => e.Slug_Name)
                     .IsRequired()
-                    .HasColumnName("Slug_Name")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -346,7 +343,7 @@ namespace ATAdmin.Efs.Entities
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.FkProductCommentId)
+                entity.Property(e => e.FkCourseId)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -367,9 +364,116 @@ namespace ATAdmin.Efs.Entities
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.Title)
+                entity.Property(e => e.Title).HasMaxLength(1000);
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+
+                entity.HasOne(d => d.FkCourse)
+                    .WithMany(p => p.Contact)
+                    .HasForeignKey(d => d.FkCourseId)
+                    .HasConstraintName("FK_Contact_Course");
+            });
+
+            modelBuilder.Entity<Course>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
                     .IsRequired()
-                    .HasMaxLength(1000);
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.FkProjectTypeId)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ImageSlug).HasMaxLength(100);
+
+                entity.Property(e => e.KeyWord).HasMaxLength(1000);
+
+                entity.Property(e => e.LongDescription_Html).HasColumnType("ntext");
+
+                entity.Property(e => e.MetaData).HasMaxLength(1000);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.Note).HasMaxLength(1000);
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion();
+
+                entity.Property(e => e.ShortDescription_Html).HasMaxLength(1000);
+
+                entity.Property(e => e.Slug_Name)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Tags).HasMaxLength(1000);
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+
+                entity.HasOne(d => d.FkProjectType)
+                    .WithMany(p => p.Course)
+                    .HasForeignKey(d => d.FkProjectTypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Course_CourseType");
+            });
+
+            modelBuilder.Entity<CourseType>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Code)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.KeyWord).HasMaxLength(1000);
+
+                entity.Property(e => e.MetaData).HasMaxLength(1000);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.Note).HasMaxLength(1000);
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion();
+
+                entity.Property(e => e.Slug_Name)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Tags).HasMaxLength(1000);
 
                 entity.Property(e => e.UpdatedBy)
                     .HasMaxLength(50)
@@ -378,22 +482,160 @@ namespace ATAdmin.Efs.Entities
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<Faq>(entity =>
+            modelBuilder.Entity<CustomerRegister>(entity =>
             {
-                entity.ToTable("FAQ");
-
                 entity.Property(e => e.Id)
-                    .HasColumnName("ID")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion();
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<Employee>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Address)
+                    .IsRequired()
+                    .HasMaxLength(500);
+
+                entity.Property(e => e.BirthDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Code)
+                    .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.Faqquestion)
+                entity.Property(e => e.CreatedBy)
                     .IsRequired()
-                    .HasColumnName("FAQQuestion")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Fk_EmplyeeId)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ImageSlug)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LongDescription_Html)
+                    .IsRequired()
+                    .HasColumnType("ntext");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Note).HasMaxLength(1000);
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion();
+
+                entity.Property(e => e.ShortDescription_Html)
+                    .IsRequired()
                     .HasMaxLength(1000);
 
-                entity.Property(e => e.Faqreply)
+                entity.Property(e => e.Slug_Name)
                     .IsRequired()
-                    .HasColumnName("FAQReply")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Specialize).HasMaxLength(100);
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Fk_Emplyee)
+                    .WithMany(p => p.Employee)
+                    .HasForeignKey(d => d.Fk_EmplyeeId)
+                    .HasConstraintName("FK_Employee_EmployeeType");
+            });
+
+            modelBuilder.Entity<EmployeeType>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Code)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.KeyWord).HasMaxLength(1000);
+
+                entity.Property(e => e.MetaData).HasMaxLength(1000);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.Note).HasMaxLength(1000);
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion();
+
+                entity.Property(e => e.Slug_Name)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Tags).HasMaxLength(1000);
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<FAQ>(entity =>
+            {
+                entity.Property(e => e.ID).HasMaxLength(50);
+
+                entity.Property(e => e.FAQQuestion)
+                    .IsRequired()
+                    .HasMaxLength(1000);
+
+                entity.Property(e => e.FAQReply)
+                    .IsRequired()
                     .HasMaxLength(2000);
 
                 entity.Property(e => e.RowVersion)
@@ -435,9 +677,8 @@ namespace ATAdmin.Efs.Entities
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.SlugName)
+                entity.Property(e => e.Slug_Name)
                     .IsRequired()
-                    .HasColumnName("Slug_Name")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -503,9 +744,8 @@ namespace ATAdmin.Efs.Entities
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.SlugName)
+                entity.Property(e => e.Slug_Name)
                     .IsRequired()
-                    .HasColumnName("Slug_Name")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -524,11 +764,6 @@ namespace ATAdmin.Efs.Entities
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Coment)
-                    .HasColumnName("coment")
-                    .HasMaxLength(100)
-                    .IsFixedLength();
-
                 entity.Property(e => e.CreatedBy)
                     .IsRequired()
                     .HasMaxLength(50)
@@ -545,9 +780,7 @@ namespace ATAdmin.Efs.Entities
 
                 entity.Property(e => e.KeyWord).HasMaxLength(1000);
 
-                entity.Property(e => e.LongDescriptionHtml)
-                    .HasColumnName("LongDescription_Html")
-                    .HasColumnType("ntext");
+                entity.Property(e => e.LongDescription_Html).HasColumnType("ntext");
 
                 entity.Property(e => e.MetaData).HasMaxLength(1000);
 
@@ -557,13 +790,10 @@ namespace ATAdmin.Efs.Entities
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.ShortDescriptionHtml)
-                    .HasColumnName("ShortDescription_Html")
-                    .HasMaxLength(1000);
+                entity.Property(e => e.ShortDescription_Html).HasMaxLength(1000);
 
-                entity.Property(e => e.SlugTitle)
+                entity.Property(e => e.Slug_Title)
                     .IsRequired()
-                    .HasColumnName("Slug_Title")
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
@@ -582,6 +812,61 @@ namespace ATAdmin.Efs.Entities
                     .HasForeignKey(d => d.FkNewsTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_News_NewsType");
+            });
+
+            modelBuilder.Entity<NewsComment>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Comment)
+                    .IsRequired()
+                    .HasMaxLength(1000);
+
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FkNewsId)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Note).HasMaxLength(1000);
+
+                entity.Property(e => e.Phone)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion();
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+
+                entity.HasOne(d => d.FkNews)
+                    .WithMany(p => p.NewsComment)
+                    .HasForeignKey(d => d.FkNewsId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_NewsComment_News");
             });
 
             modelBuilder.Entity<NewsType>(entity =>
@@ -616,9 +901,8 @@ namespace ATAdmin.Efs.Entities
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.SlugName)
+                entity.Property(e => e.Slug_Name)
                     .IsRequired()
-                    .HasColumnName("Slug_Name")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -651,7 +935,7 @@ namespace ATAdmin.Efs.Entities
             modelBuilder.Entity<People>(entity =>
             {
                 entity.Property(e => e.Id)
-                    .HasMaxLength(50)
+                    .HasMaxLength(10)
                     .IsUnicode(false);
 
                 entity.Property(e => e.BirthDay).HasColumnType("datetime");
@@ -675,12 +959,9 @@ namespace ATAdmin.Efs.Entities
                     .HasMaxLength(50);
 
                 entity.Property(e => e.Phone)
+                    .IsRequired()
                     .HasMaxLength(10)
                     .IsUnicode(false);
-
-                entity.Property(e => e.RowVersion)
-                    .IsRequired()
-                    .IsRowVersion();
             });
 
             modelBuilder.Entity<Product>(entity =>
@@ -689,18 +970,10 @@ namespace ATAdmin.Efs.Entities
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Ccy)
-                    .HasColumnName("CCY")
-                    .HasMaxLength(50);
-
                 entity.Property(e => e.Code)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
-
-                entity.Property(e => e.Color).HasMaxLength(50);
-
-                entity.Property(e => e.Country).HasMaxLength(50);
 
                 entity.Property(e => e.CreatedBy)
                     .IsRequired()
@@ -720,11 +993,7 @@ namespace ATAdmin.Efs.Entities
 
                 entity.Property(e => e.KeyWord).HasMaxLength(1000);
 
-                entity.Property(e => e.LongDescriptionHtml)
-                    .HasColumnName("LongDescription_Html")
-                    .HasColumnType("ntext");
-
-                entity.Property(e => e.Material).HasMaxLength(50);
+                entity.Property(e => e.LongDescription_Html).HasColumnType("ntext");
 
                 entity.Property(e => e.MetaData).HasMaxLength(1000);
 
@@ -734,35 +1003,16 @@ namespace ATAdmin.Efs.Entities
 
                 entity.Property(e => e.Note).HasMaxLength(1000);
 
-                entity.Property(e => e.Producer).HasMaxLength(500);
-
                 entity.Property(e => e.RowVersion)
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.ShortDescriptionHtml)
-                    .HasColumnName("ShortDescription_Html")
-                    .HasMaxLength(1000);
+                entity.Property(e => e.ShortDescription_Html).HasMaxLength(1000);
 
-                entity.Property(e => e.Size).HasMaxLength(50);
-
-                entity.Property(e => e.Sku)
-                    .HasColumnName("SKU")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.SlugName)
+                entity.Property(e => e.Slug_Name)
                     .IsRequired()
-                    .HasColumnName("Slug_Name")
                     .HasMaxLength(100)
                     .IsUnicode(false);
-
-                entity.Property(e => e.SpecificationHtml)
-                    .HasColumnName("Specification_Html")
-                    .HasMaxLength(1000);
-
-                entity.Property(e => e.Status).HasMaxLength(50);
-
-                entity.Property(e => e.Style).HasMaxLength(50);
 
                 entity.Property(e => e.Tags).HasMaxLength(1000);
 
@@ -878,9 +1128,8 @@ namespace ATAdmin.Efs.Entities
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.SlugName)
+                entity.Property(e => e.Slug_Name)
                     .IsRequired()
-                    .HasColumnName("Slug_Name")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -925,9 +1174,7 @@ namespace ATAdmin.Efs.Entities
 
                 entity.Property(e => e.KeyWord).HasMaxLength(1000);
 
-                entity.Property(e => e.LongDescriptionHtml)
-                    .HasColumnName("LongDescription_Html")
-                    .HasColumnType("ntext");
+                entity.Property(e => e.LongDescription_Html).HasColumnType("ntext");
 
                 entity.Property(e => e.MetaData).HasMaxLength(1000);
 
@@ -941,13 +1188,10 @@ namespace ATAdmin.Efs.Entities
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.ShortDescriptionHtml)
-                    .HasColumnName("ShortDescription_Html")
-                    .HasMaxLength(1000);
+                entity.Property(e => e.ShortDescription_Html).HasMaxLength(1000);
 
-                entity.Property(e => e.SlugName)
+                entity.Property(e => e.Slug_Name)
                     .IsRequired()
-                    .HasColumnName("Slug_Name")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -1005,9 +1249,8 @@ namespace ATAdmin.Efs.Entities
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.SlugName)
+                entity.Property(e => e.Slug_Name)
                     .IsRequired()
-                    .HasColumnName("Slug_Name")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -1056,9 +1299,8 @@ namespace ATAdmin.Efs.Entities
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.SlugName)
+                entity.Property(e => e.Slug_Name)
                     .IsRequired()
-                    .HasColumnName("Slug_Name")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -1092,9 +1334,7 @@ namespace ATAdmin.Efs.Entities
 
                 entity.Property(e => e.KeyWord).HasMaxLength(1000);
 
-                entity.Property(e => e.LongDescriptionHtml)
-                    .HasColumnName("LongDescription_Html")
-                    .HasColumnType("ntext");
+                entity.Property(e => e.LongDescription_Html).HasColumnType("ntext");
 
                 entity.Property(e => e.MetaData).HasMaxLength(1000);
 
@@ -1108,13 +1348,10 @@ namespace ATAdmin.Efs.Entities
                     .IsRequired()
                     .HasMaxLength(100);
 
-                entity.Property(e => e.ShortDescriptionHtml)
-                    .HasColumnName("ShortDescription_Html")
-                    .HasMaxLength(1000);
+                entity.Property(e => e.ShortDescription_Html).HasMaxLength(1000);
 
-                entity.Property(e => e.SlugName)
+                entity.Property(e => e.Slug_Name)
                     .IsRequired()
-                    .HasColumnName("Slug_Name")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -1133,31 +1370,13 @@ namespace ATAdmin.Efs.Entities
 
                 entity.Property(e => e.Description).HasMaxLength(200);
 
+                entity.Property(e => e.Id2).HasMaxLength(50);
+
                 entity.Property(e => e.ImageSlug).HasMaxLength(200);
 
                 entity.Property(e => e.RowVersion).IsRowVersion();
 
-                entity.Property(e => e.Style).HasMaxLength(200);
-
                 entity.Property(e => e.Value).IsRequired();
-
-                entity.HasOne(d => d.StyleNavigation)
-                    .WithMany(p => p.Setting)
-                    .HasForeignKey(d => d.Style)
-                    .HasConstraintName("FK_Setting_SettingType");
-            });
-
-            modelBuilder.Entity<SettingType>(entity =>
-            {
-                entity.Property(e => e.Id).HasMaxLength(200);
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.RowVersion)
-                    .IsRequired()
-                    .IsRowVersion();
             });
 
             modelBuilder.Entity<TableVersion>(entity =>
@@ -1173,23 +1392,24 @@ namespace ATAdmin.Efs.Entities
                     .IsRowVersion();
             });
 
-            modelBuilder.Entity<ViewUserRole>(entity =>
+            modelBuilder.Entity<Training>(entity =>
             {
                 entity.HasNoKey();
 
-                entity.ToView("View_User_Role");
+                entity.Property(e => e.Description).HasMaxLength(500);
 
-                entity.Property(e => e.IdRole)
+                entity.Property(e => e.Id)
                     .IsRequired()
-                    .HasMaxLength(450);
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.IdUser)
+                entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(450);
+                    .HasMaxLength(50);
 
-                entity.Property(e => e.TenNguoiDung).HasMaxLength(256);
-
-                entity.Property(e => e.TenQuyen).HasMaxLength(256);
+                entity.Property(e => e.Slug_Name)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             OnModelCreatingPartial(modelBuilder);

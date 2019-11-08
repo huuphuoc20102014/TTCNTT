@@ -10,14 +10,15 @@ using FluentValidation;
 using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
 using Microsoft.AspNetCore.Hosting;
+using ATAdmin.Efs.Context;
 
 namespace ATAdmin.Controllers
 {
     public class NewsTypesController : AtBaseController
     {
-        private readonly WebAtSolutionContext _webcontext;
+        private readonly WebTTCNTTContext _webcontext;
 
-        public NewsTypesController(WebAtSolutionContext context)
+        public NewsTypesController(WebTTCNTTContext context)
         {
             _webcontext = context;
         }
@@ -54,7 +55,7 @@ namespace ATAdmin.Controllers
                     Id = h.Id,
                     Code = h.Code,
                     Name = h.Name,
-                    SlugName = h.SlugName,
+                    SlugName = h.Slug_Name,
                     Tags = h.Tags,
                     KeyWord = h.KeyWord,
                     MetaData = h.MetaData,
@@ -82,7 +83,7 @@ namespace ATAdmin.Controllers
 
             var newsType = await _webcontext.NewsType.AsNoTracking()
 
-                    .Where(h => h.SlugName == id)
+                    .Where(h => h.Slug_Name == id)
                 .FirstOrDefaultAsync();
             if (newsType == null)
             {
@@ -142,7 +143,7 @@ namespace ATAdmin.Controllers
 
                 Code = vmItem.Code,
                 Name = vmItem.Name,
-                SlugName = vmItem.SlugName,
+                Slug_Name = vmItem.SlugName,
                 AutoSlug = vmItem.AutoSlug,
                 Tags = vmItem.Tags,
                 KeyWord = vmItem.KeyWord,
@@ -169,14 +170,14 @@ namespace ATAdmin.Controllers
 
             var dbItem = await _webcontext.NewsType.AsNoTracking()
 
-    .Where(h => h.SlugName == id)
+    .Where(h => h.Slug_Name == id)
 
                 .Select(h => new NewsTypeEditViewModel
                 {
                     Id = h.Id,
                     Code = h.Code,
                     Name = h.Name,
-                    SlugName = h.SlugName,
+                    SlugName = h.Slug_Name,
                     AutoSlug = h.AutoSlug,
                     Tags = h.Tags,
                     KeyWord = h.KeyWord,
@@ -240,7 +241,7 @@ namespace ATAdmin.Controllers
 
             dbItem.Code = vmItem.Code;
             dbItem.Name = vmItem.Name;
-            dbItem.SlugName = vmItem.SlugName;
+            dbItem.Slug_Name = vmItem.SlugName;
             dbItem.AutoSlug = vmItem.AutoSlug;
             dbItem.Tags = vmItem.Tags;
             dbItem.KeyWord = vmItem.KeyWord;
@@ -265,7 +266,7 @@ namespace ATAdmin.Controllers
 
             var dbItem = await _webcontext.NewsType.AsNoTracking()
 
-                    .Where(h => h.SlugName == id)
+                    .Where(h => h.Slug_Name == id)
                 .FirstOrDefaultAsync();
             if (dbItem == null)
             {

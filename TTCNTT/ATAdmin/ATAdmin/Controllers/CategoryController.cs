@@ -11,14 +11,15 @@ using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using ATAdmin.Efs.Context;
 
 namespace ATAdmin.Controllers
 {
-    public class ProjectTypeController : AtBaseController
+    public class CategoryController : AtBaseController
     {
-        private readonly WebAtSolutionContext _context;
+        private readonly WebTTCNTTContext _context;
 
-        public ProjectTypeController(WebAtSolutionContext context)
+        public CategoryController(WebTTCNTTContext context)
         {
             _context = context;
         }
@@ -26,10 +27,10 @@ namespace ATAdmin.Controllers
         // GET: AboutUs
         public async Task<IActionResult> Index([FromRoute]string id)
         {
-            ProjectType dbItem = null;
+            Category dbItem = null;
             if (!string.IsNullOrWhiteSpace(id))
             {
-                dbItem = await _context.ProjectType.AsNoTracking().FirstOrDefaultAsync(h => h.Id == id);
+                dbItem = await _context.Category.AsNoTracking().FirstOrDefaultAsync(h => h.Id == id);
                 if (dbItem == null)
                 {
                     return NotFound();
@@ -37,25 +38,25 @@ namespace ATAdmin.Controllers
             }
             ViewData["ParentItem"] = dbItem;
 
-            ViewData["ControllerNameForGrid"] = nameof(ProjectTypeController).Replace("Controller", "");
+            ViewData["ControllerNameForGrid"] = nameof(CategoryController).Replace("Controller", "");
             return View();
         }
 
         public async Task<IActionResult> Index_Read([DataSourceRequest] DataSourceRequest request, string parentId)
         {
-            var baseQuery = _context.ProjectType.AsNoTracking();
+            var baseQuery = _context.Category.AsNoTracking();
             if (!string.IsNullOrWhiteSpace(parentId))
             {
                 baseQuery = baseQuery.Where(h => h.Id == parentId);
             }
             var query = baseQuery
                 .Where(p => p.RowStatus == (int)AtRowStatus.Normal)
-                .Select(h => new ProjectTypeDetailsViewModel
+                .Select(h => new CategoryDetailsViewModel
                 {
                     Id = h.Id,
                     Code = h.Code,
                     Name = h.Name,
-                    SlugName = h.SlugName,
+                    SlugName = h.Slug_Name,
                     Tags = h.Tags,
                     KeyWord = h.KeyWord,
                     MetaData = h.MetaData,
@@ -81,16 +82,16 @@ namespace ATAdmin.Controllers
                 return NotFound();
             }
 
-            var projectType = await _context.ProjectType.AsNoTracking()
+            var category = await _context.Category.AsNoTracking()
 
                     .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
-            if (projectType == null)
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return View(projectType);
+            return View(category);
         }
 
         // GET: AboutUs/Create
@@ -104,7 +105,7 @@ namespace ATAdmin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([FromForm]  ProjectTypeCreateViewModel vmItem)
+        public async Task<IActionResult> Create([FromForm]  CategoryCreateViewModel vmItem)
         {
 
             // Invalid model
@@ -114,7 +115,7 @@ namespace ATAdmin.Controllers
             }
 
             // Get time stamp for table to handle concurrency conflict
-            var tableName = nameof(ProjectType);
+            var tableName = nameof(Category);
             var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
             // Trim white space
@@ -122,12 +123,12 @@ namespace ATAdmin.Controllers
 
 
             // Create save db item
-            var dbItem = new ProjectType
+            var dbItem = new Category
             {
                 Id = Guid.NewGuid().ToString(),
                 Code = vmItem.Code,
                 Name = vmItem.Name,
-                SlugName = vmItem.SlugName,
+                Slug_Name = vmItem.SlugName,
                 CreatedBy = _loginUserId,
                 CreatedDate = DateTime.Now,
                 UpdatedBy = null,
@@ -159,16 +160,16 @@ namespace ATAdmin.Controllers
             }
 
 
-            var dbItem = await _context.ProjectType.AsNoTracking()
+            var dbItem = await _context.Category.AsNoTracking()
 
     .Where(h => h.Id == id)
 
-                .Select(h => new ProjectTypeEditViewModel
+                .Select(h => new CategoryEditViewModel
                 {
                     Id = h.Id,
                     Name = h.Name,
                     Code = h.Code,
-                    SlugName = h.SlugName,
+                    SlugName = h.Slug_Name,
                     Tags = h.Tags,
                     KeyWord = h.KeyWord,
                     MetaData = h.MetaData,
@@ -190,7 +191,7 @@ namespace ATAdmin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([FromForm]  ProjectTypeEditViewModel vmItem)
+        public async Task<IActionResult> Edit([FromForm]  CategoryEditViewModel vmItem)
         {
 
             // Invalid model
@@ -200,10 +201,10 @@ namespace ATAdmin.Controllers
             }
 
             // Get time stamp for table to handle concurrency conflict
-            var tableName = nameof(ProjectType);
+            var tableName = nameof(Category);
             var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
-            var dbItem = await _context.ProjectType
+            var dbItem = await _context.Category
                 .Where(h => h.Id == vmItem.Id)
 
                 .FirstOrDefaultAsync();
@@ -216,7 +217,7 @@ namespace ATAdmin.Controllers
 
             dbItem.Name = vmItem.Name;
             dbItem.Code = vmItem.Code;
-            dbItem.SlugName = vmItem.SlugName;
+            dbItem.Slug_Name = vmItem.SlugName;
 
             // Update db item               
             dbItem.UpdatedBy = _loginUserId;
@@ -229,7 +230,7 @@ namespace ATAdmin.Controllers
             dbItem.MetaData = vmItem.MetaData;
             dbItem.Note = vmItem.Note;
 
-            _context.Entry(dbItem).Property(nameof(ProjectType.RowVersion)).OriginalValue = vmItem.RowVersion;
+            _context.Entry(dbItem).Property(nameof(Category.RowVersion)).OriginalValue = vmItem.RowVersion;
             // Set time stamp for table to handle concurrency conflict
             tableVersion.LastModify = DateTime.Now;
             await _context.SaveChangesAsync();
@@ -245,7 +246,7 @@ namespace ATAdmin.Controllers
                 return NotFound();
             }
 
-            var dbItem = await _context.ProjectType.AsNoTracking()
+            var dbItem = await _context.Category.AsNoTracking()
 
                     .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
@@ -268,10 +269,10 @@ namespace ATAdmin.Controllers
             }
 
             // Get time stamp for table to handle concurrency conflict
-            var tableName = nameof(ProjectType);
+            var tableName = nameof(Category);
             var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
-            var dbItem = await _context.ProjectType
+            var dbItem = await _context.Category
 
                 .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
@@ -294,7 +295,7 @@ namespace ATAdmin.Controllers
                 dbItem.UpdatedDate = DateTime.Now;
                 dbItem.RowVersion = rowVersion;
 
-                _context.Entry(dbItem).Property(nameof(ProjectType.RowVersion)).OriginalValue = rowVersion;
+                _context.Entry(dbItem).Property(nameof(Category.RowVersion)).OriginalValue = rowVersion;
                 // Set time stamp for table to handle concurrency conflict
                 tableVersion.LastModify = DateTime.Now;
                 await _context.SaveChangesAsync();
@@ -308,7 +309,7 @@ namespace ATAdmin.Controllers
 
 
 
-    public class ProjectTypeBaseViewModel
+    public class CategoryBaseViewModel
     {
 
        
@@ -319,7 +320,7 @@ namespace ATAdmin.Controllers
         public String Note { get; set; }
     }
 
-    public class ProjectTypeDetailsViewModel : ProjectTypeBaseViewModel
+    public class CategoryDetailsViewModel : CategoryBaseViewModel
     {
 
         public String Id { get; set; }
@@ -336,14 +337,14 @@ namespace ATAdmin.Controllers
 
     }
 
-    public class ProjectTypeCreateViewModel : ProjectTypeBaseViewModel
+    public class CategoryCreateViewModel : CategoryBaseViewModel
     {
         public String Code { get; set; }
         public String Name { get; set; }
         public String SlugName { get; set; }
     }
 
-    public class ProjectTypeEditViewModel : ProjectTypeBaseViewModel
+    public class CategoryEditViewModel : CategoryBaseViewModel
     {
 
         public String Id { get; set; }
@@ -353,9 +354,9 @@ namespace ATAdmin.Controllers
         public Byte[] RowVersion { get; set; }
     }
 
-    public class ProjectTypeBaseValidator<T> : AtBaseValidator<T> where T : ProjectTypeBaseViewModel
+    public class CategoryBaseValidator<T> : AtBaseValidator<T> where T : CategoryBaseViewModel
     {
-        public ProjectTypeBaseValidator()
+        public CategoryBaseValidator()
         {
            
             RuleFor(h => h.AutoSlug)
@@ -382,9 +383,9 @@ namespace ATAdmin.Controllers
         }
     }
 
-    public class ProjectTypeCreateValidator : ProjectTypeBaseValidator<ProjectTypeCreateViewModel>
+    public class CategoryCreateValidator : CategoryBaseValidator<CategoryCreateViewModel>
     {
-        public ProjectTypeCreateValidator()
+        public CategoryCreateValidator()
         {
             RuleFor(h => h.Name)
                       .NotEmpty()
@@ -400,9 +401,9 @@ namespace ATAdmin.Controllers
         }
     }
 
-    public class ProjectTypeEditValidator : ProjectTypeBaseValidator<ProjectTypeEditViewModel>
+    public class CategoryEditValidator : CategoryBaseValidator<CategoryEditViewModel>
     {
-        public ProjectTypeEditValidator()
+        public CategoryEditValidator()
         {
             RuleFor(h => h.Id)
                         .NotEmpty()

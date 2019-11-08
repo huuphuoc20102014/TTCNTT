@@ -5,13 +5,18 @@ namespace ATAdmin.Efs.Entities
 {
     public partial class News : AtBaseECommerceEntity
     {
+        public News()
+        {
+            NewsComment = new HashSet<NewsComment>();
+        }
+
         public string Id { get; set; }
         public string FkNewsTypeId { get; set; }
         public string Title { get; set; }
-        public string SlugTitle { get; set; }
+        public string Slug_Title { get; set; }
         public bool AutoSlug { get; set; }
-        public string ShortDescriptionHtml { get; set; }
-        public string LongDescriptionHtml { get; set; }
+        public string ShortDescription_Html { get; set; }
+        public string LongDescription_Html { get; set; }
         public string Tags { get; set; }
         public string KeyWord { get; set; }
         public string MetaData { get; set; }
@@ -23,8 +28,8 @@ namespace ATAdmin.Efs.Entities
         public byte[] RowVersion { get; set; }
         public int RowStatus { get; set; }
         public string ImageSlug { get; set; }
-        public string Coment { get; set; }
 
         public virtual NewsType FkNewsType { get; set; }
+        public virtual ICollection<NewsComment> NewsComment { get; set; }
     }
 }

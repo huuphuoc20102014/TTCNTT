@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Mvc;
 using ATAdmin.Efs.Entities;
 using FluentValidation.AspNetCore;
 using ATAdmin.Models;
+using ATAdmin.Efs.Context;
 
 namespace ATAdmin
 {
@@ -52,11 +53,11 @@ namespace ATAdmin
             //services.Configure<StaticFileSetting>(Configuration.GetSection("StaticFileSetting"));
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("WebAtSolutionContext")));
+                    Configuration.GetConnectionString("TTCNTTConnection")));
 
-            services.AddDbContext<WebAtSolutionContext>(options =>
+            services.AddDbContext<WebTTCNTTContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("WebAtSolutionContext")));
+                    Configuration.GetConnectionString("TTCNTTConnection")));
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()

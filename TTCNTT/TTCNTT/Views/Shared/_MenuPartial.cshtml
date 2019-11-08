@@ -2,15 +2,7 @@
 
 @foreach (var item in Model.listMenu)
 {
-    if (item.Slug_Name == "trang-chu")
-    {
-        <li><a href="~/home">@item.Name</a></li>
-    }
-    else if (item.Slug_Name == "gioi-thieu")
-    {
-        <li><a href="~/@item.Slug_Name">@item.Name</a></li>
-    }
-    else if (item.Slug_Name == "dich-vu")
+    if (item.Slug_Name == "dich-vu")
     {
         <li>
             <a href="~/@item.Slug_Name">@item.Name</a>
@@ -58,7 +50,7 @@
             </ul>
         </li>
     }
-    else if (item.Slug_Name == "lien-he")
+    else
     {
         <li><a href="~/@item.Slug_Name">@item.Name</a></li>
     }

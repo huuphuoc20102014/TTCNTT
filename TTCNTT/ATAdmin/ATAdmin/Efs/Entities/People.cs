@@ -13,7 +13,5 @@ namespace ATAdmin.Efs.Entities
         public string Phone { get; set; }
         public string Gmail { get; set; }
         public string Img { get; set; }
-        public int RowStatus { get; set; }
-        public byte[] RowVersion { get; set; }
     }
 }

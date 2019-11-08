@@ -11,17 +11,15 @@ using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using ATAdmin.Efs.Context;
 
 namespace ATAdmin.Controllers
 {
-    //Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.NavigationMetadata
-    //FkNewsType
-    //FkNewsTypeId
     public class SettingController : AtBaseController
     {
-        private readonly WebAtSolutionContext _context;
+        private readonly WebTTCNTTContext _context;
 
-        public SettingController(WebAtSolutionContext context)
+        public SettingController(WebTTCNTTContext context)
         {
             _context = context;
         }
@@ -56,7 +54,7 @@ namespace ATAdmin.Controllers
                 .Select(h => new SettingDetailsViewModel
                 {
                     Id = h.Id,
-                    Style = h.Style,
+                   // Style = h.Style,
                     Value = h.Value,
                     Description = h.Description,
                     IsManual = h.IsManual,
@@ -94,7 +92,7 @@ namespace ATAdmin.Controllers
             {
                 ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserSettingController).Replace("Controller", "");
                 // Get list master of foreign property and set to view data
-                await PrepareListMasterForeignKey();
+                //await PrepareListMasterForeignKey();
 
                 return View();
             }
@@ -146,7 +144,7 @@ namespace ATAdmin.Controllers
             var dbItem = new Setting
             {
                 Id = Guid.NewGuid().ToString(),
-                Style = vmItem.Style,
+                //Style = vmItem.Style,
                 Value = vmItem.Value,
                 Description = vmItem.Description,
                 IsManual = vmItem.IsManual,
@@ -179,7 +177,7 @@ namespace ATAdmin.Controllers
                 .Select(h => new SettingEditViewModel
                 {
                     Id = h.Id,
-                    Style = h.Style,
+                    //Style = h.Style,
                     Value = h.Value,
                     Description = h.Description,
                     IsManual = h.IsManual,
@@ -193,7 +191,7 @@ namespace ATAdmin.Controllers
             }
 
             // Get list master of foreign property and set to view data
-            await PrepareListMasterForeignKey(dbItem);
+            //await PrepareListMasterForeignKey(dbItem);
 
             return View(dbItem);
         }
@@ -229,7 +227,7 @@ namespace ATAdmin.Controllers
             // Trim white space
 
             // Update db item               
-            dbItem.Style = vmItem.Style;
+            //dbItem.Style = vmItem.Style;
             dbItem.Value = vmItem.Value;
             dbItem.Description = vmItem.Description;
             dbItem.IsManual = vmItem.IsManual;
@@ -253,7 +251,7 @@ namespace ATAdmin.Controllers
 
             var dbItem = await _context.Setting.AsNoTracking()
 
-                .Include(n => n.Style)
+                //.Include(n => n.Style)
                     .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
             if (dbItem == null)
@@ -280,7 +278,7 @@ namespace ATAdmin.Controllers
 
             var dbItem = await _context.Setting
 
-                .Include(n => n.Style)
+                //.Include(n => n.Style)
                 .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
             if (dbItem == null)
@@ -310,17 +308,17 @@ namespace ATAdmin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private async Task PrepareListMasterForeignKey(SettingBaseViewModel vm = null)
-        {
-            ViewData["Style"] = new SelectList(
-                await _context.SettingType.AsNoTracking()
-                    .Select(h => new { h.Id, h.Name, h.RowStatus })
-                    .Where(h => h.RowStatus == (int)AtRowStatus.Normal)
-                    .OrderBy(h => h.Id)
-                    .ToListAsync(),
-                "Id", "Name", vm?.Style);
+        //private async Task PrepareListMasterForeignKey(SettingBaseViewModel vm = null)
+        //{
+        //    ViewData["Style"] = new SelectList(
+        //        await _context.SettingType.AsNoTracking()
+        //            .Select(h => new { h.Id, h.Name, h.RowStatus })
+        //            .Where(h => h.RowStatus == (int)AtRowStatus.Normal)
+        //            .OrderBy(h => h.Id)
+        //            .ToListAsync(),
+        //        "Id", "Name", vm?.Style);
 
-        }
+        //}
     }
 
     public class ImageBrowserSettingController : EditorImageBrowserController
@@ -363,7 +361,7 @@ namespace ATAdmin.Controllers
 
         public String Value { get; set; }
         public String Description { get; set; }
-        public String Style { get; set; }
+        //public String Style { get; set; }
         public bool? IsManual { get; set; }
         public String ImageSlug { get; set; }
     }

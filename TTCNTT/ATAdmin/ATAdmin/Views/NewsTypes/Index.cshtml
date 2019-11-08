@@ -42,21 +42,21 @@
     {
         columns.Bound(c => c.Id).Title(" ").Width(180).Locked(true).Filterable(false).Sortable(false).ClientTemplate(
             "<a class=\"btn btn-success\" data-toggle=\"tooltip\" title=\"" + SharedLocalizer["Ttip_Detail"] + "\"" +
-                "href='" + Url.Action("Details", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(NewsType.SlugName) + " #'" +
+                "href='" + Url.Action("Details", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(NewsType.Slug_Name) + " #'" +
             "><i class=\"far fa-eye\"></i></a> " +
 
             "<a class=\"btn btn-success\" data-toggle=\"tooltip\" title=\"" + SharedLocalizer["Ttip_Edit"] + "\"" +
-                "href='" + Url.Action("Edit", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(NewsType.SlugName) + " #'" +
+                "href='" + Url.Action("Edit", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(NewsType.Slug_Name) + " #'" +
             "><i class=\"far fa-pencil\"></i></a> " +
 
             "<a class=\"btn btn-danger\" data-toggle=\"tooltip\" title=\"" + SharedLocalizer["Ttip_Delete"] + "\"" +
-                "href='" + Url.Action("Delete", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(NewsType.SlugName) + " #'" +
+                "href='" + Url.Action("Delete", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(NewsType.Slug_Name) + " #'" +
             "><i class=\"far fa-trash-alt\"></i></a> "
         );		
 			columns.Bound(c => c.RowStatus).Title(BaseEntityLocalizer[nameof(BaseEntityResources.RowStatus)]).Width(150).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.Code).Title(BaseEntityLocalizer[nameof(BaseEntityResources.Code)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.Name).Title("Tên").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.SlugName).Title(EntityLocalizer[nameof(NewsType.SlugName)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.SlugName).Title(EntityLocalizer[nameof(NewsType.Slug_Name)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.Tags).Title(EntityLocalizer[nameof(NewsType.Tags)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.KeyWord).Title(EntityLocalizer[nameof(NewsType.KeyWord)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.MetaData).Title(EntityLocalizer[nameof(NewsType.MetaData)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });

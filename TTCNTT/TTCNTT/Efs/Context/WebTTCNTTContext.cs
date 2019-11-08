@@ -328,10 +328,6 @@ namespace TTCNTT.Efs.Context
 
                 entity.Property(e => e.Body).IsRequired();
 
-                entity.Property(e => e.CourseId)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.CreatedBy)
                     .IsRequired()
                     .HasMaxLength(50)
@@ -992,11 +988,17 @@ namespace TTCNTT.Efs.Context
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
+                entity.Property(e => e.KeyWord).HasMaxLength(1000);
+
                 entity.Property(e => e.LongDescription_Html).HasColumnType("ntext");
+
+                entity.Property(e => e.MetaData).HasMaxLength(1000);
 
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(100);
+
+                entity.Property(e => e.Note).HasMaxLength(1000);
 
                 entity.Property(e => e.RowVersion)
                     .IsRequired()
@@ -1008,6 +1010,8 @@ namespace TTCNTT.Efs.Context
                     .IsRequired()
                     .HasMaxLength(100)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Tags).HasMaxLength(1000);
 
                 entity.Property(e => e.UpdatedBy)
                     .HasMaxLength(50)
@@ -1364,6 +1368,10 @@ namespace TTCNTT.Efs.Context
                 entity.Property(e => e.Description).HasMaxLength(200);
 
                 entity.Property(e => e.Id2).HasMaxLength(50);
+
+                entity.Property(e => e.ImageSlug).HasMaxLength(200);
+
+                entity.Property(e => e.RowVersion).IsRowVersion();
 
                 entity.Property(e => e.Value).IsRequired();
             });

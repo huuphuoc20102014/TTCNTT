@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace ATAdmin.Efs.Entities
 {
-    public partial class NewsType : AtBaseECommerceEntity
+    public partial class CourseType : AtBaseECommerceEntity
     {
-        public NewsType()
+        public CourseType()
         {
-            News = new HashSet<News>();
+            Course = new HashSet<Course>();
         }
 
         public string Id { get; set; }
@@ -26,6 +26,6 @@ namespace ATAdmin.Efs.Entities
         public byte[] RowVersion { get; set; }
         public int RowStatus { get; set; }
 
-        public virtual ICollection<News> News { get; set; }
+        public virtual ICollection<Course> Course { get; set; }
     }
 }

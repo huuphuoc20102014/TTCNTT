@@ -5,6 +5,81 @@
     <UserSecretsId>aspnet-ATAdmin-FEA30164-AFA5-4BD7-8CFD-FA961FFEA09E</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Views\GrantRights\**" />
+    <Compile Remove="Views\People\**" />
+    <Compile Remove="Views\ProjectType\**" />
+    <Compile Remove="Views\Role\**" />
+    <Compile Remove="Views\SettingType\**" />
+    <Content Remove="Views\GrantRights\**" />
+    <Content Remove="Views\People\**" />
+    <Content Remove="Views\ProjectType\**" />
+    <Content Remove="Views\Role\**" />
+    <Content Remove="Views\SettingType\**" />
+    <EmbeddedResource Remove="Views\GrantRights\**" />
+    <EmbeddedResource Remove="Views\People\**" />
+    <EmbeddedResource Remove="Views\ProjectType\**" />
+    <EmbeddedResource Remove="Views\Role\**" />
+    <EmbeddedResource Remove="Views\SettingType\**" />
+    <None Remove="Views\GrantRights\**" />
+    <None Remove="Views\People\**" />
+    <None Remove="Views\ProjectType\**" />
+    <None Remove="Views\Role\**" />
+    <None Remove="Views\SettingType\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\EmployeeController.cs" />
+    <Compile Remove="Controllers\GrantRightsController.cs" />
+    <Compile Remove="Controllers\PeopleController.cs" />
+    <Compile Remove="Controllers\RoleController.cs" />
+    <Compile Remove="Controllers\SettingTypeController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\AboutUs\Create.cshtml" />
+    <None Include="Views\AboutUs\Delete.cshtml" />
+    <None Include="Views\AboutUs\Details.cshtml" />
+    <None Include="Views\AboutUs\Edit.cshtml" />
+    <None Include="Views\AboutUs\Index.cshtml" />
+    <None Include="Views\Contacts\Create.cshtml" />
+    <None Include="Views\Contacts\Delete.cshtml" />
+    <None Include="Views\Contacts\Details.cshtml" />
+    <None Include="Views\Contacts\Edit.cshtml" />
+    <None Include="Views\Contacts\Index.cshtml" />
+    <None Include="Views\Error\Index.cshtml" />
+    <None Include="Views\ImageSlides\Create.cshtml" />
+    <None Include="Views\ImageSlides\Delete.cshtml" />
+    <None Include="Views\ImageSlides\Details.cshtml" />
+    <None Include="Views\ImageSlides\Edit.cshtml" />
+    <None Include="Views\ImageSlides\Index.cshtml" />
+    <None Include="Views\NewsTypes\Create.cshtml" />
+    <None Include="Views\NewsTypes\Delete.cshtml" />
+    <None Include="Views\NewsTypes\Details.cshtml" />
+    <None Include="Views\NewsTypes\Edit.cshtml" />
+    <None Include="Views\NewsTypes\Index.cshtml" />
+    <None Include="Views\News\Create.cshtml" />
+    <None Include="Views\News\Delete.cshtml" />
+    <None Include="Views\News\Details.cshtml" />
+    <None Include="Views\News\Edit.cshtml" />
+    <None Include="Views\News\Index.cshtml" />
+    <None Include="Views\Product\Create.cshtml" />
+    <None Include="Views\Product\Delete.cshtml" />
+    <None Include="Views\Product\Details.cshtml" />
+    <None Include="Views\Product\Edit.cshtml" />
+    <None Include="Views\Product\Index.cshtml" />
+    <None Include="Views\Service\Create.cshtml" />
+    <None Include="Views\Service\Delete.cshtml" />
+    <None Include="Views\Service\Details.cshtml" />
+    <None Include="Views\Service\Edit.cshtml" />
+    <None Include="Views\Service\Index.cshtml" />
+    <None Include="Views\Setting\Create.cshtml" />
+    <None Include="Views\Setting\Delete.cshtml" />
+    <None Include="Views\Setting\Details.cshtml" />
+    <None Include="Views\Setting\Edit.cshtml" />
+    <None Include="Views\Setting\Index.cshtml" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="EntityFrameworkCore.Scaffolding.Handlebars" Version="3.5.0" />

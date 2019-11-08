@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace ATAdmin.Efs.Entities
 {
-    public partial class Faq : AtBaseECommerceEntity
+    public partial class FAQ : AtBaseECommerceEntity
     {
-        public string Id { get; set; }
-        public string Faqquestion { get; set; }
-        public string Faqreply { get; set; }
+        public string ID { get; set; }
+        public string FAQQuestion { get; set; }
+        public string FAQReply { get; set; }
         public int ShowIndex { get; set; }
         public bool Active { get; set; }
         public byte[] RowVersion { get; set; }

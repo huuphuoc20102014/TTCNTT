@@ -7,7 +7,7 @@ namespace ATAdmin.Efs.Entities
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public string SlugName { get; set; }
+        public string Slug_Name { get; set; }
         public bool AutoSlug { get; set; }
         public string FkProductId { get; set; }
         public string Extension { get; set; }

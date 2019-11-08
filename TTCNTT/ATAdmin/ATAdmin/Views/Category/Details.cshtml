@@ -1,11 +1,11 @@
-﻿@model ATAdmin.Efs.Entities.Project
+﻿@model ATAdmin.Efs.Entities.Category
 @{
     ViewData["Title"] = "Details";
 }
 
 
 
-    <h4>Details Project</h4>
+    <h4>Details Category</h4>
     <hr />
 	
 	<div class="row form-group">
@@ -20,7 +20,6 @@
 
 		
 		
-		
 		<div class="row form-group">
 			<div class="col-md-3 text-md-right details-label">
 				@Html.DisplayNameFor(model => model.Name) :
@@ -32,13 +31,20 @@
 		
 		<div class="row form-group">
 			<div class="col-md-3 text-md-right details-label">
-				@Html.DisplayNameFor(model => model.SlugName) :
+				@Html.DisplayNameFor(model => model.Slug_Name) :
 			</div>
 			<div class="col-md-7">
-							@Html.DisplayFor(model => model.SlugName)
+							@Html.DisplayFor(model => model.Slug_Name)
 			</div>
 		</div>
-		
+        <div class="row form-group">
+            <div class="col-md-3 text-md-right details-label">
+                @Html.DisplayNameFor(model => model.Code) :
+            </div>
+            <div class="col-md-7">
+                @Html.DisplayFor(model => model.Code)
+            </div>
+        </div>
 		<div class="row form-group">
 			<div class="col-md-3 text-md-right details-label">
 				@Html.DisplayNameFor(model => model.AutoSlug) :
@@ -48,32 +54,7 @@
 			</div>
 		</div>
 		
-		<div class="row form-group">
-			<div class="col-md-3 text-md-right details-label">
-				@Html.DisplayNameFor(model => model.ImageSlug) :
-			</div>
-			<div class="col-md-7">
-							@Html.DisplayFor(model => model.ImageSlug)
-			</div>
-		</div>
 		
-		<div class="row form-group">
-			<div class="col-md-3 text-md-right details-label">
-				@Html.DisplayNameFor(model => model.ShortDescriptionHtml) :
-			</div>
-			<div class="col-md-7">
-							@Html.DisplayFor(model => model.ShortDescriptionHtml)
-			</div>
-		</div>
-		
-		<div class="row form-group">
-			<div class="col-md-3 text-md-right details-label">
-				@Html.DisplayNameFor(model => model.LongDescriptionHtml) :
-			</div>
-			<div class="col-md-7">
-							@Html.DisplayFor(model => model.LongDescriptionHtml)
-			</div>
-		</div>
 		
 		<div class="row form-group">
 			<div class="col-md-3 text-md-right details-label">
@@ -162,15 +143,6 @@
 			</div>
 			<div class="col-md-7">
 									@Model.RowStatus.ToString("N0")
-			</div>
-		</div>
-		
-        <div class="row form-group">
-			<div class="col-md-3 text-md-right details-label">
-				@Html.DisplayNameFor(model => model.FkProjectType) :
-			</div>
-			<div class="col-md-7">
-				@Html.DisplayFor(model => model.FkProjectType.Name)
 			</div>
 		</div>
 

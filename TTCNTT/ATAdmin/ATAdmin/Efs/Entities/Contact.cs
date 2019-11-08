@@ -11,8 +11,9 @@ namespace ATAdmin.Efs.Entities
         public string Phone { get; set; }
         public string Title { get; set; }
         public string Body { get; set; }
+        public string FkCourseId { get; set; }
+        public int? CourseMember { get; set; }
         public bool IsRead { get; set; }
-        public string FkProductCommentId { get; set; }
         public string Note { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
@@ -22,5 +23,7 @@ namespace ATAdmin.Efs.Entities
         public int RowStatus { get; set; }
         public string Adress { get; set; }
         public string Link { get; set; }
+
+        public virtual Course FkCourse { get; set; }
     }
 }
