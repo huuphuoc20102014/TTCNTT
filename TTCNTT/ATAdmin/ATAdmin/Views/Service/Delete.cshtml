@@ -1,0 +1,188 @@
+﻿@model ATAdmin.Efs.Entities.Service
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+
+    <h4>Delete Service</h4>
+	<h5 class="text-danger">Are you sure you want to delete this item?</h5>
+    <hr />
+	
+	<form asp-action="Delete">
+				<input type="hidden" name="Id" value="@Model?.Id" />
+				<input type="hidden" asp-for="RowVersion" />
+		<div class="row form-group">	
+			<div class="col-md-3 text-md-right ">
+			</div>
+			<div class="col-md-7">
+				<input type="submit" value="Delete" class="btn btn-danger" />
+					<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+					<a asp-action="Details" asp-route-id="@Model.Id" class="k-button">Details</a>
+				<a asp-action="Index" class="k-button">Back to List</a>
+			</div>
+		</div>
+	</form>	
+
+		
+		
+		<div class="row form-group">
+			<div class="col-md-3 text-md-right details-label">
+				@Html.DisplayNameFor(model => model.ServiceName) :
+			</div>
+			<div class="col-md-7">
+							@Html.DisplayFor(model => model.ServiceName)
+			</div>
+		</div>
+		
+		<div class="row form-group">
+			<div class="col-md-3 text-md-right details-label">
+				@Html.DisplayNameFor(model => model.SlugName) :
+			</div>
+			<div class="col-md-7">
+							@Html.DisplayFor(model => model.SlugName)
+			</div>
+		</div>
+		
+		<div class="row form-group">
+			<div class="col-md-3 text-md-right details-label">
+				@Html.DisplayNameFor(model => model.AutoSlug) :
+			</div>
+			<div class="col-md-7">
+							@Html.DisplayFor(model => model.AutoSlug)
+			</div>
+		</div>
+		
+		<div class="row form-group">
+			<div class="col-md-3 text-md-right details-label">
+				@Html.DisplayNameFor(model => model.ShortDescriptionHtml) :
+			</div>
+			<div class="col-md-7">
+							@Html.DisplayFor(model => model.ShortDescriptionHtml)
+			</div>
+		</div>
+		
+		<div class="row form-group">
+			<div class="col-md-3 text-md-right details-label">
+				@Html.DisplayNameFor(model => model.LongDescriptionHtml) :
+			</div>
+			<div class="col-md-7">
+							@Html.DisplayFor(model => model.LongDescriptionHtml)
+			</div>
+		</div>
+		
+		<div class="row form-group">
+			<div class="col-md-3 text-md-right details-label">
+				@Html.DisplayNameFor(model => model.ImageSlug) :
+			</div>
+			<div class="col-md-7">
+							@Html.DisplayFor(model => model.ImageSlug)
+			</div>
+		</div>
+		
+		<div class="row form-group">
+			<div class="col-md-3 text-md-right details-label">
+				@Html.DisplayNameFor(model => model.Tags) :
+			</div>
+			<div class="col-md-7">
+							@Html.DisplayFor(model => model.Tags)
+			</div>
+		</div>
+		
+		<div class="row form-group">
+			<div class="col-md-3 text-md-right details-label">
+				@Html.DisplayNameFor(model => model.KeyWord) :
+			</div>
+			<div class="col-md-7">
+							@Html.DisplayFor(model => model.KeyWord)
+			</div>
+		</div>
+		
+		<div class="row form-group">
+			<div class="col-md-3 text-md-right details-label">
+				@Html.DisplayNameFor(model => model.MetaData) :
+			</div>
+			<div class="col-md-7">
+							@Html.DisplayFor(model => model.MetaData)
+			</div>
+		</div>
+		
+		<div class="row form-group">
+			<div class="col-md-3 text-md-right details-label">
+				@Html.DisplayNameFor(model => model.Note) :
+			</div>
+			<div class="col-md-7">
+							@Html.DisplayFor(model => model.Note)
+			</div>
+		</div>
+		
+		<div class="row form-group">
+			<div class="col-md-3 text-md-right details-label">
+				@Html.DisplayNameFor(model => model.CreatedBy) :
+			</div>
+			<div class="col-md-7">
+							@Html.DisplayFor(model => model.CreatedBy)
+			</div>
+		</div>
+		
+		<div class="row form-group">
+			<div class="col-md-3 text-md-right details-label">
+				@Html.DisplayNameFor(model => model.CreatedDate) :
+			</div>
+			<div class="col-md-7">
+							@Html.DisplayFor(model => model.CreatedDate)
+			</div>
+		</div>
+		
+		<div class="row form-group">
+			<div class="col-md-3 text-md-right details-label">
+				@Html.DisplayNameFor(model => model.UpdatedBy) :
+			</div>
+			<div class="col-md-7">
+							@Html.DisplayFor(model => model.UpdatedBy)
+			</div>
+		</div>
+		
+		<div class="row form-group">
+			<div class="col-md-3 text-md-right details-label">
+				@Html.DisplayNameFor(model => model.UpdatedDate) :
+			</div>
+			<div class="col-md-7">
+							@Html.DisplayFor(model => model.UpdatedDate)
+			</div>
+		</div>
+		
+		<div class="row form-group">
+			<div class="col-md-3 text-md-right details-label">
+				@Html.DisplayNameFor(model => model.RowVersion) :
+			</div>
+			<div class="col-md-7">
+							@Html.DisplayFor(model => model.RowVersion)
+			</div>
+		</div>
+		
+		<div class="row form-group">
+			<div class="col-md-3 text-md-right details-label">
+				@Html.DisplayNameFor(model => model.RowStatus) :
+			</div>
+			<div class="col-md-7">
+									@Model.RowStatus.ToString("N0")
+			</div>
+		</div>
+
+	<form asp-action="Delete">
+				<input type="hidden" name="Id" value="@Model?.Id" />
+				<input type="hidden" asp-for="RowVersion" />
+		<div class="row form-group">	
+			<div class="col-md-3 text-md-right ">
+			</div>
+			<div class="col-md-7">
+				<input type="submit" value="Save" class="btn btn-danger" />
+					<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+					<a asp-action="Details" asp-route-id="@Model.Id" class="k-button">Details</a>
+				<a asp-action="Index" class="k-button">Back to List</a>
+			</div>
+		</div>
+	</form>	
+
+

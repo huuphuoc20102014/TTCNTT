@@ -1,0 +1,165 @@
+﻿@model PeopleCreateViewModel
+
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h4>Create People</h4>
+<hr />
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+        </div>
+        <div class="col-md-7">
+            <input type="submit" value="Create" class="btn btn-primary" />
+            <a asp-action="Index" class="k-button">Back to List</a>
+        </div>
+    </div>
+
+    <div class="row form-group slugName">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Name" class="col-form-label"></label>
+            <span class="text-danger">*</span>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="Name" class="k-textbox form-control slugtitle" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="BirthDay" class="col-form-label"></label>
+            <span class="text-danger">*</span>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="BirthDay" type="date" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="BirthDay" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Job" class="col-form-label"></label>
+            <span class="text-danger">*</span>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="Job" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Job" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="JobIntroduction" class="col-form-label"></label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="JobIntroduction" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="JobIntroduction" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Phone" class="col-form-label"></label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="Phone" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Gmail" class="col-form-label"></label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="Gmail" type="email" placeholder="abc@gmail.com" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Gmail" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Img" class="col-form-label"></label>
+        </div>
+        <div class="col-md-7">
+            <button id="btnChooseImage_Img" class="btn mb-1">Chọn hình</button>
+            <input style="display:none;" asp-for="Img" />
+            <img width="200" class="border border-primary" id="img_Img" src="~/Image/@Url.Content(Model?.Img)" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Img" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+        </div>
+        <div class="col-md-7">
+            <input type="submit" value="Create" class="btn btn-primary" />
+            <a asp-action="Index" class="k-button">Back to List</a>
+        </div>
+    </div>
+</form>
+
+
+
+@(Html.Kendo().Dialog()
+    .Name("dialogChooseImage_Img")
+    .Title("Chọn hình")
+    .Content("<div id=\"divChooseImage_Img\"></div>")
+    .Width(600)
+    .Visible(false)
+    .Modal(true)
+)
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            $( ".k-switch-container" ).click(function() {
+                $('.slugName').slideToggle(); //SlideUp-SlideDown
+                if ($('.slugtitle').val() == '0') {
+                    $('.slugtitle').val(''); //if input has value = 0 then set it Empty
+                } else {
+                    $( '.slugtitle' ).val('0'); //set value = 0 unless it is Empty
+                }
+            });
+            $("#divChooseImage_Img").kendoImageBrowser({
+                transport: {
+                    type: "imagebrowser-aspnetmvc",
+                    read: "@Url.Action("Read", (string)ViewData["ControllerNameForImageBrowser"])",
+                    destroy: "@Url.Action("Destroy", (string)ViewData["ControllerNameForImageBrowser"])",
+                    imageUrl: "@Url.Content( ImageBrowserPeopleController.FOLDER_NAME + "/{0}")",
+                    uploadUrl: "@Url.Action("Upload", (string)ViewData["ControllerNameForImageBrowser"])"
+                },
+                apply: function () {
+                    var selectedImage = this.value();
+                    $("#Img").val(selectedImage);
+                    $("#img_Img").attr("src", "/Image/"+ selectedImage);
+                    $('#dialogChooseImage_Img').data("kendoDialog").close();
+                }
+            });
+
+            $("#btnChooseImage_Img").click(function (e) {
+                e.preventDefault();
+                $('#dialogChooseImage_Img').data("kendoDialog").open();
+
+            });
+        });
+    </script>
+}

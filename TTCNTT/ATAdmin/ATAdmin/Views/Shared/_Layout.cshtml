@@ -1,0 +1,158 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ATSOLUTION</title>
+    <link rel="shortcut icon" href="~/img/logo.png">
+    <link rel="stylesheet" href="~/lib/regular.min.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome.min.css" />
+    <link rel="stylesheet" href="~/lib/kendo.bootstrap-v4.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/at-e-commerce.css" />
+    <link href="~/css/style.css" rel="stylesheet" />
+
+    <link href="~/vendors/css/gauge.min.css" rel="stylesheet" />
+    <link href="~/vendors/css/toastr.min.css" rel="stylesheet" />
+    <link href="~/vendors/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/vendors/css/flag-icon.min.css" rel="stylesheet">
+    <link href="~/vendors/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/vendors/css/simple-line-icons.min.css" rel="stylesheet">
+
+
+    <script src="~/lib/jquery.min.js"></script>
+    <script src="~/lib/jszip.min.js"></script>
+    <script src="~/lib/kendo.all.min.js"></script>
+    <script src="~/lib/kendo.aspnetmvc.min.js"></script>
+    <script src="~/js/app.js"></script>
+
+</head>
+<body>
+
+    <header class="app-header navbar">
+        <button class="navbar-toggler mobile-sidebar-toggler d-lg-none" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+        </a>
+        <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="nav navbar-nav d-md-down-none mr-auto">
+        </ul>
+        <div class="login" style="margin-right: 105px;">
+            <partial name="_LoginPartial" />
+        </div>
+    </header>
+    <div class="app-body">
+        <div class="sidebar">
+            <nav class="sidebar-nav">
+                
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <ul class="nav">
+                            <li class="nav-item">
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Quyền
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="nav-link text-white" asp-controller="Role" asp-action="Index"><i class="icon-speedometer"></i>Tạo Quyền</a>
+                                        <a class="nav-link text-white" asp-controller="GrantRights" asp-action="Index"><i class="icon-speedometer"></i>Cấp Quyền</a>
+                                    </div>
+                                }
+                            </li>
+                            <li class="nav-item">
+
+                                <a class="nav-link text-white" asp-controller="ProjectType" asp-action="Index"><i class="icon-speedometer"></i>Loại dự án</a>
+                                <a class="nav-link text-white" asp-controller="Projects" asp-action="Index"><i class="icon-speedometer"></i>Dự án mới</a>
+
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="NewsTypes" asp-action="Index"><i class="icon-speedometer"></i>Loại bài đăng</a>
+                                <a class="nav-link text-white" asp-controller="News" asp-action="Index"><i class="icon-speedometer"></i>Bài đăng Mới</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="SettingType" asp-action="Index"><i class="icon-speedometer"></i>Loại Setting</a>
+                                <a class="nav-link text-white" asp-controller="Setting" asp-action="Index"><i class="icon-speedometer"></i>Setting mới</a>
+                                <a class="nav-link text-white" asp-controller="ImageSlides" asp-action="Index"><i class="icon-speedometer"></i>Hình ảnh</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="People" asp-action="Index"><i class="icon-speedometer"></i>Nhân Viên</a>
+                                <a class="nav-link text-white" asp-controller="AboutUs" asp-action="Index"><i class="icon-speedometer"></i>Giới thiệu</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="Service" asp-action="Index"><i class="icon-speedometer"></i>Dịch vụ</a>
+                                <a class="nav-link text-white" asp-controller="Contacts" asp-action="Index"><i class="icon-speedometer"></i>Liên hệ</a>
+                            </li>
+                            @*<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Dự Án
+                                </button>
+                                <div class="dropdown-menu">
+                                        </div>
+                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Bài Đăng
+                                </button>
+                                <div class="dropdown-menu">
+
+                                </div>
+                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Setting
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="SettingType" asp-action="Index"><i class="icon-speedometer"></i>Loại Setting</a>
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Setting" asp-action="Index"><i class="icon-speedometer"></i>Setting mới</a>
+                                    <a class="nav-link text-white" asp-area="" asp-controller="ImageSlides" asp-action="Index"><i class="icon-speedometer"></i>Hình ảnh</a>
+                                </div>
+                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Giới Thiệu
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="People" asp-action="Index"><i class="icon-speedometer"></i>Nhân Viên</a>
+                                    <a class="nav-link text-white" asp-area="" asp-controller="AboutUs" asp-action="Index"><i class="icon-speedometer"></i>Giới thiệu</a>
+                                </div>
+                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Dịch Vụ & Liên Hệ
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Service" asp-action="Index"><i class="icon-speedometer"></i>Dịch vụ</a>
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Contacts" asp-action="Index"><i class="icon-speedometer"></i>Liên hệ</a>
+                                </div>*@
+                        </ul>
+
+                    }
+            </nav>
+            <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+        </div>
+
+        <!-- Main content -->
+        <div class="main">
+            <div class="container-fluid">
+                @*<partial name="_CookieConsentPartial" />*@
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2019 - At E-Commerce - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

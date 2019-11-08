@@ -1,0 +1,197 @@
+﻿@model ImageSlideCreateViewModel
+
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h4>Create ImageSlide</h4>
+<hr />
+<form asp-action="Create">
+	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+	<div class="row form-group">	
+		<div class="col-md-3 text-md-right ">
+		</div>
+		<div class="col-md-7">
+			<input type="submit" value="Create" class="btn btn-primary" />
+			<a asp-action="Index" class="k-button">Back to List</a>
+		</div>
+	</div>
+		
+				<div class="row form-group">
+					<div class="col-md-3 text-md-right ">
+						<label asp-for="Name" class="col-form-label"></label>
+							<span class="text-danger">*</span>
+					</div>
+						<div class="col-md-7">
+								<input asp-for="Name" class="k-textbox form-control" />
+						</div>	
+					<div class="offset-md-3 col-md-7 at-wrapper-validate">
+						<span asp-validation-for="Name" class="text-danger"></span>
+					</div>
+				</div>
+		
+				<div class="row form-group">
+					<div class="col-md-3 text-md-right ">
+						<label asp-for="SlugName" class="col-form-label"></label>
+							<span class="text-danger">*</span>
+					</div>
+						<div class="col-md-7">
+								<input asp-for="SlugName" class="k-textbox form-control" />
+						</div>	
+					<div class="offset-md-3 col-md-7 at-wrapper-validate">
+						<span asp-validation-for="SlugName" class="text-danger"></span>
+					</div>
+				</div>
+		
+				<div class="row form-group">
+					<div class="col-md-3 text-md-right ">
+						<label asp-for="AutoSlug" class="col-form-label"></label>
+							<span class="text-danger">*</span>
+					</div>
+						<div class="col-md-7">
+								<kendo-switch for="AutoSlug" checked="@Model?.AutoSlug"/>
+						</div>	
+					<div class="offset-md-3 col-md-7 at-wrapper-validate">
+						<span asp-validation-for="AutoSlug" class="text-danger"></span>
+					</div>
+				</div>
+		
+				<div class="row form-group">
+					<div class="col-md-3 text-md-right ">
+						<label asp-for="Extension" class="col-form-label"></label>
+							<span class="text-danger">*</span>
+					</div>
+						<div class="col-md-7">
+								<input asp-for="Extension" class="k-textbox form-control" />
+						</div>	
+					<div class="offset-md-3 col-md-7 at-wrapper-validate">
+						<span asp-validation-for="Extension" class="text-danger"></span>
+					</div>
+				</div>
+		
+				<div class="row form-group">
+					<div class="col-md-3 text-md-right ">
+						<label asp-for="Description" class="col-form-label"></label>
+					</div>
+						<div class="col-md-7">
+								<input asp-for="Description" class="k-textbox form-control" />
+						</div>	
+					<div class="offset-md-3 col-md-7 at-wrapper-validate">
+						<span asp-validation-for="Description" class="text-danger"></span>
+					</div>
+				</div>
+		
+				<div class="row form-group">
+					<div class="col-md-3 text-md-right ">
+						<label asp-for="SortIndex" class="col-form-label"></label>
+							<span class="text-danger">*</span>
+					</div>
+						<div class="col-6 col-md-5 col-lg-4 col-xl-3">
+								<kendo-numerictextbox for="SortIndex" class="form-control" min="@System.Int32.MinValue" max="@System.Int32.MaxValue" decimals="0" restrict-decimals="true" format="N0" />
+						</div>
+					<div class="offset-md-3 col-md-7 at-wrapper-validate">
+						<span asp-validation-for="SortIndex" class="text-danger"></span>
+					</div>
+				</div>
+		
+				<div class="row form-group">
+					<div class="col-md-3 text-md-right ">
+						<label asp-for="IsYoutube" class="col-form-label"></label>
+							<span class="text-danger">*</span>
+					</div>
+						<div class="col-md-7">
+								<kendo-switch for="IsYoutube" checked="@Model?.IsYoutube"/>
+						</div>	
+					<div class="offset-md-3 col-md-7 at-wrapper-validate">
+						<span asp-validation-for="IsYoutube" class="text-danger"></span>
+					</div>
+				</div>
+		
+				<div class="row form-group">
+					<div class="col-md-3 text-md-right ">
+						<label asp-for="YoutubeLink" class="col-form-label"></label>
+					</div>
+						<div class="col-md-7">
+								<input asp-for="YoutubeLink" class="k-textbox form-control" />
+						</div>	
+					<div class="offset-md-3 col-md-7 at-wrapper-validate">
+						<span asp-validation-for="YoutubeLink" class="text-danger"></span>
+					</div>
+				</div>
+		
+				<div class="row form-group">
+					<div class="col-md-3 text-md-right ">
+						<label asp-for="Thumbnail" class="col-form-label"></label>
+					</div>
+						<div class="col-md-7">
+								<input asp-for="Thumbnail" class="k-textbox form-control" />
+						</div>	
+					<div class="offset-md-3 col-md-7 at-wrapper-validate">
+						<span asp-validation-for="Thumbnail" class="text-danger"></span>
+					</div>
+				</div>
+		
+				<div class="row form-group">
+					<div class="col-md-3 text-md-right ">
+						<label asp-for="Note" class="col-form-label"></label>
+					</div>
+						<div class="col-md-7">
+								<input asp-for="Note" class="k-textbox form-control" />
+						</div>	
+					<div class="offset-md-3 col-md-7 at-wrapper-validate">
+						<span asp-validation-for="Note" class="text-danger"></span>
+					</div>
+				</div>
+		
+				<div class="row form-group">
+					<div class="col-md-3 text-md-right ">
+						<label asp-for="Tags" class="col-form-label"></label>
+					</div>
+						<div class="col-md-7">
+								<input asp-for="Tags" class="k-textbox form-control" />
+						</div>	
+					<div class="offset-md-3 col-md-7 at-wrapper-validate">
+						<span asp-validation-for="Tags" class="text-danger"></span>
+					</div>
+				</div>
+		
+				<div class="row form-group">
+					<div class="col-md-3 text-md-right ">
+						<label asp-for="KeyWord" class="col-form-label"></label>
+					</div>
+						<div class="col-md-7">
+								<input asp-for="KeyWord" class="k-textbox form-control" />
+						</div>	
+					<div class="offset-md-3 col-md-7 at-wrapper-validate">
+						<span asp-validation-for="KeyWord" class="text-danger"></span>
+					</div>
+				</div>
+		
+				<div class="row form-group">
+					<div class="col-md-3 text-md-right ">
+						<label asp-for="MetaData" class="col-form-label"></label>
+					</div>
+						<div class="col-md-7">
+								<input asp-for="MetaData" class="k-textbox form-control" />
+						</div>	
+					<div class="offset-md-3 col-md-7 at-wrapper-validate">
+						<span asp-validation-for="MetaData" class="text-danger"></span>
+					</div>
+				</div>
+	<div class="row form-group">	
+		<div class="col-md-3 text-md-right ">
+		</div>
+		<div class="col-md-7">
+			<input type="submit" value="Create" class="btn btn-primary" />
+			<a asp-action="Index" class="k-button">Back to List</a>
+		</div>
+	</div>
+</form>
+
+
+
+
+
+

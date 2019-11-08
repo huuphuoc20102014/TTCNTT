@@ -1,0 +1,111 @@
+﻿@model ATAdmin.Efs.Entities.People
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+
+<h4>Details Project Type</h4>
+<hr />
+
+<div class="row form-group">
+    <div class="col-md-3 text-md-right ">
+    </div>
+    <div class="col-md-7">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+        <a asp-action="Index" class="k-button">Back to List</a>
+    </div>
+</div>
+
+
+
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        @Html.DisplayNameFor(model => model.Name) :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+</div>
+
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        @Html.DisplayNameFor(model => model.BirthDay) :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.BirthDay)
+    </div>
+</div>
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        @Html.DisplayNameFor(model => model.Job) :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.Job)
+    </div>
+</div>
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        @Html.DisplayNameFor(model => model.JobIntroduction) :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.JobIntroduction)
+    </div>
+</div>
+
+
+
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        @Html.DisplayNameFor(model => model.Phone) :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.Phone)
+    </div>
+</div>
+
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        @Html.DisplayNameFor(model => model.Gmail) :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.Gmail)
+    </div>
+</div>
+
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        @Html.DisplayNameFor(model => model.Img) :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.Img)
+    </div>
+</div>
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        @Html.DisplayNameFor(model => model.RowVersion) :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.RowVersion)
+    </div>
+</div>
+
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        @Html.DisplayNameFor(model => model.RowStatus) :
+    </div>
+    <div class="col-md-7">
+        @Model.RowStatus.ToString("N0")
+    </div>
+</div>
+
+<div class="row form-group">
+    <div class="col-md-3 text-md-right ">
+    </div>
+    <div class="col-md-7">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+        <a asp-action="Index" class="k-button">Back to List</a>
+    </div>
+</div>

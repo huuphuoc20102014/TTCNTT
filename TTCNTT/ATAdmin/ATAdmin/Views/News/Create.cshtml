@@ -1,0 +1,293 @@
+﻿@model NewsCreateViewModel
+
+
+@{
+    ViewData["Title"] = "Tạo";
+
+}
+
+
+<h4>Tạo mới</h4>
+<hr />
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+        </div>
+        <div class="col-md-7">
+            <input type="submit" value="Tạo" class="btn btn-primary" />
+            <a asp-action="Index" class="k-button">Quay lại danh sách</a>
+        </div>
+    </div>
+
+
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Title" class="col-form-label">Tiêu đề</label>
+            <span class="text-danger">*</span>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="Title" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group slugName">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="SlugTitle" class="col-form-label">SEO</label>
+            <span class="text-danger">*</span>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="SlugTitle" class="k-textbox form-control slugtitle" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="SlugTitle" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="AutoSlug" class="col-form-label">Tự động SEO</label>
+            <span class="text-danger">*</span>
+        </div>
+        <div class="col-md-7">
+            <kendo-switch for="AutoSlug" checked="@Model?.AutoSlug" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="AutoSlug" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="FkNewsTypeId" class="col-form-label">Loại tin tức</label>
+            <span class="text-danger">*</span>
+        </div>
+        <div class="col-md-7">
+            <kendo-dropdownlist for="FkNewsTypeId" class="form-control" bind-to="@ViewBag.FkNewsTypeId" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="FkNewsTypeId" class="text-danger"></span>
+        </div>
+    </div>
+
+
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="ShortDescriptionHtml" class="col-form-label">Mô tả ngắn</label>
+        </div>
+        <div class="col-12">
+            @(Html.Kendo().EditorFor(h => h.ShortDescriptionHtml).Encoded(false)
+                  .HtmlAttributes(new { style = "height:440px" })
+                  .Resizable(resizable => resizable.Content(true))
+                  .Tools(tools => tools
+                    .Clear()
+                    .CleanFormatting()
+                    .Formatting()
+                    .ForeColor()
+                    .BackColor()
+                    .Bold()
+                    .Italic()
+                    .Underline()
+                    .Strikethrough()
+                    .JustifyLeft()
+                    .JustifyCenter()
+                    .JustifyRight()
+                    .JustifyFull()
+                    .InsertUnorderedList()
+                    .InsertOrderedList()
+                    .Outdent()
+                    .Indent()
+                    .CreateLink()
+                    .Unlink()
+                    .InsertImage()
+                    .SubScript()
+                    .SuperScript()
+                    .TableEditing()
+                    .FontName()
+                    .FontSize()
+                )
+                  .ImageBrowser(imageBrowser => imageBrowser
+                      .Image("~/" + ImageBrowserNewController.FOLDER_NAME + "/{0}")
+                      .Read("Read", (string)ViewData["ControllerNameForImageBrowser"])
+                      .Destroy("Destroy", (string)ViewData["ControllerNameForImageBrowser"])
+                      .Upload("Upload", (string)ViewData["ControllerNameForImageBrowser"])
+                  )
+            )
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="ShortDescriptionHtml" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="LongDescriptionHtml" class="col-form-label">Mô tả dài</label>
+        </div>
+        <div class="col-12">
+            @(Html.Kendo().EditorFor(h => h.LongDescriptionHtml).Encoded(false)
+                  .HtmlAttributes(new { style = "height:440px" })
+                  .Resizable(resizable => resizable.Content(true))
+                  .Tools(tools => tools
+                    .Clear()
+                    .CleanFormatting()
+                    .Formatting()
+                    .ForeColor()
+                    .BackColor()
+                    .Bold()
+                    .Italic()
+                    .Underline()
+                    .Strikethrough()
+                    .JustifyLeft()
+                    .JustifyCenter()
+                    .JustifyRight()
+                    .JustifyFull()
+                    .InsertUnorderedList()
+                    .InsertOrderedList()
+                    .Outdent()
+                    .Indent()
+                    .CreateLink()
+                    .Unlink()
+                    .InsertImage()
+                    .SubScript()
+                    .SuperScript()
+                    .TableEditing()
+                    .FontName()
+                    .FontSize()
+                )
+                  .ImageBrowser(imageBrowser => imageBrowser
+                      .Image("~/" + ImageBrowserNewController.FOLDER_NAME + "/{0}")
+                      .Read("Read", (string)ViewData["ControllerNameForImageBrowser"])
+                      .Destroy("Destroy", (string)ViewData["ControllerNameForImageBrowser"])
+                      .Upload("Upload", (string)ViewData["ControllerNameForImageBrowser"])
+                  )
+            )
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="LongDescriptionHtml" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="ImageSlug" class="col-form-label"></label>
+        </div>
+        <div class="col-md-7">
+            <button id="btnChooseImage_ImageSlug" class="btn mb-1">Chọn hình</button>
+            <input style="display:none;" asp-for="ImageSlug" />
+            <img width="200" class="border border-primary" id="img_ImageSlug" src="~/Image/@Url.Content(Model?.ImageSlug)" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="ImageSlug" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Tags" class="col-form-label">Thẻ(tag)</label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="Tags" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Tags" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="KeyWord" class="col-form-label">Từ khoá</label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="KeyWord" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="KeyWord" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="MetaData" class="col-form-label"></label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="MetaData" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="MetaData" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Note" class="col-form-label">Ghi chú</label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="Note" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Note" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+        </div>
+        <div class="col-md-7">
+            <input type="submit" value="Tạo" class="btn btn-primary" />
+            <a asp-action="Index" class="k-button">Quay lại danh sách</a>
+        </div>
+    </div>
+</form>
+
+
+@(Html.Kendo().Dialog()
+    .Name("dialogChooseImage_ImageSlug")
+    .Title("Chọn hình")
+    .Content("<div id=\"divChooseImage_ImageSlug\"></div>")
+    .Width(600)
+    .Visible(false)
+    .Modal(true)
+)
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            $( ".k-switch-container" ).click(function() {
+                $('.slugName').slideToggle(); //SlideUp-SlideDown
+                if ($('.slugtitle').val() == '0') {
+                    $('.slugtitle').val(''); //if input has value = 0 then set it Empty
+                } else {
+                    $( '.slugtitle' ).val('0'); //set value = 0 unless it is Empty
+                }
+            });
+            $("#divChooseImage_ImageSlug").kendoImageBrowser({
+                transport: {
+                    type: "imagebrowser-aspnetmvc",
+                    read: "@Url.Action("Read", (string)ViewData["ControllerNameForImageBrowser"])",
+                    destroy: "@Url.Action("Destroy", (string)ViewData["ControllerNameForImageBrowser"])",
+                    imageUrl: "@Url.Content( ImageBrowserNewController.FOLDER_NAME + "/{0}")",
+                    uploadUrl: "@Url.Action("Upload", (string)ViewData["ControllerNameForImageBrowser"])"
+                },
+                apply: function () {
+                    var selectedImage = this.value();
+                    $("#ImageSlug").val(selectedImage);
+                    $("#img_ImageSlug").attr("src", "/Image/"+ selectedImage);
+                    $('#dialogChooseImage_ImageSlug').data("kendoDialog").close();
+                }
+            });
+
+            $("#btnChooseImage_ImageSlug").click(function (e) {
+                e.preventDefault();
+                $('#dialogChooseImage_ImageSlug').data("kendoDialog").open();
+
+            });
+        });
+    </script>
+}

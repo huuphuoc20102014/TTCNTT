@@ -1,0 +1,135 @@
+﻿@model ProjectTypeCreateViewModel
+
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h4>Create Project Type</h4>
+<hr />
+<form asp-action="Create">
+	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+	<div class="row form-group">	
+		<div class="col-md-3 text-md-right ">
+		</div>
+		<div class="col-md-7">
+			<input type="submit" value="Create" class="btn btn-primary" />
+			<a asp-action="Index" class="k-button">Back to List</a>
+		</div>
+	</div>
+		
+				<div class="row form-group">
+					<div class="col-md-3 text-md-right ">
+						<label asp-for="Name" class="col-form-label"></label>
+							<span class="text-danger">*</span>
+					</div>
+						<div class="col-md-7">
+								<input asp-for="Name" class="k-textbox form-control" />
+						</div>	
+					<div class="offset-md-3 col-md-7 at-wrapper-validate">
+						<span asp-validation-for="Name" class="text-danger"></span>
+					</div>
+				</div>
+		
+				<div class="row form-group">
+					<div class="col-md-3 text-md-right ">
+						<label asp-for="SlugName" class="col-form-label"></label>
+							<span class="text-danger">*</span>
+					</div>
+						<div class="col-md-7">
+								<input asp-for="SlugName" class="k-textbox form-control" />
+						</div>	
+					<div class="offset-md-3 col-md-7 at-wrapper-validate">
+						<span asp-validation-for="SlugName" class="text-danger"></span>
+					</div>
+				</div>
+                <div class="row form-group">
+                    <div class="col-md-3 text-md-right ">
+                        <label asp-for="Code" class="col-form-label"></label>
+                        <span class="text-danger">*</span>
+                    </div>
+                    <div class="col-md-7">
+                        <input asp-for="Code" class="k-textbox form-control" />
+                    </div>
+                    <div class="offset-md-3 col-md-7 at-wrapper-validate">
+                        <span asp-validation-for="Code" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-3 text-md-right ">
+                        <label asp-for="AutoSlug" class="col-form-label"></label>
+                        <span class="text-danger">*</span>
+                    </div>
+                    <div class="col-md-7">
+                        <kendo-switch for="AutoSlug" checked="@Model?.AutoSlug" />
+                    </div>
+                    <div class="offset-md-3 col-md-7 at-wrapper-validate">
+                        <span asp-validation-for="AutoSlug" class="text-danger"></span>
+                    </div>
+                </div>
+				<div class="row form-group">
+					<div class="col-md-3 text-md-right ">
+						<label asp-for="Tags" class="col-form-label"></label>
+					</div>
+						<div class="col-md-7">
+								<input asp-for="Tags" class="k-textbox form-control" />
+						</div>	
+					<div class="offset-md-3 col-md-7 at-wrapper-validate">
+						<span asp-validation-for="Tags" class="text-danger"></span>
+					</div>
+				</div>
+		
+				<div class="row form-group">
+					<div class="col-md-3 text-md-right ">
+						<label asp-for="KeyWord" class="col-form-label"></label>
+					</div>
+						<div class="col-md-7">
+								<input asp-for="KeyWord" class="k-textbox form-control" />
+						</div>	
+					<div class="offset-md-3 col-md-7 at-wrapper-validate">
+						<span asp-validation-for="KeyWord" class="text-danger"></span>
+					</div>
+				</div>
+		
+				<div class="row form-group">
+					<div class="col-md-3 text-md-right ">
+						<label asp-for="MetaData" class="col-form-label"></label>
+					</div>
+						<div class="col-md-7">
+								<input asp-for="MetaData" class="k-textbox form-control" />
+						</div>	
+					<div class="offset-md-3 col-md-7 at-wrapper-validate">
+						<span asp-validation-for="MetaData" class="text-danger"></span>
+					</div>
+				</div>
+		
+				<div class="row form-group">
+					<div class="col-md-3 text-md-right ">
+						<label asp-for="Note" class="col-form-label"></label>
+					</div>
+						<div class="col-md-7">
+								<input asp-for="Note" class="k-textbox form-control" />
+						</div>	
+					<div class="offset-md-3 col-md-7 at-wrapper-validate">
+						<span asp-validation-for="Note" class="text-danger"></span>
+					</div>
+				</div>
+	<div class="row form-group">	
+		<div class="col-md-3 text-md-right ">
+		</div>
+		<div class="col-md-7">
+			<input type="submit" value="Create" class="btn btn-primary" />
+			<a asp-action="Index" class="k-button">Back to List</a>
+		</div>
+	</div>
+</form>
+
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
