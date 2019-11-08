@@ -1,0 +1,120 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UserSecretsId>aspnet-TTAdmin-FEA30164-AFA5-4BD7-8CFD-FA961FFEA09E</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Views\Contacts\**" />
+    <Compile Remove="Views\GrantRights\**" />
+    <Compile Remove="Views\ImageSlides\**" />
+    <Compile Remove="Views\NewsTypes\**" />
+    <Compile Remove="Views\News\**" />
+    <Compile Remove="Views\People\**" />
+    <Compile Remove="Views\Projects\**" />
+    <Compile Remove="Views\ProjectType\**" />
+    <Compile Remove="Views\Role\**" />
+    <Compile Remove="Views\Service\**" />
+    <Compile Remove="Views\SettingType\**" />
+    <Compile Remove="Views\Setting\**" />
+    <Content Remove="Views\Contacts\**" />
+    <Content Remove="Views\GrantRights\**" />
+    <Content Remove="Views\ImageSlides\**" />
+    <Content Remove="Views\NewsTypes\**" />
+    <Content Remove="Views\News\**" />
+    <Content Remove="Views\People\**" />
+    <Content Remove="Views\Projects\**" />
+    <Content Remove="Views\ProjectType\**" />
+    <Content Remove="Views\Role\**" />
+    <Content Remove="Views\Service\**" />
+    <Content Remove="Views\SettingType\**" />
+    <Content Remove="Views\Setting\**" />
+    <EmbeddedResource Remove="Views\Contacts\**" />
+    <EmbeddedResource Remove="Views\GrantRights\**" />
+    <EmbeddedResource Remove="Views\ImageSlides\**" />
+    <EmbeddedResource Remove="Views\NewsTypes\**" />
+    <EmbeddedResource Remove="Views\News\**" />
+    <EmbeddedResource Remove="Views\People\**" />
+    <EmbeddedResource Remove="Views\Projects\**" />
+    <EmbeddedResource Remove="Views\ProjectType\**" />
+    <EmbeddedResource Remove="Views\Role\**" />
+    <EmbeddedResource Remove="Views\Service\**" />
+    <EmbeddedResource Remove="Views\SettingType\**" />
+    <EmbeddedResource Remove="Views\Setting\**" />
+    <None Remove="Views\Contacts\**" />
+    <None Remove="Views\GrantRights\**" />
+    <None Remove="Views\ImageSlides\**" />
+    <None Remove="Views\NewsTypes\**" />
+    <None Remove="Views\News\**" />
+    <None Remove="Views\People\**" />
+    <None Remove="Views\Projects\**" />
+    <None Remove="Views\ProjectType\**" />
+    <None Remove="Views\Role\**" />
+    <None Remove="Views\Service\**" />
+    <None Remove="Views\SettingType\**" />
+    <None Remove="Views\Setting\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\ContactsController.cs" />
+    <Compile Remove="Controllers\GrantRightsController.cs" />
+    <Compile Remove="Controllers\ImageSlidesController.cs" />
+    <Compile Remove="Controllers\NewsController.cs" />
+    <Compile Remove="Controllers\NewsTypesController.cs" />
+    <Compile Remove="Controllers\PeopleController.cs" />
+    <Compile Remove="Controllers\ProjectsController.cs" />
+    <Compile Remove="Controllers\ProjectTypeController.cs" />
+    <Compile Remove="Controllers\ServiceController.cs" />
+    <Compile Remove="Controllers\SettingController.cs" />
+    <Compile Remove="Controllers\SettingTypeController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\AboutUs\Create.cshtml" />
+    <None Include="Views\AboutUs\Delete.cshtml" />
+    <None Include="Views\AboutUs\Details.cshtml" />
+    <None Include="Views\AboutUs\Edit.cshtml" />
+    <None Include="Views\AboutUs\Index.cshtml" />
+    <None Include="Views\Error\Index.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Home\Privacy.cshtml" />
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_CookieConsentPartial.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_LoginPartial.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Views\_ViewImports.cshtml" />
+    <None Include="Views\_ViewStart.cshtml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="EntityFrameworkCore.Scaffolding.Handlebars" Version="3.5.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.5.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Localization" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.0.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="3.3.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.3.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.3.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="3.3.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Utils" Version="3.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Slugify.Core" Version="2.3.0" />
+    <PackageReference Include="System.Composition" Version="1.3.0" />
+    <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="2019.3.917" />
+  </ItemGroup>
+
+</Project>

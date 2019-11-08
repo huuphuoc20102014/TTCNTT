@@ -1,0 +1,108 @@
+﻿
+@inject IStringLocalizer<SharedResources> SharedLocalizer
+@inject IViewLocalizer Localizer
+@inject IStringLocalizer<ImageSlide> EntityLocalizer
+@inject IStringLocalizer<BaseEntityResources> BaseEntityLocalizer
+
+@{
+    ViewData["Title"] =  SharedLocalizer["ViewTitle_List"]  + " " + EntityLocalizer["Hình"];
+    var parentItem = ViewData["ParentItem"] as ImageSlide;
+    if (parentItem != null)
+    {
+        ViewData["Title"] = (string)ViewData["Title"] + " : " + parentItem.Id + " | " + parentItem.Name;
+    }
+}
+
+
+<div class="container">
+	<h4>
+		@SharedLocalizer["ViewTitle_List"] @EntityLocalizer["Hình"]
+		@if (parentItem != null)
+        {
+            @:: <span class="text-warning">@parentItem.Id | @parentItem.Name</span>
+        }
+	</h4>
+	<hr />	
+	
+	<p>
+		<a asp-action="Create" class="btn btn-primary">@SharedLocalizer["Btn_CreateNew"]</a>
+		@if (parentItem != null)
+        {
+			<a asp-action="Sort" asp-route-id="@parentItem.Id" class="btn btn-primary">@SharedLocalizer["Btn_SortIndex"]</a>
+            <a asp-action="Index" asp-route-id="" class="btn btn-primary">@SharedLocalizer["Btn_ListAll"]</a>
+        }
+        else
+        {
+			<a asp-action="Sort" class="btn btn-primary">@SharedLocalizer["Btn_SortIndex"]</a>
+        }
+	</p>
+</div>
+
+@(Html.Kendo().Grid<ImageSlideDetailsViewModel>()
+    .Name("gridImageSlide")
+    .Columns(columns =>
+    {
+        columns.Bound(c => c.Id).Title(" ").Width(180).Locked(true).Filterable(false).Sortable(false).ClientTemplate(
+            "<a class=\"btn btn-success\" data-toggle=\"tooltip\" title=\"" + SharedLocalizer["Ttip_Detail"] + "\"" +
+                "href='" + Url.Action("Details", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(ImageSlide.SlugName) + " #'" +
+            "><i class=\"far fa-eye\"></i></a> " +
+
+            "<a class=\"btn btn-success\" data-toggle=\"tooltip\" title=\"" + SharedLocalizer["Ttip_Edit"] + "\"" +
+                "href='" + Url.Action("Edit", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(ImageSlide.SlugName) + " #'" +
+            "><i class=\"far fa-pencil\"></i></a> " +
+
+            "<a class=\"btn btn-danger\" data-toggle=\"tooltip\" title=\"" + SharedLocalizer["Ttip_Delete"] + "\"" +
+                "href='" + Url.Action("Delete", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(ImageSlide.SlugName) + " #'" +
+            "><i class=\"far fa-trash-alt\"></i></a> "
+        );		
+			columns.Bound(c => c.RowStatus).Title(BaseEntityLocalizer[nameof(BaseEntityResources.RowStatus)]).Width(150).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.Name).Title(BaseEntityLocalizer[nameof(BaseEntityResources.Name)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.SlugName).Title(EntityLocalizer[nameof(ImageSlide.SlugName)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.Extension).Title(EntityLocalizer[nameof(ImageSlide.Extension)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.Description).Title(EntityLocalizer[nameof(ImageSlide.Description)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.SortIndex).Title(EntityLocalizer[nameof(ImageSlide.SortIndex)]).Width(150).Format("{0:N0}").HtmlAttributes(new { @class = "col-align-right text-nowrap" });
+			columns.Bound(c => c.IsYoutube).Title(EntityLocalizer[nameof(ImageSlide.IsYoutube)]).Width(100).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.YoutubeLink).Title(EntityLocalizer[nameof(ImageSlide.YoutubeLink)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.Thumbnail).Title(EntityLocalizer[nameof(ImageSlide.Thumbnail)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.Note).Title(EntityLocalizer[nameof(ImageSlide.Note)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.Tags).Title(EntityLocalizer[nameof(ImageSlide.Tags)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.KeyWord).Title(EntityLocalizer[nameof(ImageSlide.KeyWord)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.MetaData).Title(EntityLocalizer[nameof(ImageSlide.MetaData)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.CreatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.UpdatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.UpdatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.CreatedBy).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedBy)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.UpdatedBy).Title(BaseEntityLocalizer[nameof(BaseEntityResources.UpdatedBy)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+    })
+    .HtmlAttributes(new { style = "height: 600px;" })
+	.Resizable(r => r.Columns(true))
+    .Scrollable()
+    .Groupable()
+    .Sortable()
+	.Filterable()
+    .Pageable(pageable => pageable
+        .Refresh(true)
+        .PageSizes(new int[] { 50, 100, 200, 500, 1000 })
+        .ButtonCount(5))
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Read(read => read.Action("Index_Read", ((string)ViewData["ControllerNameForGrid"]), new { ParentId = parentItem?.Id }))
+		.PageSize(50)
+    )
+)
+
+<div class="container">
+	<p>
+	</p>
+	<p>
+		<a asp-action="Create" class="btn btn-primary">@SharedLocalizer["Btn_CreateNew"]</a>
+		@if (parentItem != null)
+        {
+			<a asp-action="Sort" asp-route-id="@parentItem.Id" class="btn btn-primary">@SharedLocalizer["Btn_SortIndex"]</a>
+            <a asp-action="Index" asp-route-id="" class="btn btn-primary">@SharedLocalizer["Btn_ListAll"]</a>
+        }
+        else
+        {
+			<a asp-action="Sort" class="btn btn-primary">@SharedLocalizer["Btn_SortIndex"]</a>
+        }
+	</p>
+</div>

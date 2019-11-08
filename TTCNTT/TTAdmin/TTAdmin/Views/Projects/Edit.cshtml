@@ -1,0 +1,213 @@
+﻿@model ProjectEditViewModel
+
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<h4>Edit Project</h4>
+<hr />
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+        </div>
+        <div class="col-md-7">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Refresh</a>
+            <a asp-action="Details" asp-route-id="@Model.Id" class="k-button">Refresh</a>
+            <a asp-action="Index" class="k-button">Back to List</a>
+        </div>
+    </div>
+    <input type="hidden" name="Id" value="@Model?.Id" />
+    <input type="hidden" asp-for="RowVersion" />
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="FkProjectTypeId" class="col-form-label"></label>
+            <span class="text-danger">*</span>
+        </div>
+        <div class="col-md-7">
+            <kendo-dropdownlist for="FkProjectTypeId" class="form-control" bind-to="@ViewBag.FkProjectTypeId" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="FkProjectTypeId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Name" class="col-form-label"></label>
+            <span class="text-danger">*</span>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="Name" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="SlugName" class="col-form-label"></label>
+            <span class="text-danger">*</span>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="SlugName" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="SlugName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="AutoSlug" class="col-form-label"></label>
+            <span class="text-danger">*</span>
+        </div>
+        <div class="col-md-7">
+            <kendo-switch for="AutoSlug" checked="@Model?.AutoSlug" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="AutoSlug" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="ImageSlug" class="col-form-label"></label>
+        </div>
+        <div class="col-md-7">
+            <button id="btnChooseImage_ImageSlug" class="btn mb-1">Chọn hình</button>
+            <input style="display:none;" asp-for="ImageSlug" />
+            <img width="200" class="border border-primary" id="img_ImageSlug" src="~/Image/@Url.Content(Model?.ImageSlug)" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="ImageSlug" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="ShortDescriptionHtml" class="col-form-label"></label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="ShortDescriptionHtml" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="ShortDescriptionHtml" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="LongDescriptionHtml" class="col-form-label"></label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="LongDescriptionHtml" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="LongDescriptionHtml" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Tags" class="col-form-label"></label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="Tags" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Tags" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="KeyWord" class="col-form-label"></label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="KeyWord" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="KeyWord" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="MetaData" class="col-form-label"></label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="MetaData" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="MetaData" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Note" class="col-form-label"></label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="Note" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Note" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+        </div>
+        <div class="col-md-7">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Refresh</a>
+            <a asp-action="Details" asp-route-id="@Model.Id" class="k-button">Details</a>
+            <a asp-action="Index" class="k-button">Back to List</a>
+        </div>
+    </div>
+</form>
+
+
+@(Html.Kendo().Dialog()
+    .Name("dialogChooseImage_ImageSlug")
+    .Title("Chọn hình")
+    .Content("<div id=\"divChooseImage_ImageSlug\"></div>")
+    .Width(600)
+    .Visible(false)
+    .Modal(true)
+)
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            $( ".k-switch-container" ).click(function() {
+                $('.slugName').slideToggle(); //SlideUp-SlideDown
+                if ($('.slugtitle').val() == '0') {
+                    $('.slugtitle').val(''); //if input has value = 0 then set it Empty
+                } else {
+                    $( '.slugtitle' ).val('0'); //set value = 0 unless it is Empty
+                }
+            });
+            $("#divChooseImage_ImageSlug").kendoImageBrowser({
+                transport: {
+                    type: "imagebrowser-aspnetmvc",
+                    read: "@Url.Action("Read", (string)ViewData["ControllerNameForImageBrowser"])",
+                    destroy: "@Url.Action("Destroy", (string)ViewData["ControllerNameForImageBrowser"])",
+                    imageUrl: "@Url.Content( ImageBrowserProjectController.FOLDER_NAME + "/{0}")",
+                    uploadUrl: "@Url.Action("Upload", (string)ViewData["ControllerNameForImageBrowser"])"
+                },
+                apply: function () {
+                    var selectedImage = this.value();
+                    $("#ImageSlug").val(selectedImage);
+                    $("#img_ImageSlug").attr("src", "/Image/"+ selectedImage);
+                    $('#dialogChooseImage_ImageSlug').data("kendoDialog").close();
+                }
+            });
+
+            $("#btnChooseImage_ImageSlug").click(function (e) {
+                e.preventDefault();
+                $('#dialogChooseImage_ImageSlug').data("kendoDialog").open();
+
+            });
+        });
+    </script>
+}
+
+

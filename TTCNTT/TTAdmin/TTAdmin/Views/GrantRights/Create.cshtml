@@ -1,0 +1,61 @@
+﻿@model AspNetUserRolesCreateViewModel
+
+
+@{
+    ViewData["Title"] = "Create";
+
+}
+
+
+<h4>Create Phân Quyền</h4>
+<hr />
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+        </div>
+        <div class="col-md-7">
+            <input type="submit" value="Tạo" class="btn btn-primary" />
+            <a asp-action="Index" class="k-button">Back</a>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="UserId" class="col-form-label"></label>
+            <span class="text-danger">*</span>
+        </div>
+        <div class="col-md-7">
+            <kendo-dropdownlist for="UserId" class="form-control" bind-to="@ViewBag.UserId" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="UserId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="RoleId" class="col-form-label"></label>
+            <span class="text-danger">*</span>
+        </div>
+        <div class="col-md-7">
+            <kendo-dropdownlist for="RoleId" class="form-control" bind-to="@ViewBag.RoleId" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="RoleId" class="text-danger"></span>
+        </div>
+
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+        </div>
+        <div class="col-md-7">
+            <input type="submit" value="Tạo" class="btn btn-primary" />
+            <a asp-action="Index" class="k-button">Back</a>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,92 @@
+﻿
+@inject IStringLocalizer<SharedResources> SharedLocalizer
+@inject IViewLocalizer Localizer
+@inject IStringLocalizer<AspNetUserRoles> EntityLocalizer
+@inject IStringLocalizer<BaseEntityResources> BaseEntityLocalizer
+
+@{
+    ViewData["Title"] = SharedLocalizer["ViewTitle_List"] + " " + EntityLocalizer["Phân Quyền"];
+    var parentItem = ViewData["ParentItem"] as AspNetUserRoles;
+    if (parentItem != null)
+    {
+        ViewData["Title"] = (string)ViewData["Title"] + " : " + parentItem.UserId;
+    }
+}
+
+
+<div class="container">
+    <h4>
+        @SharedLocalizer["ViewTitle_List"] @EntityLocalizer["Phân Quyền"]
+        @if (parentItem != null)
+        {
+            @:: <span class="text-warning"></span>
+        }
+    </h4>
+    <hr />
+
+    <p>
+        <a asp-action="Create" class="btn btn-primary">@SharedLocalizer["Btn_CreateNew"]</a>
+        @if (parentItem != null)
+        {
+            <a asp-action="Index" asp-route-id="" class="btn btn-primary">@SharedLocalizer["Btn_ListAll"]</a>
+        }
+        else
+        {
+        }
+    </p>
+</div>
+
+@(Html.Kendo().Grid<AspNetUserRolesDetailsViewModel>()
+    .Name("gridaspNetUserRoles")
+    .Columns(columns =>
+    {
+        columns.Bound(c => c.UserId).Title(" ").Width(180).Locked(true).Filterable(false).Sortable(false).ClientTemplate(
+            "<a class=\"btn btn-success\" data-toggle=\"tooltip\" title=\"" + SharedLocalizer["Ttip_Detail"] + "\"" +
+                "href='" + Url.Action("Details", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(AspNetUserRoles.UserId) + " #'" +
+            "><i class=\"far fa-eye\"></i></a> " +
+
+            "<a class=\"btn btn-success\" data-toggle=\"tooltip\" title=\"" + SharedLocalizer["Ttip_Edit"] + "\"" +
+                "href='" + Url.Action("Edit", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(AspNetUserRoles.UserId) + " #'" +
+            "><i class=\"far fa-pencil\"></i></a> " +
+
+            "<a class=\"btn btn-danger\" data-toggle=\"tooltip\" title=\"" + SharedLocalizer["Ttip_Delete"] + "\"" +
+                "href='" + Url.Action("Delete", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(AspNetUserRoles.UserId) + " #'" +
+            "><i class=\"far fa-trash-alt\"></i></a> "
+        );
+        
+        columns.Bound(c => c.TenNguoiDung).Title(EntityLocalizer[nameof(ViewUserRole.TenNguoiDung)]).Width(400).HtmlAttributes(new { @class = "text-nowrap" });
+
+        columns.Bound(c => c.TenQuyen).Title(EntityLocalizer[nameof(ViewUserRole.TenQuyen)]).Width(400).HtmlAttributes(new { @class = "text-nowrap" });
+
+    })
+    .HtmlAttributes(new { style = "height: 600px;" })
+    .Resizable(r => r.Columns(true))
+    .Scrollable()
+    .Groupable()
+    .Sortable()
+    .Filterable()
+    .Pageable(pageable => pageable
+        .Refresh(true)
+        .PageSizes(new int[] { 50, 100, 200, 500, 1000 })
+        .ButtonCount(5))
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Read(read => read.Action("Index_Read", ((string)ViewData["ControllerNameForGrid"]), new { ParentId = parentItem?.UserId }))
+        .PageSize(50)
+    )
+)
+
+<div class="container">
+    <p>
+    </p>
+    <p>
+        <a asp-action="Create" class="btn btn-primary">@SharedLocalizer["Btn_CreateNew"]</a>
+        @if (parentItem != null)
+        {
+            <a asp-action="Index" asp-route-id="" class="btn btn-primary">@SharedLocalizer["Btn_ListAll"]</a>
+        }
+        else
+        {
+        }
+    </p>
+</div>
