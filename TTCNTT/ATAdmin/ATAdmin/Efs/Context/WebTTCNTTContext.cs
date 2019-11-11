@@ -7,6 +7,8 @@ namespace ATAdmin.Efs.Context
 {
     public partial class WebTTCNTTContext : DbContext
     {
+        internal string LoginUserId;
+
         public virtual DbSet<AboutCustomer> AboutCustomer { get; set; }
         public virtual DbSet<AboutUs> AboutUs { get; set; }
         public virtual DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }

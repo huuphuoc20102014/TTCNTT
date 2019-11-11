@@ -42,11 +42,11 @@
     <None Include="Views\AboutUs\Details.cshtml" />
     <None Include="Views\AboutUs\Edit.cshtml" />
     <None Include="Views\AboutUs\Index.cshtml" />
-    <None Include="Views\Contacts\Create.cshtml" />
-    <None Include="Views\Contacts\Delete.cshtml" />
-    <None Include="Views\Contacts\Details.cshtml" />
-    <None Include="Views\Contacts\Edit.cshtml" />
-    <None Include="Views\Contacts\Index.cshtml" />
+    <None Include="Views\Contact\Create.cshtml" />
+    <None Include="Views\Contact\Delete.cshtml" />
+    <None Include="Views\Contact\Details.cshtml" />
+    <None Include="Views\Contact\Edit.cshtml" />
+    <None Include="Views\Contact\Index.cshtml" />
     <None Include="Views\Error\Index.cshtml" />
     <None Include="Views\ImageSlides\Create.cshtml" />
     <None Include="Views\ImageSlides\Delete.cshtml" />

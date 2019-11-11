@@ -14,16 +14,16 @@ using ATAdmin.Efs.Context;
 
 namespace ATAdmin.Controllers
 {
-    public class ContactsController : AtBaseController
+    public class ContactController : AtBaseController
     {
         private readonly WebTTCNTTContext _context;
 
-        public ContactsController(WebTTCNTTContext context)
+        public ContactController(WebTTCNTTContext context)
         {
             _context = context;
         }
 
-        // GET: Contacts
+        // GET: Contact
         public async Task<IActionResult> Index([FromRoute]string id)
         {
             Contact dbItem = null;
@@ -37,7 +37,7 @@ namespace ATAdmin.Controllers
             }
             ViewData["ParentItem"] = dbItem;
 
-            ViewData["ControllerNameForGrid"] = nameof(ContactsController).Replace("Controller", "");
+            ViewData["ControllerNameForGrid"] = nameof(ContactController).Replace("Controller", "");
             return View();
         }
 
@@ -74,7 +74,7 @@ namespace ATAdmin.Controllers
         }
 
 
-        // GET: Contacts/Details/5
+        // GET: Contact/Details/5
         public async Task<IActionResult> Details([FromRoute] string id)
         {
             if (id == null)
@@ -94,13 +94,13 @@ namespace ATAdmin.Controllers
             return View(contact);
         }
 
-        // GET: Contacts/Create
+        // GET: Contact/Create
         public async Task<IActionResult> Create()
         {
             return View();
         }
 
-        // POST: Contacts/Create
+        // POST: Contact/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -153,7 +153,7 @@ namespace ATAdmin.Controllers
             return RedirectToAction(nameof(Details), new { id = dbItem.Id });
         }
 
-        // GET: Contacts/Edit/5
+        // GET: Contact/Edit/5
         public async Task<IActionResult> Edit([FromRoute] string id)
         {
             if (id == null)
@@ -189,7 +189,7 @@ namespace ATAdmin.Controllers
             return View(dbItem);
         }
 
-        // POST: Contacts/Edit/5
+        // POST: Contact/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -243,7 +243,7 @@ namespace ATAdmin.Controllers
             return RedirectToAction(nameof(Details), new { id = dbItem.Id });
         }
 
-        // GET: Contacts/Details/5
+        // GET: Contact/Details/5
         public async Task<IActionResult> Delete([FromRoute] string id)
         {
             if (id == null)
@@ -263,7 +263,7 @@ namespace ATAdmin.Controllers
             return View(dbItem);
         }
 
-        // POST: Contacts/Delete/5
+        // POST: Contact/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete([FromForm] string id, [FromForm] byte[] rowVersion)

@@ -23,14 +23,14 @@ namespace ATAdmin.Areas.Admin.Controllers
         {
             base.OnActionExecuting(context);
 
-            //if (User.Identity.IsAuthenticated)
-            //{
-            //    TTCNTT_Context.LoginUserId = User.Identity.Name;
-            //}
-            //else
-            //{
-            //    TTCNTT_Context.LoginUserId = null;
-            //}
+            if (User.Identity.IsAuthenticated)
+            {
+                TTCNTT_Context.LoginUserId = User.Identity.Name;
+            }
+            else
+            {
+                TTCNTT_Context.LoginUserId = null;
+            }
         }
     }
 }
