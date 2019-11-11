@@ -14,16 +14,16 @@ using ATAdmin.Efs.Context;
 
 namespace ATAdmin.Controllers
 {
-    public class NewsTypesController : AtBaseController
+    public class NewsTypeController : AtBaseController
     {
         private readonly WebTTCNTTContext _webcontext;
 
-        public NewsTypesController(WebTTCNTTContext context)
+        public NewsTypeController(WebTTCNTTContext context)
         {
             _webcontext = context;
         }
 
-        // GET: NewsTypes
+        // GET: NewsType
         public async Task<IActionResult> Index([FromRoute]string id)
         {
             NewsType dbItem = null;
@@ -37,7 +37,7 @@ namespace ATAdmin.Controllers
             }
             ViewData["ParentItem"] = dbItem;
 
-            ViewData["ControllerNameForGrid"] = nameof(NewsTypesController).Replace("Controller", "");
+            ViewData["ControllerNameForGrid"] = nameof(NewsTypeController).Replace("Controller", "");
             return View();
         }
 
@@ -73,7 +73,7 @@ namespace ATAdmin.Controllers
         }
 
 
-        // GET: NewsTypes/Details/5
+        // GET: NewsType/Details/5
         public async Task<IActionResult> Details([FromRoute] string id)
         {
             if (id == null)
@@ -83,7 +83,7 @@ namespace ATAdmin.Controllers
 
             var newsType = await _webcontext.NewsType.AsNoTracking()
 
-                    .Where(h => h.Slug_Name == id)
+                    .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
             if (newsType == null)
             {
@@ -93,13 +93,13 @@ namespace ATAdmin.Controllers
             return View(newsType);
         }
 
-        // GET: NewsTypes/Create
+        // GET: NewsType/Create
         public async Task<IActionResult> Create()
         {
             return View();
         }
 
-        // POST: NewsTypes/Create
+        // POST: NewsType/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -159,7 +159,7 @@ namespace ATAdmin.Controllers
             return RedirectToAction(nameof(Details), new { id = dbItem.Id });
         }
 
-        // GET: NewsTypes/Edit/5
+        // GET: NewsType/Edit/5
         public async Task<IActionResult> Edit([FromRoute] string id)
         {
             if (id == null)
@@ -170,7 +170,7 @@ namespace ATAdmin.Controllers
 
             var dbItem = await _webcontext.NewsType.AsNoTracking()
 
-    .Where(h => h.Slug_Name == id)
+    .Where(h => h.Id == id)
 
                 .Select(h => new NewsTypeEditViewModel
                 {
@@ -195,7 +195,7 @@ namespace ATAdmin.Controllers
             return View(dbItem);
         }
 
-        // POST: NewsTypes/Edit/5
+        // POST: NewsType/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -256,7 +256,7 @@ namespace ATAdmin.Controllers
             return RedirectToAction(nameof(Details), new { id = dbItem.Id });
         }
 
-        // GET: NewsTypes/Details/5
+        // GET: NewsType/Details/5
         public async Task<IActionResult> Delete([FromRoute] string id)
         {
             if (id == null)
@@ -266,7 +266,7 @@ namespace ATAdmin.Controllers
 
             var dbItem = await _webcontext.NewsType.AsNoTracking()
 
-                    .Where(h => h.Slug_Name == id)
+                    .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
             if (dbItem == null)
             {
@@ -276,7 +276,7 @@ namespace ATAdmin.Controllers
             return View(dbItem);
         }
 
-        // POST: NewsTypes/Delete/5
+        // POST: NewsType/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete([FromForm] string id, [FromForm] byte[] rowVersion)

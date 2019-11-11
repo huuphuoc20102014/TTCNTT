@@ -59,6 +59,7 @@ namespace ATAdmin.Controllers
                     Description = h.Description,
                     IsManual = h.IsManual,
                     ImageSlug = h.ImageSlug,
+                    Id2 = h.Id2
 
                 });
 
@@ -149,6 +150,7 @@ namespace ATAdmin.Controllers
                 Description = vmItem.Description,
                 IsManual = vmItem.IsManual,
                 ImageSlug = vmItem.ImageSlug,
+                Id2 = vmItem.Id2,
                 RowStatus = (int)AtRowStatus.Normal,
                 RowVersion = null,
 
@@ -182,6 +184,7 @@ namespace ATAdmin.Controllers
                     Description = h.Description,
                     IsManual = h.IsManual,
                     ImageSlug = h.ImageSlug,
+                    Id2 = h.Id2,
                     RowVersion = h.RowVersion,
                 })
                 .FirstOrDefaultAsync();
@@ -232,6 +235,7 @@ namespace ATAdmin.Controllers
             dbItem.Description = vmItem.Description;
             dbItem.IsManual = vmItem.IsManual;
             dbItem.ImageSlug = vmItem.ImageSlug;
+            dbItem.Id2 = vmItem.Id2;
 
             _context.Entry(dbItem).Property(nameof(Setting.RowVersion)).OriginalValue = vmItem.RowVersion;
             // Set time stamp for table to handle concurrency conflict
@@ -359,10 +363,11 @@ namespace ATAdmin.Controllers
     public class SettingBaseViewModel
     {
 
-        public String Value { get; set; }
-        public String Description { get; set; }
-        //public String Style { get; set; }
+        public string Value { get; set; }
+        public string Description { get; set; }
         public bool? IsManual { get; set; }
+        public string Id2 { get; set; }
+        //public String Style { get; set; }
         public String ImageSlug { get; set; }
     }
 

@@ -42,15 +42,15 @@
     {
         columns.Bound(c => c.Id).Title(" ").Width(180).Locked(true).Filterable(false).Sortable(false).ClientTemplate(
             "<a class=\"btn btn-success\" data-toggle=\"tooltip\" title=\"" + SharedLocalizer["Ttip_Detail"] + "\"" +
-                "href='" + Url.Action("Details", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(NewsType.Slug_Name) + " #'" +
+                "href='" + Url.Action("Details", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(NewsType.Id) + " #'" +
             "><i class=\"far fa-eye\"></i></a> " +
 
             "<a class=\"btn btn-success\" data-toggle=\"tooltip\" title=\"" + SharedLocalizer["Ttip_Edit"] + "\"" +
-                "href='" + Url.Action("Edit", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(NewsType.Slug_Name) + " #'" +
+                "href='" + Url.Action("Edit", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(NewsType.Id) + " #'" +
             "><i class=\"far fa-pencil\"></i></a> " +
 
             "<a class=\"btn btn-danger\" data-toggle=\"tooltip\" title=\"" + SharedLocalizer["Ttip_Delete"] + "\"" +
-                "href='" + Url.Action("Delete", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(NewsType.Slug_Name) + " #'" +
+                "href='" + Url.Action("Delete", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(NewsType.Id) + " #'" +
             "><i class=\"far fa-trash-alt\"></i></a> "
         );		
 			columns.Bound(c => c.RowStatus).Title(BaseEntityLocalizer[nameof(BaseEntityResources.RowStatus)]).Width(150).HtmlAttributes(new { @class = "text-nowrap" });

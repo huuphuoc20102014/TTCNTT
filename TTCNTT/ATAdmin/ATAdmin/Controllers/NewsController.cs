@@ -92,7 +92,7 @@ namespace ATAdmin.Controllers
             var news = await _context.News.AsNoTracking()
 
                 .Include(n => n.FkNewsType)
-                    .Where(h => h.Slug_Title == id)
+                    .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
             if (news == null)
             {
@@ -153,7 +153,7 @@ namespace ATAdmin.Controllers
 
             // Check slug is existed => if existed auto get next slug
             var listExistedSlug = await _context.News.AsNoTracking()
-                    .Where(h => h.Slug_Title.StartsWith(vmItem.SlugTitle))
+                    .Where(h => h.Id.StartsWith(vmItem.SlugTitle))
                     .Select(h => h.Slug_Title).ToListAsync();
             var slug = CheckAndGenNextSlug(vmItem.SlugTitle, listExistedSlug);
 
@@ -189,7 +189,7 @@ namespace ATAdmin.Controllers
                 tableVersion.LastModify = DateTime.Now;
             }
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Details), new { id = dbItem.Slug_Title });
+            return RedirectToAction(nameof(Details), new { id = dbItem.Id });
         }
         
         // GET: News/Edit/5
@@ -202,7 +202,7 @@ namespace ATAdmin.Controllers
 
 
             var dbItem = await _context.News.AsNoTracking()
-                .Where(h => h.Slug_Title == id)
+                .Where(h => h.Id == id)
                 .Select(h => new NewsEditViewModel
                 {
                     Id = h.Id,
@@ -327,7 +327,7 @@ namespace ATAdmin.Controllers
             var dbItem = await _context.News
 
                 .Include(n => n.FkNewsType)
-                .Where(h => h.Slug_Title == id)
+                .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
             if (dbItem == null)
             {

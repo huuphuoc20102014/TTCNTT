@@ -31,7 +31,7 @@ namespace ATAdmin.Controllers
             Product dbItem = null;
             if (!string.IsNullOrWhiteSpace(id))
             {
-                dbItem = await _context.Product.AsNoTracking().FirstOrDefaultAsync(h => h.Id == id);
+                dbItem = await _context.Product.FirstOrDefaultAsync(h => h.Id == id);
                 if (dbItem == null)
                 {
                     return NotFound();
@@ -57,6 +57,7 @@ namespace ATAdmin.Controllers
                     Id = h.Id,
                     FkProductId = h.FkProductId,
                     // Ford
+                    Code = h.Code,
                     Name = h.Name,
                     SlugName = h.Slug_Name,
                     ImageSlug = h.ImageSlug,
@@ -149,6 +150,7 @@ namespace ATAdmin.Controllers
                 RowVersion = null,
 
                 FkProductId = vmItem.FkProductId,
+                Code = vmItem.Code,
                 Name = vmItem.Name,
                 Slug_Name = vmItem.SlugName,
                 AutoSlug = vmItem.AutoSlug,
@@ -187,6 +189,7 @@ namespace ATAdmin.Controllers
                 {
                     Id = h.Id,
                     FkProductId = h.FkProductId,
+                    Code = h.Code,
                     Name = h.Name,
                     SlugName = h.Slug_Name,
                     AutoSlug = h.AutoSlug,
@@ -251,6 +254,7 @@ namespace ATAdmin.Controllers
             dbItem.RowVersion = vmItem.RowVersion;
 
             dbItem.FkProductId = vmItem.FkProductId;
+            dbItem.Code = vmItem.Code;
             dbItem.Name = vmItem.Name;
             dbItem.Slug_Name = vmItem.SlugName;
             dbItem.AutoSlug = vmItem.AutoSlug;
@@ -342,7 +346,7 @@ namespace ATAdmin.Controllers
         private async Task PrepareListMasterForeignKey(ProductBaseViewModel vm = null)
         {
             ViewData["FkProductId"] = new SelectList(
-                await _context.ProjectType.AsNoTracking()
+                await _context.Category.AsNoTracking()
                     .Select(h => new { h.Id, h.Name })
                     .OrderBy(h => h.Name)
                     .ToListAsync(),
@@ -387,13 +391,14 @@ namespace ATAdmin.Controllers
     public class ProductBaseViewModel
     {
 
-        public String FkProductId { get; set; }
-        public String Name { get; set; }
-        public String SlugName { get; set; }
-        public Boolean AutoSlug { get; set; }
-        public String ImageSlug { get; set; }
-        public String ShortDescriptionHtml { get; set; }
-        public String LongDescriptionHtml { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
+        public string SlugName { get; set; }
+        public bool AutoSlug { get; set; }
+        public string FkProductId { get; set; }
+        public string ShortDescriptionHtml { get; set; }
+        public string LongDescriptionHtml { get; set; }
+        public string ImageSlug { get; set; }
         public String Tags { get; set; }
         public String KeyWord { get; set; }
         public String MetaData { get; set; }
