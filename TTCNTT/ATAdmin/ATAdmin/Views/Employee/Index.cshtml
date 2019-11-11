@@ -1,12 +1,12 @@
 ﻿
 @inject IStringLocalizer<SharedResources> SharedLocalizer
 @inject IViewLocalizer Localizer
-@inject IStringLocalizer<People> EntityLocalizer
+@inject IStringLocalizer<Employee> EntityLocalizer
 @inject IStringLocalizer<BaseEntityResources> BaseEntityLocalizer
 
 @{
     ViewData["Title"] = SharedLocalizer["ViewTitle_List"] + " " + EntityLocalizer["Nhân Viên"];
-    var parentItem = ViewData["ParentItem"] as ProjectType;
+    var parentItem = ViewData["ParentItem"] as Employee;
     if (parentItem != null)
     {
         ViewData["Title"] = (string)ViewData["Title"] + " : " + parentItem.Id + " | " + parentItem.Name;
@@ -36,32 +36,37 @@
     </p>
 </div>
 
-@(Html.Kendo().Grid<PeopleDetailsViewModel>()
-    .Name("gridPeople")
+@(Html.Kendo().Grid<EmployeeDetailsViewModel>()
+    .Name("gridEmployee")
     .Columns(columns =>
     {
         columns.Bound(c => c.Id).Title(" ").Width(180).Locked(true).Filterable(false).Sortable(false).ClientTemplate(
             "<a class=\"btn btn-success\" data-toggle=\"tooltip\" title=\"" + SharedLocalizer["Ttip_Detail"] + "\"" +
-                "href='" + Url.Action("Details", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(AboutUs.Id) + " #'" +
+                "href='" + Url.Action("Details", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(Employee.Id) + " #'" +
             "><i class=\"far fa-eye\"></i></a> " +
 
             "<a class=\"btn btn-success\" data-toggle=\"tooltip\" title=\"" + SharedLocalizer["Ttip_Edit"] + "\"" +
-                "href='" + Url.Action("Edit", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(AboutUs.Id) + " #'" +
+                "href='" + Url.Action("Edit", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(Employee.Id) + " #'" +
             "><i class=\"far fa-pencil\"></i></a> " +
 
             "<a class=\"btn btn-danger\" data-toggle=\"tooltip\" title=\"" + SharedLocalizer["Ttip_Delete"] + "\"" +
-                "href='" + Url.Action("Delete", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(AboutUs.Id) + " #'" +
+                "href='" + Url.Action("Delete", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(Employee.Id) + " #'" +
             "><i class=\"far fa-trash-alt\"></i></a> "
         );
             columns.Bound(c => c.RowStatus).Title(BaseEntityLocalizer[nameof(BaseEntityResources.RowStatus)]).Width(150).HtmlAttributes(new { @class = "text-nowrap" });
-            columns.Bound(c => c.Name).Title(EntityLocalizer[nameof(People.Name)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-            columns.Bound(c => c.BirthDay).Title(EntityLocalizer[nameof(People.BirthDay)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-            columns.Bound(c => c.Job).Title(EntityLocalizer[nameof(People.Job)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-            columns.Bound(c => c.JobIntroduction).Title(EntityLocalizer[nameof(People.JobIntroduction)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-            columns.Bound(c => c.Phone).Title(EntityLocalizer[nameof(People.Phone)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-            columns.Bound(c => c.Gmail).Title(EntityLocalizer[nameof(People.Gmail)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-            columns.Bound(c => c.Img).Title(EntityLocalizer[nameof(People.Img)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-
+            columns.Bound(c => c.ImageSlug).Title("Hình ảnh").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+            columns.Bound(c => c.Fk_Emplyee.Name).Title("Loại nhân viên").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+            columns.Bound(c => c.Code).Title("Mã").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+            columns.Bound(c => c.Name).Title(EntityLocalizer[nameof(Employee.Name)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+            columns.Bound(c => c.BirthDate).Title("Ngày sinh").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+            columns.Bound(c => c.Address).Title("Địa chỉ").Width(200).HtmlAttributes(new { @class = "text-nowrap" });            
+            columns.Bound(c => c.Phone).Title("Điện thoại").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+            columns.Bound(c => c.Specialize).Title("Chuyên môn").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+            columns.Bound(c => c.Note).Title(EntityLocalizer[nameof(Product.Note)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.CreatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.UpdatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.UpdatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.CreatedBy).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedBy)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.UpdatedBy).Title(BaseEntityLocalizer[nameof(BaseEntityResources.UpdatedBy)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
     })
     .HtmlAttributes(new { style = "height: 600px;" })
     .Resizable(r => r.Columns(true))

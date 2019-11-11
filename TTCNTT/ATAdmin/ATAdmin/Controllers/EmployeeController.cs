@@ -15,23 +15,22 @@ using ATAdmin.Efs.Context;
 
 namespace ATAdmin.Controllers
 {
-
-    public class ProductController : AtBaseController
+    public class EmployeeController : AtBaseController
     {
         private readonly WebTTCNTTContext _context;
 
-        public ProductController(WebTTCNTTContext context)
+        public EmployeeController(WebTTCNTTContext context)
         {
             _context = context;
         }
 
-        // GET: Product
+        // GET: AboutUs
         public async Task<IActionResult> Index([FromRoute]string id)
         {
-            Product dbItem = null;
+            Employee dbItem = null;
             if (!string.IsNullOrWhiteSpace(id))
             {
-                dbItem = await _context.Product.AsNoTracking().FirstOrDefaultAsync(h => h.Id == id);
+                dbItem = await _context.Employee.AsNoTracking().FirstOrDefaultAsync(h => h.Id == id);
                 if (dbItem == null)
                 {
                     return NotFound();
@@ -39,32 +38,33 @@ namespace ATAdmin.Controllers
             }
             ViewData["ParentItem"] = dbItem;
 
-            ViewData["ControllerNameForGrid"] = nameof(ProductController).Replace("Controller", "");
+            ViewData["ControllerNameForGrid"] = nameof(EmployeeController).Replace("Controller", "");
             return View();
         }
 
         public async Task<IActionResult> Index_Read([DataSourceRequest] DataSourceRequest request, string parentId)
         {
-            var baseQuery = _context.Product.AsNoTracking();
+            var baseQuery = _context.Employee.AsNoTracking();
             if (!string.IsNullOrWhiteSpace(parentId))
             {
                 baseQuery = baseQuery.Where(h => h.Id == parentId);
             }
             var query = baseQuery
                 .Where(p => p.RowStatus == (int)AtRowStatus.Normal)
-                .Select(h => new ProductDetailsViewModel
+                .Select(h => new EmployeeDetailsViewModel
                 {
                     Id = h.Id,
-                    FkProductId = h.FkProductId,
-                    // Ford
+                    Code = h.Code,
                     Name = h.Name,
-                    SlugName = h.Slug_Name,
+                    Slug_Name = h.Slug_Name,
+                    BirthDate = h.BirthDate,
+                    Address = h.Address,
+                    Phone = h.Phone,
+                    Specialize = h.Specialize,
+                    Fk_EmplyeeId = h.Fk_EmplyeeId,
                     ImageSlug = h.ImageSlug,
-                    ShortDescriptionHtml = h.ShortDescription_Html,
-                    LongDescriptionHtml = h.LongDescription_Html,
-                    Tags = h.Tags,
-                    KeyWord = h.KeyWord,
-                    MetaData = h.MetaData,
+                    ShortDescription_Html = h.ShortDescription_Html,
+                    LongDescription_Html = h.LongDescription_Html,
                     Note = h.Note,
                     CreatedBy = h.CreatedBy,
                     CreatedDate = h.CreatedDate,
@@ -79,7 +79,7 @@ namespace ATAdmin.Controllers
         }
 
 
-        // GET: Product/Details/5
+        // GET: AboutUs/Details/5
         public async Task<IActionResult> Details([FromRoute] string id)
         {
             if (id == null)
@@ -87,57 +87,52 @@ namespace ATAdmin.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Product.AsNoTracking()
-
-                .Include(p => p.FkProduct)
+            var employee = await _context.Employee.AsNoTracking()
+                .Include(h => h.Fk_Emplyee)
                     .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
-            if (product == null)
+            if (employee == null)
             {
                 return NotFound();
             }
 
-            return View(product);
+            return View(employee);
         }
 
-        // GET: Product/Create
+        // GET: AboutUs/Create
         public async Task<IActionResult> Create()
         {
-            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserProductController).Replace("Controller", "");
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserEmployeeController).Replace("Controller", "");
 
-            // Get list master of foreign property and set to view data
             await PrepareListMasterForeignKey();
-
             return View();
         }
 
-        // POST: Product/Create
+        // POST: AboutUs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([FromForm] ProductCreateViewModel vmItem)
+        public async Task<IActionResult> Create([FromForm] EmployeeCreateViewModel vmItem)
         {
-            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserProductController).Replace("Controller", "");
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserEmployeeController).Replace("Controller", "");
             // Invalid model
             if (!ModelState.IsValid)
             {
-                // Get list master of foreign property and set to view data
                 await PrepareListMasterForeignKey(vmItem);
                 return View(vmItem);
             }
 
             // Get time stamp for table to handle concurrency conflict
-            var tableName = nameof(Product);
+            var tableName = nameof(Employee);
             var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
             // Trim white space
-            vmItem.Name = $"{vmItem.Name}".Trim();
 
 
 
             // Create save db item
-            var dbItem = new Product
+            var dbItem = new Employee
             {
                 Id = Guid.NewGuid().ToString(),
 
@@ -148,17 +143,19 @@ namespace ATAdmin.Controllers
                 RowStatus = (int)AtRowStatus.Normal,
                 RowVersion = null,
 
-                FkProductId = vmItem.FkProductId,
+                Code = vmItem.Code,
                 Name = vmItem.Name,
-                Slug_Name = vmItem.SlugName,
-                AutoSlug = vmItem.AutoSlug,
+                Slug_Name = vmItem.Slug_Name,
+                BirthDate = vmItem.BirthDate,
+                Address = vmItem.Address,
+                Phone = vmItem.Phone,
+                Specialize = vmItem.Specialize,
+                Fk_EmplyeeId = vmItem.Fk_EmplyeeId,
                 ImageSlug = vmItem.ImageSlug,
-                ShortDescription_Html = vmItem.ShortDescriptionHtml,
-                LongDescription_Html = vmItem.LongDescriptionHtml,
-                Tags = vmItem.Tags,
-                KeyWord = vmItem.KeyWord,
-                MetaData = vmItem.MetaData,
+                ShortDescription_Html = vmItem.ShortDescription_Html,
+                LongDescription_Html = vmItem.LongDescription_Html,
                 Note = vmItem.Note,
+
             };
             _context.Add(dbItem);
 
@@ -169,34 +166,36 @@ namespace ATAdmin.Controllers
             return RedirectToAction(nameof(Details), new { id = dbItem.Id });
         }
 
-        // GET: Product/Edit/5
+        // GET: AboutUs/Edit/5
         public async Task<IActionResult> Edit([FromRoute] string id)
         {
-            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserProductController).Replace("Controller", "");
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserEmployeeController).Replace("Controller", "");
             if (id == null)
             {
                 return NotFound();
             }
 
 
-            var dbItem = await _context.Product.AsNoTracking()
+            var dbItem = await _context.Employee.AsNoTracking()
 
-    .Where(h => h.Id == id)
+            .Where(h => h.Id == id)
 
-                .Select(h => new ProductEditViewModel
+                .Select(h => new EmployeeEditViewModel
                 {
                     Id = h.Id,
-                    FkProductId = h.FkProductId,
+                    Code = h.Code,
                     Name = h.Name,
-                    SlugName = h.Slug_Name,
-                    AutoSlug = h.AutoSlug,
+                    Slug_Name = h.Slug_Name,
+                    BirthDate = h.BirthDate,
+                    Address = h.Address,
+                    Phone = h.Phone,
+                    Specialize = h.Specialize,
+                    Fk_EmplyeeId = h.Fk_EmplyeeId,
                     ImageSlug = h.ImageSlug,
-                    ShortDescriptionHtml = h.ShortDescription_Html,
-                    LongDescriptionHtml = h.LongDescription_Html,
-                    Tags = h.Tags,
-                    KeyWord = h.KeyWord,
-                    MetaData = h.MetaData,
+                    ShortDescription_Html = h.ShortDescription_Html,
+                    LongDescription_Html = h.LongDescription_Html,
                     Note = h.Note,
+
                     RowVersion = h.RowVersion,
                 })
                 .FirstOrDefaultAsync();
@@ -205,33 +204,30 @@ namespace ATAdmin.Controllers
                 return NotFound();
             }
 
-            // Get list master of foreign property and set to view data
             await PrepareListMasterForeignKey(dbItem);
-
             return View(dbItem);
         }
 
-        // POST: Product/Edit/5
+        // POST: AboutUs/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([FromForm] ProductEditViewModel vmItem)
+        public async Task<IActionResult> Edit([FromForm] EmployeeEditViewModel vmItem)
         {
-            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserProductController).Replace("Controller", "");
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserEmployeeController).Replace("Controller", "");
             // Invalid model
             if (!ModelState.IsValid)
             {
-                // Get list master of foreign property and set to view data
                 await PrepareListMasterForeignKey(vmItem);
                 return View(vmItem);
             }
 
             // Get time stamp for table to handle concurrency conflict
-            var tableName = nameof(Product);
+            var tableName = nameof(Employee);
             var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
-            var dbItem = await _context.Product
+            var dbItem = await _context.Employee
                 .Where(h => h.Id == vmItem.Id)
 
                 .FirstOrDefaultAsync();
@@ -240,29 +236,25 @@ namespace ATAdmin.Controllers
                 return NotFound();
             }
 
-            // Trim white space
-            vmItem.Name = $"{vmItem.Name}".Trim();
-
-
-
             // Update db item               
             dbItem.UpdatedBy = _loginUserId;
             dbItem.UpdatedDate = DateTime.Now;
             dbItem.RowVersion = vmItem.RowVersion;
 
-            dbItem.FkProductId = vmItem.FkProductId;
+            dbItem.Code = vmItem.Code;
             dbItem.Name = vmItem.Name;
-            dbItem.Slug_Name = vmItem.SlugName;
-            dbItem.AutoSlug = vmItem.AutoSlug;
+            dbItem.Slug_Name = vmItem.Slug_Name;
+            dbItem.BirthDate = vmItem.BirthDate;
+            dbItem.Address = vmItem.Address;
+            dbItem.Phone = vmItem.Phone;
+            dbItem.Specialize = vmItem.Specialize;
+            dbItem.Fk_EmplyeeId = vmItem.Fk_EmplyeeId;
             dbItem.ImageSlug = vmItem.ImageSlug;
-            dbItem.ShortDescription_Html = vmItem.ShortDescriptionHtml;
-            dbItem.LongDescription_Html = vmItem.LongDescriptionHtml;
-            dbItem.Tags = vmItem.Tags;
-            dbItem.KeyWord = vmItem.KeyWord;
-            dbItem.MetaData = vmItem.MetaData;
+            dbItem.ShortDescription_Html = vmItem.ShortDescription_Html;
+            dbItem.LongDescription_Html = vmItem.LongDescription_Html;
             dbItem.Note = vmItem.Note;
 
-            _context.Entry(dbItem).Property(nameof(Product.RowVersion)).OriginalValue = vmItem.RowVersion;
+            _context.Entry(dbItem).Property(nameof(Employee.RowVersion)).OriginalValue = vmItem.RowVersion;
             // Set time stamp for table to handle concurrency conflict
             tableVersion.LastModify = DateTime.Now;
             await _context.SaveChangesAsync();
@@ -270,7 +262,7 @@ namespace ATAdmin.Controllers
             return RedirectToAction(nameof(Details), new { id = dbItem.Id });
         }
 
-        // GET: Product/Details/5
+        // GET: AboutUs/Details/5
         public async Task<IActionResult> Delete([FromRoute] string id)
         {
             if (id == null)
@@ -278,9 +270,8 @@ namespace ATAdmin.Controllers
                 return NotFound();
             }
 
-            var dbItem = await _context.Product.AsNoTracking()
-
-                .Include(p => p.FkProduct)
+            var dbItem = await _context.Employee.AsNoTracking()
+                .Include(h => h.Fk_Emplyee)
                     .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
             if (dbItem == null)
@@ -291,7 +282,7 @@ namespace ATAdmin.Controllers
             return View(dbItem);
         }
 
-        // POST: Product/Delete/5
+        // POST: AboutUs/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete([FromForm] string id, [FromForm] byte[] rowVersion)
@@ -302,12 +293,11 @@ namespace ATAdmin.Controllers
             }
 
             // Get time stamp for table to handle concurrency conflict
-            var tableName = nameof(Product);
+            var tableName = nameof(Employee);
             var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
-            var dbItem = await _context.Product
-
-                .Include(p => p.FkProduct)
+            var dbItem = await _context.Employee
+                .Include(h => h.Fk_Emplyee)
                 .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
             if (dbItem == null)
@@ -325,11 +315,9 @@ namespace ATAdmin.Controllers
             if (dbItem.RowStatus != (int)AtRowStatus.Deleted)
             {
                 dbItem.RowStatus = (int)AtRowStatus.Deleted;
-                dbItem.UpdatedBy = _loginUserId;
-                dbItem.UpdatedDate = DateTime.Now;
                 dbItem.RowVersion = rowVersion;
 
-                _context.Entry(dbItem).Property(nameof(Product.RowVersion)).OriginalValue = rowVersion;
+                _context.Entry(dbItem).Property(nameof(Employee.RowVersion)).OriginalValue = rowVersion;
                 // Set time stamp for table to handle concurrency conflict
                 tableVersion.LastModify = DateTime.Now;
                 await _context.SaveChangesAsync();
@@ -339,21 +327,21 @@ namespace ATAdmin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private async Task PrepareListMasterForeignKey(ProductBaseViewModel vm = null)
+        private async Task PrepareListMasterForeignKey(EmployeeBaseViewModel vm = null)
         {
-            ViewData["FkProductId"] = new SelectList(
-                await _context.ProjectType.AsNoTracking()
+            ViewData["FkEmplyeeId"] = new SelectList(
+                await _context.EmployeeType.AsNoTracking()
                     .Select(h => new { h.Id, h.Name })
                     .OrderBy(h => h.Name)
                     .ToListAsync(),
-                "Id", "Name", vm?.FkProductId);
+                "Id", "Name", vm?.Fk_EmplyeeId);
         }
+
     }
 
-
-    public class ImageBrowserProductController : EditorImageBrowserController
+    public class ImageBrowserEmployeeController : EditorImageBrowserController
     {
-        public const string FOLDER_NAME = "ImagesProduct";
+        public const string FOLDER_NAME = "ImagesEmployee";
         public string FOLDER_ROOTPATH;
 
         /// <summary>
@@ -367,7 +355,7 @@ namespace ATAdmin.Controllers
             }
         }
 
-        public ImageBrowserProductController(IHostingEnvironment hostingEnvironment, IConfiguration staticFileSetting)
+        public ImageBrowserEmployeeController(IHostingEnvironment hostingEnvironment, IConfiguration staticFileSetting)
            : base(hostingEnvironment)
         {
             FOLDER_ROOTPATH = staticFileSetting.GetValue<string>("StaticFileSetting");
@@ -383,96 +371,99 @@ namespace ATAdmin.Controllers
             }
             return path;
         }
-    }
-    public class ProductBaseViewModel
-    {
 
-        public String FkProductId { get; set; }
-        public String Name { get; set; }
-        public String SlugName { get; set; }
-        public Boolean AutoSlug { get; set; }
-        public String ImageSlug { get; set; }
-        public String ShortDescriptionHtml { get; set; }
-        public String LongDescriptionHtml { get; set; }
-        public String Tags { get; set; }
-        public String KeyWord { get; set; }
-        public String MetaData { get; set; }
-        public String Note { get; set; }
     }
 
-    public class ProductDetailsViewModel : ProductBaseViewModel
+    public class EmployeeBaseViewModel
     {
 
+        public string Code { get; set; }
+        public string Name { get; set; }
+        public string Slug_Name { get; set; }
+        public bool AutoSlug { get; set; }
+        public DateTime? BirthDate { get; set; }
+        public string Address { get; set; }
+        public string Phone { get; set; }
+        public string Specialize { get; set; }
+        public string Fk_EmplyeeId { get; set; }
+        public string ImageSlug { get; set; }
+        public string ShortDescription_Html { get; set; }
+        public string LongDescription_Html { get; set; }
+        public string Note { get; set; }
+
+    }
+
+    public class EmployeeDetailsViewModel : EmployeeBaseViewModel
+    {
         public String Id { get; set; }
-        public String CreatedBy { get; set; }
+        public string CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
-        public String UpdatedBy { get; set; }
+        public string UpdatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
-        public Byte[] RowVersion { get; set; }
+        public byte[] RowVersion { get; set; }
         public AtRowStatus RowStatus { get; set; }
 
-
-        public string FkProductType_Code { get; set; }
-        public string FkProductType_Name { get; set; }
-
+        public virtual EmployeeType Fk_Emplyee { get; set; }
     }
 
-    public class ProductCreateViewModel : ProductBaseViewModel
+    public class EmployeeCreateViewModel : EmployeeBaseViewModel
     {
 
     }
 
-    public class ProductEditViewModel : ProductBaseViewModel
+    public class EmployeeEditViewModel : EmployeeBaseViewModel
     {
-
         public String Id { get; set; }
-        public Byte[] RowVersion { get; set; }
+        public byte[] RowVersion { get; set; }
+
     }
 
-    public class ProductBaseValidator<T> : AtBaseValidator<T> where T : ProductBaseViewModel
+    public class EmployeeBaseValidator<T> : AtBaseValidator<T> where T : EmployeeBaseViewModel
     {
-        public ProductBaseValidator()
+        public EmployeeBaseValidator()
         {
-            RuleFor(h => h.FkProductId)
+            RuleFor(h => h.Code)
                         .NotEmpty()
                         .MaximumLength(50)
                 ;
 
             RuleFor(h => h.Name)
                         .NotEmpty()
-                        .MaximumLength(100)
+                        .MaximumLength(50)
                 ;
 
-            RuleFor(h => h.SlugName)
+
+            RuleFor(h => h.Slug_Name)
+                        .NotEmpty()
+                        .MaximumLength(50)
+                ;
+
+            RuleFor(h => h.Address)
+                        .NotEmpty()
+                        .MaximumLength(500)
+                ;
+
+
+            RuleFor(h => h.Specialize)
                         .NotEmpty()
                         .MaximumLength(100)
                 ;
 
-            RuleFor(h => h.AutoSlug)
-                ;
-
             RuleFor(h => h.ImageSlug)
+                        .NotEmpty()
                         .MaximumLength(100)
                 ;
 
-            RuleFor(h => h.ShortDescriptionHtml)
+
+            RuleFor(h => h.ShortDescription_Html)
+                        .NotEmpty()
                         .MaximumLength(1000)
                 ;
 
-            RuleFor(h => h.LongDescriptionHtml)
+            RuleFor(h => h.LongDescription_Html)
+                        .NotEmpty()
                 ;
 
-            RuleFor(h => h.Tags)
-                        .MaximumLength(1000)
-                ;
-
-            RuleFor(h => h.KeyWord)
-                        .MaximumLength(1000)
-                ;
-
-            RuleFor(h => h.MetaData)
-                        .MaximumLength(1000)
-                ;
 
             RuleFor(h => h.Note)
                         .MaximumLength(1000)
@@ -481,16 +472,17 @@ namespace ATAdmin.Controllers
         }
     }
 
-    public class ProductCreateValidator : ProductBaseValidator<ProductCreateViewModel>
+    public class EmployeeCreateValidator : EmployeeBaseValidator<EmployeeCreateViewModel>
     {
-        public ProductCreateValidator()
+        public EmployeeCreateValidator()
         {
+
         }
     }
 
-    public class ProductEditValidator : ProductBaseValidator<ProductEditViewModel>
+    public class EmployeeEditValidator : EmployeeBaseValidator<EmployeeEditViewModel>
     {
-        public ProductEditValidator()
+        public EmployeeEditValidator()
         {
             RuleFor(h => h.Id)
                         .NotEmpty()
@@ -500,15 +492,6 @@ namespace ATAdmin.Controllers
             RuleFor(h => h.RowVersion)
                         .NotNull()
                 ;
-
         }
     }
-
-
-
-
-
-
-
-
 }

@@ -8,7 +8,6 @@ namespace ATAdmin.Efs.Context
     public partial class WebTTCNTTContext : DbContext
     {
         internal string LoginUserId;
-
         public virtual DbSet<AboutCustomer> AboutCustomer { get; set; }
         public virtual DbSet<AboutUs> AboutUs { get; set; }
         public virtual DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
@@ -555,6 +554,10 @@ namespace ATAdmin.Efs.Context
 
                 entity.Property(e => e.Note).HasMaxLength(1000);
 
+                entity.Property(e => e.Phone)
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.RowVersion)
                     .IsRequired()
                     .IsRowVersion();
@@ -568,7 +571,9 @@ namespace ATAdmin.Efs.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Specialize).HasMaxLength(100);
+                entity.Property(e => e.Specialize)
+                    .IsRequired()
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.UpdatedBy)
                     .HasMaxLength(50)

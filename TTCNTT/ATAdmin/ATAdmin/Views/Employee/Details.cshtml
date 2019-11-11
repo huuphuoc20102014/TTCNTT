@@ -1,11 +1,11 @@
-﻿@model ATAdmin.Efs.Entities.People
+﻿@model ATAdmin.Efs.Entities.Employee
 @{
     ViewData["Title"] = "Details";
 }
 
 
 
-<h4>Details Project Type</h4>
+<h4>Details </h4>
 <hr />
 
 <div class="row form-group">
@@ -31,26 +31,26 @@
 
 <div class="row form-group">
     <div class="col-md-3 text-md-right details-label">
-        @Html.DisplayNameFor(model => model.BirthDay) :
+        @Html.DisplayNameFor(model => model.BirthDate) :
     </div>
     <div class="col-md-7">
-        @Html.DisplayFor(model => model.BirthDay)
+        @Html.DisplayFor(model => model.BirthDate)
     </div>
 </div>
 <div class="row form-group">
     <div class="col-md-3 text-md-right details-label">
-        @Html.DisplayNameFor(model => model.Job) :
+        @Html.DisplayNameFor(model => model.Code) :
     </div>
     <div class="col-md-7">
-        @Html.DisplayFor(model => model.Job)
+        @Html.DisplayFor(model => model.Code)
     </div>
 </div>
 <div class="row form-group">
     <div class="col-md-3 text-md-right details-label">
-        @Html.DisplayNameFor(model => model.JobIntroduction) :
+        @Html.DisplayNameFor(model => model.Address) :
     </div>
     <div class="col-md-7">
-        @Html.DisplayFor(model => model.JobIntroduction)
+        @Html.DisplayFor(model => model.Address)
     </div>
 </div>
 
@@ -67,19 +67,19 @@
 
 <div class="row form-group">
     <div class="col-md-3 text-md-right details-label">
-        @Html.DisplayNameFor(model => model.Gmail) :
+        @Html.DisplayNameFor(model => model.Specialize) :
     </div>
     <div class="col-md-7">
-        @Html.DisplayFor(model => model.Gmail)
+        @Html.DisplayFor(model => model.Specialize)
     </div>
 </div>
 
 <div class="row form-group">
     <div class="col-md-3 text-md-right details-label">
-        @Html.DisplayNameFor(model => model.Img) :
+        @Html.DisplayNameFor(model => model.Fk_Emplyee) :
     </div>
     <div class="col-md-7">
-        @Html.DisplayFor(model => model.Img)
+        @Html.DisplayFor(model => model.Fk_Emplyee.Name)
     </div>
 </div>
 <div class="row form-group">

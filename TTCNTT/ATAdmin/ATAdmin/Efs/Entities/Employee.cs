@@ -11,6 +11,7 @@ namespace ATAdmin.Efs.Entities
         public string Slug_Name { get; set; }
         public DateTime? BirthDate { get; set; }
         public string Address { get; set; }
+        public string Phone { get; set; }
         public string Specialize { get; set; }
         public string Fk_EmplyeeId { get; set; }
         public string ImageSlug { get; set; }
