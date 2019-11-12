@@ -1,0 +1,160 @@
+﻿@model ProductCommentEditViewModel
+
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<h4>Edit ProductComment</h4>
+<hr />
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+        </div>
+        <div class="col-md-7">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Refresh</a>
+            <a asp-action="Details" asp-route-id="@Model.Id" class="k-button">Refresh</a>
+            <a asp-action="Index" class="k-button">Back to List</a>
+        </div>
+    </div>
+    <input type="hidden" name="Id" value="@Model?.Id" />
+    <input type="hidden" asp-for="RowVersion" />
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="FkProductId" class="col-form-label"></label>
+            <span class="text-danger">*</span>
+        </div>
+        <div class="col-md-7">
+            <kendo-dropdownlist for="FkProductId" class="form-control" bind-to="@ViewBag.FkProductId" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="FkProductId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Name" class="col-form-label"></label>
+            <span class="text-danger">*</span>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="Name" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Email" class="col-form-label"></label>
+            <span class="text-danger">*</span>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="Email" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Phone" class="col-form-label"></label>
+            <span class="text-danger">*</span>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="Phone" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Comment" class="col-form-label"></label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="Comment" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Comment" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="IsRead" class="col-form-label"></label>
+            <span class="text-danger">*</span>
+        </div>
+        <div class="col-md-7">
+            <kendo-switch for="IsRead" checked="@Model?.IsRead" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="IsRead" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+        </div>
+        <div class="col-md-7">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Refresh</a>
+            <a asp-action="Details" asp-route-id="@Model.Id" class="k-button">Details</a>
+            <a asp-action="Index" class="k-button">Back to List</a>
+        </div>
+    </div>
+</form>
+
+
+@(Html.Kendo().Dialog()
+    .Name("dialogChooseImage_ImageSlug")
+    .Title("Chọn hình")
+    .Content("<div id=\"divChooseImage_ImageSlug\"></div>")
+    .Width(600)
+    .Visible(false)
+    .Modal(true)
+)
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            $( ".k-switch-container" ).click(function() {
+                $('.slugName').slideToggle(); //SlideUp-SlideDown
+                if ($('.slugtitle').val() == '0') {
+                    $('.slugtitle').val(''); //if input has value = 0 then set it Empty
+                } else {
+                    $( '.slugtitle' ).val('0'); //set value = 0 unless it is Empty
+                }
+            });
+            $("#divChooseImage_ImageSlug").kendoImageBrowser({
+                transport: {
+                    type: "imagebrowser-aspnetmvc",
+                    read: "@Url.Action("Read", (string)ViewData["ControllerNameForImageBrowser"])",
+                    destroy: "@Url.Action("Destroy", (string)ViewData["ControllerNameForImageBrowser"])",
+                    imageUrl: "@Url.Content( ImageBrowserProductCommentController.FOLDER_NAME + "/{0}")",
+                    uploadUrl: "@Url.Action("Upload", (string)ViewData["ControllerNameForImageBrowser"])"
+                },
+                apply: function () {
+                    var selectedImage = this.value();
+                    $("#ImageSlug").val(selectedImage);
+                    $("#img_ImageSlug").attr("src", "/Image/"+ selectedImage);
+                    $('#dialogChooseImage_ImageSlug').data("kendoDialog").close();
+                }
+            });
+
+            $("#btnChooseImage_ImageSlug").click(function (e) {
+                e.preventDefault();
+                $('#dialogChooseImage_ImageSlug').data("kendoDialog").open();
+
+            });
+        });
+    </script>
+}
+
+

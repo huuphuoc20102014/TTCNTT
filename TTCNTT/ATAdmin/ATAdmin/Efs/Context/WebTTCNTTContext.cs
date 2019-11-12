@@ -705,7 +705,7 @@ namespace ATAdmin.Efs.Context
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ControlerName)
+                entity.Property(e => e.ControllerName)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -999,7 +999,9 @@ namespace ATAdmin.Efs.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Comment).HasMaxLength(1000);
+                entity.Property(e => e.Comment)
+                    .IsRequired()
+                    .HasMaxLength(1000);
 
                 entity.Property(e => e.CreatedBy)
                     .IsRequired()

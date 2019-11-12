@@ -9,7 +9,7 @@ namespace ATAdmin.Efs.Entities
         public string Name { get; set; }
         public string Slug_Name { get; set; }
         public bool AutoSlug { get; set; }
-        public string ControlerName { get; set; }
+        public string ControllerName { get; set; }
         public string ActionName { get; set; }
         public string AnotherLink { get; set; }
         public string FkMenuId { get; set; }
