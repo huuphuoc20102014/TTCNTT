@@ -15,6 +15,9 @@ using ATAdmin.Efs.Context;
 
 namespace ATAdmin.Controllers
 {
+    //Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.NavigationMetadata
+    //FkEmployeeType
+    //FkEmployeeTypeId
     public class EmployeeController : AtBaseController
     {
         private readonly WebTTCNTTContext _context;
@@ -24,7 +27,7 @@ namespace ATAdmin.Controllers
             _context = context;
         }
 
-        // GET: AboutUs
+        // GET: Employee
         public async Task<IActionResult> Index([FromRoute]string id)
         {
             Employee dbItem = null;
@@ -72,6 +75,7 @@ namespace ATAdmin.Controllers
                     UpdatedDate = h.UpdatedDate,
                     RowVersion = h.RowVersion,
                     RowStatus = (AtRowStatus)h.RowStatus,
+                    
 
                 });
 
@@ -79,7 +83,7 @@ namespace ATAdmin.Controllers
         }
 
 
-        // GET: AboutUs/Details/5
+        // GET: Employee/Details/5
         public async Task<IActionResult> Details([FromRoute] string id)
         {
             if (id == null)
@@ -88,7 +92,8 @@ namespace ATAdmin.Controllers
             }
 
             var employee = await _context.Employee.AsNoTracking()
-                .Include(h => h.Fk_Emplyee)
+
+                .Include(n => n.Fk_Emplyee)
                     .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
             if (employee == null)
@@ -99,26 +104,36 @@ namespace ATAdmin.Controllers
             return View(employee);
         }
 
-        // GET: AboutUs/Create
+        // GET: Employee/Create
         public async Task<IActionResult> Create()
         {
-            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserEmployeeController).Replace("Controller", "");
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserNewController).Replace("Controller", "");
+                // Get list master of foreign property and set to view data
+                await PrepareListMasterForeignKey();
 
-            await PrepareListMasterForeignKey();
-            return View();
+                return View();
+            }
+            else
+            {
+                return RedirectToAction(nameof(ErrorController.Index), nameof(ErrorController).Replace("Controller", ""));
+            }
         }
 
-        // POST: AboutUs/Create
+        // POST: Employee/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([FromForm] EmployeeCreateViewModel vmItem)
         {
-            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserEmployeeController).Replace("Controller", "");
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserNewController).Replace("Controller", "");
+
             // Invalid model
             if (!ModelState.IsValid)
             {
+                // Get list master of foreign property and set to view data
                 await PrepareListMasterForeignKey(vmItem);
                 return View(vmItem);
             }
@@ -128,8 +143,21 @@ namespace ATAdmin.Controllers
             var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
             // Trim white space
+            //vmItem.Slug_Name = $"{vmItem.Slug_Name}".Trim();
+            //if (vmItem.AutoSlug)
+            //{
+            //    vmItem.Slug_Name = NormalizeSlug($"{vmItem.Name}");
+            //}
+            //else
+            //{
+            //    vmItem.Slug_Name = NormalizeSlug($"{vmItem.Slug_Name}");
+            //}
 
-
+            // Check slug is existed => if existed auto get next slug
+            //var listExistedSlug = await _context.Employee.AsNoTracking()
+            //        .Where(h => h.Id.StartsWith(vmItem.Slug_Name))
+            //        .Select(h => h.Slug_Name).ToListAsync();
+            //var slug = CheckAndGenNextSlug(vmItem.Slug_Name, listExistedSlug);
 
             // Create save db item
             var dbItem = new Employee
@@ -143,6 +171,7 @@ namespace ATAdmin.Controllers
                 RowStatus = (int)AtRowStatus.Normal,
                 RowVersion = null,
 
+                Fk_EmplyeeId = vmItem.Fk_EmplyeeId,
                 Code = vmItem.Code,
                 Name = vmItem.Name,
                 Slug_Name = vmItem.Slug_Name,
@@ -150,26 +179,27 @@ namespace ATAdmin.Controllers
                 Address = vmItem.Address,
                 Phone = vmItem.Phone,
                 Specialize = vmItem.Specialize,
-                Fk_EmplyeeId = vmItem.Fk_EmplyeeId,
                 ImageSlug = vmItem.ImageSlug,
+                //AutoSlug = vmItem.AutoSlug,
                 ShortDescription_Html = vmItem.ShortDescription_Html,
                 LongDescription_Html = vmItem.LongDescription_Html,
                 Note = vmItem.Note,
-
+                
             };
             _context.Add(dbItem);
 
             // Set time stamp for table to handle concurrency conflict
-            tableVersion.LastModify = DateTime.Now;
+            if (tableVersion != null)
+            {
+                tableVersion.LastModify = DateTime.Now;
+            }
             await _context.SaveChangesAsync();
-
             return RedirectToAction(nameof(Details), new { id = dbItem.Id });
         }
 
-        // GET: AboutUs/Edit/5
+        // GET: Employee/Edit/5
         public async Task<IActionResult> Edit([FromRoute] string id)
         {
-            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserEmployeeController).Replace("Controller", "");
             if (id == null)
             {
                 return NotFound();
@@ -177,9 +207,7 @@ namespace ATAdmin.Controllers
 
 
             var dbItem = await _context.Employee.AsNoTracking()
-
-            .Where(h => h.Id == id)
-
+                .Where(h => h.Id == id)
                 .Select(h => new EmployeeEditViewModel
                 {
                     Id = h.Id,
@@ -204,21 +232,24 @@ namespace ATAdmin.Controllers
                 return NotFound();
             }
 
+            // Get list master of foreign property and set to view data
             await PrepareListMasterForeignKey(dbItem);
+
             return View(dbItem);
         }
 
-        // POST: AboutUs/Edit/5
+        // POST: Employee/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([FromForm] EmployeeEditViewModel vmItem)
         {
-            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserEmployeeController).Replace("Controller", "");
+
             // Invalid model
             if (!ModelState.IsValid)
             {
+                // Get list master of foreign property and set to view data
                 await PrepareListMasterForeignKey(vmItem);
                 return View(vmItem);
             }
@@ -236,11 +267,16 @@ namespace ATAdmin.Controllers
                 return NotFound();
             }
 
+            // Trim white space
+
+
+
             // Update db item               
             dbItem.UpdatedBy = _loginUserId;
             dbItem.UpdatedDate = DateTime.Now;
             dbItem.RowVersion = vmItem.RowVersion;
 
+            dbItem.Fk_EmplyeeId = vmItem.Fk_EmplyeeId;
             dbItem.Code = vmItem.Code;
             dbItem.Name = vmItem.Name;
             dbItem.Slug_Name = vmItem.Slug_Name;
@@ -248,11 +284,13 @@ namespace ATAdmin.Controllers
             dbItem.Address = vmItem.Address;
             dbItem.Phone = vmItem.Phone;
             dbItem.Specialize = vmItem.Specialize;
-            dbItem.Fk_EmplyeeId = vmItem.Fk_EmplyeeId;
+
             dbItem.ImageSlug = vmItem.ImageSlug;
+            //dbItem.AutoSlug = vmItem.AutoSlug;
             dbItem.ShortDescription_Html = vmItem.ShortDescription_Html;
             dbItem.LongDescription_Html = vmItem.LongDescription_Html;
             dbItem.Note = vmItem.Note;
+
 
             _context.Entry(dbItem).Property(nameof(Employee.RowVersion)).OriginalValue = vmItem.RowVersion;
             // Set time stamp for table to handle concurrency conflict
@@ -262,7 +300,7 @@ namespace ATAdmin.Controllers
             return RedirectToAction(nameof(Details), new { id = dbItem.Id });
         }
 
-        // GET: AboutUs/Details/5
+        // GET: Employee/Details/5
         public async Task<IActionResult> Delete([FromRoute] string id)
         {
             if (id == null)
@@ -271,7 +309,8 @@ namespace ATAdmin.Controllers
             }
 
             var dbItem = await _context.Employee.AsNoTracking()
-                .Include(h => h.Fk_Emplyee)
+
+                .Include(n => n.Fk_Emplyee)
                     .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
             if (dbItem == null)
@@ -282,7 +321,7 @@ namespace ATAdmin.Controllers
             return View(dbItem);
         }
 
-        // POST: AboutUs/Delete/5
+        // POST: Employee/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete([FromForm] string id, [FromForm] byte[] rowVersion)
@@ -297,7 +336,8 @@ namespace ATAdmin.Controllers
             var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
             var dbItem = await _context.Employee
-                .Include(h => h.Fk_Emplyee)
+
+                .Include(n => n.Fk_Emplyee)
                 .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
             if (dbItem == null)
@@ -315,6 +355,8 @@ namespace ATAdmin.Controllers
             if (dbItem.RowStatus != (int)AtRowStatus.Deleted)
             {
                 dbItem.RowStatus = (int)AtRowStatus.Deleted;
+                dbItem.UpdatedBy = _loginUserId;
+                dbItem.UpdatedDate = DateTime.Now;
                 dbItem.RowVersion = rowVersion;
 
                 _context.Entry(dbItem).Property(nameof(Employee.RowVersion)).OriginalValue = rowVersion;
@@ -329,14 +371,15 @@ namespace ATAdmin.Controllers
 
         private async Task PrepareListMasterForeignKey(EmployeeBaseViewModel vm = null)
         {
-            ViewData["FkEmplyeeId"] = new SelectList(
+            ViewData["FkEmployeeTypeId"] = new SelectList(
                 await _context.EmployeeType.AsNoTracking()
-                    .Select(h => new { h.Id, h.Name })
-                    .OrderBy(h => h.Name)
+                    .Select(h => new { h.Id, h.Name, h.RowStatus })
+                    .Where(h => h.RowStatus == (int)AtRowStatus.Normal)
+                    .OrderBy(h => h.Id)
                     .ToListAsync(),
                 "Id", "Name", vm?.Fk_EmplyeeId);
-        }
 
+        }
     }
 
     public class ImageBrowserEmployeeController : EditorImageBrowserController
@@ -371,16 +414,15 @@ namespace ATAdmin.Controllers
             }
             return path;
         }
-
     }
+
 
     public class EmployeeBaseViewModel
     {
-
         public string Code { get; set; }
         public string Name { get; set; }
         public string Slug_Name { get; set; }
-        public bool AutoSlug { get; set; }
+        public bool MyProperty { get; set; }
         public DateTime? BirthDate { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
@@ -390,20 +432,19 @@ namespace ATAdmin.Controllers
         public string ShortDescription_Html { get; set; }
         public string LongDescription_Html { get; set; }
         public string Note { get; set; }
-
     }
 
     public class EmployeeDetailsViewModel : EmployeeBaseViewModel
     {
+
         public String Id { get; set; }
-        public string CreatedBy { get; set; }
+        public String CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
-        public string UpdatedBy { get; set; }
+        public String UpdatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
-        public byte[] RowVersion { get; set; }
+        public Byte[] RowVersion { get; set; }
         public AtRowStatus RowStatus { get; set; }
 
-        public virtual EmployeeType Fk_Emplyee { get; set; }
     }
 
     public class EmployeeCreateViewModel : EmployeeBaseViewModel
@@ -413,9 +454,9 @@ namespace ATAdmin.Controllers
 
     public class EmployeeEditViewModel : EmployeeBaseViewModel
     {
-        public String Id { get; set; }
-        public byte[] RowVersion { get; set; }
 
+        public String Id { get; set; }
+        public Byte[] RowVersion { get; set; }
     }
 
     public class EmployeeBaseValidator<T> : AtBaseValidator<T> where T : EmployeeBaseViewModel
@@ -432,38 +473,37 @@ namespace ATAdmin.Controllers
                         .MaximumLength(50)
                 ;
 
-
             RuleFor(h => h.Slug_Name)
                         .NotEmpty()
                         .MaximumLength(50)
                 ;
 
+            //RuleFor(h => h.AutoSlug)
+            //    ;
+
             RuleFor(h => h.Address)
-                        .NotEmpty()
                         .MaximumLength(500)
                 ;
 
+            RuleFor(h => h.Phone)
+                        .MaximumLength(15)
+                ;
 
             RuleFor(h => h.Specialize)
-                        .NotEmpty()
                         .MaximumLength(100)
+                ;
+
+            RuleFor(h => h.Fk_EmplyeeId)
+                        .MaximumLength(50)
                 ;
 
             RuleFor(h => h.ImageSlug)
-                        //.NotEmpty()
                         .MaximumLength(100)
                 ;
 
-
             RuleFor(h => h.ShortDescription_Html)
-                        .NotEmpty()
                         .MaximumLength(1000)
                 ;
-
-            RuleFor(h => h.LongDescription_Html)
-                        .NotEmpty()
-                ;
-
 
             RuleFor(h => h.Note)
                         .MaximumLength(1000)
@@ -476,7 +516,6 @@ namespace ATAdmin.Controllers
     {
         public EmployeeCreateValidator()
         {
-
         }
     }
 
@@ -492,6 +531,15 @@ namespace ATAdmin.Controllers
             RuleFor(h => h.RowVersion)
                         .NotNull()
                 ;
+
         }
     }
+
+
+
+
+
+
+
+
 }
