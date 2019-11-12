@@ -16,24 +16,24 @@ using ATAdmin.Efs.Context;
 namespace ATAdmin.Controllers
 {
     //Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.NavigationMetadata
-    //FkNewsType
-    //FkNewsTypeId
-    public class NewsController : AtBaseController
+    //FkCourseType
+    //FkCourseTypeId
+    public class CourseController : AtBaseController
     {
         private readonly WebTTCNTTContext _context;
 
-        public NewsController(WebTTCNTTContext context)
+        public CourseController(WebTTCNTTContext context)
         {
             _context = context;
         }
 
-        // GET: News
+        // GET: Course
         public async Task<IActionResult> Index([FromRoute]string id)
         {
-            News dbItem = null;
+            Course dbItem = null;
             if (!string.IsNullOrWhiteSpace(id))
             {
-                dbItem = await _context.News.AsNoTracking().FirstOrDefaultAsync(h => h.Id == id);
+                dbItem = await _context.Course.AsNoTracking().FirstOrDefaultAsync(h => h.Id == id);
                 if (dbItem == null)
                 {
                     return NotFound();
@@ -41,26 +41,26 @@ namespace ATAdmin.Controllers
             }
             ViewData["ParentItem"] = dbItem;
 
-            ViewData["ControllerNameForGrid"] = nameof(NewsController).Replace("Controller", "");
+            ViewData["ControllerNameForGrid"] = nameof(CourseController).Replace("Controller", "");
             return View();
         }
 
         public async Task<IActionResult> Index_Read([DataSourceRequest] DataSourceRequest request, string parentId)
         {
-            var baseQuery = _context.News.AsNoTracking();
+            var baseQuery = _context.Course.AsNoTracking();
             if (!string.IsNullOrWhiteSpace(parentId))
             {
                 baseQuery = baseQuery.Where(h => h.Id == parentId);
             }
             var query = baseQuery
                 .Where(p => p.RowStatus == (int)AtRowStatus.Normal)
-                .Select(h => new NewsDetailsViewModel
+                .Select(h => new CourseDetailsViewModel
                 {
                     Id = h.Id,
-                    FkNewsTypeId = h.FkNewsTypeId,
+                    FkCourseTypeId = h.FkCourseTypeId,
                     // Ford
-                    Title = h.Title,
-                    SlugTitle = h.Slug_Title,
+                    Name = h.Name,
+                    SlugName = h.Slug_Name,
                     ShortDescriptionHtml = h.ShortDescription_Html,
                     LongDescriptionHtml = h.LongDescription_Html,
                     Tags = h.Tags,
@@ -81,7 +81,7 @@ namespace ATAdmin.Controllers
         }
 
 
-        // GET: News/Details/5
+        // GET: Course/Details/5
         public async Task<IActionResult> Details([FromRoute] string id)
         {
             if (id == null)
@@ -89,20 +89,20 @@ namespace ATAdmin.Controllers
                 return NotFound();
             }
 
-            var news = await _context.News.AsNoTracking()
+            var course = await _context.Course.AsNoTracking()
 
-                .Include(n => n.FkNewsType)
+                .Include(n => n.FkCourseType)
                     .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
-            if (news == null)
+            if (course == null)
             {
                 return NotFound();
             }
 
-            return View(news);
+            return View(course);
         }
 
-        // GET: News/Create
+        // GET: Course/Create
         public async Task<IActionResult> Create()
         {
             if (User.Identity.IsAuthenticated)
@@ -119,12 +119,12 @@ namespace ATAdmin.Controllers
             }
         }
 
-        // POST: News/Create
+        // POST: Course/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([FromForm] NewsCreateViewModel vmItem)
+        public async Task<IActionResult> Create([FromForm] CourseCreateViewModel vmItem)
         {
             ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserNewController).Replace("Controller", "");
 
@@ -137,28 +137,28 @@ namespace ATAdmin.Controllers
             }
 
             // Get time stamp for table to handle concurrency conflict
-            var tableName = nameof(News);
+            var tableName = nameof(Course);
             var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
             // Trim white space
-            vmItem.SlugTitle = $"{vmItem.SlugTitle}".Trim();
+            vmItem.SlugName = $"{vmItem.SlugName}".Trim();
             if (vmItem.AutoSlug)
             {
-                vmItem.SlugTitle = NormalizeSlug($"{vmItem.Title}");
+                vmItem.SlugName = NormalizeSlug($"{vmItem.Name}");
             }
             else
             {
-                vmItem.SlugTitle = NormalizeSlug($"{vmItem.SlugTitle}");
+                vmItem.SlugName = NormalizeSlug($"{vmItem.SlugName}");
             }
 
             // Check slug is existed => if existed auto get next slug
-            var listExistedSlug = await _context.News.AsNoTracking()
-                    .Where(h => h.Id.StartsWith(vmItem.SlugTitle))
-                    .Select(h => h.Slug_Title).ToListAsync();
-            var slug = CheckAndGenNextSlug(vmItem.SlugTitle, listExistedSlug);
+            var listExistedSlug = await _context.Course.AsNoTracking()
+                    .Where(h => h.Id.StartsWith(vmItem.SlugName))
+                    .Select(h => h.Slug_Name).ToListAsync();
+            var slug = CheckAndGenNextSlug(vmItem.SlugName, listExistedSlug);
 
             // Create save db item
-            var dbItem = new News
+            var dbItem = new Course
             {
                 Id = Guid.NewGuid().ToString(),
 
@@ -169,9 +169,9 @@ namespace ATAdmin.Controllers
                 RowStatus = (int)AtRowStatus.Normal,
                 RowVersion = null,
 
-                FkNewsTypeId = vmItem.FkNewsTypeId,
-                Title = vmItem.Title,
-                Slug_Title = vmItem.SlugTitle,
+                FkCourseTypeId = vmItem.FkCourseTypeId,
+                Name = vmItem.Name,
+                Slug_Name = vmItem.SlugName,
                 AutoSlug = vmItem.AutoSlug,
                 ShortDescription_Html = vmItem.ShortDescriptionHtml,
                 LongDescription_Html = vmItem.LongDescriptionHtml,
@@ -191,8 +191,8 @@ namespace ATAdmin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Details), new { id = dbItem.Id });
         }
-        
-        // GET: News/Edit/5
+
+        // GET: Course/Edit/5
         public async Task<IActionResult> Edit([FromRoute] string id)
         {
             if (id == null)
@@ -201,14 +201,14 @@ namespace ATAdmin.Controllers
             }
 
 
-            var dbItem = await _context.News.AsNoTracking()
+            var dbItem = await _context.Course.AsNoTracking()
                 .Where(h => h.Id == id)
-                .Select(h => new NewsEditViewModel
+                .Select(h => new CourseEditViewModel
                 {
                     Id = h.Id,
-                    FkNewsTypeId = h.FkNewsTypeId,
-                    Title = h.Title,
-                    SlugTitle = h.Slug_Title,
+                    FkCourseTypeId = h.FkCourseTypeId,
+                    Name = h.Name,
+                    SlugName = h.Slug_Name,
                     AutoSlug = h.AutoSlug,
                     ShortDescriptionHtml = h.ShortDescription_Html,
                     LongDescriptionHtml = h.LongDescription_Html,
@@ -231,12 +231,12 @@ namespace ATAdmin.Controllers
             return View(dbItem);
         }
 
-        // POST: News/Edit/5
+        // POST: Course/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([FromForm] NewsEditViewModel vmItem)
+        public async Task<IActionResult> Edit([FromForm] CourseEditViewModel vmItem)
         {
 
             // Invalid model
@@ -248,10 +248,10 @@ namespace ATAdmin.Controllers
             }
 
             // Get time stamp for table to handle concurrency conflict
-            var tableName = nameof(News);
+            var tableName = nameof(Course);
             var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
-            var dbItem = await _context.News
+            var dbItem = await _context.Course
                 .Where(h => h.Id == vmItem.Id)
 
                 .FirstOrDefaultAsync();
@@ -269,9 +269,9 @@ namespace ATAdmin.Controllers
             dbItem.UpdatedDate = DateTime.Now;
             dbItem.RowVersion = vmItem.RowVersion;
 
-            dbItem.FkNewsTypeId = vmItem.FkNewsTypeId;
-            dbItem.Title = vmItem.Title;
-            dbItem.Slug_Title = vmItem.SlugTitle;
+            dbItem.FkCourseTypeId = vmItem.FkCourseTypeId;
+            dbItem.Name = vmItem.Name;
+            dbItem.Slug_Name = vmItem.SlugName;
             dbItem.AutoSlug = vmItem.AutoSlug;
             dbItem.ShortDescription_Html = vmItem.ShortDescriptionHtml;
             dbItem.LongDescription_Html = vmItem.LongDescriptionHtml;
@@ -281,7 +281,7 @@ namespace ATAdmin.Controllers
             dbItem.Note = vmItem.Note;
             dbItem.ImageSlug = vmItem.ImageSlug;
 
-            _context.Entry(dbItem).Property(nameof(News.RowVersion)).OriginalValue = vmItem.RowVersion;
+            _context.Entry(dbItem).Property(nameof(Course.RowVersion)).OriginalValue = vmItem.RowVersion;
             // Set time stamp for table to handle concurrency conflict
             tableVersion.LastModify = DateTime.Now;
             await _context.SaveChangesAsync();
@@ -289,7 +289,7 @@ namespace ATAdmin.Controllers
             return RedirectToAction(nameof(Details), new { id = dbItem.Id });
         }
 
-        // GET: News/Details/5
+        // GET: Course/Details/5
         public async Task<IActionResult> Delete([FromRoute] string id)
         {
             if (id == null)
@@ -297,9 +297,9 @@ namespace ATAdmin.Controllers
                 return NotFound();
             }
 
-            var dbItem = await _context.News.AsNoTracking()
+            var dbItem = await _context.Course.AsNoTracking()
 
-                .Include(n => n.FkNewsType)
+                .Include(n => n.FkCourseType)
                     .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
             if (dbItem == null)
@@ -310,7 +310,7 @@ namespace ATAdmin.Controllers
             return View(dbItem);
         }
 
-        // POST: News/Delete/5
+        // POST: Course/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete([FromForm] string id, [FromForm] byte[] rowVersion)
@@ -321,12 +321,12 @@ namespace ATAdmin.Controllers
             }
 
             // Get time stamp for table to handle concurrency conflict
-            var tableName = nameof(News);
+            var tableName = nameof(Course);
             var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
-            var dbItem = await _context.News
+            var dbItem = await _context.Course
 
-                .Include(n => n.FkNewsType)
+                .Include(n => n.FkCourseType)
                 .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
             if (dbItem == null)
@@ -348,7 +348,7 @@ namespace ATAdmin.Controllers
                 dbItem.UpdatedDate = DateTime.Now;
                 dbItem.RowVersion = rowVersion;
 
-                _context.Entry(dbItem).Property(nameof(News.RowVersion)).OriginalValue = rowVersion;
+                _context.Entry(dbItem).Property(nameof(Course.RowVersion)).OriginalValue = rowVersion;
                 // Set time stamp for table to handle concurrency conflict
                 tableVersion.LastModify = DateTime.Now;
                 await _context.SaveChangesAsync();
@@ -358,22 +358,22 @@ namespace ATAdmin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private async Task PrepareListMasterForeignKey(NewsBaseViewModel vm = null)
+        private async Task PrepareListMasterForeignKey(CourseBaseViewModel vm = null)
         {
-            ViewData["FkNewsTypeId"] = new SelectList(
-                await _context.NewsType.AsNoTracking()
-                    .Select(h => new { h.Id, h.Name, h.RowStatus})
-                    .Where(h=>h.RowStatus == (int)AtRowStatus.Normal)
+            ViewData["FkCourseTypeId"] = new SelectList(
+                await _context.CourseType.AsNoTracking()
+                    .Select(h => new { h.Id, h.Name, h.RowStatus })
+                    .Where(h => h.RowStatus == (int)AtRowStatus.Normal)
                     .OrderBy(h => h.Id)
                     .ToListAsync(),
-                "Id", "Name", vm?.FkNewsTypeId);
+                "Id", "Name", vm?.FkCourseTypeId);
 
-                  }
+        }
     }
 
-    public class ImageBrowserNewController : EditorImageBrowserController
+    public class ImageBrowserCourseController : EditorImageBrowserController
     {
-        public const string FOLDER_NAME = "ImagesNews";
+        public const string FOLDER_NAME = "ImagesCourse";
         public string FOLDER_ROOTPATH;
 
         /// <summary>
@@ -387,7 +387,7 @@ namespace ATAdmin.Controllers
             }
         }
 
-        public ImageBrowserNewController(IHostingEnvironment hostingEnvironment, IConfiguration staticFileSetting)
+        public ImageBrowserCourseController(IHostingEnvironment hostingEnvironment, IConfiguration staticFileSetting)
            : base(hostingEnvironment)
         {
             FOLDER_ROOTPATH = staticFileSetting.GetValue<string>("StaticFileSetting");
@@ -406,12 +406,12 @@ namespace ATAdmin.Controllers
     }
 
 
-    public class NewsBaseViewModel
+    public class CourseBaseViewModel
     {
 
-        public String FkNewsTypeId { get; set; }
-        public String Title { get; set; }
-        public String SlugTitle { get; set; }
+        public String FkCourseTypeId { get; set; }
+        public String Name { get; set; }
+        public String SlugName { get; set; }
         public Boolean AutoSlug { get; set; }
         public String ShortDescriptionHtml { get; set; }
         public String LongDescriptionHtml { get; set; }
@@ -422,7 +422,7 @@ namespace ATAdmin.Controllers
         public String ImageSlug { get; set; }
     }
 
-    public class NewsDetailsViewModel : NewsBaseViewModel
+    public class CourseDetailsViewModel : CourseBaseViewModel
     {
 
         public String Id { get; set; }
@@ -433,38 +433,34 @@ namespace ATAdmin.Controllers
         public Byte[] RowVersion { get; set; }
         public AtRowStatus RowStatus { get; set; }
 
-
-        public string FkNewsType_Code { get; set; }
-        public string FkNewsType_Name { get; set; }
-
     }
 
-    public class NewsCreateViewModel : NewsBaseViewModel
+    public class CourseCreateViewModel : CourseBaseViewModel
     {
 
     }
 
-    public class NewsEditViewModel : NewsBaseViewModel
+    public class CourseEditViewModel : CourseBaseViewModel
     {
 
         public String Id { get; set; }
         public Byte[] RowVersion { get; set; }
     }
 
-    public class NewsBaseValidator<T> : AtBaseValidator<T> where T : NewsBaseViewModel
+    public class CourseBaseValidator<T> : AtBaseValidator<T> where T : CourseBaseViewModel
     {
-        public NewsBaseValidator()
+        public CourseBaseValidator()
         {
-            RuleFor(h => h.FkNewsTypeId)
+            RuleFor(h => h.FkCourseTypeId)
                         .NotEmpty()
                         .MaximumLength(50)
                 ;
 
-            RuleFor(h => h.Title)
+            RuleFor(h => h.Name)
                         .MaximumLength(500)
                 ;
 
-            RuleFor(h => h.SlugTitle)
+            RuleFor(h => h.SlugName)
                         .NotEmpty()
                         .MaximumLength(500)
                 ;
@@ -502,16 +498,16 @@ namespace ATAdmin.Controllers
         }
     }
 
-    public class NewsCreateValidator : NewsBaseValidator<NewsCreateViewModel>
+    public class CourseCreateValidator : CourseBaseValidator<CourseCreateViewModel>
     {
-        public NewsCreateValidator()
+        public CourseCreateValidator()
         {
         }
     }
 
-    public class NewsEditValidator : NewsBaseValidator<NewsEditViewModel>
+    public class CourseEditValidator : CourseBaseValidator<CourseEditViewModel>
     {
-        public NewsEditValidator()
+        public CourseEditValidator()
         {
             RuleFor(h => h.Id)
                         .NotEmpty()

@@ -30,7 +30,6 @@ namespace ATAdmin.Efs.Context
         public virtual DbSet<NewsComment> NewsComment { get; set; }
         public virtual DbSet<NewsType> NewsType { get; set; }
         public virtual DbSet<OperationHistory> OperationHistory { get; set; }
-        public virtual DbSet<People> People { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<ProductComment> ProductComment { get; set; }
         public virtual DbSet<ProductImage> ProductImage { get; set; }
@@ -391,7 +390,7 @@ namespace ATAdmin.Efs.Context
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.FkProjectTypeId)
+                entity.Property(e => e.FkCourseTypeId)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -429,9 +428,9 @@ namespace ATAdmin.Efs.Context
 
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
 
-                entity.HasOne(d => d.FkProjectType)
+                entity.HasOne(d => d.FkCourseType)
                     .WithMany(p => p.Course)
-                    .HasForeignKey(d => d.FkProjectTypeId)
+                    .HasForeignKey(d => d.FkCourseTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Course_CourseType");
             });
@@ -927,38 +926,6 @@ namespace ATAdmin.Efs.Context
                 entity.Property(e => e.Title)
                     .IsRequired()
                     .HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<People>(entity =>
-            {
-                entity.Property(e => e.Id)
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.BirthDay).HasColumnType("datetime");
-
-                entity.Property(e => e.Gmail).HasMaxLength(100);
-
-                entity.Property(e => e.Img)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Job)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.JobIntroduction)
-                    .IsRequired()
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Phone)
-                    .IsRequired()
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Product>(entity =>
