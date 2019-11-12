@@ -1,0 +1,150 @@
+﻿@model NewsCommentCreateViewModel
+
+
+@{
+    ViewData["Title"] = "Tạo";
+
+}
+
+
+<h4>Tạo mới</h4>
+<hr />
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+        </div>
+        <div class="col-md-7">
+            <input type="submit" value="Tạo" class="btn btn-primary" />
+            <a asp-action="Index" class="k-button">Quay lại danh sách</a>
+        </div>
+    </div>
+
+
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="FkNewsId" class="col-form-label"></label>
+            <span class="text-danger">*</span>
+        </div>
+        <div class="col-md-7">
+            <kendo-dropdownlist for="FkNewsId" class="form-control" bind-to="@ViewBag.Fk_NewsId" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="FkNewsId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Name" class="col-form-label"></label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="Name" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group slugName">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Email" class="col-form-label"></label>
+            <span class="text-danger">*</span>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="Email" class="k-textbox form-control slugtitle" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Phone" class="col-form-label"></label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="Phone" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Comment" class="col-form-label"></label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="Comment" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Comment" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="IsRead" class="col-form-label"></label>
+        </div>
+        <div class="col-md-7">
+            <kendo-switch for="IsRead" checked="@Model?.IsRead" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="IsRead" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+        </div>
+        <div class="col-md-7">
+            <input type="submit" value="Tạo" class="btn btn-primary" />
+            <a asp-action="Index" class="k-button">Quay lại danh sách</a>
+        </div>
+    </div>
+</form>
+
+
+@(Html.Kendo().Dialog()
+    .Name("dialogChooseImage_ImageSlug")
+    .Title("Chọn hình")
+    .Content("<div id=\"divChooseImage_ImageSlug\"></div>")
+    .Width(600)
+    .Visible(false)
+    .Modal(true)
+)
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            $( ".k-switch-container" ).click(function() {
+                $('.slugName').slideToggle(); //SlideUp-SlideDown
+                if ($('.slugtitle').val() == '0') {
+                    $('.slugtitle').val(''); //if input has value = 0 then set it Empty
+                } else {
+                    $( '.slugtitle' ).val('0'); //set value = 0 unless it is Empty
+                }
+            });
+            $("#divChooseImage_ImageSlug").kendoImageBrowser({
+                transport: {
+                    type: "imagebrowser-aspnetmvc",
+                    read: "@Url.Action("Read", (string)ViewData["ControllerNameForImageBrowser"])",
+                    destroy: "@Url.Action("Destroy", (string)ViewData["ControllerNameForImageBrowser"])",
+                    imageUrl: "@Url.Content( ImageBrowserNewController.FOLDER_NAME + "/{0}")",
+                    uploadUrl: "@Url.Action("Upload", (string)ViewData["ControllerNameForImageBrowser"])"
+                },
+                apply: function () {
+                    var selectedImage = this.value();
+                    $("#ImageSlug").val(selectedImage);
+                    $("#img_ImageSlug").attr("src", "/Image/"+ selectedImage);
+                    $('#dialogChooseImage_ImageSlug').data("kendoDialog").close();
+                }
+            });
+
+            $("#btnChooseImage_ImageSlug").click(function (e) {
+                e.preventDefault();
+                $('#dialogChooseImage_ImageSlug').data("kendoDialog").open();
+
+            });
+        });
+    </script>
+}
