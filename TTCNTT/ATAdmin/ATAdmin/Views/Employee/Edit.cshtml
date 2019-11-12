@@ -23,6 +23,20 @@
     </div>
     <input type="hidden" name="Id" value="@Model?.Id" />
     <input type="hidden" asp-for="RowVersion" />
+
+    <div class="row form-group slugName">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Code" class="col-form-label"></label>
+            <span class="text-danger">*</span>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="Code" class="k-textbox form-control slugtitle" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Code" class="text-danger"></span>
+        </div>
+    </div>
+
     <div class="row form-group slugName">
         <div class="col-md-3 text-md-right ">
             <label asp-for="Name" class="col-form-label"></label>
@@ -101,7 +115,7 @@
             <label asp-for="Specialize" class="col-form-label"></label>
         </div>
         <div class="col-md-7">
-            <input asp-for="Specialize" type="email" placeholder="abc@gmail.com" class="k-textbox form-control" />
+            <input asp-for="Specialize" class="k-textbox form-control" />
         </div>
         <div class="offset-md-3 col-md-7 at-wrapper-validate">
             <span asp-validation-for="Specialize" class="text-danger"></span>

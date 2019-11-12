@@ -7,7 +7,6 @@ namespace ATAdmin.Efs.Context
 {
     public partial class WebTTCNTTContext : DbContext
     {
-        internal string LoginUserId;
         public virtual DbSet<AboutCustomer> AboutCustomer { get; set; }
         public virtual DbSet<AboutUs> AboutUs { get; set; }
         public virtual DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
@@ -518,9 +517,7 @@ namespace ATAdmin.Efs.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Address)
-                    .IsRequired()
-                    .HasMaxLength(500);
+                entity.Property(e => e.Address).HasMaxLength(500);
 
                 entity.Property(e => e.BirthDate).HasColumnType("datetime");
 
@@ -540,13 +537,10 @@ namespace ATAdmin.Efs.Context
                     .IsUnicode(false);
 
                 entity.Property(e => e.ImageSlug)
-                    .IsRequired()
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.LongDescription_Html)
-                    .IsRequired()
-                    .HasColumnType("ntext");
+                entity.Property(e => e.LongDescription_Html).HasColumnType("ntext");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -562,18 +556,14 @@ namespace ATAdmin.Efs.Context
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.ShortDescription_Html)
-                    .IsRequired()
-                    .HasMaxLength(1000);
+                entity.Property(e => e.ShortDescription_Html).HasMaxLength(1000);
 
                 entity.Property(e => e.Slug_Name)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Specialize)
-                    .IsRequired()
-                    .HasMaxLength(100);
+                entity.Property(e => e.Specialize).HasMaxLength(100);
 
                 entity.Property(e => e.UpdatedBy)
                     .HasMaxLength(50)

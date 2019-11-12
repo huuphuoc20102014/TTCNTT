@@ -450,7 +450,7 @@ namespace ATAdmin.Controllers
                 ;
 
             RuleFor(h => h.ImageSlug)
-                        .NotEmpty()
+                        //.NotEmpty()
                         .MaximumLength(100)
                 ;
 
