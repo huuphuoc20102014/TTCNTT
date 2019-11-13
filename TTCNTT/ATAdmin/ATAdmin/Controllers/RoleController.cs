@@ -119,7 +119,7 @@ namespace ATAdmin.Controllers
             {
                 Id = Guid.NewGuid().ToString(),
                 Name = vmItem.Name,
-                NormalizedName = vmItem.NormalizedName,
+                NormalizedName = vmItem.NormalizedName.ToUpper(),
                 ConcurrencyStamp = vmItem.ConcurrencyStamp,
             };
             _context.Add(dbItem);
@@ -190,7 +190,7 @@ namespace ATAdmin.Controllers
             }
 
             dbItem.Name = vmItem.Name;
-            dbItem.NormalizedName = vmItem.NormalizedName;
+            dbItem.NormalizedName = vmItem.NormalizedName.ToUpper();
             dbItem.ConcurrencyStamp = vmItem.ConcurrencyStamp;
 
             _context.Entry(dbItem);
