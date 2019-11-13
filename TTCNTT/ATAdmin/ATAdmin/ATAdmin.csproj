@@ -8,25 +8,20 @@
   <ItemGroup>
     <Compile Remove="Views\GrantRights\**" />
     <Compile Remove="Views\ProjectType\**" />
-    <Compile Remove="Views\Role\**" />
     <Compile Remove="Views\SettingType\**" />
     <Content Remove="Views\GrantRights\**" />
     <Content Remove="Views\ProjectType\**" />
-    <Content Remove="Views\Role\**" />
     <Content Remove="Views\SettingType\**" />
     <EmbeddedResource Remove="Views\GrantRights\**" />
     <EmbeddedResource Remove="Views\ProjectType\**" />
-    <EmbeddedResource Remove="Views\Role\**" />
     <EmbeddedResource Remove="Views\SettingType\**" />
     <None Remove="Views\GrantRights\**" />
     <None Remove="Views\ProjectType\**" />
-    <None Remove="Views\Role\**" />
     <None Remove="Views\SettingType\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Controllers\GrantRightsController.cs" />
-    <Compile Remove="Controllers\RoleController.cs" />
     <Compile Remove="Controllers\SettingTypeController.cs" />
   </ItemGroup>
 
@@ -62,6 +57,11 @@
     <None Include="Views\Product\Details.cshtml" />
     <None Include="Views\Product\Edit.cshtml" />
     <None Include="Views\Product\Index.cshtml" />
+    <None Include="Views\Role\Create.cshtml" />
+    <None Include="Views\Role\Delete.cshtml" />
+    <None Include="Views\Role\Details.cshtml" />
+    <None Include="Views\Role\Edit.cshtml" />
+    <None Include="Views\Role\Index.cshtml" />
     <None Include="Views\Service\Create.cshtml" />
     <None Include="Views\Service\Delete.cshtml" />
     <None Include="Views\Service\Details.cshtml" />

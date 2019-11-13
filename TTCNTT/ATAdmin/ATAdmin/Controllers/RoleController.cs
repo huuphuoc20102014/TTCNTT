@@ -12,15 +12,16 @@ using Kendo.Mvc.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
+using ATAdmin.Efs.Context;
 
 namespace ATAdmin.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class RoleController : AtBaseController
     {
-        private readonly WebAtSolutionContext _context;
+        private readonly WebTTCNTTContext _context;
 
-        public RoleController(WebAtSolutionContext context)
+        public RoleController(WebTTCNTTContext context)
         {
             _context = context;
         }
@@ -116,13 +117,10 @@ namespace ATAdmin.Controllers
             // Create save db item
             var dbItem = new AspNetRoles
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = vmItem.Id,
                 Name = vmItem.Name,
                 NormalizedName = vmItem.NormalizedName,
                 ConcurrencyStamp = vmItem.ConcurrencyStamp,
-
-
-
             };
             _context.Add(dbItem);
 
@@ -266,6 +264,7 @@ namespace ATAdmin.Controllers
 
     public class RoleBaseViewModel
     {
+        public String Id { get; set; }
         public String Name { get; set; }
         public String NormalizedName { get; set; }
         public String ConcurrencyStamp { get; set; }
@@ -273,10 +272,6 @@ namespace ATAdmin.Controllers
 
     public class RoleDetailsViewModel : RoleBaseViewModel
     {
-
-        public String Id { get; set; }
-
-
 
     }
 
@@ -287,8 +282,6 @@ namespace ATAdmin.Controllers
 
     public class RoleEditViewModel : RoleBaseViewModel
     {
-
-        public String Id { get; set; }
 
 
     }
