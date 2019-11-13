@@ -117,7 +117,7 @@ namespace ATAdmin.Controllers
             // Create save db item
             var dbItem = new AspNetRoles
             {
-                Id = vmItem.Id,
+                Id = Guid.NewGuid().ToString(),
                 Name = vmItem.Name,
                 NormalizedName = vmItem.NormalizedName,
                 ConcurrencyStamp = vmItem.ConcurrencyStamp,
@@ -272,7 +272,7 @@ namespace ATAdmin.Controllers
 
     public class RoleDetailsViewModel : RoleBaseViewModel
     {
-
+        
     }
 
     public class RoleCreateViewModel : RoleBaseViewModel

@@ -12,15 +12,16 @@ using Kendo.Mvc.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
+using ATAdmin.Efs.Context;
 
 namespace ATAdmin.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class GrantRightsController : AtBaseController
     {
-        private readonly WebAtSolutionContext _context;
+        private readonly WebTTCNTTContext _context;
 
-        public GrantRightsController(WebAtSolutionContext context)
+        public GrantRightsController(WebTTCNTTContext context)
         {
             _context = context;
         }
