@@ -38,8 +38,6 @@ namespace TTCNTT.Efs.Context
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<NewsComment> NewsComment { get; set; }
         public virtual DbSet<NewsType> NewsType { get; set; }
-        public virtual DbSet<OperationHistory> OperationHistory { get; set; }
-        public virtual DbSet<People> People { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<ProductComment> ProductComment { get; set; }
         public virtual DbSet<ProductImage> ProductImage { get; set; }
@@ -291,11 +289,17 @@ namespace TTCNTT.Efs.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.KeyWord).HasMaxLength(1000);
+
+                entity.Property(e => e.MetaData).HasMaxLength(1000);
+
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(100);
 
                 entity.Property(e => e.Note).HasMaxLength(1000);
+
+                entity.Property(e => e.Note1).HasMaxLength(1000);
 
                 entity.Property(e => e.RowVersion)
                     .IsRequired()
@@ -305,6 +309,8 @@ namespace TTCNTT.Efs.Context
                     .IsRequired()
                     .HasMaxLength(100)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Tags).HasMaxLength(1000);
 
                 entity.Property(e => e.UpdatedBy)
                     .HasMaxLength(50)
@@ -388,7 +394,7 @@ namespace TTCNTT.Efs.Context
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.FkProjectTypeId)
+                entity.Property(e => e.FkCourseTypeId)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -426,9 +432,9 @@ namespace TTCNTT.Efs.Context
 
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
 
-                entity.HasOne(d => d.FkProjectType)
+                entity.HasOne(d => d.FkCourseType)
                     .WithMany(p => p.Course)
-                    .HasForeignKey(d => d.FkProjectTypeId)
+                    .HasForeignKey(d => d.FkCourseTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Course_CourseType");
             });
@@ -514,9 +520,7 @@ namespace TTCNTT.Efs.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Address)
-                    .IsRequired()
-                    .HasMaxLength(500);
+                entity.Property(e => e.Address).HasMaxLength(500);
 
                 entity.Property(e => e.BirthDate).HasColumnType("datetime");
 
@@ -536,13 +540,10 @@ namespace TTCNTT.Efs.Context
                     .IsUnicode(false);
 
                 entity.Property(e => e.ImageSlug)
-                    .IsRequired()
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.LongDescription_Html)
-                    .IsRequired()
-                    .HasColumnType("ntext");
+                entity.Property(e => e.LongDescription_Html).HasColumnType("ntext");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -550,13 +551,15 @@ namespace TTCNTT.Efs.Context
 
                 entity.Property(e => e.Note).HasMaxLength(1000);
 
+                entity.Property(e => e.Phone)
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.RowVersion)
                     .IsRequired()
                     .IsRowVersion();
 
-                entity.Property(e => e.ShortDescription_Html)
-                    .IsRequired()
-                    .HasMaxLength(1000);
+                entity.Property(e => e.ShortDescription_Html).HasMaxLength(1000);
 
                 entity.Property(e => e.Slug_Name)
                     .IsRequired()
@@ -706,7 +709,7 @@ namespace TTCNTT.Efs.Context
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ControlerName)
+                entity.Property(e => e.ControllerName)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -912,55 +915,6 @@ namespace TTCNTT.Efs.Context
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<OperationHistory>(entity =>
-            {
-                entity.Property(e => e.Id)
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.CreateDate).HasColumnType("datetime");
-
-                entity.Property(e => e.HistoryDescription)
-                    .IsRequired()
-                    .HasMaxLength(300);
-
-                entity.Property(e => e.Title)
-                    .IsRequired()
-                    .HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<People>(entity =>
-            {
-                entity.Property(e => e.Id)
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.BirthDay).HasColumnType("datetime");
-
-                entity.Property(e => e.Gmail).HasMaxLength(100);
-
-                entity.Property(e => e.Img)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Job)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.JobIntroduction)
-                    .IsRequired()
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Phone)
-                    .IsRequired()
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
-            });
-
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.Property(e => e.Id)
@@ -1032,7 +986,9 @@ namespace TTCNTT.Efs.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Comment).HasMaxLength(1000);
+                entity.Property(e => e.Comment)
+                    .IsRequired()
+                    .HasMaxLength(1000);
 
                 entity.Property(e => e.CreatedBy)
                     .IsRequired()

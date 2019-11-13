@@ -32,6 +32,7 @@ namespace TTCNTT.Helpers
         public string FOOTER_LOGO { get; set; }
         public string FOOTER_YOUTUBE { get; set; }
 
+        public string IMAGESLIDE { get; set; }
         public string BANNER { get; set; }
         public string TOP_LOGO { get; set; }
 

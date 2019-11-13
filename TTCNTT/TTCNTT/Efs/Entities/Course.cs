@@ -11,7 +11,7 @@ namespace TTCNTT.Efs.Entities
         }
 
         public string Id { get; set; }
-        public string FkProjectTypeId { get; set; }
+        public string FkCourseTypeId { get; set; }
         public string Name { get; set; }
         public string Slug_Name { get; set; }
         public bool AutoSlug { get; set; }
@@ -29,7 +29,7 @@ namespace TTCNTT.Efs.Entities
         public byte[] RowVersion { get; set; }
         public int RowStatus { get; set; }
 
-        public virtual CourseType FkProjectType { get; set; }
+        public virtual CourseType FkCourseType { get; set; }
         public virtual ICollection<Contact> Contact { get; set; }
     }
 }

@@ -27,6 +27,10 @@ namespace TTCNTT.Efs.Entities
         public int RowStatus { get; set; }
         public int? CountChild { get; set; }
         public int? CountProduct { get; set; }
+        public string Tags { get; set; }
+        public string KeyWord { get; set; }
+        public string MetaData { get; set; }
+        public string Note1 { get; set; }
 
         public virtual Category FkCategory { get; set; }
         public virtual ICollection<Category> InverseFkCategory { get; set; }
