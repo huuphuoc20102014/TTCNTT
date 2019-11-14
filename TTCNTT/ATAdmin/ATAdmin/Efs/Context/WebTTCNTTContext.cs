@@ -29,7 +29,6 @@ namespace ATAdmin.Efs.Context
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<NewsComment> NewsComment { get; set; }
         public virtual DbSet<NewsType> NewsType { get; set; }
-        public virtual DbSet<OperationHistory> OperationHistory { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<ProductComment> ProductComment { get; set; }
         public virtual DbSet<ProductImage> ProductImage { get; set; }
@@ -40,6 +39,7 @@ namespace ATAdmin.Efs.Context
         public virtual DbSet<Setting> Setting { get; set; }
         public virtual DbSet<TableVersion> TableVersion { get; set; }
         public virtual DbSet<Training> Training { get; set; }
+        public virtual DbSet<View_Users_Roles> View_Users_Roles { get; set; }
 
         public WebTTCNTTContext(DbContextOptions<WebTTCNTTContext> options) : base(options)
         {
@@ -911,23 +911,6 @@ namespace ATAdmin.Efs.Context
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<OperationHistory>(entity =>
-            {
-                entity.Property(e => e.Id)
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.CreateDate).HasColumnType("datetime");
-
-                entity.Property(e => e.HistoryDescription)
-                    .IsRequired()
-                    .HasMaxLength(300);
-
-                entity.Property(e => e.Title)
-                    .IsRequired()
-                    .HasMaxLength(50);
-            });
-
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.Property(e => e.Id)
@@ -1376,6 +1359,25 @@ namespace ATAdmin.Efs.Context
                 entity.Property(e => e.Slug_Name)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<View_Users_Roles>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("View_Users_Roles");
+
+                entity.Property(e => e.IdRole)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.IdUser)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.TenNguoiDung).HasMaxLength(256);
+
+                entity.Property(e => e.TenQuyen).HasMaxLength(256);
             });
 
             OnModelCreatingPartial(modelBuilder);

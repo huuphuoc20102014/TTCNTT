@@ -6,22 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\GrantRights\**" />
     <Compile Remove="Views\ProjectType\**" />
     <Compile Remove="Views\SettingType\**" />
-    <Content Remove="Views\GrantRights\**" />
     <Content Remove="Views\ProjectType\**" />
     <Content Remove="Views\SettingType\**" />
-    <EmbeddedResource Remove="Views\GrantRights\**" />
     <EmbeddedResource Remove="Views\ProjectType\**" />
     <EmbeddedResource Remove="Views\SettingType\**" />
-    <None Remove="Views\GrantRights\**" />
     <None Remove="Views\ProjectType\**" />
     <None Remove="Views\SettingType\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\GrantRightsController.cs" />
     <Compile Remove="Controllers\SettingTypeController.cs" />
   </ItemGroup>
 
@@ -37,6 +32,11 @@
     <None Include="Views\Employee\Edit.cshtml" />
     <None Include="Views\Employee\Index.cshtml" />
     <None Include="Views\Error\Index.cshtml" />
+    <None Include="Views\GrantRights\Create.cshtml" />
+    <None Include="Views\GrantRights\Delete.cshtml" />
+    <None Include="Views\GrantRights\Details.cshtml" />
+    <None Include="Views\GrantRights\PhanQuyen.cshtml" />
+    <None Include="Views\GrantRights\Index.cshtml" />
     <None Include="Views\ImageSlides\Create.cshtml" />
     <None Include="Views\ImageSlides\Delete.cshtml" />
     <None Include="Views\ImageSlides\Details.cshtml" />

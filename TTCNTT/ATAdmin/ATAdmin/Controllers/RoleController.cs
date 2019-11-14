@@ -141,18 +141,16 @@ namespace ATAdmin.Controllers
 
 
             var dbItem = await _context.AspNetRoles.AsNoTracking()
+            .Where(h => h.Id == id)
+            .Select(h => new RoleEditViewModel
+            {
+                Id = h.Id,
+                Name = h.Name,
+                NormalizedName = h.NormalizedName,
+                ConcurrencyStamp = h.ConcurrencyStamp,
 
-    .Where(h => h.Id == id)
-
-                .Select(h => new RoleEditViewModel
-                {
-                    Id = h.Id,
-                    Name = h.Name,
-                    NormalizedName = h.NormalizedName,
-                    ConcurrencyStamp = h.ConcurrencyStamp,
-
-                })
-                .FirstOrDefaultAsync();
+            })
+            .FirstOrDefaultAsync();
             if (dbItem == null)
             {
                 return NotFound();

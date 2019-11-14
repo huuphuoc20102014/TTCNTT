@@ -46,7 +46,7 @@
             "><i class=\"far fa-eye\"></i></a> " +
 
             "<a class=\"btn btn-success\" data-toggle=\"tooltip\" title=\"" + SharedLocalizer["Ttip_Edit"] + "\"" +
-                "href='" + Url.Action("Edit", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(AspNetUserRoles.UserId) + " #'" +
+                "href='" + Url.Action("PhanQuyen", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(AspNetUserRoles.UserId) + " #'" +
             "><i class=\"far fa-pencil\"></i></a> " +
 
             "<a class=\"btn btn-danger\" data-toggle=\"tooltip\" title=\"" + SharedLocalizer["Ttip_Delete"] + "\"" +
@@ -54,9 +54,9 @@
             "><i class=\"far fa-trash-alt\"></i></a> "
         );
         
-        columns.Bound(c => c.TenNguoiDung).Title(EntityLocalizer[nameof(ViewUserRole.TenNguoiDung)]).Width(400).HtmlAttributes(new { @class = "text-nowrap" });
+        columns.Bound(c => c.TenNguoiDung).Title(EntityLocalizer[nameof(View_Users_Roles.TenNguoiDung)]).Width(400).HtmlAttributes(new { @class = "text-nowrap" });
 
-        columns.Bound(c => c.TenQuyen).Title(EntityLocalizer[nameof(ViewUserRole.TenQuyen)]).Width(400).HtmlAttributes(new { @class = "text-nowrap" });
+        columns.Bound(c => c.TenQuyen).Title(EntityLocalizer[nameof(View_Users_Roles.TenQuyen)]).Width(400).HtmlAttributes(new { @class = "text-nowrap" });
 
     })
     .HtmlAttributes(new { style = "height: 600px;" })

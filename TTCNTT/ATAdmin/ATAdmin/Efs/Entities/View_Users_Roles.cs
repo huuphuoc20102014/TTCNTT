@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ATAdmin.Efs.Entities
 {
-    public partial class ViewUserRole : AtBaseECommerceEntity
+    public partial class View_Users_Roles : AtBaseECommerceEntity
     {
         public string TenQuyen { get; set; }
         public string TenNguoiDung { get; set; }

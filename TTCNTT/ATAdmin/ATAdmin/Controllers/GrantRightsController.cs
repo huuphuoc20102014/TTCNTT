@@ -46,7 +46,7 @@ namespace ATAdmin.Controllers
 
         public async Task<IActionResult> Index_Read([DataSourceRequest] DataSourceRequest request, string parentId)
         {
-            var baseQuery = _context.ViewUserRole.AsNoTracking();
+            var baseQuery = _context.View_Users_Roles.AsNoTracking();
             if (!string.IsNullOrWhiteSpace(parentId))
             {
                 baseQuery = baseQuery.Where(h => h.IdUser == parentId);
@@ -72,7 +72,7 @@ namespace ATAdmin.Controllers
                 return NotFound();
             }
 
-            var aspNetUserRoles = await _context.ViewUserRole.AsNoTracking()
+            var aspNetUserRoles = await _context.View_Users_Roles.AsNoTracking()
                     .Where(h => h.IdUser == id)
                 .FirstOrDefaultAsync();
             if (aspNetUserRoles == null)
@@ -83,77 +83,46 @@ namespace ATAdmin.Controllers
             return View(aspNetUserRoles);
         }
 
-        // GET: News/Create
-        public async Task<IActionResult> Create()
+        public class arrayRoles
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                await PrepareListMasterForeignKey();
-
-                return View();
-            }
-            else
-            {
-                return RedirectToAction(nameof(ErrorController.Index), nameof(ErrorController).Replace("Controller", ""));
-            }
-        }
-
-        // POST: News/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([FromForm] AspNetUserRolesCreateViewModel vmItem)
-        {
-
-            if (!ModelState.IsValid)
-            {
-
-                return View(vmItem);
-            }
-
-            // Get time stamp for table to handle concurrency conflict
-            var tableName = nameof(AspNetUserRoles);
-            var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
-
-            var dbItem = new AspNetUserRoles
-            {
-                UserId = vmItem.UserId,
-                RoleId = vmItem.RoleId,
-
-            };
-            _context.Add(dbItem);
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction(nameof(Details), new { id = dbItem.UserId });
+            public string IDroles { get; set; }
         }
 
         // GET: News/Edit/5
-        public async Task<IActionResult> Edit([FromRoute] string id)
+        public async Task<IActionResult> PhanQuyen([FromRoute] string id, List<arrayRoles> data)
         {
-
             if (id == null)
             {
                 return NotFound();
             }
 
-
-            var dbItem = await _context.AspNetUserRoles.AsNoTracking()
-                 .Where(h => h.UserId == id)
-                .Select(h => new AspNetUserRolesEditViewModel
-                {
-                    UserId = h.UserId,
-                    RoleId = h.RoleId,
-                    
-                })
+            var dbItem = await _context.View_Users_Roles.AsNoTracking()
+                 .Where(h => h.IdUser == id)
+                 .Select(h => new AspNetUserRolesEditViewModel 
+                 { 
+                     UserId = h.IdUser,
+                     RoleId = h.IdRole,
+                     TenNguoiDung = h.TenNguoiDung
+                 })
                 .FirstOrDefaultAsync();
             if (dbItem == null)
             {
                 return NotFound();
             }
+            
 
-            // Get list master of foreign property and set to view data
-            await PrepareListMasterForeignKey(dbItem);
+            var listChuaQuyen = _context.AspNetRoles.ToList();
+
+            var listQuyenNguoiDung = _context.AspNetUserRoles.Where(h => h.UserId == id).ToList();
+
+            foreach (var item in listQuyenNguoiDung)
+            {
+                var roles = _context.AspNetRoles.FirstOrDefault(h => h.Id == item.RoleId);
+                listChuaQuyen.Remove(roles);
+            }
+
+            ViewBag.ListChuaQuyen = listChuaQuyen;
+            ViewBag.ListCoQuyen = listQuyenNguoiDung;
 
             return View(dbItem);
         }
@@ -163,7 +132,7 @@ namespace ATAdmin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([FromForm] AspNetUserRolesEditViewModel vmItem, [FromRoute] string id)
+        public async Task<IActionResult> PhanQuyen([FromForm] AspNetUserRolesEditViewModel vmItem, [FromRoute] string id)
         {
             if (id == null)
             {
@@ -206,7 +175,7 @@ namespace ATAdmin.Controllers
                 return NotFound();
             }
 
-            var dbItem = await _context.ViewUserRole.AsNoTracking()
+            var dbItem = await _context.View_Users_Roles.AsNoTracking()
 
                 .Where(h => h.IdUser == id)
                 .FirstOrDefaultAsync();
@@ -268,13 +237,16 @@ namespace ATAdmin.Controllers
     {
         public String UserId { get; set; }
         public String RoleId { get; set; }
-       
+        public string TenQuyen { get; set; }
+        public string TenNguoiDung { get; set; }
+
+
     }
 
     public class AspNetUserRolesDetailsViewModel : AspNetUserRolesBaseViewModel
     {
-        public String TenQuyen { get; set; }
-        public String TenNguoiDung { get; set; }
+
+
     }
 
     public class AspNetUserRolesCreateViewModel : AspNetUserRolesBaseViewModel
