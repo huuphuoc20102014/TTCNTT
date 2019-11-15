@@ -39,6 +39,7 @@ namespace ATAdmin.Efs.Context
         public virtual DbSet<Setting> Setting { get; set; }
         public virtual DbSet<TableVersion> TableVersion { get; set; }
         public virtual DbSet<Training> Training { get; set; }
+        public virtual DbSet<View_Roles> View_Roles { get; set; }
         public virtual DbSet<View_Users_Roles> View_Users_Roles { get; set; }
 
         public WebTTCNTTContext(DbContextOptions<WebTTCNTTContext> options) : base(options)
@@ -1359,6 +1360,23 @@ namespace ATAdmin.Efs.Context
                 entity.Property(e => e.Slug_Name)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<View_Roles>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("View_Roles");
+
+                entity.Property(e => e.IdTaiKhoan)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.Quyen).HasMaxLength(256);
+
+                entity.Property(e => e.RoleId)
+                    .IsRequired()
+                    .HasMaxLength(450);
             });
 
             modelBuilder.Entity<View_Users_Roles>(entity =>

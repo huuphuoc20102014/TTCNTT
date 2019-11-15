@@ -83,11 +83,11 @@
                     <label for="selected"> Có quyền</label>
                     <br />
 
-                    <kendo-listbox name="optional" connect-with="selected" bind-to="ViewBag.ListChuaQuyen">
+                    <kendo-listbox name="optional" connect-with="selected" bind-to="ViewBag.ListChuaQuyen" datatextfield="Name" datavaluefield="Id">
                         <toolbar position="ListBoxToolbarPosition.Right" tools='tools' />
                     </kendo-listbox>
 
-                    <kendo-listbox name="selected" selectable="ListBoxSelectable.Multiple" bind-to="ViewBag.ListCoQuyen">
+                    <kendo-listbox name="selected" selectable="ListBoxSelectable.Multiple" bind-to="ViewBag.ListCoQuyen" datatextfield="Quyen" datavaluefield="RoleId">
                     </kendo-listbox>
                 </div>
             </div>

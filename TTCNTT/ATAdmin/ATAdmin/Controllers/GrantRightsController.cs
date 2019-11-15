@@ -112,6 +112,7 @@ namespace ATAdmin.Controllers
             
 
             var listChuaQuyen = _context.AspNetRoles.ToList();
+            var listCoQuyen = _context.View_Roles.Where(h => h.IdTaiKhoan == id).ToList();
 
             var listQuyenNguoiDung = _context.AspNetUserRoles.Where(h => h.UserId == id).ToList();
 
@@ -122,7 +123,7 @@ namespace ATAdmin.Controllers
             }
 
             ViewBag.ListChuaQuyen = listChuaQuyen;
-            ViewBag.ListCoQuyen = listQuyenNguoiDung;
+            ViewBag.ListCoQuyen = listCoQuyen;
 
             return View(dbItem);
         }
