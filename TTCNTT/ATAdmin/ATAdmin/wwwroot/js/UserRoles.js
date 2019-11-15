@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
 
     $(".btn-primary").click(function () {
-        var arrayId = $("#optional option");
+        var arrayId = $("#selected option");
         var idRoles;
         var array = [];
 

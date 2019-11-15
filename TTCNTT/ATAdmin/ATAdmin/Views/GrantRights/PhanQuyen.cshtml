@@ -43,7 +43,7 @@
 
 <h4>Edit Phân Quyền</h4>
 <hr />
-<form asp-action="Edit">
+<form asp-action="PhanQuyen">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
@@ -87,7 +87,7 @@
                         <toolbar position="ListBoxToolbarPosition.Right" tools='tools' />
                     </kendo-listbox>
 
-                    <kendo-listbox name="selected" selectable="ListBoxSelectable.Multiple" bind-to="ViewBag.ListCoQuyen" datatextfield="Quyen" datavaluefield="RoleId">
+                    <kendo-listbox name="selected" selectable="ListBoxSelectable.Multiple" bind-to="ViewBag.ListCoQuyen" datatextfield="Name" datavaluefield="Id">
                     </kendo-listbox>
                 </div>
             </div>

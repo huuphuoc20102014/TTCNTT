@@ -89,7 +89,7 @@ namespace ATAdmin.Controllers
         }
 
         // GET: News/Edit/5
-        public async Task<IActionResult> PhanQuyen([FromRoute] string id, List<arrayRoles> data)
+        public async Task<IActionResult> PhanQuyen([FromRoute] string id)
         {
             if (id == null)
             {
@@ -133,21 +133,16 @@ namespace ATAdmin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> PhanQuyen([FromForm] AspNetUserRolesEditViewModel vmItem, [FromRoute] string id)
+        public async Task<IActionResult> PhanQuyen([FromForm] AspNetUserRolesEditViewModel vmItem, List<arrayRoles> data)
         {
-            if (id == null)
+            if (vmItem == null)
             {
                 return NotFound();
             }
 
-            // Get time stamp for table to handle concurrency conflict
-            var tableName = nameof(AspNetUserRoles);
-            var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
-
             var dbItem = await _context.AspNetUserRoles
-
-                .Where(h => h.UserId == id)
-                .FirstOrDefaultAsync();
+                .Where(h => h.UserId == vmItem.UserId)
+                .ToListAsync();
             if (dbItem == null)
             {
                 return NotFound();
@@ -155,17 +150,22 @@ namespace ATAdmin.Controllers
             _context.Remove(dbItem);
             await _context.SaveChangesAsync();
 
-           
-            var dbItem1 = new AspNetUserRoles
+            var dbItem1 = new AspNetUserRoles();
+            foreach (var item in data)
             {
-                UserId = id,
-                RoleId = vmItem.RoleId,
+                dbItem1 = new AspNetUserRoles
+                {
+                    UserId = vmItem.UserId,
+                    RoleId = dbItem1.RoleId,
 
-            };
-            _context.Add(dbItem1);
-            await _context.SaveChangesAsync();
+                };
+                _context.Add(dbItem1);
+                await _context.SaveChangesAsync();
+            }
+
 
             return RedirectToAction(nameof(Details), new { id = dbItem1.UserId });
+            //return RedirectToAction(nameof(Index));
         }
 
         // GET: News/Details/5

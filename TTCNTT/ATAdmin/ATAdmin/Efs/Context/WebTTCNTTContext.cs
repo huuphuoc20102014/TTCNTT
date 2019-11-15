@@ -1368,15 +1368,15 @@ namespace ATAdmin.Efs.Context
 
                 entity.ToView("View_Roles");
 
+                entity.Property(e => e.Id)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
                 entity.Property(e => e.IdTaiKhoan)
                     .IsRequired()
                     .HasMaxLength(450);
 
-                entity.Property(e => e.Quyen).HasMaxLength(256);
-
-                entity.Property(e => e.RoleId)
-                    .IsRequired()
-                    .HasMaxLength(450);
+                entity.Property(e => e.Name).HasMaxLength(256);
             });
 
             modelBuilder.Entity<View_Users_Roles>(entity =>
