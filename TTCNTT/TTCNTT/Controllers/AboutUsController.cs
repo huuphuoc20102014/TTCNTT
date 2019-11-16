@@ -26,6 +26,8 @@ namespace TTCNTT.Controllers
             AboutUsViewModel model = new AboutUsViewModel();
             model.about = await _dbContext.AboutUs.FirstOrDefaultAsync(p => p.Skill == "0");
             model.listAboutSkill = await _dbContext.AboutUs.Where(h => h.Skill == "1").ToListAsync();
+            model.listEmployee = await _dbContext.Employee.Where(h => h.Fk_EmplyeeId == "ET03").ToListAsync();
+
             model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
 
             return View(model);

@@ -11,6 +11,7 @@ namespace TTCNTT.Models
     {
         public AboutUs about { get; set; }
         public List<AboutUs> listAboutSkill { get; set; }
+        public List<Employee> listEmployee { get; set; }
         public SettingHelper setting { get; set; }
     }
 }

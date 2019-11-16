@@ -96,20 +96,42 @@
             </div>
             <div class="our-team-detail-sec" id="tt-employee">
             </div>
+            @foreach (var item in Model.listEmployee.Take(3))
+            {
+                <div class="col-md-4">
+                    <div class="team-member">
+                        <div class="team-member-box">
+                            <a href="~/giang-vien/chi-tiet/@item.Slug_Name">
+                                <div class="image-holder">
+                                    <img src="~/Images/Employee/@item.ImageSlug" title="@item.Name" alt="@item.Name" id="add-src">
+                                </div>
+                                <div class="text-box">
+                                    <h6 id="tt-Specialize">@item.Specialize</h6>
+                                    <h5 id="tt-employee-name">@item.Name</h5>
+                                    <hr>
+                                    <p id="tt-employee-detail">@item.ShortDescription_Html. </p>
+
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+
 
         </div>
     </div>
 </section>
 
-<div style="display:none;">
+@*<div style="display:none;">
     <partial name="_TemplateListEmployee.cshtml" />
-</div>
+</div>*@
 
 
-@section scripts {
-    <script>
-        var _urlGetListEmployee =
-            '@Url.Action(nameof(AboutUsController.GetListEmployee), nameof(AboutUsController).Replace("Controller", ""))';
-    </script>
-    <script src="~/js/_Pages/GetListEmployee.js"></script>
-}
+@*@section scripts {
+        <script>
+            var _urlGetListEmployee =
+                '@Url.Action(nameof(AboutUsController.GetListEmployee), nameof(AboutUsController).Replace("Controller", ""))';
+        </script>
+        <script src="~/js/_Pages/GetListEmployee.js"></script>
+    }*@
