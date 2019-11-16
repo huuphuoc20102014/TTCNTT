@@ -25,7 +25,7 @@ namespace TTCNTT.Controllers
         public async Task<IActionResult>  Index(int? page)
         {
             var pageNumber = page ?? 1;
-            var onePageOfNews = _dbContext.News.ToPagedList(pageNumber, 9);
+            var onePageOfNews = _dbContext.News.OrderByDescending(h => h.CreatedDate).ToPagedList(pageNumber, 9);
             ViewBag.onePageOfNews = onePageOfNews;
 
             NewsViewModel model = new NewsViewModel();
@@ -43,7 +43,7 @@ namespace TTCNTT.Controllers
 
 
             var pageNumber = page ?? 1;
-            var onePageOfNews = _dbContext.News.Where(h => h.FkNewsTypeId == model.newsType.Id).ToPagedList(pageNumber, 9);
+            var onePageOfNews = _dbContext.News.Where(h => h.FkNewsTypeId == model.newsType.Id).OrderByDescending(h => h.CreatedDate).ToPagedList(pageNumber, 9);
             ViewBag.OnePageOfNews = onePageOfNews;
 
             return View(model);
@@ -56,8 +56,8 @@ namespace TTCNTT.Controllers
             model.news = await _dbContext.News.SingleOrDefaultAsync(h => h.Slug_Title == id);
             model.newsType = await _dbContext.NewsType.Where(h => h.Id == model.news.FkNewsTypeId).FirstOrDefaultAsync();
             model.listNewsType = await _dbContext.NewsType.ToListAsync();
-            model.listNews = await _dbContext.News.Where(h => h.FkNewsTypeId == model.newsType.Id).ToListAsync();
-            model.listNewsComment = await _dbContext.NewsComment.Where(h => h.FkNewsId == model.news.Id).ToListAsync();
+            model.listNews = await _dbContext.News.Where(h => h.FkNewsTypeId == model.newsType.Id).OrderByDescending(h => h.CreatedDate).ToListAsync();
+            model.listNewsComment = await _dbContext.NewsComment.Where(h => h.FkNewsId == model.news.Id).OrderBy(h => h.CreatedDate).ToListAsync();
 
             model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
 
@@ -106,7 +106,7 @@ namespace TTCNTT.Controllers
         public async Task<IActionResult> Search(string id, int? page)
         {
             var pageNumber = page ?? 1;
-            var onePageOfNews = _dbContext.News.Where(h => h.Title.Contains(id)).ToPagedList(pageNumber, 9);
+            var onePageOfNews = _dbContext.News.Where(h => h.Title.Contains(id)).OrderByDescending(h => h.CreatedDate).ToPagedList(pageNumber, 9);
 
             ViewBag.OnePageOfNews = onePageOfNews;
             ViewBag.id = id;

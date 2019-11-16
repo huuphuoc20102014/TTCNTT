@@ -24,7 +24,7 @@ namespace TTCNTT.Controllers
         public async Task<IActionResult> Index(int? page)
         {
             var pageNumber = page ?? 1;
-            var onePageOfServices = _dbContext.Service.ToPagedList(pageNumber, 6);
+            var onePageOfServices = _dbContext.Service.OrderByDescending(h => h.CreatedDate).ToPagedList(pageNumber, 6);
 
             ViewBag.OnePageOfServices = onePageOfServices;
 
@@ -40,7 +40,7 @@ namespace TTCNTT.Controllers
         {
             ServiceViewModel model = new ServiceViewModel();
             model.service = await _dbContext.Service.FirstOrDefaultAsync(h => h.Slug_Name == id);
-            model.listService = await _dbContext.Service.ToListAsync();
+            model.listService = await _dbContext.Service.OrderByDescending(h => h.CreatedDate).ToListAsync();
             model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
 
             return View(model);
@@ -56,7 +56,7 @@ namespace TTCNTT.Controllers
         public async Task<IActionResult> Search(string id, int? page)
         {
             var pageNumber = page ?? 1;
-            var onePageOfServices = _dbContext.Service.Where(h => h.ServiceName.Contains(id)).ToPagedList(pageNumber, 6);
+            var onePageOfServices = _dbContext.Service.Where(h => h.ServiceName.Contains(id)).OrderByDescending(h => h.CreatedDate).ToPagedList(pageNumber, 6);
 
             ViewBag.OnePageOfServices = onePageOfServices;
             ViewBag.id = id;

@@ -25,7 +25,7 @@ namespace TTCNTT.Controllers
         public async Task<IActionResult>  Index(int? page)
         {
             var pageNumber = page ?? 1;
-            var onePageOfProducts = _dbContext.Product.ToPagedList(pageNumber, 9);
+            var onePageOfProducts = _dbContext.Product.OrderByDescending(h => h.CreatedDate).ToPagedList(pageNumber, 9);
 
             ViewBag.OnePageOfProducts = onePageOfProducts;
 
@@ -41,9 +41,9 @@ namespace TTCNTT.Controllers
             ProductViewModel model = new ProductViewModel();
             model.product = await _dbContext.Product.FirstOrDefaultAsync(h => h.Slug_Name == id);
             model.category = await _dbContext.Category.FirstOrDefaultAsync(h => h.Id == model.product.FkProductId);
-            model.listProduct = await _dbContext.Product.Where(h => h.FkProductId == model.category.Id).ToListAsync();
+            model.listProduct = await _dbContext.Product.Where(h => h.FkProductId == model.category.Id).OrderByDescending(h => h.CreatedDate).ToListAsync();
             model.listCategory = await _dbContext.Category.ToListAsync();
-            model.listProductComment = await _dbContext.ProductComment.Where(h => h.FkProductId == model.product.Id).ToListAsync();
+            model.listProductComment = await _dbContext.ProductComment.Where(h => h.FkProductId == model.product.Id).OrderBy(h => h.CreatedDate).ToListAsync();
 
             model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
 
@@ -61,7 +61,7 @@ namespace TTCNTT.Controllers
 
             var pageNumber = page ?? 1;
             var category = await _dbContext.Category.FirstOrDefaultAsync(h => h.Slug_Name == id);
-            var onePageOfProducts = _dbContext.Product.Where(h =>h.FkProductId == category.Id.ToString()).ToPagedList(pageNumber, 9);
+            var onePageOfProducts = _dbContext.Product.Where(h =>h.FkProductId == category.Id.ToString()).OrderByDescending(h => h.CreatedDate).ToPagedList(pageNumber, 9);
 
             ViewBag.OnePageOfProducts = onePageOfProducts;
 
@@ -109,7 +109,7 @@ namespace TTCNTT.Controllers
         public async Task<IActionResult> Search(string id, int? page)
         {
             var pageNumber = page ?? 1;
-            var onePageOfProducts = _dbContext.Product.Where(h => h.Name.Contains(id)).ToPagedList(pageNumber, 9);
+            var onePageOfProducts = _dbContext.Product.Where(h => h.Name.Contains(id)).OrderByDescending(h => h.CreatedDate).ToPagedList(pageNumber, 9);
 
             ViewBag.OnePageOfProducts = onePageOfProducts;
             ViewBag.id = id;

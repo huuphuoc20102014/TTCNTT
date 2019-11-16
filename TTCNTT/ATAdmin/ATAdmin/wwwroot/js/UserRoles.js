@@ -18,7 +18,8 @@
                 url: _urlUserRoles,
                 type: 'POST',
                 data: JSON.stringify(array),
-                dataType: 'application/json',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
                 error: function (jqXHR, exception) {
                     var msg = '';
                     if (jqXHR.status === 0) {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
 using ATAdmin.Efs.Context;
+using Newtonsoft.Json;
 
 namespace ATAdmin.Controllers
 {
@@ -83,11 +85,6 @@ namespace ATAdmin.Controllers
             return View(aspNetUserRoles);
         }
 
-        public class arrayRoles
-        {
-            public string IDroles { get; set; }
-        }
-
         // GET: News/Edit/5
         public async Task<IActionResult> PhanQuyen([FromRoute] string id)
         {
@@ -133,39 +130,49 @@ namespace ATAdmin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> PhanQuyen([FromForm] AspNetUserRolesEditViewModel vmItem, List<arrayRoles> data)
+        public async Task<IActionResult> PhanQuyen([FromForm] AspNetUserRolesEditViewModel vmItem, List<arrayRoles> listRoles)
         {
             if (vmItem == null)
             {
                 return NotFound();
             }
 
-            var dbItem = await _context.AspNetUserRoles
-                .Where(h => h.UserId == vmItem.UserId)
-                .ToListAsync();
-            if (dbItem == null)
+            var listQuyenNguoiDung = _context.AspNetUserRoles.Where(h => h.UserId == vmItem.UserId).ToList();
+
+            if (listQuyenNguoiDung == null)
             {
                 return NotFound();
             }
-            _context.Remove(dbItem);
-            await _context.SaveChangesAsync();
-
-            var dbItem1 = new AspNetUserRoles();
-            foreach (var item in data)
+            //nhớ kiểm tra nếu list cũ bằng list mới thì không thay đổi gì.
+            foreach (var item in listQuyenNguoiDung)
             {
-                dbItem1 = new AspNetUserRoles
+                var roles = _context.AspNetUserRoles.FirstOrDefault(h => h.UserId == item.UserId);
+                _context.AspNetUserRoles.Remove(roles);
+                await _context.SaveChangesAsync();
+            }
+            
+
+            var dbItem = new AspNetUserRoles();
+            foreach (var item in listRoles)
+            {
+                dbItem = new AspNetUserRoles
                 {
                     UserId = vmItem.UserId,
-                    RoleId = dbItem1.RoleId,
+                    RoleId = item.IDroles,
 
                 };
-                _context.Add(dbItem1);
+                _context.Add(dbItem);
                 await _context.SaveChangesAsync();
             }
 
 
-            return RedirectToAction(nameof(Details), new { id = dbItem1.UserId });
+            return RedirectToAction(nameof(Details), new { id = vmItem.UserId });
             //return RedirectToAction(nameof(Index));
+        }
+
+        public class arrayRoles
+        {
+            public String IDroles { get; set; }
         }
 
         // GET: News/Details/5
@@ -257,8 +264,7 @@ namespace ATAdmin.Controllers
 
     public class AspNetUserRolesEditViewModel : AspNetUserRolesBaseViewModel
     {
-        public virtual AspNetRoles Role { get; set; }
-        public virtual AspNetUsers User { get; set; }
+
     }
 
     public class AspNetUserRolesBaseValidator<T> : AtBaseValidator<T> where T : AspNetUserRolesBaseViewModel
