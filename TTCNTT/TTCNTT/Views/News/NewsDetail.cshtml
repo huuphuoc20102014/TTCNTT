@@ -48,8 +48,8 @@
                                     <li>
                                         <!-- hình ảnh -->
                                         @*<div class="user-pic">
-                                        <img src="~/template/img/testimonial-2.jpg" alt="">
-                                    </div>*@
+                                                <img src="~/template/img/testimonial-2.jpg" alt="">
+                                            </div>*@
                                         @if (Model.listNewsComment.Count() != 0)
                                         {
                                             @foreach (var item in Model.listNewsComment)
@@ -124,14 +124,16 @@
                                     {
                                         <li>
                                             <div class="row">
-                                                <div class="col-md-5">
-                                                    <img src="~/Images/News/@item.ImageSlug" alt="">
-                                                </div>
-                                                <div class="col-md-7">
-                                                    <div class="text">
-                                                        <p><a href="~/tin-tuc/chi-tiet/@item.Slug_Title">@item.Title</a></p>
+                                                <a href="~/tin-tuc/chi-tiet/@item.Slug_Title">
+                                                    <div class="col-md-5">
+                                                        <img src="~/Images/News/@item.ImageSlug" alt="">
                                                     </div>
-                                                </div>
+                                                    <div class="col-md-7">
+                                                        <div class="text">
+                                                            <p>@item.Title</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
                                             </div>
                                         </li>
                                     }
@@ -140,31 +142,31 @@
                                 <!-- End:Recent Posts-->
                                 <!-- Star:flikr-img-->
                                 @*<h5>Flickr</h5>
-                            <ul class="flikr-img-list">
-                                <li><img src="img/flikr-1.jpg" alt=""></li>
-                                <li><img src="img/flikr-2.jpg" alt=""></li>
-                                <li><img src="img/flikr-3.jpg" alt=""></li>
-                                <li> <img src="img/flikr-4.jpg" alt=""></li>
-                                <li><img src="img/flikr-5.jpg" alt=""></li>
-                                <li><img src="img/flikr-6.jpg" alt=""></li>
-                                <li><img src="img/flikr-7.jpg" alt=""></li>
-                                <li><img src="img/flikr-8.jpg" alt=""></li>
-                            </ul>*@
+                                    <ul class="flikr-img-list">
+                                        <li><img src="img/flikr-1.jpg" alt=""></li>
+                                        <li><img src="img/flikr-2.jpg" alt=""></li>
+                                        <li><img src="img/flikr-3.jpg" alt=""></li>
+                                        <li> <img src="img/flikr-4.jpg" alt=""></li>
+                                        <li><img src="img/flikr-5.jpg" alt=""></li>
+                                        <li><img src="img/flikr-6.jpg" alt=""></li>
+                                        <li><img src="img/flikr-7.jpg" alt=""></li>
+                                        <li><img src="img/flikr-8.jpg" alt=""></li>
+                                    </ul>*@
                                 <!-- End:flikr-img-->
                                 <!-- Start:tags-->
                                 @*<h5>Tags</h5>
-                            <div class="tags">
-                                <a href="#"><span>HTML</span></a>
-                                <a href="#"><span>Finearts</span></a>
-                                <a href="#"><span>PHP</span></a>
-                                <a href="#"><span>Java Script</span></a>
-                                <a href="#"><span>Articles</span></a>
-                                <a href="#"><span>CSS</span></a>
-                                <a href="#"><span>Economics</span></a>
-                                <a href="#"><span>JQuery</span></a>
-                                <a href="#"><span>Edithing</span></a>
-                                <a href="#"><span>Painting</span></a>
-                            </div>*@
+                                    <div class="tags">
+                                        <a href="#"><span>HTML</span></a>
+                                        <a href="#"><span>Finearts</span></a>
+                                        <a href="#"><span>PHP</span></a>
+                                        <a href="#"><span>Java Script</span></a>
+                                        <a href="#"><span>Articles</span></a>
+                                        <a href="#"><span>CSS</span></a>
+                                        <a href="#"><span>Economics</span></a>
+                                        <a href="#"><span>JQuery</span></a>
+                                        <a href="#"><span>Edithing</span></a>
+                                        <a href="#"><span>Painting</span></a>
+                                    </div>*@
                                 <!-- End:tags-->
 
                             </div>

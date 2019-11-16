@@ -60,14 +60,16 @@
                                     {
                                         <li>
                                             <div class="row">
-                                                <div class="col-md-5">
-                                                    <img src="~/Images/Employee/@item.ImageSlug" alt="@item.Name">
-                                                </div>
-                                                <div class="col-md-7">
-                                                    <div class="text">
-                                                        <p><a href="~/giang-vien/chi-tiet/@item.Slug_Name">@item.Name</a></p>
+                                                <a href="~/giang-vien/chi-tiet/@item.Slug_Name">
+                                                    <div class="col-md-5">
+                                                        <img src="~/Images/Employee/@item.ImageSlug" alt="@item.Name">
                                                     </div>
-                                                </div>
+                                                    <div class="col-md-7">
+                                                        <div class="text">
+                                                            <p>@item.Name</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
                                             </div>
                                         </li>
                                     }

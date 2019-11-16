@@ -124,14 +124,16 @@
                                     {
                                         <li>
                                             <div class="row">
-                                                <div class="col-md-5">
-                                                    <img src="~/Images/Product/@item.ImageSlug" alt="">
-                                                </div>
-                                                <div class="col-md-7">
-                                                    <div class="text">
-                                                        <p><a href="~/san-pham/chi-tiet/@item.Slug_Name">@item.Name</a></p>
+                                                <a href="~/san-pham/chi-tiet/@item.Slug_Name">
+                                                    <div class="col-md-5">
+                                                        <img src="~/Images/Product/@item.ImageSlug" alt="">
                                                     </div>
-                                                </div>
+                                                    <div class="col-md-7">
+                                                        <div class="text">
+                                                            <p>@item.Name</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
                                             </div>
                                         </li>
                                     }

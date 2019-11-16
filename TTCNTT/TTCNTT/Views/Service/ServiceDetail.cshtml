@@ -59,14 +59,16 @@
                                     {
                                         <li>
                                             <div class="row">
-                                                <div class="col-md-5">
-                                                    <img src="~/Images/Services/@item.ImageSlug" alt="@item.ServiceName">
-                                                </div>
-                                                <div class="col-md-7">
-                                                    <div class="text">
-                                                        <p><a href="~/dich-vu/chi-tiet/@item.Slug_Name">@item.ServiceName</a></p>
+                                                <a href="~/dich-vu/chi-tiet/@item.Slug_Name">
+                                                    <div class="col-md-5">
+                                                        <img src="~/Images/Services/@item.ImageSlug" alt="@item.ServiceName">
                                                     </div>
-                                                </div>
+                                                    <div class="col-md-7">
+                                                        <div class="text">
+                                                            <p>@item.ServiceName</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
                                             </div>
                                         </li>
                                     }
