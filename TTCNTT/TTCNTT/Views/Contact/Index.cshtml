@@ -29,19 +29,19 @@
                     <h1>@Model.setting.CONTACT</h1>
                 </div>
                 <div class="form-sec">
-                    <form id="myform" name="contact" method="post">
+                    <form id="myform" method="post">
                         <div class="col-md-4">
-                            <input type="text" id="contact-name" placeholder="Tên của bạn" class="text-field-box">
+                            <input type="text" id="contact-name" name="hoten" placeholder="Tên của bạn" class="text-field-box">
                         </div>
                         <div class="col-md-4">
-                            <input type="text" id="contact-email" placeholder="Email" class="text-field-box">
+                            <input type="email" id="contact-email" name="mail" placeholder="Email" class="text-field-box">
                         </div>
                         <div class="col-md-4">
-                            <input type="text" id="contact-number" placeholder="Số điện thoại" class="text-field-box">
+                            <input type="text" id="contact-number" name="sdt" placeholder="Số điện thoại" class="text-field-box" onkeydown="return event.keyCode !== 69" : oninput="validity.valid||(value='');" min="0" >
                         </div>
                         <div class="col-md-12">
-                            <textarea id="contact-msg" class="text-field-box" placeholder="Nội dung"></textarea>
-                            <button name="contact" type="submit" id="contact-submit" class="button-medium">Gửi ngay</button>
+                            <textarea id="contact-msg" class="text-field-box" name="noidung" placeholder="Nội dung"></textarea>
+                            <button name="contact" id="contact-submit" class="button-medium">Gửi ngay</button>
                         </div>
                         @if (TempData["LienHe"] != null)
                         {
@@ -80,4 +80,5 @@
         var _urlContact = '@Url.Action("NewContact", "Contact")';
     </script>
     <script src="~/js/contact.js"></script>
+    <script src="~/js/Validate/Validate-Contact.js"></script>
 }

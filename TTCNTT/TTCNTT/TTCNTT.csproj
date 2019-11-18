@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\css\Validate.css~RF44dfc7b7.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="Views\News\Index.cshtml" />
   </ItemGroup>
 

@@ -16,6 +16,7 @@
     <link type="text/css" rel="stylesheet" href="~/template/css/animate.min.css"><!-- Animation -->
     <link type="text/css" rel="stylesheet" href="~/template/css/flexslider.css"><!-- FlexSlider CSS -->
     <link type="text/css" rel="stylesheet" href="~/template/css/style.css"><!-- Light Theme Core CSS -->
+    <link href="~/css/Validate.css" rel="stylesheet" /><!--Validate-->
     <link href="~/template/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <!-- font-awesome -->
     <link href="~/template/fontawesome-free-5.11.2-web/css/fontawesome.min.css" rel="stylesheet" />
@@ -52,7 +53,10 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+
+
+
+
 
 
 
@@ -71,12 +75,21 @@
     <script type="text/javascript" src="~/template/js/featherlight.min.js"></script><!-- Feather-Lightbox (projects) Js -->
     <script type="text/javascript" src="~/template/js/forms.js"></script><!-- Form Js -->
     <script type="text/javascript" src="~/template/js/animation.js"></script><!-- Animation Js -->
-
-
+    <!-- CustomerRegister -->
     <script>
         var _urlCustomerRegister = '@Url.Action("NewCustomerRegister", "Home")';
     </script>
     <script src="~/js/CustomerRegister.js"></script>
 
+
+    <!-- Validate -->
+    @*<script src="~/js/Validate/jquery.validate.min.js"></script>
+        <script src="~/js/Validate/additional-methods.min.js"></script>*@
+
+    <!-- Validate -->
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

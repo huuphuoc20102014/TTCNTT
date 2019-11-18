@@ -129,15 +129,14 @@ namespace ATAdmin.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> PhanQuyen([FromForm] AspNetUserRolesEditViewModel vmItem, List<arrayRoles> listRoles)
+        public async Task<IActionResult> PhanQuyen([FromBody] List<arrayRoles> listRoles, [FromRoute] string ID)
         {
-            if (vmItem == null)
+            if (listRoles.Count() == 0)
             {
                 return NotFound();
             }
 
-            var listQuyenNguoiDung = _context.AspNetUserRoles.Where(h => h.UserId == vmItem.UserId).ToList();
+            var listQuyenNguoiDung = _context.AspNetUserRoles.Where(h => h.UserId == ID).ToList();
 
             if (listQuyenNguoiDung == null)
             {
@@ -150,14 +149,14 @@ namespace ATAdmin.Controllers
                 _context.AspNetUserRoles.Remove(roles);
                 await _context.SaveChangesAsync();
             }
-            
+
 
             var dbItem = new AspNetUserRoles();
             foreach (var item in listRoles)
             {
                 dbItem = new AspNetUserRoles
                 {
-                    UserId = vmItem.UserId,
+                    UserId = ID,
                     RoleId = item.IDroles,
 
                 };
@@ -166,7 +165,7 @@ namespace ATAdmin.Controllers
             }
 
 
-            return RedirectToAction(nameof(Details), new { id = vmItem.UserId });
+            return RedirectToAction(nameof(Details), new { id = ID });
             //return RedirectToAction(nameof(Index));
         }
 
