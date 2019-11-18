@@ -176,7 +176,8 @@ namespace ATAdmin.Controllers
                 .Select(h => new ServiceEditViewModel
                 {
                     Id = h.Id,
-                    
+                    ServiceName = h.ServiceName,
+                    SlugName = h.Slug_Name,
                     AutoSlug = h.AutoSlug,
                     ShortDescriptionHtml = h.ShortDescription_Html,
                     LongDescriptionHtml = h.LongDescription_Html,

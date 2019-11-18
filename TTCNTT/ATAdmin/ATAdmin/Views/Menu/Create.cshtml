@@ -19,6 +19,22 @@
         </div>
     </div>
 
+
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="ImageSlug" class="col-form-label"></label>
+        </div>
+        <div class="col-md-7">
+            <button id="btnChooseImage_ImageSlug" class="btn mb-1">Chọn hình</button>
+            <input style="display:none;" asp-for="ImageSlug" />
+            <img width="200" class="border border-primary" id="img_ImageSlug" src="~/Image/@Url.Content(Model?.ImageSlug)" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="ImageSlug" class="text-danger"></span>
+        </div>
+    </div>
+
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
             <label asp-for="Name" class="col-form-label"></label>
@@ -79,20 +95,6 @@
         </div>
         <div class="offset-md-3 col-md-7 at-wrapper-validate">
             <span asp-validation-for="IsMainMenu" class="text-danger"></span>
-        </div>
-    </div>
-
-    <div class="row form-group">
-        <div class="col-md-3 text-md-right ">
-            <label asp-for="ImageSlug" class="col-form-label"></label>
-        </div>
-        <div class="col-md-7">
-            <button id="btnChooseImage_ImageSlug" class="btn mb-1">Chọn hình</button>
-            <input style="display:none;" asp-for="ImageSlug" />
-            <img width="200" class="border border-primary" id="img_ImageSlug" src="~/Image/@Url.Content(Model?.ImageSlug)" />
-        </div>
-        <div class="offset-md-3 col-md-7 at-wrapper-validate">
-            <span asp-validation-for="ImageSlug" class="text-danger"></span>
         </div>
     </div>
 

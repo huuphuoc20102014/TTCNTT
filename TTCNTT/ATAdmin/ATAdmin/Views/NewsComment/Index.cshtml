@@ -53,7 +53,7 @@
                 "href='" + Url.Action("Delete", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(NewsComment.Id) + " #'" +
             "><i class=\"far fa-trash-alt\"></i></a> "
         );
-        columns.Bound(c => c.FkNewsId).Title(EntityLocalizer[nameof(NewsComment.FkNewsId)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+        columns.Bound(c => c.NewsName).Title("Tên bài đăng").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
         columns.Bound(c => c.Name).Title(EntityLocalizer[nameof(NewsComment.Name)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
         columns.Bound(c => c.Email).Title(EntityLocalizer[nameof(NewsComment.Email)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
         columns.Bound(c => c.Phone).Title(EntityLocalizer[nameof(NewsComment.Phone)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });

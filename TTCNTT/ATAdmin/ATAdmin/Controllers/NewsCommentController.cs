@@ -57,6 +57,7 @@ namespace ATAdmin.Controllers
                 .Select(h => new NewsCommentDetailsViewModel
                 {
                     Id = h.Id,
+                    NewsName = h.FkNews.Title,
                     FkNewsId = h.FkNewsId,
                     // Ford
                     Name = h.Name,
@@ -390,7 +391,7 @@ namespace ATAdmin.Controllers
         public DateTime? UpdatedDate { get; set; }
         public Byte[] RowVersion { get; set; }
         public AtRowStatus RowStatus { get; set; }
-
+        public String NewsName { get; set; }
     }
 
     public class NewsCommentCreateViewModel : NewsCommentBaseViewModel

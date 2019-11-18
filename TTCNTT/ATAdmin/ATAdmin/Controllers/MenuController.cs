@@ -163,6 +163,8 @@ namespace ATAdmin.Controllers
         // GET: Menu/Edit/5
         public async Task<IActionResult> Edit([FromRoute] string id)
         {
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserMenuController).Replace("Controller", "");
+
             if (id == null)
             {
                 return NotFound();
@@ -205,6 +207,7 @@ namespace ATAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([FromForm] MenuEditViewModel vmItem)
         {
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserMenuController).Replace("Controller", "");
 
             // Invalid model
             if (!ModelState.IsValid)
@@ -319,7 +322,6 @@ namespace ATAdmin.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
 
 
     }

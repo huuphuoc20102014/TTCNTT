@@ -57,6 +57,7 @@ namespace ATAdmin.Controllers
                 .Select(h => new ProductCommentDetailsViewModel
                 {
                     Id = h.Id,
+                    FkProductName = h.FkProduct.Name,
                     FkProductId = h.FkProductId,
                     Name = h.Name,
                     Email = h.Email,
@@ -170,6 +171,8 @@ namespace ATAdmin.Controllers
         // GET: ProductComment/Edit/5
         public async Task<IActionResult> Edit([FromRoute] string id)
         {
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserProductCommentController).Replace("Controller", "");
+
             if (id == null)
             {
                 return NotFound();
@@ -209,6 +212,7 @@ namespace ATAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([FromForm] ProductCommentEditViewModel vmItem)
         {
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserProductCommentController).Replace("Controller", "");
 
             // Invalid model
             if (!ModelState.IsValid)
@@ -397,7 +401,7 @@ namespace ATAdmin.Controllers
         public DateTime? UpdatedDate { get; set; }
         public Byte[] RowVersion { get; set; }
         public AtRowStatus RowStatus { get; set; }
-
+        public String FkProductName { get; set; }
 
     }
 

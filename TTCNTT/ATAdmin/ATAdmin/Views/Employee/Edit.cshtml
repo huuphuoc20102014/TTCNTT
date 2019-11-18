@@ -24,6 +24,34 @@
     <input type="hidden" name="Id" value="@Model?.Id" />
     <input type="hidden" asp-for="RowVersion" />
 
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="ImageSlug" class="col-form-label"></label>
+        </div>
+        <div class="col-md-7">
+            <button id="btnChooseImage_ImageSlug" class="btn mb-1">Chọn hình</button>
+            <input style="display:none;" asp-for="ImageSlug" />
+            <img width="200" class="border border-primary" id="img_ImageSlug" src="~/Image/@Url.Content(Model?.ImageSlug)" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="ImageSlug" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Fk_EmplyeeId" class="col-form-label">Loại nhân viên</label>
+            <span class="text-danger">*</span>
+        </div>
+        <div class="col-md-7">
+            <kendo-dropdownlist for="Fk_EmplyeeId" class="form-control" bind-to="@ViewBag.FkEmployeeTypeId" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Fk_EmplyeeId" class="text-danger"></span>
+        </div>
+    </div>
+
     <div class="row form-group slugName">
         <div class="col-md-3 text-md-right ">
             <label asp-for="Code" class="col-form-label"></label>
@@ -75,17 +103,17 @@
         </div>
     </div>
     @*<div class="row form-group">
-        <div class="col-md-3 text-md-right ">
-            <label asp-for="AutoSlug" class="col-form-label"></label>
-            <span class="text-danger">*</span>
-        </div>
-        <div class="col-md-7">
-            <kendo-switch for="AutoSlug" checked="@Model?.AutoSlug" />
-        </div>
-        <div class="offset-md-3 col-md-7 at-wrapper-validate">
-            <span asp-validation-for="AutoSlug" class="text-danger"></span>
-        </div>
-    </div>*@
+            <div class="col-md-3 text-md-right ">
+                <label asp-for="AutoSlug" class="col-form-label"></label>
+                <span class="text-danger">*</span>
+            </div>
+            <div class="col-md-7">
+                <kendo-switch for="AutoSlug" checked="@Model?.AutoSlug" />
+            </div>
+            <div class="offset-md-3 col-md-7 at-wrapper-validate">
+                <span asp-validation-for="AutoSlug" class="text-danger"></span>
+            </div>
+        </div>*@
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
             <label asp-for="BirthDate" class="col-form-label"></label>
@@ -124,19 +152,6 @@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="ImageSlug" class="col-form-label"></label>
-        </div>
-        <div class="col-md-7">
-            <button id="btnChooseImage_Img" class="btn mb-1">Chọn hình</button>
-            <input style="display:none;" asp-for="ImageSlug" />
-            <img width="200" class="border border-primary" id="img_Img" src="~/Image/@Url.Content(Model?.ImageSlug)" />
-        </div>
-        <div class="offset-md-3 col-md-7 at-wrapper-validate">
-            <span asp-validation-for="ImageSlug" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="row form-group">
-        <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
             <input type="submit" value="Save" class="btn btn-primary" />
@@ -150,13 +165,14 @@
 
 
 @(Html.Kendo().Dialog()
-    .Name("dialogChooseImage_Img")
+    .Name("dialogChooseImage_ImageSlug")
     .Title("Chọn hình")
-    .Content("<div id=\"divChooseImage_Img\"></div>")
+    .Content("<div id=\"divChooseImage_ImageSlug\"></div>")
     .Width(600)
     .Visible(false)
     .Modal(true)
 )
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
@@ -169,25 +185,25 @@
                     $( '.slugtitle' ).val('0'); //set value = 0 unless it is Empty
                 }
             });
-            $("#divChooseImage_Img").kendoImageBrowser({
+            $("#divChooseImage_ImageSlug").kendoImageBrowser({
                 transport: {
                     type: "imagebrowser-aspnetmvc",
                     read: "@Url.Action("Read", (string)ViewData["ControllerNameForImageBrowser"])",
                     destroy: "@Url.Action("Destroy", (string)ViewData["ControllerNameForImageBrowser"])",
-                    imageUrl: "@Url.Content(ImageBrowserEmployeeController.FOLDER_NAME + "/{0}")",
+                    imageUrl: "@Url.Content( ImageBrowserNewController.FOLDER_NAME + "/{0}")",
                     uploadUrl: "@Url.Action("Upload", (string)ViewData["ControllerNameForImageBrowser"])"
                 },
                 apply: function () {
                     var selectedImage = this.value();
-                    $("#Img").val(selectedImage);
-                    $("#img_Img").attr("src", "/Image/"+ selectedImage);
-                    $('#dialogChooseImage_Img').data("kendoDialog").close();
+                    $("#ImageSlug").val(selectedImage);
+                    $("#img_ImageSlug").attr("src", "/Image/"+ selectedImage);
+                    $('#dialogChooseImage_ImageSlug').data("kendoDialog").close();
                 }
             });
 
-            $("#btnChooseImage_Img").click(function (e) {
+            $("#btnChooseImage_ImageSlug").click(function (e) {
                 e.preventDefault();
-                $('#dialogChooseImage_Img').data("kendoDialog").open();
+                $('#dialogChooseImage_ImageSlug').data("kendoDialog").open();
 
             });
         });

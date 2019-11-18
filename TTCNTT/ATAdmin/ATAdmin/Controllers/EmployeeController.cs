@@ -64,6 +64,7 @@ namespace ATAdmin.Controllers
                     Address = h.Address,
                     Phone = h.Phone,
                     Specialize = h.Specialize,
+                    EmployeeTypeName = h.Fk_Emplyee.Name,
                     Fk_EmplyeeId = h.Fk_EmplyeeId,
                     ImageSlug = h.ImageSlug,
                     ShortDescription_Html = h.ShortDescription_Html,
@@ -200,6 +201,8 @@ namespace ATAdmin.Controllers
         // GET: Employee/Edit/5
         public async Task<IActionResult> Edit([FromRoute] string id)
         {
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserNewController).Replace("Controller", "");
+
             if (id == null)
             {
                 return NotFound();
@@ -245,6 +248,7 @@ namespace ATAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([FromForm] EmployeeEditViewModel vmItem)
         {
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserNewController).Replace("Controller", "");
 
             // Invalid model
             if (!ModelState.IsValid)
@@ -444,7 +448,7 @@ namespace ATAdmin.Controllers
         public DateTime? UpdatedDate { get; set; }
         public Byte[] RowVersion { get; set; }
         public AtRowStatus RowStatus { get; set; }
-
+        public String EmployeeTypeName { get; set; }
     }
 
     public class EmployeeCreateViewModel : EmployeeBaseViewModel

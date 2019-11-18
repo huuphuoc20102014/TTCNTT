@@ -57,6 +57,7 @@ namespace ATAdmin.Controllers
                 .Select(h => new CourseDetailsViewModel
                 {
                     Id = h.Id,
+                    CourseTypeName = h.FkCourseType.Name,
                     FkCourseTypeId = h.FkCourseTypeId,
                     // Ford
                     Name = h.Name,
@@ -195,6 +196,8 @@ namespace ATAdmin.Controllers
         // GET: Course/Edit/5
         public async Task<IActionResult> Edit([FromRoute] string id)
         {
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserNewController).Replace("Controller", "");
+
             if (id == null)
             {
                 return NotFound();
@@ -238,6 +241,7 @@ namespace ATAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([FromForm] CourseEditViewModel vmItem)
         {
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserNewController).Replace("Controller", "");
 
             // Invalid model
             if (!ModelState.IsValid)
@@ -432,6 +436,7 @@ namespace ATAdmin.Controllers
         public DateTime? UpdatedDate { get; set; }
         public Byte[] RowVersion { get; set; }
         public AtRowStatus RowStatus { get; set; }
+        public String CourseTypeName { get; set; }
 
     }
 

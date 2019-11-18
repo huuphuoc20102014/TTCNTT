@@ -53,6 +53,13 @@
                 "href='" + Url.Action("Delete", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(Employee.Id) + " #'" +
             "><i class=\"far fa-trash-alt\"></i></a> "
         );
+        columns.Bound(c => c.ImageSlug).Title("Hình ảnh").Width(150).Locked(true).Filterable(false).Sortable(false).ClientTemplate(
+
+            "<img class=\"border border-primary\" id=\"img_ImageSlug\" width=\"100\" src='" + "Image/" + "#= ImageSlug #'" +
+            "/>"
+
+        );
+        columns.Bound(c => c.EmployeeTypeName).Title("Loại nhân viên").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
         columns.Bound(c => c.Code).Title("Mã").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
         columns.Bound(c => c.Name).Title("Tên").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
         columns.Bound(c => c.BirthDate).Title("Ngày sinh").Width(200).HtmlAttributes(new { @class = "text-nowrap" });

@@ -59,6 +59,7 @@ namespace ATAdmin.Controllers
                     Title = h.Title,
                     Body = h.Body,
                     IsRead = h.IsRead,
+                    CourseName = h.FkCourse.Name,
                     Fk_CourseId = h.FkCourseId,
                     Note = h.Note,
                     CreatedBy = h.CreatedBy,
@@ -351,8 +352,7 @@ namespace ATAdmin.Controllers
         public DateTime? UpdatedDate { get; set; }
         public Byte[] RowVersion { get; set; }
         public AtRowStatus RowStatus { get; set; }
-
-
+        public String CourseName { get; set; }
     }
 
     public class ContactCreateViewModel : ContactBaseViewModel

@@ -59,7 +59,7 @@
             "/>"
 
         );
-        columns.Bound(c => c.FkNewsTypeId).Title(EntityLocalizer[nameof(News.FkNewsTypeId)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+        columns.Bound(c => c.FkNewsType_Name).Title("Loại bài đăng").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
         columns.Bound(c => c.Title).Title(EntityLocalizer[nameof(News.Title)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
         columns.Bound(c => c.SlugTitle).Title(EntityLocalizer[nameof(News.Slug_Title)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
         columns.Bound(c => c.ShortDescriptionHtml).Title(EntityLocalizer[nameof(News.ShortDescription_Html)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });

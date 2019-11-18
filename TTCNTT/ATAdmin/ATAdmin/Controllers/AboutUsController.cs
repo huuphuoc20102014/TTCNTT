@@ -162,6 +162,8 @@ namespace ATAdmin.Controllers
         // GET: AboutUs/Edit/5
         public async Task<IActionResult> Edit([FromRoute] string id)
         {
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserAboutUsController).Replace("Controller", "");
+
             if (id == null)
             {
                 return NotFound();
@@ -204,6 +206,7 @@ namespace ATAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([FromForm] AboutUsEditViewModel vmItem)
         {
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserAboutUsController).Replace("Controller", "");
 
             // Invalid model
             if (!ModelState.IsValid)

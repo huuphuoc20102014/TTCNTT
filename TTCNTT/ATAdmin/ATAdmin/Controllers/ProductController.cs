@@ -55,6 +55,7 @@ namespace ATAdmin.Controllers
                 .Select(h => new ProductDetailsViewModel
                 {
                     Id = h.Id,
+                    FkProductType_Name = h.FkProduct.Name,
                     FkProductId = h.FkProductId,
                     // Ford
                     Code = h.Code,

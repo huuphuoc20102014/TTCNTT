@@ -57,6 +57,7 @@ namespace ATAdmin.Controllers
                 .Select(h => new NewsDetailsViewModel
                 {
                     Id = h.Id,
+                    FkNewsType_Name = h.FkNewsType.Name,
                     FkNewsTypeId = h.FkNewsTypeId,
                     // Ford
                     Title = h.Title,
@@ -195,6 +196,8 @@ namespace ATAdmin.Controllers
         // GET: News/Edit/5
         public async Task<IActionResult> Edit([FromRoute] string id)
         {
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserNewController).Replace("Controller", "");
+
             if (id == null)
             {
                 return NotFound();
@@ -238,6 +241,7 @@ namespace ATAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([FromForm] NewsEditViewModel vmItem)
         {
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserNewController).Replace("Controller", "");
 
             // Invalid model
             if (!ModelState.IsValid)
