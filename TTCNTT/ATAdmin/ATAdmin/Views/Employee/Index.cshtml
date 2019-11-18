@@ -53,14 +53,12 @@
                 "href='" + Url.Action("Delete", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(Employee.Id) + " #'" +
             "><i class=\"far fa-trash-alt\"></i></a> "
         );
-        columns.Bound(c => c.RowStatus).Title(EntityLocalizer[nameof(Employee.RowStatus)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
         columns.Bound(c => c.Code).Title("Mã").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
         columns.Bound(c => c.Name).Title("Tên").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
         columns.Bound(c => c.BirthDate).Title("Ngày sinh").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
         columns.Bound(c => c.Address).Title("Địa chỉ").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
         columns.Bound(c => c.Phone).Title("Điện thoại").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
         columns.Bound(c => c.Specialize).Title("Chuyên môn").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-        columns.Bound(c => c.Note).Title(EntityLocalizer[nameof(Employee.Note)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
         columns.Bound(c => c.CreatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
         columns.Bound(c => c.UpdatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.UpdatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
         columns.Bound(c => c.CreatedBy).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedBy)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });

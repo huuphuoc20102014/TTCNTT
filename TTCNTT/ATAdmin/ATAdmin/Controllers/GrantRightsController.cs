@@ -85,6 +85,12 @@ namespace ATAdmin.Controllers
             return View(aspNetUserRoles);
         }
 
+        public async Task<IActionResult> Create()
+        {
+            await PrepareListMasterForeignKey();
+            return View();
+        }
+
         // GET: News/Edit/5
         public async Task<IActionResult> PhanQuyen([FromRoute] string id)
         {

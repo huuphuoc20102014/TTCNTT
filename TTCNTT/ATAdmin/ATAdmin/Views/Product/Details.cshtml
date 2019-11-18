@@ -18,6 +18,14 @@
     </div>
 </div>
 
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        @Html.DisplayNameFor(model => model.FkProduct) :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.FkProduct.Name)
+    </div>
+</div>
 
 <div class="row form-group">
     <div class="col-md-3 text-md-right details-label">
@@ -169,15 +177,6 @@
     </div>
     <div class="col-md-7">
         @Model.RowStatus.ToString("N0")
-    </div>
-</div>
-
-<div class="row form-group">
-    <div class="col-md-3 text-md-right details-label">
-        @Html.DisplayNameFor(model => model.FkProduct) :
-    </div>
-    <div class="col-md-7">
-        @Html.DisplayFor(model => model.FkProduct.Name)
     </div>
 </div>
 

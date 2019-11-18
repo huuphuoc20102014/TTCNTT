@@ -6,17 +6,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\ImageSlides\**" />
     <Compile Remove="Views\ProjectType\**" />
     <Compile Remove="Views\SettingType\**" />
+    <Content Remove="Views\ImageSlides\**" />
     <Content Remove="Views\ProjectType\**" />
     <Content Remove="Views\SettingType\**" />
+    <EmbeddedResource Remove="Views\ImageSlides\**" />
     <EmbeddedResource Remove="Views\ProjectType\**" />
     <EmbeddedResource Remove="Views\SettingType\**" />
+    <None Remove="Views\ImageSlides\**" />
     <None Remove="Views\ProjectType\**" />
     <None Remove="Views\SettingType\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\ImageSlidesController.cs" />
     <Compile Remove="Controllers\SettingTypeController.cs" />
   </ItemGroup>
 
@@ -37,11 +42,6 @@
     <None Include="Views\GrantRights\Details.cshtml" />
     <None Include="Views\GrantRights\PhanQuyen.cshtml" />
     <None Include="Views\GrantRights\Index.cshtml" />
-    <None Include="Views\ImageSlides\Create.cshtml" />
-    <None Include="Views\ImageSlides\Delete.cshtml" />
-    <None Include="Views\ImageSlides\Details.cshtml" />
-    <None Include="Views\ImageSlides\Edit.cshtml" />
-    <None Include="Views\ImageSlides\Index.cshtml" />
     <None Include="Views\NewsType\Create.cshtml" />
     <None Include="Views\NewsType\Delete.cshtml" />
     <None Include="Views\NewsType\Details.cshtml" />

@@ -53,21 +53,16 @@
                 "href='" + Url.Action("Delete", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(Product.Id) + " #'" +
             "><i class=\"far fa-trash-alt\"></i></a> "
         );		
-			columns.Bound(c => c.RowStatus).Title(BaseEntityLocalizer[nameof(BaseEntityResources.RowStatus)]).Width(150).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.Name).Title("Tên").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.FkProductId).Title(EntityLocalizer[nameof(Product.FkProductId)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });								
-			columns.Bound(c => c.Code).Title("Mã").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+        	columns.Bound(c => c.FkProductId).Title("Loại sản phẩm").Width(200).HtmlAttributes(new { @class = "text-nowrap" });								
+			columns.Bound(c => c.Code).Title("Mã").Width(200).HtmlAttributes(new { @class = "text-nowrap" });		
+            columns.Bound(c => c.Name).Title("Tên").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
             columns.Bound(c => c.SlugName).Title(EntityLocalizer[nameof(Product.Slug_Name)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.ImageSlug).Title(EntityLocalizer[nameof(Product.ImageSlug)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.ShortDescriptionHtml).Title(EntityLocalizer[nameof(Product.ShortDescription_Html)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.LongDescriptionHtml).Title(EntityLocalizer[nameof(Product.LongDescription_Html)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.Tags).Title(EntityLocalizer[nameof(Product.Tags)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.KeyWord).Title(EntityLocalizer[nameof(Product.KeyWord)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.MetaData).Title(EntityLocalizer[nameof(Product.MetaData)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.Note).Title(EntityLocalizer[nameof(Product.Note)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.CreatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.UpdatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.UpdatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.CreatedBy).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedBy)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.CreatedBy).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedBy)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });	
+            columns.Bound(c => c.UpdatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.UpdatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.UpdatedBy).Title(BaseEntityLocalizer[nameof(BaseEntityResources.UpdatedBy)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
     })
     .HtmlAttributes(new { style = "height: 600px;" })

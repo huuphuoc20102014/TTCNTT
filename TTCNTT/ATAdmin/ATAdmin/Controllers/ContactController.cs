@@ -83,7 +83,7 @@ namespace ATAdmin.Controllers
             }
 
             var contact = await _context.Contact.AsNoTracking()
-
+                .Include(h => h.FkCourse)
                     .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
             if (contact == null)
@@ -97,6 +97,8 @@ namespace ATAdmin.Controllers
         // GET: Contact/Create
         public async Task<IActionResult> Create()
         {
+            await PrepareListMasterForeignKey();
+
             return View();
         }
 
@@ -185,6 +187,7 @@ namespace ATAdmin.Controllers
                 return NotFound();
             }
 
+            await PrepareListMasterForeignKey();
 
             return View(dbItem);
         }
@@ -252,7 +255,7 @@ namespace ATAdmin.Controllers
             }
 
             var dbItem = await _context.Contact.AsNoTracking()
-
+                .Include(h => h.FkCourse)
                     .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
             if (dbItem == null)
@@ -278,7 +281,7 @@ namespace ATAdmin.Controllers
             var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
             var dbItem = await _context.Contact
-
+                .Include(h => h.FkCourse)
                 .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
             if (dbItem == null)
@@ -310,6 +313,17 @@ namespace ATAdmin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        private async Task PrepareListMasterForeignKey(ContactBaseViewModel vm = null)
+        {
+            ViewData["FkCourseId"] = new SelectList(
+                await _context.Course.AsNoTracking()
+                    .Select(h => new { h.Id, h.Name, h.RowStatus })
+                    .Where(h => h.RowStatus == (int)AtRowStatus.Normal)
+                    .OrderBy(h => h.Id)
+                    .ToListAsync(),
+                "Id", "Name", vm?.Fk_CourseId);
+
+        }
     }
 
 

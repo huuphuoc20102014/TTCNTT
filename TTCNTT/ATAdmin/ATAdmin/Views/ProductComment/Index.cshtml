@@ -5,7 +5,7 @@
 @inject IStringLocalizer<BaseEntityResources> BaseEntityLocalizer
 
 @{
-    ViewData["Title"] =  SharedLocalizer["ViewTitle_List"]  + " " + EntityLocalizer["Bình Luận Sản Phẩm"];
+    ViewData["Title"] = SharedLocalizer["ViewTitle_List"] + " " + EntityLocalizer["Bình Luận Sản Phẩm"];
     var parentItem = ViewData["ParentItem"] as ProductComment;
     if (parentItem != null)
     {
@@ -15,25 +15,25 @@
 
 
 <div class="container">
-	<h4>
-		@SharedLocalizer["ViewTitle_List"] @EntityLocalizer["Bình Luận Sản Phẩm"]
-		@if (parentItem != null)
+    <h4>
+        @SharedLocalizer["ViewTitle_List"] @EntityLocalizer["Bình Luận Sản Phẩm"]
+        @if (parentItem != null)
         {
             @:: <span class="text-warning">@parentItem.Id | @parentItem.Name</span>
         }
-	</h4>
-	<hr />	
-	
-	<p>
-		<a asp-action="Create" class="btn btn-primary">@SharedLocalizer["Btn_CreateNew"]</a>
-		@if (parentItem != null)
+    </h4>
+    <hr />
+
+    <p>
+        <a asp-action="Create" class="btn btn-primary">@SharedLocalizer["Btn_CreateNew"]</a>
+        @if (parentItem != null)
         {
             <a asp-action="Index" asp-route-id="" class="btn btn-primary">@SharedLocalizer["Btn_ListAll"]</a>
         }
         else
         {
         }
-	</p>
+    </p>
 </div>
 
 @(Html.Kendo().Grid<ProductCommentDetailsViewModel>()
@@ -52,27 +52,24 @@
             "<a class=\"btn btn-danger\" data-toggle=\"tooltip\" title=\"" + SharedLocalizer["Ttip_Delete"] + "\"" +
                 "href='" + Url.Action("Delete", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(ProductComment.Id) + " #'" +
             "><i class=\"far fa-trash-alt\"></i></a> "
-        );		
-			columns.Bound(c => c.RowStatus).Title(BaseEntityLocalizer[nameof(BaseEntityResources.RowStatus)]).Width(150).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.Name).Title("Tên").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.FkProductCommentId).Title(EntityLocalizer[nameof(ProductComment.FkProductCommentId)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });								
-			columns.Bound(c => c.FkProductId).Title("Sản phẩm").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+        );
+            columns.Bound(c => c.FkProductId).Title("Sản phẩm").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+            columns.Bound(c => c.Name).Title("Tên").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
             columns.Bound(c => c.Email).Title(EntityLocalizer[nameof(ProductComment.Email)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.Phone).Title(EntityLocalizer[nameof(ProductComment.Phone)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.Comment).Title(EntityLocalizer[nameof(ProductComment.Comment)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.IsRead).Title(EntityLocalizer[nameof(ProductComment.IsRead)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.Note).Title(EntityLocalizer[nameof(ProductComment.Note)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.CreatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.UpdatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.UpdatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.CreatedBy).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedBy)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.UpdatedBy).Title(BaseEntityLocalizer[nameof(BaseEntityResources.UpdatedBy)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+            columns.Bound(c => c.Phone).Title(EntityLocalizer[nameof(ProductComment.Phone)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+            columns.Bound(c => c.Comment).Title(EntityLocalizer[nameof(ProductComment.Comment)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+            columns.Bound(c => c.IsRead).Title(EntityLocalizer[nameof(ProductComment.IsRead)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+            columns.Bound(c => c.CreatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
+            columns.Bound(c => c.CreatedBy).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedBy)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });    
+            columns.Bound(c => c.UpdatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.UpdatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
+            columns.Bound(c => c.UpdatedBy).Title(BaseEntityLocalizer[nameof(BaseEntityResources.UpdatedBy)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
     })
     .HtmlAttributes(new { style = "height: 600px;" })
-	.Resizable(r => r.Columns(true))
+    .Resizable(r => r.Columns(true))
     .Scrollable()
     .Groupable()
     .Sortable()
-	.Filterable()
+    .Filterable()
     .Pageable(pageable => pageable
         .Refresh(true)
         .PageSizes(new int[] { 50, 100, 200, 500, 1000 })
@@ -80,21 +77,21 @@
     .DataSource(dataSource => dataSource
         .Ajax()
         .Read(read => read.Action("Index_Read", ((string)ViewData["ControllerNameForGrid"]), new { ParentId = parentItem?.Id }))
-		.PageSize(50)
+        .PageSize(50)
     )
 )
 
 <div class="container">
-	<p>
-	</p>
-	<p>
-		<a asp-action="Create" class="btn btn-primary">@SharedLocalizer["Btn_CreateNew"]</a>
-		@if (parentItem != null)
+    <p>
+    </p>
+    <p>
+        <a asp-action="Create" class="btn btn-primary">@SharedLocalizer["Btn_CreateNew"]</a>
+        @if (parentItem != null)
         {
             <a asp-action="Index" asp-route-id="" class="btn btn-primary">@SharedLocalizer["Btn_ListAll"]</a>
         }
         else
         {
         }
-	</p>
+    </p>
 </div>

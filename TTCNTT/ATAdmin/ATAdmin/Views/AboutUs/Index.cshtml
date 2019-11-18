@@ -53,16 +53,10 @@
                 "href='" + Url.Action("Delete", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(AboutUs.Id) + " #'" +
             "><i class=\"far fa-trash-alt\"></i></a> "
         );		
-			columns.Bound(c => c.RowStatus).Title(BaseEntityLocalizer[nameof(BaseEntityResources.RowStatus)]).Width(150).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.Title).Title(EntityLocalizer[nameof(AboutUs.Title)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.SlugTitle).Title(EntityLocalizer[nameof(AboutUs.Slug_Title)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.ShortDescriptionHtml).Title(EntityLocalizer[nameof(AboutUs.ShortDescription_Html)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.LongDescriptionHtml).Title(EntityLocalizer[nameof(AboutUs.LongDescription_Html)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.ImageSlug).Title(EntityLocalizer[nameof(AboutUs.ImageSlug)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.Tags).Title(EntityLocalizer[nameof(AboutUs.Tags)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.KeyWord).Title(EntityLocalizer[nameof(AboutUs.KeyWord)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.MetaData).Title(EntityLocalizer[nameof(AboutUs.MetaData)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.Note).Title(EntityLocalizer[nameof(AboutUs.Note)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.LongDescriptionHtml).Title(EntityLocalizer[nameof(AboutUs.LongDescription_Html)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });			
+            columns.Bound(c => c.ImageSlug).Title(EntityLocalizer[nameof(AboutUs.ImageSlug)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.CreatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.UpdatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.UpdatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.CreatedBy).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedBy)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });

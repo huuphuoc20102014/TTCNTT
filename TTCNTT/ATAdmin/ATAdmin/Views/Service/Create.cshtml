@@ -58,10 +58,46 @@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="ShortDescriptionHtml" class="col-form-label"></label>
+            <label asp-for="ShortDescriptionHtml" class="col-form-label">Mô tả ngắn</label>
         </div>
-        <div class="col-md-7">
-            <input asp-for="ShortDescriptionHtml" class="k-textbox form-control" />
+        <div class="col-12">
+            @(Html.Kendo().EditorFor(h => h.ShortDescriptionHtml).Encoded(false)
+                  .HtmlAttributes(new { style = "height:440px" })
+                  .Resizable(resizable => resizable.Content(true))
+                  .Tools(tools => tools
+                    .Clear()
+                    .CleanFormatting()
+                    .Formatting()
+                    .ForeColor()
+                    .BackColor()
+                    .Bold()
+                    .Italic()
+                    .Underline()
+                    .Strikethrough()
+                    .JustifyLeft()
+                    .JustifyCenter()
+                    .JustifyRight()
+                    .JustifyFull()
+                    .InsertUnorderedList()
+                    .InsertOrderedList()
+                    .Outdent()
+                    .Indent()
+                    .CreateLink()
+                    .Unlink()
+                    .InsertImage()
+                    .SubScript()
+                    .SuperScript()
+                    .TableEditing()
+                    .FontName()
+                    .FontSize()
+                )
+                  .ImageBrowser(imageBrowser => imageBrowser
+                      .Image("~/" + ImageBrowserServiceController.FOLDER_NAME + "/{0}")
+                      .Read("Read", (string)ViewData["ControllerNameForImageBrowser"])
+                      .Destroy("Destroy", (string)ViewData["ControllerNameForImageBrowser"])
+                      .Upload("Upload", (string)ViewData["ControllerNameForImageBrowser"])
+                  )
+            )
         </div>
         <div class="offset-md-3 col-md-7 at-wrapper-validate">
             <span asp-validation-for="ShortDescriptionHtml" class="text-danger"></span>
@@ -70,10 +106,46 @@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="LongDescriptionHtml" class="col-form-label"></label>
+            <label asp-for="LongDescriptionHtml" class="col-form-label">Mô tả dài</label>
         </div>
-        <div class="col-md-7">
-            <input asp-for="LongDescriptionHtml" class="k-textbox form-control" />
+        <div class="col-12">
+            @(Html.Kendo().EditorFor(h => h.LongDescriptionHtml).Encoded(false)
+                  .HtmlAttributes(new { style = "height:440px" })
+                  .Resizable(resizable => resizable.Content(true))
+                  .Tools(tools => tools
+                    .Clear()
+                    .CleanFormatting()
+                    .Formatting()
+                    .ForeColor()
+                    .BackColor()
+                    .Bold()
+                    .Italic()
+                    .Underline()
+                    .Strikethrough()
+                    .JustifyLeft()
+                    .JustifyCenter()
+                    .JustifyRight()
+                    .JustifyFull()
+                    .InsertUnorderedList()
+                    .InsertOrderedList()
+                    .Outdent()
+                    .Indent()
+                    .CreateLink()
+                    .Unlink()
+                    .InsertImage()
+                    .SubScript()
+                    .SuperScript()
+                    .TableEditing()
+                    .FontName()
+                    .FontSize()
+                )
+                  .ImageBrowser(imageBrowser => imageBrowser
+                      .Image("~/" + ImageBrowserServiceController.FOLDER_NAME + "/{0}")
+                      .Read("Read", (string)ViewData["ControllerNameForImageBrowser"])
+                      .Destroy("Destroy", (string)ViewData["ControllerNameForImageBrowser"])
+                      .Upload("Upload", (string)ViewData["ControllerNameForImageBrowser"])
+                  )
+            )
         </div>
         <div class="offset-md-3 col-md-7 at-wrapper-validate">
             <span asp-validation-for="LongDescriptionHtml" class="text-danger"></span>

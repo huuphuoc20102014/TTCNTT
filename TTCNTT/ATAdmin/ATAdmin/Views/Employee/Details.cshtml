@@ -22,6 +22,14 @@
 
 <div class="row form-group">
     <div class="col-md-3 text-md-right details-label">
+        @Html.DisplayNameFor(model => model.Code) :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.Code)
+    </div>
+</div>
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
         @Html.DisplayNameFor(model => model.Name) :
     </div>
     <div class="col-md-7">
@@ -35,14 +43,6 @@
     </div>
     <div class="col-md-7">
         @Html.DisplayFor(model => model.BirthDate)
-    </div>
-</div>
-<div class="row form-group">
-    <div class="col-md-3 text-md-right details-label">
-        @Html.DisplayNameFor(model => model.Code) :
-    </div>
-    <div class="col-md-7">
-        @Html.DisplayFor(model => model.Code)
     </div>
 </div>
 <div class="row form-group">

@@ -24,6 +24,14 @@
     </div>
 </form>
 
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        @Html.DisplayNameFor(model => model.FkProduct) :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.FkProduct.Name)
+    </div>
+</div>
 
 <div class="row form-group">
     <div class="col-md-3 text-md-right details-label">
@@ -178,14 +186,7 @@
     </div>
 </div>
 
-<div class="row form-group">
-    <div class="col-md-3 text-md-right details-label">
-        @Html.DisplayNameFor(model => model.FkProduct) :
-    </div>
-    <div class="col-md-7">
-        @Html.DisplayFor(model => model.FkProduct.Name)
-    </div>
-</div>
+
 
 <form asp-action="Delete">
     <input type="hidden" name="Id" value="@Model?.Id" />

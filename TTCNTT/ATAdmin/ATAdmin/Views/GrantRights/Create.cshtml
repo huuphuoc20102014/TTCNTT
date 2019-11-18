@@ -44,14 +44,14 @@
 
 <h4>Create Phân Quyền</h4>
 <hr />
-<form asp-action="Create" method="post">
+<form asp-action="PhanQuyen" method="post">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Tạo" class="btn btn-primary" />
-            <a asp-action="Index" class="k-button">Back</a>
+            <input type="submit" value="Phân quyền" class="btn btn-primary" />
+            <a asp-action="Index" class="k-button">Quay lại</a>
         </div>
     </div>
     <div class="row form-group">
@@ -69,37 +69,10 @@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="RoleId" class="col-form-label">Chọn quyền: </label>
-            <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
-
-            <div id="example" role="application">
-                <div class="demo-section k-content wide">
-                    <label for="optional" id="employees"> Chưa có quyền</label>
-                    <label for="selected"> Có quyền</label>
-                    <br />
-
-                    <kendo-listbox name="optional" connect-with="selected" bind-to="ViewBag.RoleId">
-                        <toolbar position="ListBoxToolbarPosition.Right" tools='tools' />
-                    </kendo-listbox>
-
-                    @*<kendo-listbox name="selected" selectable="ListBoxSelectable.Multiple" bind-to="">
-                    </kendo-listbox>*@
-                </div>
-            </div>
-
-        </div>
-        <div class="offset-md-3 col-md-7 at-wrapper-validate">
-            <span asp-validation-for="RoleId" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="row form-group">
-        <div class="col-md-3 text-md-right ">
-        </div>
-        <div class="col-md-7">
-            <input type="submit" value="Tạo" class="btn btn-primary" />
-            <a asp-action="Index" class="k-button">Back</a>
+            <input type="submit" value="Phân quyền" class="btn btn-primary" />
+            <a asp-action="Index" class="k-button">Quay lại</a>
         </div>
     </div>
 </form>

@@ -368,7 +368,7 @@ namespace ATAdmin.Controllers
                     .ToListAsync(),
                 "Id", "Name", vm?.FkNewsTypeId);
 
-                  }
+        }
     }
 
     public class ImageBrowserNewController : EditorImageBrowserController
