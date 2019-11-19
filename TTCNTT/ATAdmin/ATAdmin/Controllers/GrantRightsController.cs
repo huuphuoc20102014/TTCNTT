@@ -61,6 +61,7 @@ namespace ATAdmin.Controllers
                     TenNguoiDung = h.TenNguoiDung,
                     TenQuyen = h.TenQuyen
                 });
+            
 
             return Json(await query.ToDataSourceResultAsync(request));
         }
@@ -258,8 +259,6 @@ namespace ATAdmin.Controllers
 
     public class AspNetUserRolesDetailsViewModel : AspNetUserRolesBaseViewModel
     {
-        public AspNetUsers listUsers { get; set; }
-        public View_Roles listRoles { get; set; }
 
     }
 
