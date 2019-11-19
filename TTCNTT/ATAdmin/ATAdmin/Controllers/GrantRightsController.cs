@@ -88,52 +88,23 @@ namespace ATAdmin.Controllers
 
         public async Task<IActionResult> Create()
         {
-            AspNetUserRolesCreateViewModel model = new AspNetUserRolesCreateViewModel();
-            model.listUsers = await _context.AspNetUsers.ToListAsync();
-            await PrepareListMasterForeignKey();
-            return View(model);
+            ViewData["UsersID"] = new SelectList( _context.AspNetUsers, "Id", "UserName");
+            return View();
         }
 
         //[HttpPost]
-        //public async Task<IActionResult> Create([FromBody] List<arrayRoles> listRoles, [FromForm] AspNetUserRolesCreateViewModel vmItem)
+        //public async Task<IActionResult> Create(string ID)
         //{
-        //    if (listRoles.Count() == 0)
+        //    if (ID == null)
         //    {
         //        return NotFound();
         //    }
 
-        //    var listQuyenNguoiDung = _context.AspNetUserRoles.Where(h => h.UserId == vmItem.UserId).ToList();
-
-        //    if (listQuyenNguoiDung == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    //nhớ kiểm tra nếu list cũ bằng list mới thì không thay đổi gì.
-        //    foreach (var item in listQuyenNguoiDung)
-        //    {
-        //        var roles = _context.AspNetUserRoles.FirstOrDefault(h => h.UserId == item.UserId);
-        //        _context.AspNetUserRoles.Remove(roles);
-        //        await _context.SaveChangesAsync();
-        //    }
-
-
-        //    var dbItem = new AspNetUserRoles();
-        //    foreach (var item in listRoles)
-        //    {
-        //        dbItem = new AspNetUserRoles
-        //        {
-        //            UserId = vmItem.UserId,
-        //            RoleId = item.IDroles,
-
-        //        };
-        //        _context.Add(dbItem);
-        //        await _context.SaveChangesAsync();
-        //    }
-
-        //    return RedirectToAction(nameof(Index));
+        //    return RedirectToAction(nameof(PhanQuyen), new { id = ID });
         //}
 
         // GET: News/Edit/5
+
         public async Task<IActionResult> PhanQuyen([FromRoute] string id)
         {
             if (id == null)

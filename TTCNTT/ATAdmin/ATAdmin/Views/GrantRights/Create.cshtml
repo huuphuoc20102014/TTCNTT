@@ -8,7 +8,7 @@
 
 <h4>Create Phân Quyền</h4>
 <hr />
-<form asp-action="PhanQuyen" method="post">
+@*<form>*@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
@@ -25,7 +25,7 @@
             <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
-            <kendo-dropdownlist name="mydropdownlist" for="UserId" bind-to="@ViewBag.UserID" class="form-control" />
+            <select asp-for="UserId" asp-items="ViewBag.UsersID" class="form-control" ></select>
 
         </div>
         <div class="offset-md-3 col-md-7 at-wrapper-validate">
@@ -42,19 +42,18 @@
             <a asp-action="Index" class="k-button">Quay lại</a>
         </div>
     </div>
-</form>
+@*</form>*@
 
 <script>
 
 
 </script>
 
-@*@section Scripts {
+@section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script>
-        var _urlUserRoles = '@Url.Action("PhanQuyen", "GrantRights")';
+        var _urlUsers = '@Url.Action("Create", "GrantRights")';
     </script>
-
-    <script src="~/js/UserRoles.js"></script>
-}*@
+    <script src="~/js/Users.js"></script>
+}
