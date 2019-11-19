@@ -119,8 +119,21 @@ namespace ATAdmin.Controllers
             var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
             // Trim white space
+            vmItem.SlugName = $"{vmItem.SlugName}".Trim();
+            if (vmItem.AutoSlug)
+            {
+                vmItem.SlugName = NormalizeSlug($"{vmItem.Name}");
+            }
+            else
+            {
+                vmItem.SlugName = NormalizeSlug($"{vmItem.SlugName}");
+            }
 
-
+            // Check slug is existed => if existed auto get next slug
+            var listExistedSlug = await _context.Category.AsNoTracking()
+                    .Where(h => h.Id.StartsWith(vmItem.SlugName))
+                    .Select(h => h.Slug_Name).ToListAsync();
+            var slug = CheckAndGenNextSlug(vmItem.SlugName, listExistedSlug);
 
             // Create save db item
             var dbItem = new Category
@@ -129,6 +142,7 @@ namespace ATAdmin.Controllers
                 Code = vmItem.Code,
                 Name = vmItem.Name,
                 Slug_Name = vmItem.SlugName,
+                AutoSlug = vmItem.AutoSlug,
                 CreatedBy = _loginUserId,
                 CreatedDate = DateTime.Now,
                 UpdatedBy = null,
@@ -170,6 +184,7 @@ namespace ATAdmin.Controllers
                     Name = h.Name,
                     Code = h.Code,
                     SlugName = h.Slug_Name,
+                    AutoSlug = h.AutoSlug,
                     Tags = h.Tags,
                     KeyWord = h.KeyWord,
                     MetaData = h.MetaData,
@@ -214,10 +229,27 @@ namespace ATAdmin.Controllers
             }
 
             // Trim white space
+            vmItem.SlugName = $"{vmItem.SlugName}".Trim();
+            if (vmItem.AutoSlug)
+            {
+                vmItem.SlugName = NormalizeSlug($"{vmItem.Name}");
+            }
+            else
+            {
+                vmItem.SlugName = NormalizeSlug($"{vmItem.SlugName}");
+            }
 
+            // Check slug is existed => if existed auto get next slug
+            var listExistedSlug = await _context.Category.AsNoTracking()
+                    .Where(h => h.Id.StartsWith(vmItem.SlugName))
+                    .Select(h => h.Slug_Name).ToListAsync();
+            var slug = CheckAndGenNextSlug(vmItem.SlugName, listExistedSlug);
+
+            //save db
             dbItem.Name = vmItem.Name;
             dbItem.Code = vmItem.Code;
             dbItem.Slug_Name = vmItem.SlugName;
+            dbItem.AutoSlug = vmItem.AutoSlug;
 
             // Update db item               
             dbItem.UpdatedBy = _loginUserId;

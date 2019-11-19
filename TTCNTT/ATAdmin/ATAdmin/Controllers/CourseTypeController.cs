@@ -121,6 +121,17 @@ namespace ATAdmin.Controllers
             vmItem.Code = $"{vmItem.Code}".Trim();
             vmItem.Name = $"{vmItem.Name}".Trim();
 
+            //auto slug
+            vmItem.SlugName = $"{vmItem.SlugName}".Trim();
+            if (vmItem.AutoSlug)
+            {
+                vmItem.SlugName = NormalizeSlug($"{vmItem.Name}");
+            }
+            else
+            {
+                vmItem.SlugName = NormalizeSlug($"{vmItem.SlugName}");
+            }
+
             // Check code is existed
             if (await _webcontext.CourseType.AnyAsync(h => h.Code == vmItem.Code))
             {
@@ -225,6 +236,17 @@ namespace ATAdmin.Controllers
             // Trim white space
             vmItem.Code = $"{vmItem.Code}".Trim();
             vmItem.Name = $"{vmItem.Name}".Trim();
+
+            //auto slug
+            vmItem.SlugName = $"{vmItem.SlugName}".Trim();
+            if (vmItem.AutoSlug)
+            {
+                vmItem.SlugName = NormalizeSlug($"{vmItem.Name}");
+            }
+            else
+            {
+                vmItem.SlugName = NormalizeSlug($"{vmItem.SlugName}");
+            }
 
             // Check code is existed
             if (await _webcontext.CourseType.AnyAsync(h => h.Id != vmItem.Id && h.Code == vmItem.Code))

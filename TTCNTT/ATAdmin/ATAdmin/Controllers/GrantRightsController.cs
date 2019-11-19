@@ -88,9 +88,50 @@ namespace ATAdmin.Controllers
 
         public async Task<IActionResult> Create()
         {
+            AspNetUserRolesCreateViewModel model = new AspNetUserRolesCreateViewModel();
+            model.listUsers = await _context.AspNetUsers.ToListAsync();
             await PrepareListMasterForeignKey();
-            return View();
+            return View(model);
         }
+
+        //[HttpPost]
+        //public async Task<IActionResult> Create([FromBody] List<arrayRoles> listRoles, [FromForm] AspNetUserRolesCreateViewModel vmItem)
+        //{
+        //    if (listRoles.Count() == 0)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var listQuyenNguoiDung = _context.AspNetUserRoles.Where(h => h.UserId == vmItem.UserId).ToList();
+
+        //    if (listQuyenNguoiDung == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    //nhớ kiểm tra nếu list cũ bằng list mới thì không thay đổi gì.
+        //    foreach (var item in listQuyenNguoiDung)
+        //    {
+        //        var roles = _context.AspNetUserRoles.FirstOrDefault(h => h.UserId == item.UserId);
+        //        _context.AspNetUserRoles.Remove(roles);
+        //        await _context.SaveChangesAsync();
+        //    }
+
+
+        //    var dbItem = new AspNetUserRoles();
+        //    foreach (var item in listRoles)
+        //    {
+        //        dbItem = new AspNetUserRoles
+        //        {
+        //            UserId = vmItem.UserId,
+        //            RoleId = item.IDroles,
+
+        //        };
+        //        _context.Add(dbItem);
+        //        await _context.SaveChangesAsync();
+        //    }
+
+        //    return RedirectToAction(nameof(Index));
+        //}
 
         // GET: News/Edit/5
         public async Task<IActionResult> PhanQuyen([FromRoute] string id)
@@ -230,7 +271,7 @@ namespace ATAdmin.Controllers
 
         private async Task PrepareListMasterForeignKey(AspNetUserRolesBaseViewModel vm = null)
         {
-            ViewData["UserId"] = new SelectList(
+            ViewData["UserID"] = new SelectList(
                 await _context.AspNetUsers.AsNoTracking()
                     .Select(h => new {h.Id, h.UserName})
                     .ToListAsync(),
@@ -264,7 +305,7 @@ namespace ATAdmin.Controllers
 
     public class AspNetUserRolesCreateViewModel : AspNetUserRolesBaseViewModel
     {
-
+        public List<AspNetUsers>  listUsers { get; set; }
     }
 
     public class AspNetUserRolesEditViewModel : AspNetUserRolesBaseViewModel

@@ -142,6 +142,9 @@ namespace ATAdmin.Controllers
             var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
             // Trim white space
+            vmItem.Name = $"{vmItem.Name}".Trim();
+
+            //auto slug
             vmItem.SlugName = $"{vmItem.SlugName}".Trim();
             if (vmItem.AutoSlug)
             {
@@ -265,7 +268,22 @@ namespace ATAdmin.Controllers
             }
 
             // Trim white space
+            // Trim white space
+            vmItem.SlugName = $"{vmItem.SlugName}".Trim();
+            if (vmItem.AutoSlug)
+            {
+                vmItem.SlugName = NormalizeSlug($"{vmItem.Name}");
+            }
+            else
+            {
+                vmItem.SlugName = NormalizeSlug($"{vmItem.SlugName}");
+            }
 
+            // Check slug is existed => if existed auto get next slug
+            var listExistedSlug = await _context.Course.AsNoTracking()
+                    .Where(h => h.Id.StartsWith(vmItem.SlugName))
+                    .Select(h => h.Slug_Name).ToListAsync();
+            var slug = CheckAndGenNextSlug(vmItem.SlugName, listExistedSlug);
 
 
             // Update db item               

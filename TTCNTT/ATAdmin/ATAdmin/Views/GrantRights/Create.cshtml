@@ -6,42 +6,6 @@
 
 }
 
-@{
-    var tools = new string[] {
-        "transferTo",
-        "transferFrom",
-        "transferAllTo",
-        "transferAllFrom"
-    };
-}
-
-<style>
-    #employees {
-        width: 270px;
-    }
-
-    .demo-section label {
-        margin-bottom: 5px;
-        font-weight: bold;
-        display: inline-block;
-    }
-
-    #example .demo-section {
-        max-width: none;
-        width: 515px;
-    }
-
-    #example .k-listbox {
-        width: 236px;
-        height: 310px;
-    }
-
-    #example .k-listbox:first-of-type {
-        width: 270px;
-        margin-right: 1px;
-    }
-</style>
-
 <h4>Create Phân Quyền</h4>
 <hr />
 <form asp-action="PhanQuyen" method="post">
@@ -54,18 +18,21 @@
             <a asp-action="Index" class="k-button">Quay lại</a>
         </div>
     </div>
+
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label class="col-form-label">Tên người dùng: </label>
+            <label class="col-form-label">Người dùng: </label>
             <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
-            <kendo-dropdownlist for="UserId" bind-to="@ViewBag.UserId" class="form-control" />
+            <kendo-dropdownlist name="mydropdownlist" for="UserId" bind-to="@ViewBag.UserID" class="form-control" />
+
         </div>
         <div class="offset-md-3 col-md-7 at-wrapper-validate">
             <span class="text-danger"></span>
         </div>
     </div>
+
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
@@ -77,13 +44,17 @@
     </div>
 </form>
 
+<script>
 
-@section Scripts {
+
+</script>
+
+@*@section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script>
-        var _urlUserRoles = '@Url.Action("Create", "GrantRights")';
+        var _urlUserRoles = '@Url.Action("PhanQuyen", "GrantRights")';
     </script>
 
     <script src="~/js/UserRoles.js"></script>
-}
+}*@

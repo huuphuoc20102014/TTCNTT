@@ -23,6 +23,20 @@
         </div>
         <input type="hidden" name="Id" value="@Model?.Id" />
         <input type="hidden" asp-for="RowVersion" />
+
+        <div class="row form-group">
+            <div class="col-md-3 text-md-right ">
+                <label asp-for="Code" class="col-form-label"></label>
+                <span class="text-danger">*</span>
+            </div>
+            <div class="col-md-7">
+                <input asp-for="Code" class="k-textbox form-control" />
+            </div>
+            <div class="offset-md-3 col-md-7 at-wrapper-validate">
+                <span asp-validation-for="Code" class="text-danger"></span>
+            </div>
+        </div>
+
         <div class="row form-group">
             <div class="col-md-3 text-md-right ">
                 <label asp-for="Name" class="col-form-label"></label>
@@ -47,18 +61,7 @@
                 <span asp-validation-for="SlugName" class="text-danger"></span>
             </div>
         </div>
-        <div class="row form-group">
-            <div class="col-md-3 text-md-right ">
-                <label asp-for="Code" class="col-form-label"></label>
-                <span class="text-danger">*</span>
-            </div>
-            <div class="col-md-7">
-                <input asp-for="Code" class="k-textbox form-control" />
-            </div>
-            <div class="offset-md-3 col-md-7 at-wrapper-validate">
-                <span asp-validation-for="Code" class="text-danger"></span>
-            </div>
-        </div>
+
         <div class="row form-group">
             <div class="col-md-3 text-md-right ">
                 <label asp-for="AutoSlug" class="col-form-label"></label>
@@ -71,7 +74,7 @@
                 <span asp-validation-for="AutoSlug" class="text-danger"></span>
             </div>
         </div>
-       
+
         <div class="row form-group">
             <div class="col-md-3 text-md-right ">
                 <label asp-for="Tags" class="col-form-label"></label>

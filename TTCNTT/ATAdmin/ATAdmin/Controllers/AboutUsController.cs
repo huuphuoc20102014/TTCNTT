@@ -124,8 +124,21 @@ namespace ATAdmin.Controllers
             var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
             // Trim white space
+            vmItem.SlugTitle = $"{vmItem.SlugTitle}".Trim();
+            if (vmItem.AutoSlug)
+            {
+                vmItem.SlugTitle = NormalizeSlug($"{vmItem.Title}");
+            }
+            else
+            {
+                vmItem.SlugTitle = NormalizeSlug($"{vmItem.SlugTitle}");
+            }
 
-
+            // Check slug is existed => if existed auto get next slug
+            var listExistedSlug = await _context.AboutUs.AsNoTracking()
+                    .Where(h => h.Id.StartsWith(vmItem.SlugTitle))
+                    .Select(h => h.Slug_Title).ToListAsync();
+            var slug = CheckAndGenNextSlug(vmItem.SlugTitle, listExistedSlug);
 
             // Create save db item
             var dbItem = new AboutUs
@@ -228,8 +241,21 @@ namespace ATAdmin.Controllers
             }
 
             // Trim white space
+            vmItem.SlugTitle = $"{vmItem.SlugTitle}".Trim();
+            if (vmItem.AutoSlug)
+            {
+                vmItem.SlugTitle = NormalizeSlug($"{vmItem.Title}");
+            }
+            else
+            {
+                vmItem.SlugTitle = NormalizeSlug($"{vmItem.SlugTitle}");
+            }
 
-
+            // Check slug is existed => if existed auto get next slug
+            var listExistedSlug = await _context.AboutUs.AsNoTracking()
+                    .Where(h => h.Id.StartsWith(vmItem.SlugTitle))
+                    .Select(h => h.Slug_Title).ToListAsync();
+            var slug = CheckAndGenNextSlug(vmItem.SlugTitle, listExistedSlug);
 
             // Update db item               
             dbItem.UpdatedBy = _loginUserId;

@@ -16,11 +16,11 @@ namespace ATAdmin.Controllers
 {
     public class NewsTypeController : AtBaseController
     {
-        private readonly WebTTCNTTContext _webcontext;
+        private readonly WebTTCNTTContext _context;
 
         public NewsTypeController(WebTTCNTTContext context)
         {
-            _webcontext = context;
+            _context = context;
         }
 
         // GET: NewsType
@@ -29,7 +29,7 @@ namespace ATAdmin.Controllers
             NewsType dbItem = null;
             if (!string.IsNullOrWhiteSpace(id))
             {
-                dbItem = await _webcontext.NewsType.AsNoTracking().FirstOrDefaultAsync(h => h.Id == id);
+                dbItem = await _context.NewsType.AsNoTracking().FirstOrDefaultAsync(h => h.Id == id);
                 if (dbItem == null)
                 {
                     return NotFound();
@@ -43,7 +43,7 @@ namespace ATAdmin.Controllers
 
         public async Task<IActionResult> Index_Read([DataSourceRequest] DataSourceRequest request, string parentId)
         {
-            var baseQuery = _webcontext.NewsType.AsNoTracking();
+            var baseQuery = _context.NewsType.AsNoTracking();
             if (!string.IsNullOrWhiteSpace(parentId))
             {
                 baseQuery = baseQuery.Where(h => h.Id == parentId);
@@ -81,7 +81,7 @@ namespace ATAdmin.Controllers
                 return NotFound();
             }
 
-            var newsType = await _webcontext.NewsType.AsNoTracking()
+            var newsType = await _context.NewsType.AsNoTracking()
 
                     .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
@@ -115,14 +115,21 @@ namespace ATAdmin.Controllers
 
             // Get time stamp for table to handle concurrency conflict
             var tableName = nameof(NewsType);
-            var tableVersion = await _webcontext.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
+            var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
             // Trim white space
-            vmItem.Code = $"{vmItem.Code}".Trim();
-            vmItem.Name = $"{vmItem.Name}".Trim();
+            vmItem.SlugName = $"{vmItem.SlugName}".Trim();
+            if (vmItem.AutoSlug)
+            {
+                vmItem.SlugName = NormalizeSlug($"{vmItem.Name}");
+            }
+            else
+            {
+                vmItem.SlugName = NormalizeSlug($"{vmItem.SlugName}");
+            }
 
             // Check code is existed
-            if (await _webcontext.NewsType.AnyAsync(h => h.Code == vmItem.Code))
+            if (await _context.NewsType.AnyAsync(h => h.Code == vmItem.Code))
             {
                 ModelState.AddModelError(nameof(NewsType.Code), "The code has been existed.");
                 return View(vmItem);
@@ -150,11 +157,11 @@ namespace ATAdmin.Controllers
                 MetaData = vmItem.MetaData,
                 Note = vmItem.Note,
             };
-            _webcontext.Add(dbItem);
+            _context.Add(dbItem);
 
             // Set time stamp for table to handle concurrency conflict
             tableVersion.LastModify = DateTime.Now;
-            await _webcontext.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Details), new { id = dbItem.Id });
         }
@@ -168,7 +175,7 @@ namespace ATAdmin.Controllers
             }
 
 
-            var dbItem = await _webcontext.NewsType.AsNoTracking()
+            var dbItem = await _context.NewsType.AsNoTracking()
 
     .Where(h => h.Id == id)
 
@@ -211,9 +218,9 @@ namespace ATAdmin.Controllers
 
             // Get time stamp for table to handle concurrency conflict
             var tableName = nameof(NewsType);
-            var tableVersion = await _webcontext.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
+            var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
-            var dbItem = await _webcontext.NewsType
+            var dbItem = await _context.NewsType
                 .Where(h => h.Id == vmItem.Id)
 
                 .FirstOrDefaultAsync();
@@ -223,16 +230,22 @@ namespace ATAdmin.Controllers
             }
 
             // Trim white space
-            vmItem.Code = $"{vmItem.Code}".Trim();
-            vmItem.Name = $"{vmItem.Name}".Trim();
+            vmItem.SlugName = $"{vmItem.SlugName}".Trim();
+            if (vmItem.AutoSlug)
+            {
+                vmItem.SlugName = NormalizeSlug($"{vmItem.Name}");
+            }
+            else
+            {
+                vmItem.SlugName = NormalizeSlug($"{vmItem.SlugName}");
+            }
 
             // Check code is existed
-            if (await _webcontext.NewsType.AnyAsync(h => h.Id != vmItem.Id && h.Code == vmItem.Code))
+            if (await _context.NewsType.AnyAsync(h => h.Id != vmItem.Id && h.Code == vmItem.Code))
             {
                 ModelState.AddModelError(nameof(NewsType.Code), "The code has been existed.");
                 return View(vmItem);
             }
-
 
             // Update db item               
             dbItem.UpdatedBy = _loginUserId;
@@ -248,10 +261,10 @@ namespace ATAdmin.Controllers
             dbItem.MetaData = vmItem.MetaData;
             dbItem.Note = vmItem.Note;
 
-            _webcontext.Entry(dbItem).Property(nameof(NewsType.RowVersion)).OriginalValue = vmItem.RowVersion;
+            _context.Entry(dbItem).Property(nameof(NewsType.RowVersion)).OriginalValue = vmItem.RowVersion;
             // Set time stamp for table to handle concurrency conflict
             tableVersion.LastModify = DateTime.Now;
-            await _webcontext.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Details), new { id = dbItem.Id });
         }
@@ -264,7 +277,7 @@ namespace ATAdmin.Controllers
                 return NotFound();
             }
 
-            var dbItem = await _webcontext.NewsType.AsNoTracking()
+            var dbItem = await _context.NewsType.AsNoTracking()
 
                     .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
@@ -288,9 +301,9 @@ namespace ATAdmin.Controllers
 
             // Get time stamp for table to handle concurrency conflict
             var tableName = nameof(NewsType);
-            var tableVersion = await _webcontext.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
+            var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
-            var dbItem = await _webcontext.NewsType
+            var dbItem = await _context.NewsType
 
                 .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
@@ -313,10 +326,10 @@ namespace ATAdmin.Controllers
                 dbItem.UpdatedDate = DateTime.Now;
                 dbItem.RowVersion = rowVersion;
 
-                _webcontext.Entry(dbItem).Property(nameof(NewsType.RowVersion)).OriginalValue = rowVersion;
+                _context.Entry(dbItem).Property(nameof(NewsType.RowVersion)).OriginalValue = rowVersion;
                 // Set time stamp for table to handle concurrency conflict
                 tableVersion.LastModify = DateTime.Now;
-                await _webcontext.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
 
 
