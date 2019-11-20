@@ -112,13 +112,12 @@ namespace ATAdmin.Controllers
                 return NotFound();
             }
 
-            var dbItem = await _context.View_Users_Roles.AsNoTracking()
-                 .Where(h => h.IdUser == id)
+            var dbItem = await _context.AspNetUsers.AsNoTracking()
+                 .Where(h => h.Id == id)
                  .Select(h => new AspNetUserRolesEditViewModel 
                  { 
-                     UserId = h.IdUser,
-                     RoleId = h.IdRole,
-                     TenNguoiDung = h.TenNguoiDung
+                     UserId = h.Id,
+                     TenNguoiDung = h.UserName
                  })
                 .FirstOrDefaultAsync();
             if (dbItem == null)
@@ -155,7 +154,7 @@ namespace ATAdmin.Controllers
                 return NotFound();
             }
 
-            var listQuyenNguoiDung = _context.AspNetUserRoles.Where(h => h.UserId == ID).ToList();
+            var listQuyenNguoiDung = await _context.AspNetUserRoles.Where(h => h.UserId == ID).ToListAsync();
 
             if (listQuyenNguoiDung == null)
             {
@@ -184,8 +183,12 @@ namespace ATAdmin.Controllers
             }
 
 
-            return RedirectToAction(nameof(Details), new { id = ID });
-            //return RedirectToAction(nameof(Index));
+            //return Json(listQuyenNguoiDung);
+            //return Json(new { newUrl = Url.Action("Index", "GrantRights") });
+            //return RedirectToAction(nameof(Details), new { id = ID });
+            //return RedirectToAction("Index","GrantRights");
+            return Json(true);
+
         }
 
         public class arrayRoles
@@ -254,6 +257,7 @@ namespace ATAdmin.Controllers
                   "Id","Name", vm?.RoleId);
 
         }
+
     }
 
     
