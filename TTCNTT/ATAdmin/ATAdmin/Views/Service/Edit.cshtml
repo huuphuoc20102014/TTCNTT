@@ -66,8 +66,9 @@
             <label asp-for="AutoSlug" class="col-form-label"></label>
             <span class="text-danger">*</span>
         </div>
-        <div class="col-md-7" >
-            <kendo-switch for="AutoSlug" checked="@Model?.AutoSlug"/>
+        <div class="col-md-7">
+            <kendo-switch for="AutoSlug" name="switch" checked="@Model?.AutoSlug" on-change="switchChange" />
+
         </div>
         <div class="offset-md-3 col-md-7 at-wrapper-validate">
             <span asp-validation-for="AutoSlug" class="text-danger"></span>
@@ -237,11 +238,21 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
+    @*<script>
+        function switchChange(e) {
+            console.log("switch value was changed to " + (e.checked ? "checked" : "unchecked"));
+        }
+    </script>*@
 
 
     <script>
         $(document).ready(function () {
-            $('.slugName').slideToggle();
+
+
+            if ($('#AutoSlug').prop('checked') == true) { //Kiểm tra Kendo-Switch true hay false
+                $('.slugName').slideToggle();
+            }
+
 
             $( ".k-switch-container" ).click(function() {
                 $('.slugName').slideToggle(); //SlideUp-SlideDown
@@ -275,4 +286,3 @@
         });
     </script>
 }
-

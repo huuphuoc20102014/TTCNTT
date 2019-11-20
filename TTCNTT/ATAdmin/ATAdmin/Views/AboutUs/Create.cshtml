@@ -32,13 +32,13 @@
         </div>
     </div>
 
-    <div class="row form-group">
+    <div class="row form-group slugName">
         <div class="col-md-3 text-md-right ">
             <label asp-for="SlugTitle" class="col-form-label"></label>
             <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
-            <input asp-for="SlugTitle" class="k-textbox form-control" />
+            <input asp-for="SlugTitle" class="k-textbox form-control slugtitle" />
         </div>
         <div class="offset-md-3 col-md-7 at-wrapper-validate">
             <span asp-validation-for="SlugTitle" class="text-danger"></span>

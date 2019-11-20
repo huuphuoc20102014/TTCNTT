@@ -26,6 +26,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\lib\kendo.default-v2.min.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="Views\AboutUs\Create.cshtml" />
     <None Include="Views\AboutUs\Delete.cshtml" />
     <None Include="Views\AboutUs\Details.cshtml" />

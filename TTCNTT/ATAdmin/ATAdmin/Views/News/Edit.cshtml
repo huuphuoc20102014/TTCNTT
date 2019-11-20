@@ -250,6 +250,11 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
         $(document).ready(function () {
+
+            if ($('#AutoSlug').prop('checked') == true) { //Kiểm tra Kendo-Switch true hay false
+                $('.slugName').slideToggle();
+            }
+
             $( ".k-switch-container" ).click(function() {
                 $('.slugName').slideToggle(); //SlideUp-SlideDown
                 if ($('.slugtitle').val() == '0') {

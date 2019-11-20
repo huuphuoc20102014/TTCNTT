@@ -46,13 +46,13 @@
         </div>
     </div>
 
-    <div class="row form-group">
+    <div class="row form-group slugName">
         <div class="col-md-3 text-md-right ">
             <label asp-for="SlugName" class="col-form-label"></label>
             <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
-            <input asp-for="SlugName" class="k-textbox form-control" />
+            <input asp-for="SlugName" class="k-textbox form-control slugtitle" />
         </div>
         <div class="offset-md-3 col-md-7 at-wrapper-validate">
             <span asp-validation-for="SlugName" class="text-danger"></span>
@@ -130,8 +130,27 @@
 
 
 
-
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    @*<script>
+            function switchChange(e) {
+                console.log("switch value was changed to " + (e.checked ? "checked" : "unchecked"));
+            }
+        </script>*@
+
+
+    <script>
+        $(document).ready(function () {
+
+            $( ".k-switch-container" ).click(function() {
+                $('.slugName').slideToggle(); //SlideUp-SlideDown
+                if ($('.slugtitle').val() == '0') {
+                    $('.slugtitle').val(''); //if input has value = 0 then set it Empty
+                } else {
+                    $( '.slugtitle' ).val('0'); //set value = 0 unless it is Empty
+                }
+            });
+        });
+    </script>
 }
