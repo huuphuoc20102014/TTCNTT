@@ -4810,6 +4810,8 @@ tbody.collapse.show {
 }
 
 .btn-group-vertical {
+    width: 100%;
+    margin-top: 6px;
     -ms-flex-direction: column;
     flex-direction: column;
     -ms-flex-align: start;
@@ -14820,7 +14822,7 @@ base-chart.chart {
     .sidebar .nav-link, .sidebar .navbar .dropdown-toggle, .navbar .sidebar .dropdown-toggle {
         display: block;
         padding: 0.75rem 1rem;
-        color: #fff;
+        color: black;
         text-decoration: none;
         background: transparent;
     }
