@@ -60,16 +60,15 @@
 
             );        
         	columns.Bound(c => c.FkProductType_Name).Title("Loại sản phẩm").Width(200).HtmlAttributes(new { @class = "text-nowrap" });								
-			columns.Bound(c => c.Code).Title("Mã").Width(200).HtmlAttributes(new { @class = "text-nowrap" });		
+			columns.Bound(c => c.Code).Title("Mã sản phẩm").Width(200).HtmlAttributes(new { @class = "text-nowrap" });		
             columns.Bound(c => c.Name).Title("Tên").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-            columns.Bound(c => c.SlugName).Title(EntityLocalizer[nameof(Product.Slug_Name)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.ImageSlug).Title(EntityLocalizer[nameof(Product.ImageSlug)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.ShortDescriptionHtml).Title(EntityLocalizer[nameof(Product.ShortDescription_Html)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.LongDescriptionHtml).Title(EntityLocalizer[nameof(Product.LongDescription_Html)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.CreatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.CreatedBy).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedBy)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });	
-            columns.Bound(c => c.UpdatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.UpdatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.UpdatedBy).Title(BaseEntityLocalizer[nameof(BaseEntityResources.UpdatedBy)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+            columns.Bound(c => c.SlugName).Title("SEO").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.ShortDescriptionHtml).Title("Mô tả ngắn").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.LongDescriptionHtml).Title("Mô tả đầy đủ").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.CreatedDate).Title("Ngày tạo").Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.CreatedBy).Title("Tạo bởi").Width(200).HtmlAttributes(new { @class = "text-nowrap" });	
+            columns.Bound(c => c.UpdatedDate).Title("Ngày cập nhật").Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.UpdatedBy).Title("Cập nhật bởi").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
     })
     .HtmlAttributes(new { style = "height: 600px;" })
 	.Resizable(r => r.Columns(true))

@@ -2,11 +2,11 @@
 
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Tạo Quyền";
 }
 
 
-<h4>Create Quyền</h4>
+<h4>Tạo Quyền</h4>
 <hr />
 <form asp-action="Create">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -14,14 +14,14 @@
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Create" class="btn btn-primary" />
-            <a asp-action="Index" class="k-button">Back to List</a>
+            <input type="submit" value="Tạo mới" class="btn btn-primary" />
+            <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="Name" class="col-form-label"></label>
+            <label asp-for="Name" class="col-form-label">Tên quyền</label>
             <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
@@ -34,7 +34,6 @@
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
             <label asp-for="NormalizedName" class="col-form-label"></label>
-            <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
             <input asp-for="NormalizedName" class="k-textbox form-control" />
@@ -43,10 +42,9 @@
             <span asp-validation-for="NormalizedName" class="text-danger"></span>
         </div>
     </div>
-    <div class="row form-group">
+    @*<div class="row form-group">
         <div class="col-md-3 text-md-right ">
             <label asp-for="ConcurrencyStamp" class="col-form-label"></label>
-            <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
             <input asp-for="ConcurrencyStamp" class="k-textbox form-control" />
@@ -54,14 +52,14 @@
         <div class="offset-md-3 col-md-7 at-wrapper-validate">
             <span asp-validation-for="ConcurrencyStamp" class="text-danger"></span>
         </div>
-    </div>
+    </div>*@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Create" class="btn btn-primary" />
-            <a asp-action="Index" class="k-button">Back to List</a>
+            <input type="submit" value="Tạo mới" class="btn btn-primary" />
+            <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>
 </form>

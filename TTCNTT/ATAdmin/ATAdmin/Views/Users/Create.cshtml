@@ -2,11 +2,11 @@
 
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Thêm dịch vụ";
 }
 
 
-<h4>Create Service</h4>
+<h4>Thêm dịch vụ</h4>
 <hr />
 <form asp-action="Create">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -14,15 +14,15 @@
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Create" class="btn btn-primary" />
-            <a asp-action="Index" class="k-button">Back to List</a>
+            <input type="submit" value="Tạo mới" class="btn btn-primary" />
+            <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>
 
 
     <div class="row form-group slugName">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="UserName" class="col-form-label"></label>
+            <label asp-for="UserName" class="col-form-label">Tên người dùng</label>
             <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
@@ -46,8 +46,7 @@
     </div>
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="EmailConfirmed" class="col-form-label"></label>
-            <span class="text-danger">*</span>
+            <label asp-for="EmailConfirmed" class="col-form-label">Xác nhận</label>
         </div>
         <div class="col-md-7">
             <kendo-switch for="EmailConfirmed" checked="@Model?.EmailConfirmed" />
@@ -61,8 +60,8 @@
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Create" class="btn btn-primary" />
-            <a asp-action="Index" class="k-button">Back to List</a>
+            <input type="submit" value="Tạo mới" class="btn btn-primary" />
+            <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>
 </form>

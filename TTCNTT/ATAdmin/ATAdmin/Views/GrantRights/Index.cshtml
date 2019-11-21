@@ -40,10 +40,10 @@
     .Name("gridaspNetUserRoles")
     .Columns(columns =>
     {
-        columns.Bound(c => c.UserId).Title(" ").Width(180).Locked(true).Filterable(false).Sortable(false).ClientTemplate(
-            "<a class=\"btn btn-success\" data-toggle=\"tooltip\" title=\"" + SharedLocalizer["Ttip_Detail"] + "\"" +
-                "href='" + Url.Action("Details", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(AspNetUserRoles.UserId) + " #'" +
-            "><i class=\"far fa-eye\"></i></a> " +
+        columns.Bound(c => c.UserId).Title(" ").Width(110).Locked(true).Filterable(false).Sortable(false).ClientTemplate(
+            //"<a class=\"btn btn-success\" data-toggle=\"tooltip\" title=\"" + SharedLocalizer["Ttip_Detail"] + "\"" +
+            //    "href='" + Url.Action("Details", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(AspNetUserRoles.UserId) + " #'" +
+            //"><i class=\"far fa-eye\"></i></a> " +
 
             "<a class=\"btn btn-success\" data-toggle=\"tooltip\" title=\"" + SharedLocalizer["Ttip_Edit"] + "\"" +
                 "href='" + Url.Action("PhanQuyen", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(AspNetUserRoles.UserId) + " #'" +
@@ -53,10 +53,10 @@
                 "href='" + Url.Action("Delete", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(AspNetUserRoles.UserId) + " #'" +
             "><i class=\"far fa-trash-alt\"></i></a> "
         );
-        
-        columns.Bound(c => c.TenNguoiDung).Title(EntityLocalizer[nameof(View_Users_Roles.TenNguoiDung)]).Width(400).HtmlAttributes(new { @class = "text-nowrap" });
 
-        columns.Bound(c => c.TenQuyen).Title(EntityLocalizer[nameof(View_Users_Roles.TenQuyen)]).Width(400).HtmlAttributes(new { @class = "text-nowrap" });
+        columns.Bound(c => c.TenNguoiDung).Title("Người dùng").Width(400).HtmlAttributes(new { @class = "text-nowrap" });
+
+        columns.Bound(c => c.TenQuyen).Title("Tên quyền").Width(400).HtmlAttributes(new { @class = "text-nowrap" });
 
     })
     .HtmlAttributes(new { style = "height: 600px;" })

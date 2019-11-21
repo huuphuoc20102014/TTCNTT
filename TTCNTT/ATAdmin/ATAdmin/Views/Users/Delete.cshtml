@@ -1,12 +1,12 @@
 ﻿@model ATAdmin.Efs.Entities.AspNetUsers
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Xóa dịch vụ";
 }
 
 
 
-<h4>Delete Service</h4>
-<h5 class="text-danger">Are you sure you want to delete this item?</h5>
+<h4>Xóa dịch vụ</h4>
+<h5 class="text-danger">Bạn có chắc muốn xóa?</h5>
 <hr />
 
 <form asp-action="Delete">
@@ -15,10 +15,10 @@
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Delete" class="btn btn-danger" />
-            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
-            <a asp-action="Details" asp-route-id="@Model.Id" class="k-button">Details</a>
-            <a asp-action="Index" class="k-button">Back to List</a>
+            <input type="submit" value="Xóa" class="btn btn-danger" />
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Sửa</a>
+            <a asp-action="Details" asp-route-id="@Model.Id" class="k-button">Chi tiết</a>
+            <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>
 </form>
@@ -74,10 +74,10 @@
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Save" class="btn btn-danger" />
-            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
-            <a asp-action="Details" asp-route-id="@Model.Id" class="k-button">Details</a>
-            <a asp-action="Index" class="k-button">Back to List</a>
+            <input type="submit" value="Xóa" class="btn btn-danger" />
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Sửa</a>
+            <a asp-action="Details" asp-route-id="@Model.Id" class="k-button">Chi tiết</a>
+            <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>
 </form>

@@ -112,14 +112,17 @@ namespace ATAdmin.Controllers
 
             // Trim white space
 
-
+            if (vmItem.NormalizedName == null)
+            {
+                vmItem.NormalizedName = vmItem.Name.ToUpper();
+            }
 
             // Create save db item
             var dbItem = new AspNetRoles
             {
                 Id = Guid.NewGuid().ToString(),
                 Name = vmItem.Name,
-                NormalizedName = vmItem.NormalizedName.ToUpper(),
+                NormalizedName = vmItem.NormalizedName,
                 ConcurrencyStamp = vmItem.ConcurrencyStamp,
             };
             _context.Add(dbItem);
@@ -187,8 +190,13 @@ namespace ATAdmin.Controllers
                 return NotFound();
             }
 
+            if (vmItem.NormalizedName == null)
+            {
+                vmItem.NormalizedName = vmItem.Name.ToUpper();
+            }
+
             dbItem.Name = vmItem.Name;
-            dbItem.NormalizedName = vmItem.NormalizedName.ToUpper();
+            dbItem.NormalizedName = vmItem.NormalizedName;
             dbItem.ConcurrencyStamp = vmItem.ConcurrencyStamp;
 
             _context.Entry(dbItem);

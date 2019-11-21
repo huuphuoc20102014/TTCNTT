@@ -2,11 +2,11 @@
 
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Sửa sản phẩm";
 }
 
 
-<h4>Edit Product</h4>
+<h4>Sửa sản phẩm</h4>
 <hr />
 <form asp-action="Edit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -14,11 +14,11 @@
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Save" class="btn btn-primary" />
-            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
-            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Refresh</a>
-            <a asp-action="Details" asp-route-id="@Model.Id" class="k-button">Refresh</a>
-            <a asp-action="Index" class="k-button">Back to List</a>
+            <input type="submit" value="Lưu" class="btn btn-primary" />
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Xóa</a>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Tại lại</a>
+            <a asp-action="Details" asp-route-id="@Model.Id" class="k-button">Chi tiết</a>
+            <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>
     <input type="hidden" name="Id" value="@Model?.Id" />
@@ -41,7 +41,7 @@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="FkProductId" class="col-form-label"></label>
+            <label asp-for="FkProductId" class="col-form-label">Loại sản phẩm</label>
             <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
@@ -54,7 +54,7 @@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="Code" class="col-form-label"></label>
+            <label asp-for="Code" class="col-form-label">Mã sản phẩm</label>
             <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
@@ -66,7 +66,7 @@
     </div>
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="Name" class="col-form-label"></label>
+            <label asp-for="Name" class="col-form-label">Tên</label>
             <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
@@ -78,7 +78,7 @@
     </div>
     <div class="row form-group slugName">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="SlugName" class="col-form-label"></label>
+            <label asp-for="SlugName" class="col-form-label">SEO</label>
             <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
@@ -90,7 +90,7 @@
     </div>
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="AutoSlug" class="col-form-label"></label>
+            <label asp-for="AutoSlug" class="col-form-label">Tự động SEO</label>
             <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
@@ -231,7 +231,7 @@
     </div>
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="Note" class="col-form-label"></label>
+            <label asp-for="Note" class="col-form-label">Ghi chú</label>
         </div>
         <div class="col-md-7">
             <input asp-for="Note" class="k-textbox form-control" />
@@ -244,11 +244,11 @@
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Save" class="btn btn-primary" />
-            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
-            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Refresh</a>
-            <a asp-action="Details" asp-route-id="@Model.Id" class="k-button">Details</a>
-            <a asp-action="Index" class="k-button">Back to List</a>
+            <input type="submit" value="Lưu" class="btn btn-primary" />
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Xóa</a>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Tại lại</a>
+            <a asp-action="Details" asp-route-id="@Model.Id" class="k-button">Chi tiết</a>
+            <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>
 </form>

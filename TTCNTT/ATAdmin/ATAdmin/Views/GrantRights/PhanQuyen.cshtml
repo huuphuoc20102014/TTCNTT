@@ -2,7 +2,7 @@
 
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Sửa Phân Quyền";
 }
 
 @{
@@ -41,7 +41,7 @@
         }
 </style>
 
-<h4>Edit Phân Quyền</h4>
+<h4>Sửa Phân Quyền</h4>
 <hr />
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <div class="row form-group">
@@ -96,11 +96,11 @@
     <div class="col-md-3 text-md-right ">
     </div>
     <div class="col-md-7">
-        <input type="submit" value="Save" id="btn-save" class="btn btn-primary" />
-        <a asp-action="Delete" asp-route-id="@Model.UserId" class="btn btn-danger">Delete</a>
-        <a asp-action="PhanQuyen" asp-route-id="@Model.UserId" class="btn btn-success">Refresh</a>
-        <a asp-action="Details" asp-route-id="@Model.UserId" class="k-button">Details</a>
-        <a asp-action="Index" class="k-button">Back to List</a>
+        <input type="submit" value="Lưu" id="btn-save" class="btn btn-primary" />
+        <a asp-action="Delete" asp-route-id="@Model.UserId" class="btn btn-danger">Xóa</a>
+        <a asp-action="PhanQuyen" asp-route-id="@Model.UserId" class="btn btn-success">Tải lại</a>
+        @*<a asp-action="Details" asp-route-id="@Model.UserId" class="k-button">Chi tiết</a>*@
+        <a asp-action="Index" class="k-button">Trở lại</a>
     </div>
 </div>
 

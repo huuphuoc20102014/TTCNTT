@@ -53,7 +53,7 @@
                 "href='" + Url.Action("Delete", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(AspNetRoles.Id) + " #'" +
             "><i class=\"far fa-trash-alt\"></i></a> "
         );		
-			columns.Bound(c => c.Name).Title(EntityLocalizer[nameof(AspNetRoles.Name)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.Name).Title("Tên quyền").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.NormalizedName).Title(EntityLocalizer[nameof(AspNetRoles.NormalizedName)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.ConcurrencyStamp).Title(EntityLocalizer[nameof(AspNetRoles.ConcurrencyStamp)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
 			
