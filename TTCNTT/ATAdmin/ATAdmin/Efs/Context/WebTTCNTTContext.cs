@@ -558,11 +558,6 @@ namespace ATAdmin.Efs.Context
 
                 entity.Property(e => e.ShortDescription_Html).HasMaxLength(1000);
 
-                entity.Property(e => e.Slug_Name)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.Specialize).HasMaxLength(100);
 
                 entity.Property(e => e.UpdatedBy)

@@ -59,13 +59,12 @@ namespace ATAdmin.Controllers
                     Id = h.Id,
                     Code = h.Code,
                     Name = h.Name,
-                    Slug_Name = h.Slug_Name,
                     BirthDate = h.BirthDate,
                     Address = h.Address,
                     Phone = h.Phone,
                     Specialize = h.Specialize,
-                    EmployeeTypeName = h.Fk_Emplyee.Name,
                     Fk_EmplyeeId = h.Fk_EmplyeeId,
+                    Fk_EmployeeName = h.Fk_Emplyee.Name,
                     ImageSlug = h.ImageSlug,
                     ShortDescription_Html = h.ShortDescription_Html,
                     LongDescription_Html = h.LongDescription_Html,
@@ -76,7 +75,6 @@ namespace ATAdmin.Controllers
                     UpdatedDate = h.UpdatedDate,
                     RowVersion = h.RowVersion,
                     RowStatus = (AtRowStatus)h.RowStatus,
-                    
 
                 });
 
@@ -144,21 +142,10 @@ namespace ATAdmin.Controllers
             var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
             // Trim white space
-            //vmItem.Slug_Name = $"{vmItem.Slug_Name}".Trim();
-            //if (vmItem.AutoSlug)
-            //{
-            //    vmItem.Slug_Name = NormalizeSlug($"{vmItem.Name}");
-            //}
-            //else
-            //{
-            //    vmItem.Slug_Name = NormalizeSlug($"{vmItem.Slug_Name}");
-            //}
+
 
             // Check slug is existed => if existed auto get next slug
-            //var listExistedSlug = await _context.Employee.AsNoTracking()
-            //        .Where(h => h.Id.StartsWith(vmItem.Slug_Name))
-            //        .Select(h => h.Slug_Name).ToListAsync();
-            //var slug = CheckAndGenNextSlug(vmItem.Slug_Name, listExistedSlug);
+
 
             // Create save db item
             var dbItem = new Employee
@@ -175,13 +162,11 @@ namespace ATAdmin.Controllers
                 Fk_EmplyeeId = vmItem.Fk_EmplyeeId,
                 Code = vmItem.Code,
                 Name = vmItem.Name,
-                Slug_Name = vmItem.Slug_Name,
                 BirthDate = vmItem.BirthDate,
                 Address = vmItem.Address,
                 Phone = vmItem.Phone,
                 Specialize = vmItem.Specialize,
                 ImageSlug = vmItem.ImageSlug,
-                //AutoSlug = vmItem.AutoSlug,
                 ShortDescription_Html = vmItem.ShortDescription_Html,
                 LongDescription_Html = vmItem.LongDescription_Html,
                 Note = vmItem.Note,
@@ -216,7 +201,6 @@ namespace ATAdmin.Controllers
                     Id = h.Id,
                     Code = h.Code,
                     Name = h.Name,
-                    Slug_Name = h.Slug_Name,
                     BirthDate = h.BirthDate,
                     Address = h.Address,
                     Phone = h.Phone,
@@ -283,7 +267,6 @@ namespace ATAdmin.Controllers
             dbItem.Fk_EmplyeeId = vmItem.Fk_EmplyeeId;
             dbItem.Code = vmItem.Code;
             dbItem.Name = vmItem.Name;
-            dbItem.Slug_Name = vmItem.Slug_Name;
             dbItem.BirthDate = vmItem.BirthDate;
             dbItem.Address = vmItem.Address;
             dbItem.Phone = vmItem.Phone;
@@ -425,7 +408,6 @@ namespace ATAdmin.Controllers
     {
         public string Code { get; set; }
         public string Name { get; set; }
-        public string Slug_Name { get; set; }
         public bool MyProperty { get; set; }
         public DateTime? BirthDate { get; set; }
         public string Address { get; set; }
@@ -448,7 +430,7 @@ namespace ATAdmin.Controllers
         public DateTime? UpdatedDate { get; set; }
         public Byte[] RowVersion { get; set; }
         public AtRowStatus RowStatus { get; set; }
-        public String EmployeeTypeName { get; set; }
+        public String Fk_EmployeeName { get; set; }
     }
 
     public class EmployeeCreateViewModel : EmployeeBaseViewModel
@@ -477,10 +459,7 @@ namespace ATAdmin.Controllers
                         .MaximumLength(50)
                 ;
 
-            RuleFor(h => h.Slug_Name)
-                        .NotEmpty()
-                        .MaximumLength(50)
-                ;
+
 
             //RuleFor(h => h.AutoSlug)
             //    ;

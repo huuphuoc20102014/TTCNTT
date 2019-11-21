@@ -84,30 +84,19 @@
             <span asp-validation-for="BirthDate" class="text-danger"></span>
         </div>
     </div>
+
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="Slug_Name" class="col-form-label"></label>
+            <label asp-for="Address" class="col-form-label"></label>
             <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
-            <input asp-for="Slug_Name" class="k-textbox form-control" />
+            <input asp-for="Address" class="k-textbox form-control" />
         </div>
         <div class="offset-md-3 col-md-7 at-wrapper-validate">
-            <span asp-validation-for="Slug_Name" class="text-danger"></span>
+            <span asp-validation-for="Address" class="text-danger"></span>
         </div>
     </div>
-    @*<div class="row form-group">
-            <div class="col-md-3 text-md-right ">
-                <label asp-for="AutoSlug" class="col-form-label"></label>
-                <span class="text-danger">*</span>
-            </div>
-            <div class="col-md-7">
-                <kendo-switch for="AutoSlug" checked="@Model?.AutoSlug" />
-            </div>
-            <div class="offset-md-3 col-md-7 at-wrapper-validate">
-                <span asp-validation-for="AutoSlug" class="text-danger"></span>
-            </div>
-        </div>*@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
