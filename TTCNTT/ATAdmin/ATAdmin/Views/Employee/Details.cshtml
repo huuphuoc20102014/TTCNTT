@@ -1,23 +1,32 @@
 ﻿@model ATAdmin.Efs.Entities.Employee
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Nhân Viên";
 }
 
 
 
-<h4>Details </h4>
+<h4>Chi Tiết Nhân Viên </h4>
 <hr />
 
 <div class="row form-group">
     <div class="col-md-3 text-md-right ">
     </div>
     <div class="col-md-7">
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
-        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Sửa</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Xóa</a>
         <a asp-action="Index" class="k-button">Trở lại</a>
     </div>
 </div>
 
+
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        Loại nhân viên :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.Fk_Emplyee.Name)
+    </div>
+</div>
 
 <div class="row form-group">
     <div class="col-md-3 text-md-right details-label">
@@ -30,7 +39,7 @@
 
 <div class="row form-group">
     <div class="col-md-3 text-md-right details-label">
-        @Html.DisplayNameFor(model => model.Code) :
+        Mã nhân viên :
     </div>
     <div class="col-md-7">
         @Html.DisplayFor(model => model.Code)
@@ -38,7 +47,7 @@
 </div>
 <div class="row form-group">
     <div class="col-md-3 text-md-right details-label">
-        @Html.DisplayNameFor(model => model.Name) :
+        Tên nhân viên :
     </div>
     <div class="col-md-7">
         @Html.DisplayFor(model => model.Name)
@@ -47,7 +56,7 @@
 
 <div class="row form-group">
     <div class="col-md-3 text-md-right details-label">
-        @Html.DisplayNameFor(model => model.BirthDate) :
+        Ngày sinh :
     </div>
     <div class="col-md-7">
         @Html.DisplayFor(model => model.BirthDate)
@@ -55,18 +64,16 @@
 </div>
 <div class="row form-group">
     <div class="col-md-3 text-md-right details-label">
-        @Html.DisplayNameFor(model => model.Address) :
+        Địa chỉ :
     </div>
     <div class="col-md-7">
         @Html.DisplayFor(model => model.Address)
     </div>
 </div>
 
-
-
 <div class="row form-group">
     <div class="col-md-3 text-md-right details-label">
-        @Html.DisplayNameFor(model => model.Phone) :
+        Số điện thoại :
     </div>
     <div class="col-md-7">
         @Html.DisplayFor(model => model.Phone)
@@ -75,21 +82,13 @@
 
 <div class="row form-group">
     <div class="col-md-3 text-md-right details-label">
-        @Html.DisplayNameFor(model => model.Specialize) :
+        Chuyên môn :
     </div>
     <div class="col-md-7">
         @Html.DisplayFor(model => model.Specialize)
     </div>
 </div>
 
-<div class="row form-group">
-    <div class="col-md-3 text-md-right details-label">
-        @Html.DisplayNameFor(model => model.Fk_Emplyee) :
-    </div>
-    <div class="col-md-7">
-        @Html.DisplayFor(model => model.Fk_Emplyee.Name)
-    </div>
-</div>
 <div class="row form-group">
     <div class="col-md-3 text-md-right details-label">
         @Html.DisplayNameFor(model => model.RowVersion) :
@@ -112,8 +111,8 @@
     <div class="col-md-3 text-md-right ">
     </div>
     <div class="col-md-7">
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
-        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Sửa</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Xóa</a>
         <a asp-action="Index" class="k-button">Trở lại</a>
     </div>
 </div>

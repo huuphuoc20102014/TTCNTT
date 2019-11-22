@@ -2,11 +2,11 @@
 
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Giới thiệu";
 }
 
 
-<h4>Create AboutUs</h4>
+    <h4>Thêm Giới thiệu</h4>
 <hr />
 <form asp-action="Create">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -14,14 +14,14 @@
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Create" class="btn btn-primary" />
+            <input type="submit" value="Tạo mới" class="btn btn-primary" />
             <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="Title" class="col-form-label"></label>
+            <label asp-for="Title" class="col-form-label">Tiêu đề</label>
             <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
@@ -34,7 +34,7 @@
 
     <div class="row form-group slugName">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="SlugTitle" class="col-form-label"></label>
+            <label asp-for="SlugTitle" class="col-form-label">SEO</label>
             <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
@@ -47,14 +47,27 @@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="AutoSlug" class="col-form-label"></label>
-            <span class="text-danger">*</span>
+            <label asp-for="AutoSlug" class="col-form-label">SEO tự động</label>
         </div>
         <div class="col-md-7">
             <kendo-switch for="AutoSlug" checked="@Model?.AutoSlug" />
         </div>
         <div class="offset-md-3 col-md-7 at-wrapper-validate">
             <span asp-validation-for="AutoSlug" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="ImageSlug" class="col-form-label">Hình ảnh</label>
+        </div>
+        <div class="col-md-7">
+            <button id="btnChooseImage_ImageSlug" class="btn mb-1">Chọn hình</button>
+            <input style="display:none;" asp-for="ImageSlug" />
+            <img width="200" class="border border-primary" id="img_ImageSlug" src="~/Image/@Url.Content(Model?.ImageSlug)" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="ImageSlug" class="text-danger"></span>
         </div>
     </div>
 
@@ -108,7 +121,7 @@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="LongDescriptionHtml" class="col-form-label">Mô tả dài</label>
+            <label asp-for="LongDescriptionHtml" class="col-form-label">Mô tả đầy đủ</label>
         </div>
         <div class="col-12">
             @(Html.Kendo().EditorFor(h => h.LongDescriptionHtml).Encoded(false)
@@ -156,20 +169,6 @@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="ImageSlug" class="col-form-label"></label>
-        </div>
-        <div class="col-md-7">
-            <button id="btnChooseImage_ImageSlug" class="btn mb-1">Chọn hình</button>
-            <input style="display:none;" asp-for="ImageSlug" />
-            <img width="200" class="border border-primary" id="img_ImageSlug" src="~/Image/@Url.Content(Model?.ImageSlug)" />
-        </div>
-        <div class="offset-md-3 col-md-7 at-wrapper-validate">
-            <span asp-validation-for="ImageSlug" class="text-danger"></span>
-        </div>
-    </div>
-
-    <div class="row form-group">
-        <div class="col-md-3 text-md-right ">
             <label asp-for="Tags" class="col-form-label"></label>
         </div>
         <div class="col-md-7">
@@ -206,7 +205,7 @@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="Note" class="col-form-label"></label>
+            <label asp-for="Note" class="col-form-label">Ghi chú</label>
         </div>
         <div class="col-md-7">
             <input asp-for="Note" class="k-textbox form-control" />
@@ -219,7 +218,7 @@
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Create" class="btn btn-primary" />
+            <input type="submit" value="Tạo mới" class="btn btn-primary" />
             <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>

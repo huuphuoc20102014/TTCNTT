@@ -2,11 +2,11 @@
 
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Liên lạc";
 }
 
 
-<h4>Create Contact</h4>
+    <h4>Thêm Liên lạc</h4>
 <hr />
 <form asp-action="Create">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -14,14 +14,14 @@
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Create" class="btn btn-primary" />
+            <input type="submit" value="Tạo mới" class="btn btn-primary" />
             <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="Name" class="col-form-label"></label>
+            <label asp-for="Name" class="col-form-label">Tên</label>
             <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
@@ -47,7 +47,7 @@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="Phone" class="col-form-label"></label>
+            <label asp-for="Phone" class="col-form-label">Số điện thoại</label>
             <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
@@ -58,7 +58,7 @@
         </div>
     </div>
 
-    <div class="row form-group">
+    @*<div class="row form-group">
         <div class="col-md-3 text-md-right ">
             <label asp-for="Title" class="col-form-label"></label>
             <span class="text-danger">*</span>
@@ -69,11 +69,11 @@
         <div class="offset-md-3 col-md-7 at-wrapper-validate">
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
-    </div>
+    </div>*@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="Body" class="col-form-label"></label>
+            <label asp-for="Body" class="col-form-label">Nội dung</label>
             <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
@@ -86,8 +86,7 @@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="IsRead" class="col-form-label"></label>
-            <span class="text-danger">*</span>
+            <label asp-for="IsRead" class="col-form-label">Đã xem</label>
         </div>
         <div class="col-md-7">
             <kendo-switch for="IsRead" checked="@Model?.IsRead" />
@@ -99,7 +98,7 @@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="Fk_CourseId" class="col-form-label"></label>
+            <label asp-for="Fk_CourseId" class="col-form-label">Tên Khóa học</label>
         </div>
         <div class="col-md-7">
             <kendo-dropdownlist for="Fk_CourseId" bind-to="@ViewBag.FkCourseId" class="form-control" />
@@ -111,7 +110,7 @@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="Note" class="col-form-label"></label>
+            <label asp-for="Note" class="col-form-label"> Ghi chú</label>
         </div>
         <div class="col-md-7">
             <input asp-for="Note" class="k-textbox form-control" />
@@ -124,7 +123,7 @@
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Create" class="btn btn-primary" />
+            <input type="submit" value="Tạo mới" class="btn btn-primary" />
             <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>

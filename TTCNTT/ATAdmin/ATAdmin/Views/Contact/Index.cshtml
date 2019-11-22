@@ -55,11 +55,10 @@
         );		
 			columns.Bound(c => c.Name).Title("Tên").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.Email).Title(EntityLocalizer[nameof(Contact.Email)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.Phone).Title(EntityLocalizer[nameof(Contact.Phone)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.Title).Title(EntityLocalizer[nameof(Contact.Title)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.Body).Title(EntityLocalizer[nameof(Contact.Body)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.IsRead).Title(EntityLocalizer[nameof(Contact.IsRead)]).Width(100).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.CourseName).Title("Khóa học").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.Phone).Title("Số điện thoại").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.Body).Title("Nội dung").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.IsRead).Title("Đã xem").Width(120).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.CourseName).Title("Tên khóa học").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.CreatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.CreatedBy).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedBy)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.UpdatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.UpdatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
