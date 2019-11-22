@@ -82,6 +82,7 @@ namespace TTCNTT.Controllers
                 comment.Email = email;
                 comment.Phone = phone;
                 comment.Comment = content;
+                comment.IsRead = false;
                 comment.CreatedBy = "Customer";
                 comment.CreatedDate = DateTime.Now;
                 comment.RowStatus = 0;
