@@ -1,88 +1,104 @@
 ﻿@model ATAdmin.Efs.Entities.Setting
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Setting";
 }
 
 
 
-    <h4>Details Setting</h4>
-    <hr />
-	
-	<div class="row form-group">
-		<div class="col-md-3 text-md-right ">
-		</div>
-		<div class="col-md-7">
-					<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
-					<a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
-			<a asp-action="Index" class="k-button">Trở lại</a>
-		</div>
-	</div>
+<h4>Chi tiết Setting</h4>
+<hr />
 
-		
-		
-		
-		<div class="row form-group">
-			<div class="col-md-3 text-md-right details-label">
-				@Html.DisplayNameFor(model => model.Value) :
-			</div>
-			<div class="col-md-7">
-							@Html.DisplayFor(model => model.Value)
-			</div>
-		</div>
-		
-		<div class="row form-group">
-			<div class="col-md-3 text-md-right details-label">
-				@Html.DisplayNameFor(model => model.Description) :
-			</div>
-			<div class="col-md-7">
-							@Html.DisplayFor(model => model.Description)
-			</div>
-		</div>
-		
-		<div class="row form-group">
-			<div class="col-md-3 text-md-right details-label">
-				@Html.DisplayNameFor(model => model.IsManual) :
-			</div>
-			<div class="col-md-7">
-							@Html.DisplayFor(model => model.IsManual)
-			</div>
-		</div>
-		
-		<div class="row form-group">
-			<div class="col-md-3 text-md-right details-label">
-				@Html.DisplayNameFor(model => model.ImageSlug) :
-			</div>
-			<div class="col-md-7">
-							@Html.DisplayFor(model => model.ImageSlug)
-			</div>
-		</div>
-		
-		
-		<div class="row form-group">
-			<div class="col-md-3 text-md-right details-label">
-				@Html.DisplayNameFor(model => model.RowVersion) :
-			</div>
-			<div class="col-md-7">
-							@Html.DisplayFor(model => model.RowVersion)
-			</div>
-		</div>
-		
-		<div class="row form-group">
-			<div class="col-md-3 text-md-right details-label">
-				@Html.DisplayNameFor(model => model.RowStatus) :
-			</div>
-			<div class="col-md-7">
-									@Model.RowStatus.ToString("N0")
-			</div>
-		</div>
-		
+<div class="row form-group">
+    <div class="col-md-3 text-md-right ">
+    </div>
+    <div class="col-md-7">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Sửa</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Xóa</a>
+        <a asp-action="Index" class="k-button">Trở lại</a>
+    </div>
+</div>
 
-	<div class="row form-group">
-		<div class="col-md-3 text-md-right ">
-		</div>
-		<div class="col-md-7">
-					<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
-					<a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
-			<a asp-action="Index" class="k-button">Trở lại</a>
-		</div>
-	</div>
+
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        @Html.DisplayNameFor(model => model.Id) :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.Id)
+    </div>
+</div>
+
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        @Html.DisplayNameFor(model => model.Value) :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.Value)
+    </div>
+</div>
+
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        @Html.DisplayNameFor(model => model.Id2) :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.Id2)
+    </div>
+</div>
+
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        @Html.DisplayNameFor(model => model.Description) :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+</div>
+
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        @Html.DisplayNameFor(model => model.IsManual) :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.IsManual)
+    </div>
+</div>
+
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        @Html.DisplayNameFor(model => model.ImageSlug) :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.ImageSlug)
+    </div>
+</div>
+
+
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        @Html.DisplayNameFor(model => model.RowVersion) :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.RowVersion)
+    </div>
+</div>
+
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        @Html.DisplayNameFor(model => model.RowStatus) :
+    </div>
+    <div class="col-md-7">
+        @Model.RowStatus.ToString("N0")
+    </div>
+</div>
+
+
+<div class="row form-group">
+    <div class="col-md-3 text-md-right ">
+    </div>
+    <div class="col-md-7">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Sửa</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Xóa</a>
+        <a asp-action="Index" class="k-button">Trở lại</a>
+    </div>
+</div>

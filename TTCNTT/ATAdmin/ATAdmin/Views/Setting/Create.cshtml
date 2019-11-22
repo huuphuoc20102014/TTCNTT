@@ -2,12 +2,12 @@
 
 
 @{
-    ViewData["Title"] = "Tạo";
+    ViewData["Title"] = "Setting";
 
 }
 
 
-<h4>Tạo mới</h4>
+    <h4>Thêm Setting</h4>
 <hr />
 <form asp-action="Create">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -15,16 +15,27 @@
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Tạo" class="btn btn-primary" />
-            <a asp-action="Index" class="k-button">Back</a>
+            <input type="submit" value="Tạo mới" class="btn btn-primary" />
+            <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>
 
-
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Id" class="col-form-label"></label>
+            <span class="text-danger">*</span>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="Id" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Id" class="text-danger"></span>
+        </div>
+    </div>
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="Value" class="col-form-label">Tittle</label>
+            <label asp-for="Value" class="col-form-label"></label>
             <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
@@ -37,8 +48,19 @@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="Description" class="col-form-label">Description</label>
-            <span class="text-danger">*</span>
+            <label asp-for="Id2" class="col-form-label"></label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="Id2" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Id2" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Description" class="col-form-label">Mô tả</label>
         </div>
         <div class="col-md-7">
             <input asp-for="Description" class="k-textbox form-control" />
@@ -51,7 +73,6 @@
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
             <label asp-for="IsManual" class="col-form-label"></label>
-            <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
             <kendo-switch for="IsManual" checked="@Model?.IsManual" />
@@ -61,38 +82,38 @@
         </div>
     </div>
     @*<div class="row form-group">
-        <div class="col-md-3 text-md-right ">
-            <label asp-for="Style" class="col-form-label"></label>
-            <span class="text-danger">*</span>
-        </div>
-        <div class="col-md-7">
-            <kendo-dropdownlist for="Style" class="form-control" bind-to="@ViewBag.Style" />
-        </div>
-        <div class="offset-md-3 col-md-7 at-wrapper-validate">
-            <span asp-validation-for="Style" class="text-danger"></span>
-        </div>
-    </div>*@
+            <div class="col-md-3 text-md-right ">
+                <label asp-for="Style" class="col-form-label"></label>
+                <span class="text-danger">*</span>
+            </div>
+            <div class="col-md-7">
+                <kendo-dropdownlist for="Style" class="form-control" bind-to="@ViewBag.Style" />
+            </div>
+            <div class="offset-md-3 col-md-7 at-wrapper-validate">
+                <span asp-validation-for="Style" class="text-danger"></span>
+            </div>
+        </div>*@
+
+    @*<div class="row form-group">
+            <div class="col-md-3 text-md-right ">
+                <label asp-for="ImageSlug" class="col-form-label"></label>
+            </div>
+            <div class="col-md-7">
+                <button id="btnChooseImage_ImageSlug" class="btn mb-1">Chọn hình</button>
+                <input style="display:none;" asp-for="ImageSlug" />
+                <img width="200" class="border border-primary" id="img_ImageSlug" src="~/Image/@Url.Content(Model?.ImageSlug)" />
+            </div>
+            <div class="offset-md-3 col-md-7 at-wrapper-validate">
+                <span asp-validation-for="ImageSlug" class="text-danger"></span>
+            </div>
+        </div>*@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="ImageSlug" class="col-form-label"></label>
         </div>
         <div class="col-md-7">
-            <button id="btnChooseImage_ImageSlug" class="btn mb-1">Chọn hình</button>
-            <input style="display:none;" asp-for="ImageSlug" />
-            <img width="200" class="border border-primary" id="img_ImageSlug" src="~/Image/@Url.Content(Model?.ImageSlug)" />
-        </div>
-        <div class="offset-md-3 col-md-7 at-wrapper-validate">
-            <span asp-validation-for="ImageSlug" class="text-danger"></span>
-        </div>
-    </div>
-
-    <div class="row form-group">
-        <div class="col-md-3 text-md-right ">
-        </div>
-        <div class="col-md-7">
-            <input type="submit" value="Tạo" class="btn btn-primary" />
-            <a asp-action="Index" class="k-button">Back</a>
+            <input type="submit" value="Tạo mới" class="btn btn-primary" />
+            <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>
 </form>

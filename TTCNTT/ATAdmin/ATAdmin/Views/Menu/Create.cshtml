@@ -2,11 +2,11 @@
 
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Menu";
 }
 
 
-<h4>Create Menu</h4>
+<h4>Thêm Menu</h4>
 <hr />
 <form asp-action="Create">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -14,7 +14,7 @@
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Create" class="btn btn-primary" />
+            <input type="submit" value="Tạo mới" class="btn btn-primary" />
             <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>
@@ -23,7 +23,7 @@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="ImageSlug" class="col-form-label"></label>
+            <label asp-for="ImageSlug" class="col-form-label">Hình ảnh</label>
         </div>
         <div class="col-md-7">
             <button id="btnChooseImage_ImageSlug" class="btn mb-1">Chọn hình</button>
@@ -37,7 +37,7 @@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="Name" class="col-form-label"></label>
+            <label asp-for="Name" class="col-form-label">Tên</label>
             <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
@@ -50,7 +50,7 @@
 
     <div class="row form-group slugName">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="SlugName" class="col-form-label"></label>
+            <label asp-for="SlugName" class="col-form-label">SEO</label>
             <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
@@ -63,8 +63,7 @@
 
     <div class="row form-group ">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="AutoSlug" class="col-form-label"></label>
-            <span class="text-danger">*</span>
+            <label asp-for="AutoSlug" class="col-form-label">SEO tự động</label>
         </div>
         <div class="col-md-7">
             <kendo-switch for="AutoSlug" checked="@Model?.AutoSlug" />
@@ -136,7 +135,7 @@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="Note" class="col-form-label"></label>
+            <label asp-for="Note" class="col-form-label">Ghi chú</label>
         </div>
         <div class="col-md-7">
             <input asp-for="Note" class="k-textbox form-control" />
@@ -149,7 +148,7 @@
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Create" class="btn btn-primary" />
+            <input type="submit" value="Tạo mới" class="btn btn-primary" />
             <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>

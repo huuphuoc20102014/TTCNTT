@@ -53,13 +53,14 @@
                 "href='" + Url.Action("Delete", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(Setting.Id) + " #'" +
             "><i class=\"far fa-trash-alt\"></i></a> "
         );
+        columns.Bound(c => c.Id).Title(EntityLocalizer[nameof(Setting.Id)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
         columns.Bound(c => c.Id2).Title(EntityLocalizer[nameof(Setting.Id2)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-        columns.Bound(c => c.RowStatus).Title(BaseEntityLocalizer[nameof(BaseEntityResources.RowStatus)]).Width(150).HtmlAttributes(new { @class = "text-nowrap" });
         columns.Bound(c => c.Value).Title(EntityLocalizer[nameof(Setting.Value)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+        columns.Bound(c => c.RowStatus).Title(BaseEntityLocalizer[nameof(BaseEntityResources.RowStatus)]).Width(150).HtmlAttributes(new { @class = "text-nowrap" });
         columns.Bound(c => c.Description).Title("Mô tả").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
         columns.Bound(c => c.IsManual).Title(EntityLocalizer[nameof(Setting.IsManual)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
         //columns.Bound(c => c.Style).Title(EntityLocalizer[nameof(Setting.Style)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-        columns.Bound(c => c.ImageSlug).Title(EntityLocalizer[nameof(Setting.ImageSlug)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+        //columns.Bound(c => c.ImageSlug).Title(EntityLocalizer[nameof(Setting.ImageSlug)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
          
     })
     .HtmlAttributes(new { style = "height: 600px;" })

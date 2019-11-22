@@ -5,7 +5,7 @@
 @inject IStringLocalizer<BaseEntityResources> BaseEntityLocalizer
 
 @{
-    ViewData["Title"] =  SharedLocalizer["ViewTitle_List"]  + " " + EntityLocalizer["Khách Hàng Đăng Ký"];
+    ViewData["Title"] =  SharedLocalizer["ViewTitle_List"]  + " " + EntityLocalizer["Đăng Ký Nhận Tin"];
     var parentItem = ViewData["ParentItem"] as CustomerRegister;
     if (parentItem != null)
     {
@@ -16,7 +16,7 @@
 
 <div class="container">
 	<h4>
-		@SharedLocalizer["ViewTitle_List"] @EntityLocalizer["Khách Hàng Đăng Ký"]
+		@SharedLocalizer["ViewTitle_List"] @EntityLocalizer["Đăng Ký Nhận Tin"]
 		@if (parentItem != null)
         {
             @:: <span class="text-warning">@parentItem.Id</span>

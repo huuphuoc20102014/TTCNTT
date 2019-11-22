@@ -2,11 +2,11 @@
 
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Đăng Ký Nhận Tin";
 }
 
 
-<h4>Create CustomerRegister</h4>
+    <h4>Thêm Đăng Ký Nhận Tin</h4>
 <hr />
 <form asp-action="Create">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -14,7 +14,7 @@
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Create" class="btn btn-primary" />
+            <input type="submit" value="Tạo mới" class="btn btn-primary" />
             <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>
@@ -22,6 +22,7 @@
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
             <label asp-for="Email" class="col-form-label"></label>
+            <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
             <input asp-for="Email" type="email" placeholder="abc@gmail.com" class="k-textbox form-control" />
@@ -35,7 +36,7 @@
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Create" class="btn btn-primary" />
+            <input type="submit" value="Tạo mới" class="btn btn-primary" />
             <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>

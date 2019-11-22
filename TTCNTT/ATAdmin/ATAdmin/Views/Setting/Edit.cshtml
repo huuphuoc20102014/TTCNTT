@@ -14,30 +14,32 @@
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Save" class="btn btn-primary" />
-            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
-            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Refresh</a>
-            <a asp-action="Details" asp-route-id="@Model.Id" class="k-button">Refresh</a>
+            <input type="submit" value="Lưu" class="btn btn-primary" />
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Xóa</a>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Tải lại</a>
+            <a asp-action="Details" asp-route-id="@Model.Id" class="k-button">Chi tiết</a>
             <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>
     <input type="hidden" name="Id" value="@Model?.Id" />
     <input type="hidden" asp-for="RowVersion" />
     @*<div class="row form-group">
-        <div class="col-md-3 text-md-right ">
-            <label asp-for="Style" class="col-form-label"></label>
-            <span class="text-danger">*</span>
-        </div>
-        <div class="col-md-7">
-            <kendo-dropdownlist for="Style" class="form-control" bind-to="@ViewBag.Style" />
-        </div>
-        <div class="offset-md-3 col-md-7 at-wrapper-validate">
-            <span asp-validation-for="Style" class="text-danger"></span>
-        </div>
-    </div>*@
+            <div class="col-md-3 text-md-right ">
+                <label asp-for="Style" class="col-form-label"></label>
+                <span class="text-danger">*</span>
+            </div>
+            <div class="col-md-7">
+                <kendo-dropdownlist for="Style" class="form-control" bind-to="@ViewBag.Style" />
+            </div>
+            <div class="offset-md-3 col-md-7 at-wrapper-validate">
+                <span asp-validation-for="Style" class="text-danger"></span>
+            </div>
+        </div>*@
+
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
             <label asp-for="Value" class="col-form-label"></label>
+            <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
             <input asp-for="Value" class="k-textbox form-control" />
@@ -46,6 +48,19 @@
             <span asp-validation-for="Value" class="text-danger"></span>
         </div>
     </div>
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Id2" class="col-form-label"></label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="Id2" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Id2" class="text-danger"></span>
+        </div>
+    </div>
+
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
             <label asp-for="Description" class="col-form-label"></label>
@@ -70,27 +85,27 @@
             <span asp-validation-for="IsManual" class="text-danger"></span>
         </div>
     </div>
+    @*<div class="row form-group">
+            <div class="col-md-3 text-md-right ">
+                <label asp-for="ImageSlug" class="col-form-label"></label>
+            </div>
+            <div class="col-md-7">
+                <button id="btnChooseImage_ImageSlug" class="btn mb-1">Chọn hình</button>
+                <input style="display:none;" asp-for="ImageSlug" />
+                <img width="200" class="border border-primary" id="img_ImageSlug" src="~/Image/@Url.Content(Model?.ImageSlug)" />
+            </div>
+            <div class="offset-md-3 col-md-7 at-wrapper-validate">
+                <span asp-validation-for="ImageSlug" class="text-danger"></span>
+            </div>
+        </div>*@
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="ImageSlug" class="col-form-label"></label>
         </div>
         <div class="col-md-7">
-            <button id="btnChooseImage_ImageSlug" class="btn mb-1">Chọn hình</button>
-            <input style="display:none;" asp-for="ImageSlug" />
-            <img width="200" class="border border-primary" id="img_ImageSlug" src="~/Image/@Url.Content(Model?.ImageSlug)" />
-        </div>
-        <div class="offset-md-3 col-md-7 at-wrapper-validate">
-            <span asp-validation-for="ImageSlug" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="row form-group">
-        <div class="col-md-3 text-md-right ">
-        </div>
-        <div class="col-md-7">
-            <input type="submit" value="Save" class="btn btn-primary" />
-            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
-            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Refresh</a>
-            <a asp-action="Details" asp-route-id="@Model.Id" class="k-button">Details</a>
+            <input type="submit" value="Lưu" class="btn btn-primary" />
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Xóa</a>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Tải lại</a>
+            <a asp-action="Details" asp-route-id="@Model.Id" class="k-button">Chi tiết</a>
             <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>

@@ -48,6 +48,8 @@ namespace TTCNTT.Efs.Context
         public virtual DbSet<Setting> Setting { get; set; }
         public virtual DbSet<TableVersion> TableVersion { get; set; }
         public virtual DbSet<Training> Training { get; set; }
+        public virtual DbSet<View_Roles> View_Roles { get; set; }
+        public virtual DbSet<View_Users_Roles> View_Users_Roles { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -560,11 +562,6 @@ namespace TTCNTT.Efs.Context
                     .IsRowVersion();
 
                 entity.Property(e => e.ShortDescription_Html).HasMaxLength(1000);
-
-                entity.Property(e => e.Slug_Name)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.Specialize).HasMaxLength(100);
 
@@ -1363,6 +1360,42 @@ namespace TTCNTT.Efs.Context
                 entity.Property(e => e.Slug_Name)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<View_Roles>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("View_Roles");
+
+                entity.Property(e => e.Id)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.IdTaiKhoan)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.Name).HasMaxLength(256);
+            });
+
+            modelBuilder.Entity<View_Users_Roles>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("View_Users_Roles");
+
+                entity.Property(e => e.IdRole)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.IdUser)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.TenNguoiDung).HasMaxLength(256);
+
+                entity.Property(e => e.TenQuyen).HasMaxLength(256);
             });
 
             OnModelCreatingPartial(modelBuilder);

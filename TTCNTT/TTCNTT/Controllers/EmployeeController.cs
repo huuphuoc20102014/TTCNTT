@@ -39,7 +39,7 @@ namespace TTCNTT.Controllers
         public async Task<IActionResult> EmployeeDetail(string id)
         {
             EmployeeViewModel model = new EmployeeViewModel();
-            model.employee = await _dbContext.Employee.FirstOrDefaultAsync(h => h.Slug_Name == id);
+            model.employee = await _dbContext.Employee.FirstOrDefaultAsync(h => h.Id == id);
             model.listEmployee = await _dbContext.Employee.Where(p => p.Fk_EmplyeeId == "ET03").ToListAsync();
 
             model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);

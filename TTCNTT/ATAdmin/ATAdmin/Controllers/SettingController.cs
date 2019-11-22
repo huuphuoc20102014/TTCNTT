@@ -144,7 +144,7 @@ namespace ATAdmin.Controllers
             // Create save db item
             var dbItem = new Setting
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = vmItem.Id,
                 //Style = vmItem.Style,
                 Value = vmItem.Value,
                 Description = vmItem.Description,
@@ -362,21 +362,22 @@ namespace ATAdmin.Controllers
 
     public class SettingBaseViewModel
     {
-
+        public String Id { get; set; }
         public string Value { get; set; }
         public string Description { get; set; }
         public bool? IsManual { get; set; }
         public string Id2 { get; set; }
         //public String Style { get; set; }
         public String ImageSlug { get; set; }
+
+        public AtRowStatus RowStatus { get; set; }
     }
 
     public class SettingDetailsViewModel : SettingBaseViewModel
     {
 
-        public String Id { get; set; }
         public Byte[] RowVersion { get; set; }
-        public AtRowStatus RowStatus { get; set; }
+
 
     }
 
@@ -387,8 +388,6 @@ namespace ATAdmin.Controllers
 
     public class SettingEditViewModel : SettingBaseViewModel
     {
-
-        public String Id { get; set; }
         public Byte[] RowVersion { get; set; }
     }
 

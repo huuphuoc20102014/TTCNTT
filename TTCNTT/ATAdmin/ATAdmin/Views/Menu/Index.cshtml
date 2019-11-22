@@ -59,9 +59,8 @@
                 "/>"
 
             );			
-            columns.Bound(c => c.ImageSlug).Title(EntityLocalizer[nameof(ATAdmin.Efs.Entities.Menu.ImageSlug)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.Name).Title(EntityLocalizer[nameof(ATAdmin.Efs.Entities.Menu.Name)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.SlugName).Title(EntityLocalizer[nameof(ATAdmin.Efs.Entities.Menu.Slug_Name)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.Name).Title("Tên").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.SlugName).Title("SEO").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.IsAdminMenu).Title(EntityLocalizer[nameof(ATAdmin.Efs.Entities.Menu.IsAdminMenu)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.IsMainMenu).Title(EntityLocalizer[nameof(ATAdmin.Efs.Entities.Menu.IsMainMenu)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.CreatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
