@@ -5,7 +5,7 @@
 @inject IStringLocalizer<BaseEntityResources> BaseEntityLocalizer
 
 @{
-    ViewData["Title"] =  SharedLocalizer["ViewTitle_List"]  + " " + EntityLocalizer["Loại Bài Đăng"];
+    ViewData["Title"] =  SharedLocalizer["ViewTitle_List"]  + " " + EntityLocalizer["Loại tin tức"];
     var parentItem = ViewData["ParentItem"] as NewsType;
     if (parentItem != null)
     {
@@ -16,7 +16,7 @@
 
 <div class="container">
 	<h4>
-		@SharedLocalizer["ViewTitle_List"] @EntityLocalizer["Loại Bài Đăng"]
+		@SharedLocalizer["ViewTitle_List"] @EntityLocalizer["Loại tin tức"]
 		@if (parentItem != null)
         {
             @:: <span class="text-warning">@parentItem.Code | @parentItem.Name</span>
@@ -55,11 +55,11 @@
         );		
 			columns.Bound(c => c.Code).Title(BaseEntityLocalizer[nameof(BaseEntityResources.Code)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.Name).Title("Tên").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.SlugName).Title(EntityLocalizer[nameof(NewsType.Slug_Name)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.CreatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.UpdatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.UpdatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.CreatedBy).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedBy)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-			columns.Bound(c => c.UpdatedBy).Title(BaseEntityLocalizer[nameof(BaseEntityResources.UpdatedBy)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.SlugName).Title("SEO").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.CreatedDate).Title("Ngày tạo").Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.CreatedBy).Title("Tạo bởi").Width(200).HtmlAttributes(new { @class = "text-nowrap" });			
+            columns.Bound(c => c.UpdatedDate).Title("Ngày cập nhật").Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.UpdatedBy).Title("Cập nhật bởi").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
     })
     .HtmlAttributes(new { style = "height: 600px;" })
 	.Resizable(r => r.Columns(true))

@@ -2,12 +2,12 @@
 
 
 @{
-    ViewData["Title"] = "Tạo";
+    ViewData["Title"] = "Tin tức";
 
 }
 
 
-<h4>Tạo mới</h4>
+<h4>Thêm tin tức</h4>
 <hr />
 <form asp-action="Create">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -15,12 +15,25 @@
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Tạo" class="btn btn-primary" />
-            <a asp-action="Index" class="k-button">Quay lại danh sách</a>
+            <input type="submit" value="Tạo mới" class="btn btn-primary" />
+            <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>
 
 
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="FkNewsTypeId" class="col-form-label">Loại tin tức</label>
+            <span class="text-danger">*</span>
+        </div>
+        <div class="col-md-7">
+            <kendo-dropdownlist for="FkNewsTypeId" class="form-control" bind-to="@ViewBag.FkNewsTypeId" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="FkNewsTypeId" class="text-danger"></span>
+        </div>
+    </div>
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
@@ -34,6 +47,7 @@
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
     </div>
+
 
     <div class="row form-group slugName">
         <div class="col-md-3 text-md-right ">
@@ -51,7 +65,6 @@
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
             <label asp-for="AutoSlug" class="col-form-label">SEO tự động</label>
-            <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
             <kendo-switch for="AutoSlug" checked="@Model?.AutoSlug" />
@@ -61,23 +74,10 @@
         </div>
     </div>
 
-    <div class="row form-group">
-        <div class="col-md-3 text-md-right ">
-            <label asp-for="FkNewsTypeId" class="col-form-label">Loại tin tức</label>
-            <span class="text-danger">*</span>
-        </div>
-        <div class="col-md-7">
-            <kendo-dropdownlist for="FkNewsTypeId" class="form-control" bind-to="@ViewBag.FkNewsTypeId" />
-        </div>
-        <div class="offset-md-3 col-md-7 at-wrapper-validate">
-            <span asp-validation-for="FkNewsTypeId" class="text-danger"></span>
-        </div>
-    </div>
-
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="ImageSlug" class="col-form-label"></label>
+            <label asp-for="ImageSlug" class="col-form-label">Hình ảnh</label>
         </div>
         <div class="col-md-7">
             <button id="btnChooseImage_ImageSlug" class="btn mb-1">Chọn hình</button>
@@ -139,7 +139,7 @@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="LongDescriptionHtml" class="col-form-label">Mô tả dài</label>
+            <label asp-for="LongDescriptionHtml" class="col-form-label">Mô tả đầy đủ</label>
         </div>
         <div class="col-12">
             @(Html.Kendo().EditorFor(h => h.LongDescriptionHtml).Encoded(false)
@@ -187,6 +187,18 @@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
+            <label asp-for="Note" class="col-form-label">Ghi chú</label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="Note" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Note" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
             <label asp-for="Tags" class="col-form-label">Thẻ(tag)</label>
         </div>
         <div class="col-md-7">
@@ -221,25 +233,14 @@
         </div>
     </div>
 
-    <div class="row form-group">
-        <div class="col-md-3 text-md-right ">
-            <label asp-for="Note" class="col-form-label">Ghi chú</label>
-        </div>
-        <div class="col-md-7">
-            <input asp-for="Note" class="k-textbox form-control" />
-        </div>
-        <div class="offset-md-3 col-md-7 at-wrapper-validate">
-            <span asp-validation-for="Note" class="text-danger"></span>
-        </div>
-    </div>
 
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Tạo" class="btn btn-primary" />
-            <a asp-action="Index" class="k-button">Quay lại danh sách</a>
+            <input type="submit" value="Tạo mới" class="btn btn-primary" />
+            <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>
 </form>

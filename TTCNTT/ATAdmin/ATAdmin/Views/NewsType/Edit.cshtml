@@ -2,11 +2,11 @@
 
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Tin tức";
 }
 
 
-<h4>Edit NewsType</h4>
+<h4>Sửa tin tức</h4>
 <hr />
 <form asp-action="Edit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -14,10 +14,10 @@
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Save" class="btn btn-primary" />
-            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
-            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Refresh</a>
-            <a asp-action="Details" asp-route-id="@Model.Id" class="k-button">Refresh</a>
+            <input type="submit" value="lưu" class="btn btn-primary" />
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Xóa</a>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Tải lại</a>
+            <a asp-action="Details" asp-route-id="@Model.Id" class="k-button">Chi tiết</a>
             <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>
@@ -25,7 +25,7 @@
     <input type="hidden" asp-for="RowVersion" />
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="Code" class="col-form-label"></label>
+            <label asp-for="Code" class="col-form-label">Mã loại</label>
             <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
@@ -35,9 +35,10 @@
             <span asp-validation-for="Code" class="text-danger"></span>
         </div>
     </div>
+
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="Name" class="col-form-label"></label>
+            <label asp-for="Name" class="col-form-label">Tên loại</label>
             <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
@@ -47,9 +48,10 @@
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
     </div>
+
     <div class="row form-group slugName">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="SlugName" class="col-form-label"></label>
+            <label asp-for="SlugName" class="col-form-label">SEO</label>
             <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
@@ -59,10 +61,10 @@
             <span asp-validation-for="SlugName" class="text-danger"></span>
         </div>
     </div>
+
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="AutoSlug" class="col-form-label"></label>
-            <span class="text-danger">*</span>
+            <label asp-for="AutoSlug" class="col-form-label">SEO tự động</label>
         </div>
         <div class="col-md-7">
             <kendo-switch for="AutoSlug" checked="@Model?.AutoSlug" />
@@ -71,6 +73,19 @@
             <span asp-validation-for="AutoSlug" class="text-danger"></span>
         </div>
     </div>
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="Note" class="col-form-label">Ghi chú</label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="Note" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="Note" class="text-danger"></span>
+        </div>
+    </div>
+
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
             <label asp-for="Tags" class="col-form-label"></label>
@@ -82,6 +97,7 @@
             <span asp-validation-for="Tags" class="text-danger"></span>
         </div>
     </div>
+
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
             <label asp-for="KeyWord" class="col-form-label"></label>
@@ -93,6 +109,7 @@
             <span asp-validation-for="KeyWord" class="text-danger"></span>
         </div>
     </div>
+
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
             <label asp-for="MetaData" class="col-form-label"></label>
@@ -104,25 +121,16 @@
             <span asp-validation-for="MetaData" class="text-danger"></span>
         </div>
     </div>
-    <div class="row form-group">
-        <div class="col-md-3 text-md-right ">
-            <label asp-for="Note" class="col-form-label"></label>
-        </div>
-        <div class="col-md-7">
-            <input asp-for="Note" class="k-textbox form-control" />
-        </div>
-        <div class="offset-md-3 col-md-7 at-wrapper-validate">
-            <span asp-validation-for="Note" class="text-danger"></span>
-        </div>
-    </div>
+
+
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Save" class="btn btn-primary" />
-            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
-            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Refresh</a>
-            <a asp-action="Details" asp-route-id="@Model.Id" class="k-button">Details</a>
+            <input type="submit" value="lưu" class="btn btn-primary" />
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Xóa</a>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Tải lại</a>
+            <a asp-action="Details" asp-route-id="@Model.Id" class="k-button">Chi tiết</a>
             <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>
@@ -146,12 +154,12 @@
                 $('.slugName').slideToggle();
             }
 
-            $( ".k-switch-container" ).click(function() {
+            $(".k-switch-container").click(function () {
                 $('.slugName').slideToggle(); //SlideUp-SlideDown
                 if ($('.slugtitle').val() == '0') {
                     $('.slugtitle').val(''); //if input has value = 0 then set it Empty
                 } else {
-                    $( '.slugtitle' ).val('0'); //set value = 0 unless it is Empty
+                    $('.slugtitle').val('0'); //set value = 0 unless it is Empty
                 }
             });
         });

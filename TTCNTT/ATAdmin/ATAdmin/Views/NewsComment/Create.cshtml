@@ -2,12 +2,12 @@
 
 
 @{
-    ViewData["Title"] = "Tạo";
+    ViewData["Title"] = "Bình Luận Tin Tức";
 
 }
 
 
-<h4>Tạo mới</h4>
+<h4>Thêm Bình Luận</h4>
 <hr />
 <form asp-action="Create">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -15,8 +15,8 @@
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Tạo" class="btn btn-primary" />
-            <a asp-action="Index" class="k-button">Quay lại danh sách</a>
+            <input type="submit" value="Tạo mới" class="btn btn-primary" />
+            <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>
 
@@ -24,7 +24,7 @@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="FkNewsId" class="col-form-label"></label>
+            <label asp-for="FkNewsId" class="col-form-label">Tên tin tức</label>
             <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
@@ -36,7 +36,8 @@
     </div>
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="Name" class="col-form-label"></label>
+            <label asp-for="Name" class="col-form-label">Tên</label>
+            <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
             <input asp-for="Name" class="k-textbox form-control" />
@@ -59,7 +60,8 @@
     </div>
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="Phone" class="col-form-label"></label>
+            <label asp-for="Phone" class="col-form-label">Số điện thoại</label>
+            <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
             <input asp-for="Phone" class="k-textbox form-control" />
@@ -70,7 +72,8 @@
     </div>
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="Comment" class="col-form-label"></label>
+            <label asp-for="Comment" class="col-form-label">Bình luận</label>
+            <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
             <input asp-for="Comment" class="k-textbox form-control" />
@@ -81,7 +84,7 @@
     </div>
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
-            <label asp-for="IsRead" class="col-form-label"></label>
+            <label asp-for="IsRead" class="col-form-label">Đã xem</label>
         </div>
         <div class="col-md-7">
             <kendo-switch for="IsRead" checked="@Model?.IsRead" />
@@ -96,8 +99,8 @@
         <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
-            <input type="submit" value="Tạo" class="btn btn-primary" />
-            <a asp-action="Index" class="k-button">Quay lại danh sách</a>
+            <input type="submit" value="Tạo mới" class="btn btn-primary" />
+            <a asp-action="Index" class="k-button">Trở lại</a>
         </div>
     </div>
 </form>

@@ -5,7 +5,7 @@
 @inject IStringLocalizer<BaseEntityResources> BaseEntityLocalizer
 
 @{
-    ViewData["Title"] = SharedLocalizer["ViewTitle_List"] + " " + EntityLocalizer["Bình Luận Bài Đăng"];
+    ViewData["Title"] = SharedLocalizer["ViewTitle_List"] + " " + EntityLocalizer["Bình Luận Tin Tức"];
     var parentItem = ViewData["ParentItem"] as NewsComment;
     if (parentItem != null)
     {
@@ -16,7 +16,7 @@
 
 <div class="container">
     <h4>
-        @SharedLocalizer["ViewTitle_List"] @EntityLocalizer["Bình Luận Bài Đăng"]
+        @SharedLocalizer["ViewTitle_List"] @EntityLocalizer["Bình Luận Tin Tức"]
         @if (parentItem != null)
         {
             @:: <span class="text-warning">@parentItem.FkNewsId | @parentItem.Name</span>
@@ -53,16 +53,16 @@
                 "href='" + Url.Action("Delete", ((string)ViewData["ControllerNameForGrid"])) + "/#= " + nameof(NewsComment.Id) + " #'" +
             "><i class=\"far fa-trash-alt\"></i></a> "
         );
-        columns.Bound(c => c.NewsName).Title("Tên bài đăng").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-        columns.Bound(c => c.Name).Title(EntityLocalizer[nameof(NewsComment.Name)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+        columns.Bound(c => c.NewsName).Title("Tên tin tức").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+        columns.Bound(c => c.Name).Title("Tên").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
         columns.Bound(c => c.Email).Title(EntityLocalizer[nameof(NewsComment.Email)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-        columns.Bound(c => c.Phone).Title(EntityLocalizer[nameof(NewsComment.Phone)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-        columns.Bound(c => c.Comment).Title(EntityLocalizer[nameof(NewsComment.Comment)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-        columns.Bound(c => c.IsRead).Title(EntityLocalizer[nameof(NewsComment.IsRead)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
-        columns.Bound(c => c.CreatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
-        columns.Bound(c => c.CreatedBy).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedBy)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });        
-        columns.Bound(c => c.UpdatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.UpdatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
-        columns.Bound(c => c.UpdatedBy).Title(BaseEntityLocalizer[nameof(BaseEntityResources.UpdatedBy)]).Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+        columns.Bound(c => c.Phone).Title("Số điện thoại").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+        columns.Bound(c => c.Comment).Title("Bình luận").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+        columns.Bound(c => c.IsRead).Title("Đã xem").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+        columns.Bound(c => c.CreatedDate).Title("Ngày tạo").Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
+        columns.Bound(c => c.CreatedBy).Title("Tạo bởi").Width(200).HtmlAttributes(new { @class = "text-nowrap" });        
+        columns.Bound(c => c.UpdatedDate).Title("Ngày cập nhật").Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });
+        columns.Bound(c => c.UpdatedBy).Title("Cập nhật bởi").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
     })
     .HtmlAttributes(new { style = "height: 600px;" })
     .Resizable(r => r.Columns(true))
