@@ -11,19 +11,20 @@ using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using ATAdmin.Efs.Context;
+using Microsoft.Extensions.Configuration;
 
 namespace ATAdmin.Controllers
 {
-    public class ImageSlidesController : AtBaseController
+    public class ImageSlideController : AtBaseController
     {
         private readonly WebTTCNTTContext _context;
 
-        public ImageSlidesController(WebTTCNTTContext context)
+        public ImageSlideController(WebTTCNTTContext context)
         {
             _context = context;
         }
 
-        // GET: ImageSlides
+        // GET: ImageSlide
         public async Task<IActionResult> Index([FromRoute]string id)
         {
             ImageSlide dbItem = null;
@@ -37,7 +38,7 @@ namespace ATAdmin.Controllers
             }
             ViewData["ParentItem"] = dbItem;
 
-            ViewData["ControllerNameForGrid"] = nameof(ImageSlidesController).Replace("Controller", "");
+            ViewData["ControllerNameForGrid"] = nameof(ImageSlideController).Replace("Controller", "");
             return View();
         }
 
@@ -77,7 +78,7 @@ namespace ATAdmin.Controllers
         }
 
 
-        // GET: ImageSlides/Details/5
+        // GET: ImageSlide/Details/5
         public async Task<IActionResult> Details([FromRoute] string id)
         {
             if (id == null)
@@ -87,7 +88,7 @@ namespace ATAdmin.Controllers
 
             var imageSlide = await _context.ImageSlide.AsNoTracking()
 
-                    .Where(h => h.Slug_Name == id)
+                    .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
             if (imageSlide == null)
             {
@@ -97,19 +98,22 @@ namespace ATAdmin.Controllers
             return View(imageSlide);
         }
 
-        // GET: ImageSlides/Create
+        // GET: ImageSlide/Create
         public async Task<IActionResult> Create()
         {
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserImageSlideController).Replace("Controller", "");
+
             return View();
         }
 
-        // POST: ImageSlides/Create
+        // POST: ImageSlide/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([FromForm] ImageSlideCreateViewModel vmItem)
         {
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserImageSlideController).Replace("Controller", "");
 
             // Invalid model
             if (!ModelState.IsValid)
@@ -122,8 +126,21 @@ namespace ATAdmin.Controllers
             var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
             // Trim white space
-            vmItem.Name = $"{vmItem.Name}".Trim();
+            vmItem.SlugName = $"{vmItem.SlugName}".Trim();
+            if (vmItem.AutoSlug)
+            {
+                vmItem.SlugName = NormalizeSlug($"{vmItem.Name}");
+            }
+            else
+            {
+                vmItem.SlugName = NormalizeSlug($"{vmItem.SlugName}");
+            }
 
+            // Check slug is existed => if existed auto get next slug
+            var listExistedSlug = await _context.ImageSlide.AsNoTracking()
+                    .Where(h => h.Id.StartsWith(vmItem.SlugName))
+                    .Select(h => h.Slug_Name).ToListAsync();
+            var slug = CheckAndGenNextSlug(vmItem.SlugName, listExistedSlug);
 
 
             // Create save db item
@@ -161,9 +178,11 @@ namespace ATAdmin.Controllers
             return RedirectToAction(nameof(Details), new { id = dbItem.Id });
         }
 
-        // GET: ImageSlides/Edit/5
+        // GET: ImageSlide/Edit/5
         public async Task<IActionResult> Edit([FromRoute] string id)
         {
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserImageSlideController).Replace("Controller", "");
+
             if (id == null)
             {
                 return NotFound();
@@ -171,7 +190,7 @@ namespace ATAdmin.Controllers
 
 
             var dbItem = await _context.ImageSlide.AsNoTracking()
-                .Where(h => h.Slug_Name == id)
+                .Where(h => h.Id == id)
                 .Select(h => new ImageSlideEditViewModel
                 {
                     Id = h.Id,
@@ -200,13 +219,14 @@ namespace ATAdmin.Controllers
             return View(dbItem);
         }
 
-        // POST: ImageSlides/Edit/5
+        // POST: ImageSlide/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([FromForm] ImageSlideEditViewModel vmItem)
         {
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserImageSlideController).Replace("Controller", "");
 
             // Invalid model
             if (!ModelState.IsValid)
@@ -259,7 +279,7 @@ namespace ATAdmin.Controllers
             return RedirectToAction(nameof(Details), new { id = dbItem.Id });
         }
 
-        // GET: ImageSlides/Details/5
+        // GET: ImageSlide/Details/5
         public async Task<IActionResult> Delete([FromRoute] string id)
         {
             if (id == null)
@@ -269,7 +289,7 @@ namespace ATAdmin.Controllers
 
             var dbItem = await _context.ImageSlide.AsNoTracking()
 
-                    .Where(h => h.Slug_Name == id)
+                    .Where(h => h.Id == id)
                 .FirstOrDefaultAsync();
             if (dbItem == null)
             {
@@ -279,7 +299,7 @@ namespace ATAdmin.Controllers
             return View(dbItem);
         }
 
-        // POST: ImageSlides/Delete/5
+        // POST: ImageSlide/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete([FromForm] string id, [FromForm] byte[] rowVersion)
@@ -328,7 +348,39 @@ namespace ATAdmin.Controllers
 
     }
 
+    public class ImageBrowserImageSlideController : EditorImageBrowserController
+    {
+        public const string FOLDER_NAME = "ImagesImageSlide";
+        public string FOLDER_ROOTPATH;
 
+        /// <summary>
+        /// Gets the base paths from which content will be served.
+        /// </summary>
+        public override string ContentPath
+        {
+            get
+            {
+                return CreateUserFolder();
+            }
+        }
+
+        public ImageBrowserImageSlideController(IHostingEnvironment hostingEnvironment, IConfiguration staticFileSetting)
+           : base(hostingEnvironment)
+        {
+            FOLDER_ROOTPATH = staticFileSetting.GetValue<string>("StaticFileSetting");
+        }
+        private string CreateUserFolder()
+        {
+            var virtualPath = System.IO.Path.Combine(FOLDER_NAME);
+            //var path = HostingEnvironment.WebRootFileProvider.GetFileInfo(virtualPath).PhysicalPath;
+            var path = System.IO.Path.Combine(FOLDER_ROOTPATH, FOLDER_NAME);
+            if (!System.IO.Directory.Exists(path))
+            {
+                System.IO.Directory.CreateDirectory(path);
+            }
+            return path;
+        }
+    }
 
     public class ImageSlideBaseViewModel
     {
