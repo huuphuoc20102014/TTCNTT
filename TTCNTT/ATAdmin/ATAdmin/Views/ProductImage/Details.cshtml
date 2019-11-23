@@ -1,11 +1,11 @@
-﻿@model ATAdmin.Efs.Entities.Product
+﻿@model ATAdmin.Efs.Entities.ProductImage
 @{
-    ViewData["Title"] = "Chi tiết sản phẩm";
+    ViewData["Title"] = "Hình Sản Phẩm";
 }
 
 
 
-<h4>Chi tiết sản phẩm</h4>
+<h4>Chi Tiết Hình</h4>
 <hr />
 
 <div class="row form-group">
@@ -24,13 +24,13 @@
         Hình ảnh :
     </div>
     <div class="col-md-7">
-        <img width="200" class="border border-primary" id="img_ImageSlug" src="~/Image/@Url.Content(Model?.ImageSlug)" />
+        <img width="200" class="border border-primary" id="img_Thumbnail" src="~/Image/@Url.Content(Model?.Thumbnail)" />
     </div>
 </div>
 
 <div class="row form-group">
     <div class="col-md-3 text-md-right details-label">
-        Loại sản phẩm :
+        Tên sản phẩm :
     </div>
     <div class="col-md-7">
         @Html.DisplayFor(model => model.FkProduct.Name)
@@ -39,16 +39,7 @@
 
 <div class="row form-group">
     <div class="col-md-3 text-md-right details-label">
-        Mã sản phẩm :
-    </div>
-    <div class="col-md-7">
-        @Html.DisplayFor(model => model.Code)
-    </div>
-</div>
-
-<div class="row form-group">
-    <div class="col-md-3 text-md-right details-label">
-        Tên :
+        Tên sản phẩm :
     </div>
     <div class="col-md-7">
         @Html.DisplayFor(model => model.Name)
@@ -75,19 +66,46 @@
 
 <div class="row form-group">
     <div class="col-md-3 text-md-right details-label">
-        Mô tả ngắn :
+        Mở rộng :
     </div>
     <div class="col-md-7">
-        @Html.DisplayFor(model => model.ShortDescription_Html)
+        @Html.DisplayFor(model => model.Extension)
     </div>
 </div>
 
 <div class="row form-group">
     <div class="col-md-3 text-md-right details-label">
-        Mô tả đầy đủ :
+        Mô tả :
     </div>
     <div class="col-md-7">
-        @Html.DisplayFor(model => model.LongDescription_Html)
+        @Html.DisplayFor(model => model.Description)
+    </div>
+</div>
+
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        Sắp xếp :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.SortIndex)
+    </div>
+</div>
+
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        Youtube :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.IsYoutube)
+    </div>
+</div>
+
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        Link Youtube :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.YoutubeLink)
     </div>
 </div>
 

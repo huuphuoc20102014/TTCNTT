@@ -1,22 +1,28 @@
-﻿@model ATAdmin.Efs.Entities.Product
+﻿@model ATAdmin.Efs.Entities.ProductImage
 @{
-    ViewData["Title"] = "Chi tiết sản phẩm";
+    ViewData["Title"] = "Hình Sản Phẩm";
 }
 
 
 
-<h4>Chi tiết sản phẩm</h4>
+<h4>Xóa Hình</h4>
+<h5 class="text-danger">Bạn có chắc muốn xóa?</h5>
 <hr />
 
-<div class="row form-group">
-    <div class="col-md-3 text-md-right ">
+<form asp-action="Delete">
+    <input type="hidden" name="Id" value="@Model?.Id" />
+    <input type="hidden" asp-for="RowVersion" />
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+        </div>
+        <div class="col-md-7">
+            <input type="submit" value="Xóa" class="btn btn-danger" />
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Sửa</a>
+            <a asp-action="Details" asp-route-id="@Model.Id" class="k-button">Chi tiết</a>
+            <a asp-action="Index" class="k-button">Trở lại</a>
+        </div>
     </div>
-    <div class="col-md-7">
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Sửa</a>
-        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Xóa</a>
-        <a asp-action="Index" class="k-button">Trở lại</a>
-    </div>
-</div>
+</form>
 
 
 <div class="row form-group">
@@ -24,13 +30,13 @@
         Hình ảnh :
     </div>
     <div class="col-md-7">
-        <img width="200" class="border border-primary" id="img_ImageSlug" src="~/Image/@Url.Content(Model?.ImageSlug)" />
+        <img width="200" class="border border-primary" id="img_Thumbnail" src="~/Image/@Url.Content(Model?.Thumbnail)" />
     </div>
 </div>
 
 <div class="row form-group">
     <div class="col-md-3 text-md-right details-label">
-        Loại sản phẩm :
+        Tên sản phẩm :
     </div>
     <div class="col-md-7">
         @Html.DisplayFor(model => model.FkProduct.Name)
@@ -39,16 +45,7 @@
 
 <div class="row form-group">
     <div class="col-md-3 text-md-right details-label">
-        Mã sản phẩm :
-    </div>
-    <div class="col-md-7">
-        @Html.DisplayFor(model => model.Code)
-    </div>
-</div>
-
-<div class="row form-group">
-    <div class="col-md-3 text-md-right details-label">
-        Tên :
+        Tên sản phẩm :
     </div>
     <div class="col-md-7">
         @Html.DisplayFor(model => model.Name)
@@ -75,19 +72,46 @@
 
 <div class="row form-group">
     <div class="col-md-3 text-md-right details-label">
-        Mô tả ngắn :
+        Mở rộng :
     </div>
     <div class="col-md-7">
-        @Html.DisplayFor(model => model.ShortDescription_Html)
+        @Html.DisplayFor(model => model.Extension)
     </div>
 </div>
 
 <div class="row form-group">
     <div class="col-md-3 text-md-right details-label">
-        Mô tả đầy đủ :
+        Mô tả :
     </div>
     <div class="col-md-7">
-        @Html.DisplayFor(model => model.LongDescription_Html)
+        @Html.DisplayFor(model => model.Description)
+    </div>
+</div>
+
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        Sắp xếp :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.SortIndex)
+    </div>
+</div>
+
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        Youtube :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.IsYoutube)
+    </div>
+</div>
+
+<div class="row form-group">
+    <div class="col-md-3 text-md-right details-label">
+        Link Youtube :
+    </div>
+    <div class="col-md-7">
+        @Html.DisplayFor(model => model.YoutubeLink)
     </div>
 </div>
 
@@ -181,12 +205,19 @@
     </div>
 </div>
 
-<div class="row form-group">
-    <div class="col-md-3 text-md-right ">
+<form asp-action="Delete">
+    <input type="hidden" name="Id" value="@Model?.Id" />
+    <input type="hidden" asp-for="RowVersion" />
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+        </div>
+        <div class="col-md-7">
+            <input type="submit" value="Xóa" class="btn btn-danger" />
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Sửa</a>
+            <a asp-action="Details" asp-route-id="@Model.Id" class="k-button">Chi tiết</a>
+            <a asp-action="Index" class="k-button">Trở lại</a>
+        </div>
     </div>
-    <div class="col-md-7">
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Sửa</a>
-        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Xóa</a>
-        <a asp-action="Index" class="k-button">Trở lại</a>
-    </div>
-</div>
+</form>
+
+
