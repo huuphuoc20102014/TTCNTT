@@ -60,7 +60,6 @@
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
             <label asp-for="AutoSlug" class="col-form-label">SEO tự động</label>
-            <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
             <kendo-switch for="AutoSlug" checked="@Model?.AutoSlug" />
@@ -106,7 +105,7 @@
                     .FontSize()
                 )
                   .ImageBrowser(imageBrowser => imageBrowser
-                      .Image("~/" + ImageBrowserServiceController.FOLDER_NAME + "/{0}")
+                      .Image("/Image/" + ImageBrowserServiceController.FOLDER_NAME + "/{0}")
                       .Read("Read", (string)ViewData["ControllerNameForImageBrowser"])
                       .Destroy("Destroy", (string)ViewData["ControllerNameForImageBrowser"])
                       .Upload("Upload", (string)ViewData["ControllerNameForImageBrowser"])
@@ -154,7 +153,7 @@
                     .FontSize()
                 )
                   .ImageBrowser(imageBrowser => imageBrowser
-                      .Image("~/" + ImageBrowserServiceController.FOLDER_NAME + "/{0}")
+                      .Image("/Image/" + ImageBrowserServiceController.FOLDER_NAME + "/{0}")
                       .Read("Read", (string)ViewData["ControllerNameForImageBrowser"])
                       .Destroy("Destroy", (string)ViewData["ControllerNameForImageBrowser"])
                       .Upload("Upload", (string)ViewData["ControllerNameForImageBrowser"])

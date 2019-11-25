@@ -125,6 +125,102 @@
 
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
+            <label asp-for="ShortDescription_Html" class="col-form-label">Mô tả ngắn</label>
+        </div>
+        <div class="col-12">
+            @(Html.Kendo().EditorFor(h => h.ShortDescription_Html).Encoded(false)
+                  .HtmlAttributes(new { style = "height:440px" })
+                  .Resizable(resizable => resizable.Content(true))
+                  .Tools(tools => tools
+                    .Clear()
+                    .CleanFormatting()
+                    .Formatting()
+                    .ForeColor()
+                    .BackColor()
+                    .Bold()
+                    .Italic()
+                    .Underline()
+                    .Strikethrough()
+                    .JustifyLeft()
+                    .JustifyCenter()
+                    .JustifyRight()
+                    .JustifyFull()
+                    .InsertUnorderedList()
+                    .InsertOrderedList()
+                    .Outdent()
+                    .Indent()
+                    .CreateLink()
+                    .Unlink()
+                    .InsertImage()
+                    .SubScript()
+                    .SuperScript()
+                    .TableEditing()
+                    .FontName()
+                    .FontSize()
+                )
+                  .ImageBrowser(imageBrowser => imageBrowser
+                      .Image("/Image/" + ImageBrowserEmployeeController.FOLDER_NAME + "/{0}")
+                      .Read("Read", (string)ViewData["ControllerNameForImageBrowser"])
+                      .Destroy("Destroy", (string)ViewData["ControllerNameForImageBrowser"])
+                      .Upload("Upload", (string)ViewData["ControllerNameForImageBrowser"])
+                  )
+            )
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="ShortDescription_Html" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="LongDescription_Html" class="col-form-label">Mô tả đầy đủ</label>
+        </div>
+        <div class="col-12">
+            @(Html.Kendo().EditorFor(h => h.LongDescription_Html).Encoded(false)
+                  .HtmlAttributes(new { style = "height:440px" })
+                  .Resizable(resizable => resizable.Content(true))
+                  .Tools(tools => tools
+                    .Clear()
+                    .CleanFormatting()
+                    .Formatting()
+                    .ForeColor()
+                    .BackColor()
+                    .Bold()
+                    .Italic()
+                    .Underline()
+                    .Strikethrough()
+                    .JustifyLeft()
+                    .JustifyCenter()
+                    .JustifyRight()
+                    .JustifyFull()
+                    .InsertUnorderedList()
+                    .InsertOrderedList()
+                    .Outdent()
+                    .Indent()
+                    .CreateLink()
+                    .Unlink()
+                    .InsertImage()
+                    .SubScript()
+                    .SuperScript()
+                    .TableEditing()
+                    .FontName()
+                    .FontSize()
+                )
+                  .ImageBrowser(imageBrowser => imageBrowser
+                      .Image("/Image/" + ImageBrowserEmployeeController.FOLDER_NAME + "/{0}")
+                      .Read("Read", (string)ViewData["ControllerNameForImageBrowser"])
+                      .Destroy("Destroy", (string)ViewData["ControllerNameForImageBrowser"])
+                      .Upload("Upload", (string)ViewData["ControllerNameForImageBrowser"])
+                  )
+            )
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="LongDescription_Html" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
         </div>
         <div class="col-md-7">
             <input type="submit" value="Tạo mới" class="btn btn-primary" />
@@ -161,7 +257,7 @@
                     type: "imagebrowser-aspnetmvc",
                     read: "@Url.Action("Read", (string)ViewData["ControllerNameForImageBrowser"])",
                     destroy: "@Url.Action("Destroy", (string)ViewData["ControllerNameForImageBrowser"])",
-                    imageUrl: "@Url.Content( ImageBrowserNewController.FOLDER_NAME + "/{0}")",
+                    imageUrl: "@Url.Content( ImageBrowserEmployeeController.FOLDER_NAME + "/{0}")",
                     uploadUrl: "@Url.Action("Upload", (string)ViewData["ControllerNameForImageBrowser"])"
                 },
                 apply: function () {

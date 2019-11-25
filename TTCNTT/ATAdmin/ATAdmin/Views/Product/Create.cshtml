@@ -132,7 +132,7 @@
                     .FontSize()
                 )
                   .ImageBrowser(imageBrowser => imageBrowser
-                      .Image("~/" + ImageBrowserProductController.FOLDER_NAME + "/{0}")
+                      .Image("/Image/" + ImageBrowserProductController.FOLDER_NAME + "/{0}")
                       .Read("Read", (string)ViewData["ControllerNameForImageBrowser"])
                       .Destroy("Destroy", (string)ViewData["ControllerNameForImageBrowser"])
                       .Upload("Upload", (string)ViewData["ControllerNameForImageBrowser"])
@@ -180,7 +180,7 @@
                     .FontSize()
                 )
                   .ImageBrowser(imageBrowser => imageBrowser
-                      .Image("~/" + ImageBrowserProductController.FOLDER_NAME + "/{0}")
+                      .Image("/Image/" + ImageBrowserProductController.FOLDER_NAME + "/{0}")
                       .Read("Read", (string)ViewData["ControllerNameForImageBrowser"])
                       .Destroy("Destroy", (string)ViewData["ControllerNameForImageBrowser"])
                       .Upload("Upload", (string)ViewData["ControllerNameForImageBrowser"])

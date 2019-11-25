@@ -108,7 +108,7 @@ namespace ATAdmin.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserNewController).Replace("Controller", "");
+                ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserEmployeeController).Replace("Controller", "");
                 // Get list master of foreign property and set to view data
                 await PrepareListMasterForeignKey();
 
@@ -127,7 +127,7 @@ namespace ATAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([FromForm] EmployeeCreateViewModel vmItem)
         {
-            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserNewController).Replace("Controller", "");
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserEmployeeController).Replace("Controller", "");
 
             // Invalid model
             if (!ModelState.IsValid)
@@ -186,7 +186,7 @@ namespace ATAdmin.Controllers
         // GET: Employee/Edit/5
         public async Task<IActionResult> Edit([FromRoute] string id)
         {
-            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserNewController).Replace("Controller", "");
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserEmployeeController).Replace("Controller", "");
 
             if (id == null)
             {
@@ -232,7 +232,7 @@ namespace ATAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([FromForm] EmployeeEditViewModel vmItem)
         {
-            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserNewController).Replace("Controller", "");
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserEmployeeController).Replace("Controller", "");
 
             // Invalid model
             if (!ModelState.IsValid)
