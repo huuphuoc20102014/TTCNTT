@@ -111,9 +111,24 @@ namespace ATAdmin.Controllers
             var tableName = nameof(AspNetUsers);
             var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
-            // Trim white space
+            //Check if null
+            if (vmItem.NormalizedUserName == null)
+            {
+                vmItem.NormalizedUserName = vmItem.UserName.ToUpper();
+            }
+            else
+            {
+                vmItem.NormalizedUserName = vmItem.NormalizedUserName;
+            }
 
-
+            if (vmItem.NormalizedEmail == null)
+            {
+                vmItem.NormalizedEmail = vmItem.Email.ToUpper();
+            }
+            else
+            {
+                vmItem.NormalizedEmail = vmItem.NormalizedEmail;
+            }
 
             // Create save db item
             var dbItem = new AspNetUsers
@@ -121,9 +136,9 @@ namespace ATAdmin.Controllers
                 Id = Guid.NewGuid().ToString(),
 
                 UserName = vmItem.UserName,
-                NormalizedUserName = vmItem.UserName.ToUpper(),
+                NormalizedUserName = vmItem.NormalizedUserName,
                 Email = vmItem.Email,
-                NormalizedEmail = vmItem.Email.ToUpper(),
+                NormalizedEmail = vmItem.NormalizedEmail,
                 EmailConfirmed = vmItem.EmailConfirmed,
                 PasswordHash = vmItem.PasswordHash,
             };
@@ -195,21 +210,37 @@ namespace ATAdmin.Controllers
                 .Where(h => h.Id == vmItem.Id)
 
                 .FirstOrDefaultAsync();
+
             if (dbItem == null)
             {
                 return NotFound();
             }
 
-            // Trim white space
+            //Check if null
+            if (vmItem.NormalizedUserName == null)
+            {
+                vmItem.NormalizedUserName = vmItem.UserName.ToUpper();
+            }
+            else
+            {
+                vmItem.NormalizedUserName = vmItem.NormalizedUserName;
+            }
 
-
+            if (vmItem.NormalizedEmail == null)
+            {
+                vmItem.NormalizedEmail = vmItem.Email.ToUpper();
+            }
+            else
+            {
+                vmItem.NormalizedEmail = vmItem.NormalizedEmail;
+            }
 
             // Update db item       
 
             dbItem.UserName = vmItem.UserName;
-            dbItem.NormalizedUserName = vmItem.UserName.ToUpper();
+            dbItem.NormalizedUserName = vmItem.NormalizedUserName;
             dbItem.Email = vmItem.Email;
-            dbItem.NormalizedEmail = vmItem.Email.ToUpper();
+            dbItem.NormalizedEmail = vmItem.NormalizedEmail;
             dbItem.EmailConfirmed = vmItem.EmailConfirmed;
             dbItem.PasswordHash = vmItem.PasswordHash;
 
@@ -350,6 +381,7 @@ namespace ATAdmin.Controllers
         {
 
             RuleFor(h => h.UserName)
+                        .NotEmpty()
                         .MaximumLength(256)
                 ;
 
@@ -358,6 +390,7 @@ namespace ATAdmin.Controllers
                 ;
 
             RuleFor(h => h.Email)
+                        .NotEmpty()
                         .MaximumLength(256)
                 ;
 

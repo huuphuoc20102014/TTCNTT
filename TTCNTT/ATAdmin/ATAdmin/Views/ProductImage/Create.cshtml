@@ -219,22 +219,31 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
         $(document).ready(function () {
+            //$(".k-switch-container").click(function () {
+            //    if ($('#AutoSlug').prop('checked') == false) {
+
+            //        $('.slugName').slideToggle();
+            //        $('.slugtitle').val('0');
+            //    }
+            //    else {
+            //        $('.slugName').slideToggle();
+            //        $('.slugtitle').val('');
+            //    }
+
+            //});
+
             $(".k-switch-container").click(function () {
-                //if ($('#AutoSlug').prop('checked') == false) {
-                if ($('#AutoSlug').prop('checked').change()) {
-
-                    $('.slugName').slideToggle();
-                    $('.slugtitle').val('0');
-                }
-                else {
-                    $('.slugName').slideToggle();
-                    $('.slugtitle').val('');
-                }
+            if ($("input[name='AutoSlug']:checked")) {
+                alert("AutoSlug");
+            }
+            else if ("input[name='IsYoutube']:checked") {
+                alert("IsYoutube");
+            }
+});
 
 
 
-            });
- 
+
             $("#divChooseImage_Thumbnail").kendoImageBrowser({
                 transport: {
                     type: "imagebrowser-aspnetmvc",

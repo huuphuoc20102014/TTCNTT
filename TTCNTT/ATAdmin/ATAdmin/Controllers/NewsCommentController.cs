@@ -416,6 +416,7 @@ namespace ATAdmin.Controllers
                 ;
 
             RuleFor(h => h.Name)
+                        .NotEmpty()
                         .MaximumLength(50)
                 ;
 
@@ -425,6 +426,7 @@ namespace ATAdmin.Controllers
                 ;
 
             RuleFor(h => h.Phone)
+                        .NotEmpty()
                         .MaximumLength(20)
                 ;
 

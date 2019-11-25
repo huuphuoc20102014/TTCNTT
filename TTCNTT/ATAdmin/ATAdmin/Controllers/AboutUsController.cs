@@ -448,6 +448,7 @@ namespace ATAdmin.Controllers
                 ;
 
             RuleFor(h => h.LongDescriptionHtml)
+                        .MaximumLength(1000)
                 ;
 
             RuleFor(h => h.ImageSlug)

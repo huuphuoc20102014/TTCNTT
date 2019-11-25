@@ -344,7 +344,9 @@ namespace ATAdmin.Controllers
     public class CategoryBaseViewModel
     {
 
-       
+        public String Code { get; set; }
+        public String Name { get; set; }
+        public String SlugName { get; set; }
         public Boolean AutoSlug { get; set; }
         public String Tags { get; set; }
         public String KeyWord { get; set; }
@@ -371,9 +373,7 @@ namespace ATAdmin.Controllers
 
     public class CategoryCreateViewModel : CategoryBaseViewModel
     {
-        public String Code { get; set; }
-        public String Name { get; set; }
-        public String SlugName { get; set; }
+
     }
 
     public class CategoryEditViewModel : CategoryBaseViewModel
@@ -394,7 +394,17 @@ namespace ATAdmin.Controllers
             RuleFor(h => h.AutoSlug)
                 ;
 
-          
+            RuleFor(h => h.Name)
+                      .NotEmpty()
+                      .MaximumLength(100)
+              ;
+            RuleFor(h => h.Code)
+                     .NotEmpty()
+                     .MaximumLength(50);
+
+            RuleFor(h => h.SlugName)
+                    .NotEmpty()
+                    .MaximumLength(100);
 
             RuleFor(h => h.Tags)
                         .MaximumLength(1000)
@@ -419,16 +429,7 @@ namespace ATAdmin.Controllers
     {
         public CategoryCreateValidator()
         {
-            RuleFor(h => h.Name)
-                      .NotEmpty()
-                      .MaximumLength(100)
-              ;
-            RuleFor(h => h.Code)
-                     .NotEmpty()
-                     .MaximumLength(50);
-            RuleFor(h => h.SlugName)
-                    .NotEmpty()
-                    .MaximumLength(100);
+
 
         }
     }
@@ -448,7 +449,6 @@ namespace ATAdmin.Controllers
 
         }
     }
-
 
 
 

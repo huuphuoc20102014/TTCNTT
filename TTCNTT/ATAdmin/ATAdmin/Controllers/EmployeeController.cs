@@ -460,15 +460,17 @@ namespace ATAdmin.Controllers
                 ;
 
 
-
-            //RuleFor(h => h.AutoSlug)
-            //    ;
+            RuleFor(h => h.BirthDate)
+                        .NotEmpty()
+                ;
 
             RuleFor(h => h.Address)
+                        .NotEmpty()
                         .MaximumLength(500)
                 ;
 
             RuleFor(h => h.Phone)
+                        .NotEmpty()
                         .MaximumLength(15)
                 ;
 

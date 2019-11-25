@@ -64,7 +64,6 @@
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
             <label asp-for="Description" class="col-form-label"></label>
-            <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
             <input asp-for="Description" class="k-textbox form-control" />
@@ -76,7 +75,6 @@
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
             <label asp-for="IsManual" class="col-form-label"></label>
-            <span class="text-danger">*</span>
         </div>
         <div class="col-md-7">
             <kendo-switch for="IsManual" checked="@Model?.IsManual" />

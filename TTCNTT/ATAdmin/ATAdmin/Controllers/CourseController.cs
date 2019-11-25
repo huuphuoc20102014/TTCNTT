@@ -480,6 +480,7 @@ namespace ATAdmin.Controllers
                 ;
 
             RuleFor(h => h.Name)
+                        .NotEmpty()
                         .MaximumLength(500)
                 ;
 

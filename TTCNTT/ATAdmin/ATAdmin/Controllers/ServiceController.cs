@@ -385,7 +385,8 @@ namespace ATAdmin.Controllers
 
     public class ServiceBaseViewModel
     {
-
+        public String ServiceName { get; set; }
+        public String SlugName { get; set; }
         public Boolean AutoSlug { get; set; }
         public String ShortDescriptionHtml { get; set; }
         public String LongDescriptionHtml { get; set; }
@@ -414,8 +415,7 @@ namespace ATAdmin.Controllers
 
     public class ServiceCreateViewModel : ServiceBaseViewModel
     {
-        public String ServiceName { get; set; }
-        public String SlugName { get; set; }
+
     }
 
     public class ServiceEditViewModel : ServiceBaseViewModel
@@ -431,6 +431,19 @@ namespace ATAdmin.Controllers
     {
         public ServiceBaseValidator()
         {
+            RuleFor(h => h.ServiceName)
+                        .NotEmpty()
+                        .MaximumLength(100)
+                ;
+
+            RuleFor(h => h.SlugName)
+                        .NotEmpty()
+                        .MaximumLength(100)
+                ;
+
+            RuleFor(h => h.Tags)
+                        .MaximumLength(1000)
+                ;
 
             RuleFor(h => h.AutoSlug)
                 ;

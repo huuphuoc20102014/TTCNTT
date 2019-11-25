@@ -395,9 +395,13 @@ namespace ATAdmin.Controllers
     {
         public SettingBaseValidator()
         {
+            RuleFor(h => h.Id)
+                        .NotEmpty()
+                        .MaximumLength(200)
+                ;
+
             RuleFor(h => h.Value)
                         .NotEmpty()
-                        .MaximumLength(10000)
                 ;
 
             RuleFor(h => h.Description)

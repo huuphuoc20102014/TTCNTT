@@ -387,7 +387,17 @@ namespace ATAdmin.Controllers
             RuleFor(h => h.AutoSlug)
                 ;
 
+            RuleFor(h => h.Name)
+                        .NotEmpty()
+                        .MaximumLength(100)
+  ;
+            RuleFor(h => h.Code)
+                        .NotEmpty()
+                        .MaximumLength(50);
 
+            RuleFor(h => h.SlugName)
+                        .NotEmpty()
+                        .MaximumLength(100);
 
             RuleFor(h => h.Tags)
                         .MaximumLength(1000)
@@ -412,16 +422,7 @@ namespace ATAdmin.Controllers
     {
         public EmployeeTypeCreateValidator()
         {
-            RuleFor(h => h.Name)
-                      .NotEmpty()
-                      .MaximumLength(100)
-              ;
-            RuleFor(h => h.Code)
-                     .NotEmpty()
-                     .MaximumLength(50);
-            RuleFor(h => h.SlugName)
-                    .NotEmpty()
-                    .MaximumLength(100);
+
 
         }
     }

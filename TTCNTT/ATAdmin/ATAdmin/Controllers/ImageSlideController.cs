@@ -453,6 +453,7 @@ namespace ATAdmin.Controllers
                 ;
 
             RuleFor(h => h.SortIndex)
+                        .NotEmpty()
                 ;
 
             RuleFor(h => h.IsYoutube)
@@ -463,6 +464,7 @@ namespace ATAdmin.Controllers
                 ;
 
             RuleFor(h => h.Thumbnail)
+                        .NotEmpty()
                         .MaximumLength(500)
                 ;
 

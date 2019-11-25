@@ -468,6 +468,11 @@ namespace ATAdmin.Controllers
     {
         public ProductBaseValidator()
         {
+            RuleFor(h => h.Code)
+                        .NotEmpty()
+                        .MaximumLength(50)
+                ;
+
             RuleFor(h => h.FkProductId)
                         .NotEmpty()
                         .MaximumLength(50)
@@ -487,6 +492,7 @@ namespace ATAdmin.Controllers
                 ;
 
             RuleFor(h => h.ImageSlug)
+                        .NotEmpty()
                         .MaximumLength(100)
                 ;
 

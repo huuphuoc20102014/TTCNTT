@@ -32,6 +32,17 @@
             <span asp-validation-for="UserName" class="text-danger"></span>
         </div>
     </div>
+    <div class="row form-group slugName">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="NormalizedUserName" class="col-form-label"></label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="NormalizedUserName" class="k-textbox form-control slugtitle" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="NormalizedUserName" class="text-danger"></span>
+        </div>
+    </div>
     <div class="row form-group">
         <div class="col-md-3 text-md-right ">
             <label asp-for="Email" class="col-form-label"></label>
@@ -42,6 +53,17 @@
         </div>
         <div class="offset-md-3 col-md-7 at-wrapper-validate">
             <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 text-md-right ">
+            <label asp-for="NormalizedEmail" class="col-form-label"></label>
+        </div>
+        <div class="col-md-7">
+            <input asp-for="NormalizedEmail" class="k-textbox form-control" />
+        </div>
+        <div class="offset-md-3 col-md-7 at-wrapper-validate">
+            <span asp-validation-for="NormalizedEmail" class="text-danger"></span>
         </div>
     </div>
     <div class="row form-group">

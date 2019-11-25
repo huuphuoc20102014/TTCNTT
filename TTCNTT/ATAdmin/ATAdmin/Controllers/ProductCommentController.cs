@@ -432,10 +432,12 @@ namespace ATAdmin.Controllers
                 ;
 
             RuleFor(h => h.Email)
+                        .NotEmpty()
                         .MaximumLength(50)
                 ;
 
             RuleFor(h => h.Phone)
+                        .NotEmpty()
                         .MaximumLength(20)
                 ;
 

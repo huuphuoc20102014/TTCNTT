@@ -96,7 +96,8 @@
             <span class="text-danger">*</span>
         </div>
         <div class="col-6 col-md-5 col-lg-4 col-xl-3">
-            <kendo-numerictextbox for="SortIndex" class="form-control" min="@System.Int32.MinValue" max="@System.Int32.MaxValue" decimals="0" restrict-decimals="true" format="N0" />
+            <input asp-for="SortIndex" class="k-textbox form-control" />
+            @*<kendo-numerictextbox for="SortIndex" class="form-control" min="@System.Int32.MinValue" max="@System.Int32.MaxValue" decimals="0" restrict-decimals="true" format="N0" />*@
         </div>
         <div class="offset-md-3 col-md-7 at-wrapper-validate">
             <span asp-validation-for="SortIndex" class="text-danger"></span>
@@ -213,6 +214,11 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
         $(document).ready(function () {
+
+            if ($('#AutoSlug').prop('checked') == true) { //Kiểm tra Kendo-Switch true hay false
+                $('.slugName').slideToggle();
+            }
+
             $( ".k-switch-container" ).click(function() {
                 $('.slugName').slideToggle(); //SlideUp-SlideDown
                 if ($('.slugtitle').val() == '0') {
