@@ -43,7 +43,15 @@
                     alert('Lỗi');
                 }
                 else {
-                    $(".blog-comment-sec").load(location.href + " .blog-comment-sec>*", "");
+
+                    //Load lại div chỗ hiển thị cmt để hiện cmt
+                    $(".users-list").load(location.href + " .users-list>*", "");
+
+                    //Xóa tất cả dữ liệu trong ô nhập
+                    yourName.val('');
+                    yourEmail.val('');
+                    yourPhone.val('');
+                    yourContent.val('');
 
                 }
             },
