@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    $("#ContactForm").validate({
+    $("#CommentForm").validate({
         rules: {
             Name: {
                 required: true,

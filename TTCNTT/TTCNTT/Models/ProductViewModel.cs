@@ -15,5 +15,10 @@ namespace TTCNTT.Models
         public List<Category> listCategory { get; set; }
         public List<ProductComment> listProductComment { get; set; }
         public SettingHelper setting { get; set; }
+        public string Name { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+        public string Content { get; set; }
+        public string fkProductId { get; set; }
     }
 }

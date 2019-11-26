@@ -21,8 +21,8 @@ namespace TTCNTT.Controllers
         {
             _dbContext = dbContext;
         }
-        
-        public async Task<IActionResult>  Index(int? page)
+
+        public async Task<IActionResult> Index(int? page)
         {
             var pageNumber = page ?? 1;
             var onePageOfProducts = _dbContext.Product.OrderByDescending(h => h.CreatedDate).ToPagedList(pageNumber, 9);
@@ -61,27 +61,28 @@ namespace TTCNTT.Controllers
 
             var pageNumber = page ?? 1;
             var category = await _dbContext.Category.FirstOrDefaultAsync(h => h.Slug_Name == id);
-            var onePageOfProducts = _dbContext.Product.Where(h =>h.FkProductId == category.Id.ToString()).OrderByDescending(h => h.CreatedDate).ToPagedList(pageNumber, 9);
+            var onePageOfProducts = _dbContext.Product.Where(h => h.FkProductId == category.Id.ToString()).OrderByDescending(h => h.CreatedDate).ToPagedList(pageNumber, 9);
 
             ViewBag.OnePageOfProducts = onePageOfProducts;
 
             return View(model);
         }
 
+
         [HttpPost]
         [Route("NewProductComment")]
-        public async Task<IActionResult> NewProductComment(string name, string email, string phone, string content, string fkProductId)
+        public async Task<IActionResult> NewProductComment([FromForm] ProductViewModel vmItem)
         {
             ProductComment comment = new ProductComment();
 
             try
             {
                 comment.Id = Guid.NewGuid().ToString();
-                comment.FkProductId = fkProductId;
-                comment.Name = name;
-                comment.Email = email;
-                comment.Phone = phone;
-                comment.Comment = content;
+                comment.FkProductId = vmItem.fkProductId;
+                comment.Name = vmItem.Name;
+                comment.Email = vmItem.Email;
+                comment.Phone = vmItem.Phone;
+                comment.Comment = vmItem.Content;
                 comment.IsRead = false;
                 comment.CreatedBy = "Customer";
                 comment.CreatedDate = DateTime.Now;

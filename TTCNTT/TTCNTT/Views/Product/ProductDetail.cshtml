@@ -76,22 +76,23 @@
                                     <input id="fk_ProductId" type="hidden" value="@Model.product.Id" />
                                     <h6>Để lại bình luận</h6>
                                     <p>Email và số điện thoại của bạn sẽ được giữ bí mật.</p>
-                                    <form>
+                                    <form id="CommentForm" asp-action="NewProductComment" method="post">
+                                        <input asp-for="fkProductId" type="hidden" value="@Model.product.Id" />
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <input id="Name" type="text" placeholder="Họ tên" class="text-field-box borderd smoke-white ">
+                                                <input asp-for="Name" type="text" placeholder="Họ tên" class="text-field-box borderd smoke-white ">
                                             </div>
                                             <div class="col-md-4">
-                                                <input id="Email" type="text" placeholder="Email" class="text-field-box borderd smoke-white ">
+                                                <input asp-for="Email" type="email" placeholder="Email" class="text-field-box borderd smoke-white ">
                                             </div>
                                             <div class="col-md-4">
-                                                <input id="Phone" type="text" placeholder="Số điện thoại" class="text-field-box borderd smoke-white ">
+                                                <input asp-for="Phone" type="text" placeholder="Số điện thoại" class="text-field-box borderd smoke-white ">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="container">
-                                                <textarea id="Content" class="text-field-box borderd smoke-white" placeholder="Nội dung bình luận"></textarea>
-                                                <button type="submit" id="contact-submit" class="button-medium submit-comment">Gửi bình luận</button>
+                                                <textarea asp-for="Content" class="text-field-box borderd smoke-white" placeholder="Nội dung bình luận"></textarea>
+                                                <button type="submit" class="button-medium submit-comment">Gửi bình luận</button>
                                             </div>
                                         </div>
                                     </form>
@@ -185,10 +186,11 @@ Content Area End -->
 
 @section scripts{
     <script>
-        var _urlNewsComment = '@Url.Action("NewProductComment", "Product")';
+        @*var _urlNewsComment = '@Url.Action("NewProductComment", "Product")';*@
         var _urlProductSearch = '@Url.Action("ProductSearch", "san-pham")';
     </script>
-    <script src="~/js/productcomment.js"></script>
+    @*<script src="~/js/productcomment.js"></script>*@
+    <script src="~/js/Validate/Validate-Comment.js"></script>
     <script src="~/js/ProductSearch.js"></script>
 
 }
