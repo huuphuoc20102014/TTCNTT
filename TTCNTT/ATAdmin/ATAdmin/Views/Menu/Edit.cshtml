@@ -70,7 +70,8 @@
             <label asp-for="AutoSlug" class="col-form-label">SEO tự động</label>
         </div>
         <div class="col-md-7">
-            <kendo-switch for="AutoSlug" checked="@Model?.AutoSlug" />
+            <input type="checkbox" id="AutoSlug" checked="@Model?.AutoSlug" />
+            @*<kendo-switch for="AutoSlug" checked="@Model?.AutoSlug" />*@
         </div>
         <div class="offset-md-3 col-md-7 at-wrapper-validate">
             <span asp-validation-for="AutoSlug" class="text-danger"></span>
@@ -180,14 +181,19 @@
                 $('.slugName').slideToggle();
             }
 
-            $( ".k-switch-container" ).click(function() {
-                $('.slugName').slideToggle(); //SlideUp-SlideDown
-                if ($('.slugtitle').val() == '0') {
-                    $('.slugtitle').val(''); //if input has value = 0 then set it Empty
-                } else {
-                    $( '.slugtitle' ).val('0'); //set value = 0 unless it is Empty
+            $("#AutoSlug").kendoSwitch({
+                change: function () {
+                    if ($('#AutoSlug').prop('checked') == true) {
+                        $('.slugName').slideToggle();
+                        $('.slugtitle').val('0');
+                    }
+                    else {
+                        $('.slugName').slideToggle();
+                        $('.slugtitle').val('');
+                    }
                 }
             });
+
             $("#divChooseImage_ImageSlug").kendoImageBrowser({
                 transport: {
                     type: "imagebrowser-aspnetmvc",

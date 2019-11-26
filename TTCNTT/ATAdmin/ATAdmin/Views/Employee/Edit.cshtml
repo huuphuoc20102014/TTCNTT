@@ -238,14 +238,7 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
         $(document).ready(function () {
-            $( ".k-switch-container" ).click(function() {
-                $('.slugName').slideToggle(); //SlideUp-SlideDown
-                if ($('.slugtitle').val() == '0') {
-                    $('.slugtitle').val(''); //if input has value = 0 then set it Empty
-                } else {
-                    $( '.slugtitle' ).val('0'); //set value = 0 unless it is Empty
-                }
-            });
+
             $("#divChooseImage_ImageSlug").kendoImageBrowser({
                 transport: {
                     type: "imagebrowser-aspnetmvc",
