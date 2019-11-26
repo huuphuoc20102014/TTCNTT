@@ -13,7 +13,7 @@
                 required: true,
                 maxlength: 20
             },
-            Body: {
+            Content: {
                 required: true,
             },
         },
@@ -30,7 +30,7 @@
                 required: 'Vui lòng nhập số điện thoại!',
                 maxlength: 'Nội dung quá dài!'
             },
-            Body: {
+            Content: {
                 required: 'Vui lòng nhập nội dung!',
             },
         }
