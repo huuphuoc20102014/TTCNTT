@@ -1,4 +1,6 @@
 ﻿label.error {
     display: inline-block;
     color: red;
+    font-size: large;
+    margin-bottom: 20px;
 }

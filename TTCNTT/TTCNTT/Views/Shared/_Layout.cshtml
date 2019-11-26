@@ -16,7 +16,7 @@
     <link type="text/css" rel="stylesheet" href="~/template/css/animate.min.css"><!-- Animation -->
     <link type="text/css" rel="stylesheet" href="~/template/css/flexslider.css"><!-- FlexSlider CSS -->
     <link type="text/css" rel="stylesheet" href="~/template/css/style.css"><!-- Light Theme Core CSS -->
-    <link href="~/css/Validate.css" rel="stylesheet" /><!--Validate-->
+
     <link href="~/template/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <!-- font-awesome -->
     <link href="~/template/fontawesome-free-5.11.2-web/css/fontawesome.min.css" rel="stylesheet" />
@@ -26,11 +26,13 @@
     <link href="~/template/fontawesome-free-5.11.2-web/css/solid.min.css" rel="stylesheet" />
     <link href="~/template/fontawesome-free-5.11.2-web/css/svg-with-js.min.css" rel="stylesheet" />
     <link href="~/template/fontawesome-free-5.11.2-web/css/v4-shims.min.css" rel="stylesheet" />
+    <link href="~/css/Validate.css" rel="stylesheet" /><!--Validate-->
+    @RenderSection("Css", false)
 
     <!-- Google Fonts here -->
     @*<link href="~/template/css/fonts/poppins.css" rel='stylesheet' type='text/css'>
-    <link href="~/template/css/fonts/open-sans.css" type='text/css'>
-    <link href="~/template/css/fonts/lato.css" rel='stylesheet' type='text/css'>*@
+        <link href="~/template/css/fonts/open-sans.css" type='text/css'>
+        <link href="~/template/css/fonts/lato.css" rel='stylesheet' type='text/css'>*@
 </head>
 <body>
 
@@ -54,14 +56,6 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
-
-
-
-
-
-
-
-
     <!-- lbr JS -->
     <script type="text/javascript" src="~/template/js/jquery.js"></script>
     <script type="text/javascript" src="~/template/js/jquery.particleground.js"></script><!-- Particle Header Js -->
@@ -81,14 +75,11 @@
     </script>
     <script src="~/js/CustomerRegister.js"></script>
 
-
     <!-- Validate -->
-    @*<script src="~/js/Validate/jquery.validate.min.js"></script>
-        <script src="~/js/Validate/additional-methods.min.js"></script>*@
-
-    <!-- Validate -->
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+    <script src="~/js/Validate/additional-methods.min.js"></script>
+    <script src="~/js/Validate/jquery.validate.min.js"></script>
+    @*<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>*@
 
     @RenderSection("Scripts", required: false)
 </body>

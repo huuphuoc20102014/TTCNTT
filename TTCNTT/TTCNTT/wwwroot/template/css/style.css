@@ -1709,6 +1709,18 @@ a.down-app-btn:hover, .down-app-btn:hover {
 	max-width: 100%;
 }
 /*----------------------------  Text Feild Box    --------------------------------------------------------*/
+.tt-text-field-box {
+    float: left;
+    /*margin-bottom: 30px !important;*/
+    height: 54px;
+    padding: 0 30px;
+    line-height: 54px;
+    background: #eee;
+    border: 1px solid rgba(0,0,0,0);
+    border-radius: 30px;
+    font-size: 16px;
+    width: 100%;
+}
 
 .text-field-box {
 	background: #fff;
@@ -3448,9 +3460,10 @@ a.ovelay-icon:hover {
 	text-align: center;
 }
 .contact-form-sec textarea {
-	min-height: 180px;
-	line-height: 2;
-	padding: 30px;
+    min-height: 180px;
+    line-height: 2;
+    padding: 30px;
+    margin-bottom: 10px;
 }
 .contact-form-sec .text-field-box {
 	margin-bottom: 30px !important;
@@ -3545,6 +3558,7 @@ form input[type="file"] {
 }
 input[type="text"] {
 	float: left;
+    margin-bottom: 10px;
 }
 label i {
 	margin-right: 10px;

@@ -1064,6 +1064,10 @@ namespace TTCNTT.Efs.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.ImageSlug)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.KeyWord).HasMaxLength(1000);
 
                 entity.Property(e => e.MetaData).HasMaxLength(1000);

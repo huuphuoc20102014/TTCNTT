@@ -34,17 +34,17 @@ namespace TTCNTT.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> NewContact(string name, string email, string phone, string content)
+        public async Task<IActionResult> NewContact([FromForm] ContactViewModel vmItem)
         {
             Contact contact = new Contact();
 
             try
             {
                 contact.Id = Guid.NewGuid().ToString();
-                contact.Name = name;
-                contact.Email = email;
-                contact.Phone = phone;
-                contact.Body = content;
+                contact.Name = vmItem.Name;
+                contact.Email = vmItem.Email;
+                contact.Phone = vmItem.Phone;
+                contact.Body = vmItem.Body;
                 contact.IsRead = false;
                 contact.CreatedBy = "Customer";
                 contact.CreatedDate = DateTime.Now;

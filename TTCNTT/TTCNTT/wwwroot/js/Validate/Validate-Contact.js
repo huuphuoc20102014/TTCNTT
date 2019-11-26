@@ -1,36 +1,36 @@
 ﻿$(document).ready(function () {
-    $("#myform").validate({
+    $("#ContactForm").validate({
         rules: {
-            hoten: {
+            Name: {
                 required: true,
                 maxlength: 50
             },
-            mail: {
+            Email: {
                 required: true,
                 maxlength: 50
             },
-            sdt: {
+            Phone: {
                 required: true,
                 maxlength: 20
             },
-            noidung: {
+            Body: {
                 required: true,
             },
         },
         messages: {
-            hoten: {
+            Name: {
                 required: "Vui lòng nhâp tên!",
                 maxlength: "Nội dung quá dài!"
             },
-            mail: {
+            Email: {
                 required: 'Vui lòng nhập email!',
                 maxlength: 'Nội dung quá dài!'
             },
-            sdt: {
+            Phone: {
                 required: 'Vui lòng nhập số điện thoại!',
                 maxlength: 'Nội dung quá dài!'
             },
-            noidung: {
+            Body: {
                 required: 'Vui lòng nhập nội dung!',
                 maxlength: 'Nội dung quá dài!'
             },

@@ -10,5 +10,10 @@ namespace TTCNTT.Models
     public class ContactViewModel
     {
         public SettingHelper setting { get; set; }
+
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public string Body { get; set; }
     }
 }

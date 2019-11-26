@@ -15,6 +15,7 @@ namespace TTCNTT.Efs.Entities
         public int SortIndex { get; set; }
         public bool IsYoutube { get; set; }
         public string YoutubeLink { get; set; }
+        public string ImageSlug { get; set; }
         public string Thumbnail { get; set; }
         public string Tags { get; set; }
         public string KeyWord { get; set; }

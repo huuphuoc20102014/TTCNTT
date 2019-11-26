@@ -77,7 +77,8 @@
             <label asp-for="AutoSlug" class="col-form-label">SEO tự động</label>
         </div>
         <div class="col-md-7">
-            <kendo-switch for="AutoSlug" checked="@Model?.AutoSlug" />
+            <input type="checkbox" id="AutoSlug" checked="@Model?.AutoSlug" />
+            @*<kendo-switch for="AutoSlug" checked="@Model?.AutoSlug" />*@
         </div>
         <div class="offset-md-3 col-md-7 at-wrapper-validate">
             <span asp-validation-for="AutoSlug" class="text-danger"></span>
@@ -128,19 +129,20 @@
             <label asp-for="IsYoutube" class="col-form-label">Youtube</label>
         </div>
         <div class="col-md-7">
-            <kendo-switch for="IsYoutube" checked="@Model?.IsYoutube" />
+            <input type="checkbox" id="IsYoutube" checked="@Model?.IsYoutube" />
+            @*<kendo-switch for="IsYoutube" checked="@Model?.IsYoutube" />*@
         </div>
         <div class="offset-md-3 col-md-7 at-wrapper-validate">
             <span asp-validation-for="IsYoutube" class="text-danger"></span>
         </div>
     </div>
 
-    <div class="row form-group">
+    <div class="row form-group youtubelink">
         <div class="col-md-3 text-md-right ">
             <label asp-for="YoutubeLink" class="col-form-label">Link Youtube</label>
         </div>
         <div class="col-md-7">
-            <input asp-for="YoutubeLink" class="k-textbox form-control" />
+            <input asp-for="YoutubeLink" class="k-textbox form-control linkyoutube" />
         </div>
         <div class="offset-md-3 col-md-7 at-wrapper-validate">
             <span asp-validation-for="YoutubeLink" class="text-danger"></span>
@@ -219,30 +221,33 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
         $(document).ready(function () {
-            //$(".k-switch-container").click(function () {
-            //    if ($('#AutoSlug').prop('checked') == false) {
 
-            //        $('.slugName').slideToggle();
-            //        $('.slugtitle').val('0');
-            //    }
-            //    else {
-            //        $('.slugName').slideToggle();
-            //        $('.slugtitle').val('');
-            //    }
+            $('.youtubelink').slideToggle();
+            $("#AutoSlug").kendoSwitch({
+                change: function () {
+                    if ($('#AutoSlug').prop('checked') == true) {
+                        $('.slugName').slideToggle();
+                        $('.slugtitle').val('0');
+                    }
+                    else {
+                        $('.slugName').slideToggle();
+                        $('.slugtitle').val('');
+                    }
+                }
+            });
 
-            //});
-
-            $(".k-switch-container").click(function () {
-            if ($("input[name='AutoSlug']:checked")) {
-                alert("AutoSlug");
-            }
-            else if ("input[name='IsYoutube']:checked") {
-                alert("IsYoutube");
-            }
-});
-
-
-
+            $("#IsYoutube").kendoSwitch({
+                change: function () {
+                    if ($('#IsYoutube').prop('checked') == true) {
+                        $('.youtubelink').slideToggle();
+                        
+                    }
+                    else {
+                        $('.youtubelink').slideToggle();
+                        $('.linkyoutube').val('');
+                    }
+                }
+            });
 
             $("#divChooseImage_Thumbnail").kendoImageBrowser({
                 transport: {

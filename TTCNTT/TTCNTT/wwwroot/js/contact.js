@@ -38,10 +38,17 @@
             success: function (data) {
                 if (data.errorMessage) {
                     console.log(data.errorMessage);
-                    alert('Lỗi');
+
+                    $(".col-md-12").append($('<div id="contact-failed"> Lỗi...!, gửi thất bại, mời bạn thử lại sau.</div>'));
                 }
                 else {
-                    $(".content-area").load(location.href + " .content-area>*", "");
+                    //$(".content-area").load(location.href + " .content-area>*", "");
+                    yourName.val('');
+                    yourEmail.val('');
+                    yourTelephone.val('');
+                    yourMessage.val('');
+
+                    $(".col-md-12").append($('<div id="contact-success">Gửi thành công!</div>'));
                 }
             },
         });
