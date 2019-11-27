@@ -16,6 +16,8 @@ using TTCNTT.Efs.Context;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace TTCNTT
 {
@@ -76,7 +78,14 @@ namespace TTCNTT
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                //Key -> StaticFileSetting || Value -> "D:\\ATImage"
+                //Configuration.GetSection("StaticFileSetting").Value -> "E:\\ATImage"
+                Path.Combine(Configuration.GetSection("StaticFileSetting").Value)),
+                RequestPath = "/Image"
+            });
             app.UseRouting();
 
             app.UseAuthentication();
