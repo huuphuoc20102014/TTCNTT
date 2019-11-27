@@ -8,10 +8,20 @@
 }
 
 
-@{
-    var bannerModel = await TTCNTT.Helpers.SettingValueHelper.GetValueSetting(context);
-    <partial name="_BannerPartial" model="bannerModel" />
-}
+<section class="banner-sec">
+    <div class="main-banner inner" style=" background:url(/Image/@Model.setting.IMAGESLIDE) no-repeat top center fixed;">
+        <a href="#" name="scroll-top-div"></a>
+        <div class="overlay-mask">
+            <!-- Start:Slider area -->
+            <div class="container">
+                <h1>@Model.setting.PRODUCT</h1>
+                <h6>@Model.setting.PRODUCT_SLOGAN</h6>
+                <hr>
+            </div>
+            <!-- End:Slider area -->
+        </div>
+    </div>
+</section>
 
 <section class="blog-outer-area">
     <div class="content-area">
@@ -37,7 +47,7 @@
                                 <div class="col-md-4 ">
                                     <div class="item-box">
                                         <a href="~/san-pham/chi-tiet/@item.Slug_Name" class=" img-holder">
-                                            <img src="~/Images/Product/@item.ImageSlug" alt="">
+                                            <img src="~/Image/@item.ImageSlug" alt="">
                                             <div class="mask"></div>
                                         </a>
                                         <div class="info-text-holder">
