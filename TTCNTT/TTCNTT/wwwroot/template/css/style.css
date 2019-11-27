@@ -1750,7 +1750,7 @@ a.down-app-btn:hover, .down-app-btn:hover {
 	background: #eee;
 }
 .text-field-box.error {
-	border: 1px solid #faac3a !important;
+	border: 1px solid red !important;
 }
 .medium-height {
 	height: 40px !important;
