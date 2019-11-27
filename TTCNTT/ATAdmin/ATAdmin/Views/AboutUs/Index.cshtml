@@ -55,12 +55,13 @@
 
 
         );		
-            columns.Bound(c => c.ImageSlug).Title("Hình ảnh").Width(100).Locked(true).Filterable(false).Sortable(false).ClientTemplate(
+            columns.Bound(c => c.ImageSlug).Title("Hình ảnh").Width(80).Locked(true).Filterable(false).Sortable(false).ClientTemplate(
 
-                    "<img width=\"70\" src='" + "/Image" + "/#= ImageSlug #'" +
+                    "<img height=\"50\" src='" + "/Image" + "/#= ImageSlug #'" +
                     "/>"
             );
 			columns.Bound(c => c.Title).Title("Tiêu đề").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
+			columns.Bound(c => c.SlugTitle).Title("SEO").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.ShortDescriptionHtml).Title("Mô tả ngắn").Width(200).HtmlAttributes(new { @class = "text-nowrap" });
 			columns.Bound(c => c.LongDescriptionHtml).Title("Mô tả đầy đủ").Width(200).HtmlAttributes(new { @class = "text-nowrap" });			
 			columns.Bound(c => c.CreatedDate).Title(BaseEntityLocalizer[nameof(BaseEntityResources.CreatedDate)]).Width(180).Format(SharedLocalizer["Format_DateTime"]).HtmlAttributes(new { @class = "text-nowrap" });

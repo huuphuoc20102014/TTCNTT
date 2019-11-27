@@ -67,7 +67,8 @@
             <label asp-for="AutoSlug" class="col-form-label">SEO tự động</label>
         </div>
         <div class="col-md-7">
-            <kendo-switch for="AutoSlug" checked="@Model?.AutoSlug" />
+            <input asp-for="AutoSlug" type="checkbox" checked="@Model?.AutoSlug" />
+            @*<kendo-switch for="AutoSlug" checked="@Model?.AutoSlug" />*@
         </div>
         <div class="offset-md-3 col-md-7 at-wrapper-validate">
             <span asp-validation-for="AutoSlug" class="text-danger"></span>
@@ -280,7 +281,7 @@
                     type: "imagebrowser-aspnetmvc",
                     read: "@Url.Action("Read", (string)ViewData["ControllerNameForImageBrowser"])",
                     destroy: "@Url.Action("Destroy", (string)ViewData["ControllerNameForImageBrowser"])",
-                    imageUrl: "@Url.Content( ImageBrowserNewController.FOLDER_NAME + "/{0}")",
+                    imageUrl: "@Url.Content( ImageBrowserCourseController.FOLDER_NAME + "/{0}")",
                     uploadUrl: "@Url.Action("Upload", (string)ViewData["ControllerNameForImageBrowser"])"
                 },
                 apply: function () {

@@ -108,7 +108,7 @@ namespace ATAdmin.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserNewController).Replace("Controller", "");
+                ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserCourseController).Replace("Controller", "");
                 // Get list master of foreign property and set to view data
                 await PrepareListMasterForeignKey();
 
@@ -127,7 +127,7 @@ namespace ATAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([FromForm] CourseCreateViewModel vmItem)
         {
-            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserNewController).Replace("Controller", "");
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserCourseController).Replace("Controller", "");
 
             // Invalid model
             if (!ModelState.IsValid)
@@ -142,10 +142,6 @@ namespace ATAdmin.Controllers
             var tableVersion = await _context.TableVersion.FirstOrDefaultAsync(h => h.Id == tableName);
 
             // Trim white space
-            vmItem.Name = $"{vmItem.Name}".Trim();
-
-            //auto slug
-            vmItem.SlugName = $"{vmItem.SlugName}".Trim();
             if (vmItem.AutoSlug)
             {
                 vmItem.SlugName = NormalizeSlug($"{vmItem.Name}");
@@ -199,7 +195,7 @@ namespace ATAdmin.Controllers
         // GET: Course/Edit/5
         public async Task<IActionResult> Edit([FromRoute] string id)
         {
-            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserNewController).Replace("Controller", "");
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserCourseController).Replace("Controller", "");
 
             if (id == null)
             {
@@ -244,7 +240,7 @@ namespace ATAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([FromForm] CourseEditViewModel vmItem)
         {
-            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserNewController).Replace("Controller", "");
+            ViewData["ControllerNameForImageBrowser"] = nameof(ImageBrowserCourseController).Replace("Controller", "");
 
             // Invalid model
             if (!ModelState.IsValid)
@@ -268,8 +264,6 @@ namespace ATAdmin.Controllers
             }
 
             // Trim white space
-            // Trim white space
-            vmItem.SlugName = $"{vmItem.SlugName}".Trim();
             if (vmItem.AutoSlug)
             {
                 vmItem.SlugName = NormalizeSlug($"{vmItem.Name}");
