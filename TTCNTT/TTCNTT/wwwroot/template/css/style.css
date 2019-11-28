@@ -2920,13 +2920,30 @@ a.ovelay-icon:hover {
     float: left;
     height: auto;
     width: 100%;
-    margin-bottom: 20px;
+    margin: 5px 0 2px;
     padding: 12px 20px;
     background: #f8f8f8 !important;
     border: 1px solid #ccc;
     border-radius: 30px;
 }
-
+.users-list li .user-reply {
+    display: inline-block;
+    float: right;
+    height: auto;
+    width: 85%;
+    margin-bottom: 2px;
+    padding: 8px 20px;
+    background: #f8f8f8 !important;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+}
+.users-list li .user-reply h6 {
+    font-weight: bold;
+    margin: 0 0 3px 0;
+}
+.users-list li .user-reply p {
+    margin: 3px 0 5px;
+}
 .users-list li .user-pic {
     display: inline-block;
     float: left;

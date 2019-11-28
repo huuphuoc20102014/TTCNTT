@@ -57,52 +57,67 @@
                                 <h4>Bình Luận</h4>
                                 <ul class="users-list">
                                     <li>
-                                        <!-- hình ảnh -->
-                                        @*<div class="user-pic">
-                                                <img src="~/template/img/testimonial-2.jpg" alt="">
-                                            </div>*@
-                                        @if (Model.listProductComment.Count() != 0)
+                                        @if (Model.listProductComment.Count() > 0)
                                         {
-                                            @foreach (var item in Model.listProductComment)
+                                            @foreach (var item in Model.listProductComment.Where(h => h.FkProductCommentId == null).OrderBy(h => h.CreatedDate))
                                             {
                                                 <div class="user-comment">
                                                     <h6>@item.Name</h6>
                                                     <i>@item.CreatedDate</i>
                                                     <p>@item.Comment.</p>
-                                                    <span><a href="#"> Trả lời</a></span>
+                                                    <input class="commentID" type="hidden" />
+                                                    <input class="btn-Reply" type="submit" value="Trả lời" data-comment-id="@item.Id" />
+
                                                 </div>
+                                                @foreach (var subitem in item.InverseFkProductComment)
+                                                {
+                                                    <div class="user-reply">
+                                                        <h6>@subitem.Name</h6><i>@subitem.CreatedDate</i>
+                                                        <p>@subitem.Comment.</p>
+                                                    </div>
+                                                }
+
                                             }
                                         }
                                         else
                                         {
-                                            <p style="text-align:center; font-size:18px;">(Hãy là người bình luận đầu tiên)</p>
+                                            <p style="text-align: center; font-size: 18px;">(Hãy là người bình luận đầu tiên)</p>
                                         }
 
+
+
                                     </li>
+
+                                    @*@{
+                                            var model = await TTCNTT.Helpers.CommentHelper.GetProductComment(context);
+                                            <partial name="_CommentPartial" model="model" />
+                                        }*@
                                 </ul>
 
                                 <!-- Start:Leave Repaly -->
                                 <div class="Reply-sec">
                                     <input id="fk_ProductId" type="hidden" value="@Model.product.Id" />
-                                    <h6>Để lại bình luận</h6>
+                                    <input id="comment-id" type="hidden" />
+                                    <h6 class="leave-comment">Để lại bình luận</h6>
                                     <p>Email và số điện thoại của bạn sẽ được giữ bí mật.</p>
-                                    <form id="CommentForm" asp-action="NewProductComment" method="post">
-                                        <input asp-for="fkProductId" type="hidden" value="@Model.product.Id" />
+                                    <form id="CommentForm" method="post">
+                                        @*<input asp-for="fkProductId" type="hidden" value="@Model.product.Id" />*@
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <input asp-for="Name" type="text" placeholder="Họ tên" class="text-field-box borderd smoke-white ">
+                                                <input id="name" type="text" placeholder="Họ tên" class="text-field-box borderd smoke-white ">
                                             </div>
                                             <div class="col-md-4">
-                                                <input asp-for="Email" type="email" placeholder="Email" class="text-field-box borderd smoke-white ">
+                                                <input id="email" type="email" placeholder="Email" class="text-field-box borderd smoke-white ">
                                             </div>
                                             <div class="col-md-4">
-                                                <input asp-for="Phone" type="text" placeholder="Số điện thoại" class="text-field-box borderd smoke-white ">
+                                                <input id="phone" type="text" placeholder="Số điện thoại" class="text-field-box borderd smoke-white ">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="container">
-                                                <textarea asp-for="Content" class="text-field-box borderd smoke-white" placeholder="Nội dung bình luận"></textarea>
-                                                <button type="submit" class="button-medium submit-comment">Gửi bình luận</button>
+                                                <textarea id="content" class="text-field-box borderd smoke-white" placeholder="Nội dung bình luận"></textarea>
+                                                <input type="button" class="button-medium submit-comment" value="Gửi bình luận" />
+                                                @*<button class="button-medium submit-comment">Gửi bình luận</button>*@
                                             </div>
                                         </div>
                                     </form>
@@ -196,11 +211,29 @@ Content Area End -->
 
 @section scripts{
     <script>
-        @*var _urlNewsComment = '@Url.Action("NewProductComment", "Product")';*@
+        var _urlComment = '@Url.Action("NewProductComment", "Product")';
         var _urlProductSearch = '@Url.Action("ProductSearch", "san-pham")';
     </script>
-    @*<script src="~/js/productcomment.js"></script>*@
-    <script src="~/js/Validate/Validate-Comment.js"></script>
+
+    <script src="~/js/productcomment.js"></script>
     <script src="~/js/ProductSearch.js"></script>
+    <script>
+        $(".btn-Reply").click(function () {
+
+            var $clickedButton = $(this);
+            var commentId = $clickedButton.data('comment-id');
+            $('#comment-id').val(commentId);
+
+            $('html, body').animate({
+                scrollTop: parseInt($(".Reply-sec").offset().top)
+            }, 2000);
+
+            $("h6.leave-comment").replaceWith('<h6 class="leave-comment">Trả lời bình luận</h6>');
+
+        });
+
+
+
+    </script>
 
 }

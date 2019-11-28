@@ -71,18 +71,19 @@ namespace TTCNTT.Controllers
 
         [HttpPost]
         [Route("NewProductComment")]
-        public async Task<IActionResult> NewProductComment([FromForm] ProductViewModel vmItem)
+        public async Task<IActionResult> NewProductComment(string fkProductId, string name, string email, string phone, string content, string fkProductCommentId)
         {
             ProductComment comment = new ProductComment();
 
             try
             {
                 comment.Id = Guid.NewGuid().ToString();
-                comment.FkProductId = vmItem.fkProductId;
-                comment.Name = vmItem.Name;
-                comment.Email = vmItem.Email;
-                comment.Phone = vmItem.Phone;
-                comment.Comment = vmItem.Content;
+                comment.FkProductId = fkProductId;
+                comment.Name = name;
+                comment.Email = email;
+                comment.Phone = phone;
+                comment.Comment = content;
+                comment.FkProductCommentId = fkProductCommentId;
                 comment.IsRead = false;
                 comment.CreatedBy = "Customer";
                 comment.CreatedDate = DateTime.Now;

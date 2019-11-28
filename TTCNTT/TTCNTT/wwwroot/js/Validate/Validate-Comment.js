@@ -1,36 +1,36 @@
 ﻿$(document).ready(function () {
     $("#CommentForm").validate({
         rules: {
-            Name: {
+            name: {
                 required: true,
                 maxlength: 50
             },
-            Email: {
+            email: {
                 required: true,
                 maxlength: 50
             },
-            Phone: {
+            phone: {
                 required: true,
                 maxlength: 20
             },
-            Content: {
+            content: {
                 required: true,
             },
         },
         messages: {
-            Name: {
+            name: {
                 required: "Vui lòng nhâp tên!",
                 maxlength: "Nội dung quá dài!"
             },
-            Email: {
+            email: {
                 required: 'Vui lòng nhập email!',
                 maxlength: 'Nội dung quá dài!'
             },
-            Phone: {
+            phone: {
                 required: 'Vui lòng nhập số điện thoại!',
                 maxlength: 'Nội dung quá dài!'
             },
-            Content: {
+            content: {
                 required: 'Vui lòng nhập nội dung!',
             },
         }
