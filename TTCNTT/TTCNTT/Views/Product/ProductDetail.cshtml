@@ -84,14 +84,7 @@
                                             <p style="text-align: center; font-size: 18px;">(Hãy là người bình luận đầu tiên)</p>
                                         }
 
-
-
                                     </li>
-
-                                    @*@{
-                                            var model = await TTCNTT.Helpers.CommentHelper.GetProductComment(context);
-                                            <partial name="_CommentPartial" model="model" />
-                                        }*@
                                 </ul>
 
                                 <!-- Start:Leave Repaly -->
@@ -101,7 +94,6 @@
                                     <h6 class="leave-comment">Để lại bình luận</h6>
                                     <p>Email và số điện thoại của bạn sẽ được giữ bí mật.</p>
                                     <form id="CommentForm" method="post">
-                                        @*<input asp-for="fkProductId" type="hidden" value="@Model.product.Id" />*@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <input id="name" type="text" placeholder="Họ tên" class="text-field-box borderd smoke-white ">
@@ -117,7 +109,6 @@
                                             <div class="container">
                                                 <textarea id="content" class="text-field-box borderd smoke-white" placeholder="Nội dung bình luận"></textarea>
                                                 <input type="button" class="button-medium submit-comment" value="Gửi bình luận" />
-                                                @*<button class="button-medium submit-comment">Gửi bình luận</button>*@
                                             </div>
                                         </div>
                                     </form>
@@ -219,17 +210,18 @@ Content Area End -->
     <script src="~/js/ProductSearch.js"></script>
     <script>
         $(".btn-Reply").click(function () {
-
+            //Lấy id của comment
             var $clickedButton = $(this);
             var commentId = $clickedButton.data('comment-id');
             $('#comment-id').val(commentId);
-
+            //Hiệu ứng cuộn
             $('html, body').animate({
                 scrollTop: parseInt($(".Reply-sec").offset().top)
             }, 2000);
-
-            $("h6.leave-comment").replaceWith('<h6 class="leave-comment">Trả lời bình luận</h6>');
-
+            //Thế chỗ
+            $("h6.leave-comment").replaceWith('<h6 class="leave-comment" style="color:#116184;">Trả lời bình luận</h6>');
+            $(".submit-comment").val("Gửi trả lời").css("background-color", "#116184");
+            $(".submit-comment").css("background-color", "#116184")
         });
 
 
