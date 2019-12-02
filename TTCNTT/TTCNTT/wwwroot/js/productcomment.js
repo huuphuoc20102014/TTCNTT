@@ -28,35 +28,31 @@
                     alert('Lỗi');
                 }
                 else {
-                    //Load lại chỗ danh sách comment
+                    //Refresh Comment
                     $(".users-list").load(" .users-list > *");
-                    
 
-
-                    //Xóa tất cả dữ liệu trong ô nhập
+                    //Empty input
                     yourName.val('');
                     yourEmail.val('');
                     yourPhone.val('');
                     yourContent.val('');
 
-                    //Đăng ký lại nút Trả lời-Reply 
+                    //Re-register event
                     $(document).on('click', '.btn-Reply', function () {
 
-                        //Lấy id của comment
+                        //Get id of comment
                         var $clickedButton = $(this);
                         var commentId = $clickedButton.data('comment-id');
                         $('#comment-id').val(commentId);
 
-                        //Hiệu ứng cuộn
+                        //Reply
                         var arrayId = $(".users-list .Reply-section");
                         for (var i = 0; i < arrayId.length; i++) {
                             if ($(arrayId[i]).attr('id') == commentId) {
                                 $("#" + $(arrayId[i]).attr('id')).slideToggle();
                             }
                         }
-                        //$('html, body').animate({
-                        //    scrollTop: parseInt($(".Reply-sec").offset().top)
-                        //}, 2000);
+
                     }); 
 
                 }
@@ -94,33 +90,31 @@
                     alert('Lỗi');
                 }
                 else {
-                    //Load lại chỗ danh sách comment
+                    //Refresh div comment
                     $(".users-list").load(" .users-list > *");
 
-                    //Xóa tất cả dữ liệu trong ô nhập
+                    //Empty input
                     myName.val('');
                     myEmail.val('');
                     myPhone.val('');
                     myContent.val('');
 
-                    //Đăng ký lại nút Trả lời-Reply 
+                    //Re-register event
                     $(document).on('click', '.btn-Reply', function () {
 
-                        //Lấy id của comment
+                        //Get id of comment
                         var $clickedButton = $(this);
                         var commentId = $clickedButton.data('comment-id');
                         $('#comment-id').val(commentId);
 
-                        //Hiệu ứng cuộn
+                        //Reply
                         var arrayId = $(".users-list .Reply-section");
                         for (var i = 0; i < arrayId.length; i++) {
                             if ($(arrayId[i]).attr('id') == commentId) {
-                                $("#" + $(arrayId[i]).attr('id')).slideToggle();
+                                $("#" + $(arrayId[i]).attr('id')).show(300);
                             }
                         }
-                        //$('html, body').animate({
-                        //    scrollTop: parseInt($(".Reply-sec").offset().top)
-                        //}, 2000);
+
                     }); 
 
                 }

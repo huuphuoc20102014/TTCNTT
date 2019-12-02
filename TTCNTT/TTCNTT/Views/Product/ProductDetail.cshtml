@@ -233,32 +233,27 @@ Content Area End -->
     <script src="~/js/ProductSearch.js"></script>
     <script>
         $(document).ready(function () {
-            $('.Reply-section').slideToggle();
 
             $(".btn-Reply").click(function () {
-                //Lấy id của comment
+                //Get id of comment
                 var $clickedButton = $(this);
                 var commentId = $clickedButton.data('comment-id');
                 $('#comment-id').val(commentId);
-                //Hiệu ứng cuộn
 
+                //Reply
                 var arrayId = $(".users-list .Reply-section");
                 for (var i = 0; i < arrayId.length; i++) {
                     if ($(arrayId[i]).attr('id') == commentId) {
-                        $("#" +$(arrayId[i]).attr('id')).slideToggle();
+                        var IdOfComment = $(arrayId[i]).attr('id');
+                        if ($('#' + IdOfComment).is(":visible")) {
+                            $('#' + IdOfComment).hide();
+                        }
+                        else {
+                            $('#' + IdOfComment).show(300);
+                        }
+
                     }
                 }
-
-
-                //$('.Reply-section').slideToggle();
-                //$('html, body').animate({
-                //    scrollTop: parseInt($(".Reply-sec").offset().top)
-                //}, 2000);
-                //Thế chỗ
-                //var commentName = $clickedButton.data('comment-name');
-                //$("h6.leave-comment").replaceWith('<h6 class="leave-comment" style="color:#116184;">Trả lời ' + commentName + '</h6>');
-                //$(".submit-comment").val("Gửi trả lời");
-                //$(".submit-comment").css("background-color", "#116184")
             });
         });
 
