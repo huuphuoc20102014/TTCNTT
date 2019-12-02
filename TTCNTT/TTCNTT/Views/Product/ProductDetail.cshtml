@@ -62,17 +62,40 @@
                                             @foreach (var item in Model.listProductComment.Where(h => h.FkProductCommentId == null).OrderBy(h => h.CreatedDate))
                                             {
                                                 <div class="user-comment">
-                                                    <h6>@item.Name</h6>
-                                                    <i>@item.CreatedDate</i>
+                                                    <span>@item.Name </span>  • <i>@item.CreatedDate.ToShortDateString()</i>
                                                     <p>@item.Comment.</p>
                                                     <input class="commentID" type="hidden" />
-                                                    <input class="btn-Reply" type="submit" value="Trả lời" data-comment-id="@item.Id" />
+                                                    <input class="btn-Reply" type="submit" value="Trả lời" data-comment-id="@item.Id" data-comment-name="@item.Name" />
 
+                                                </div>
+                                                <div id="@item.Id" class="Reply-section " >
+                                                    <input id="fkProductId" type="hidden" value="@Model.product.Id" />
+                                                    <input id="comment-id" type="hidden" />
+                                                    <form method="post">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <input type="text" placeholder="Họ tên" class="text-field-box borderd smoke-white MyName">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <input type="email" placeholder="Email" class="text-field-box borderd smoke-white MyEmail">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <input type="text" placeholder="Số điện thoại" class="text-field-box borderd smoke-white MyPhone">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="container">
+                                                                <textarea class="text-field-box borderd smoke-white MyContent" placeholder="Nội dung bình luận"></textarea>
+                                                                <input type="button" class="button-comment" value="Gửi trả lời" />
+                                                            </div>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                                 @foreach (var subitem in item.InverseFkProductComment)
                                                 {
+
                                                     <div class="user-reply">
-                                                        <h6>@subitem.Name</h6><i>@subitem.CreatedDate</i>
+                                                        <span>@subitem.Name </span>  • <i>@subitem.CreatedDate.ToShortDateString()</i>
                                                         <p>@subitem.Comment.</p>
                                                     </div>
                                                 }
@@ -90,7 +113,7 @@
                                 <!-- Start:Leave Repaly -->
                                 <div class="Reply-sec">
                                     <input id="fk_ProductId" type="hidden" value="@Model.product.Id" />
-                                    <input id="comment-id" type="hidden" />
+                                    @*<input id="comment-id" type="hidden" />*@
                                     <h6 class="leave-comment">Để lại bình luận</h6>
                                     <p>Email và số điện thoại của bạn sẽ được giữ bí mật.</p>
                                     <form id="CommentForm" method="post">
@@ -209,21 +232,35 @@ Content Area End -->
     <script src="~/js/productcomment.js"></script>
     <script src="~/js/ProductSearch.js"></script>
     <script>
-        $(".btn-Reply").click(function () {
-            //Lấy id của comment
-            var $clickedButton = $(this);
-            var commentId = $clickedButton.data('comment-id');
-            $('#comment-id').val(commentId);
-            //Hiệu ứng cuộn
-            $('html, body').animate({
-                scrollTop: parseInt($(".Reply-sec").offset().top)
-            }, 2000);
-            //Thế chỗ
-            $("h6.leave-comment").replaceWith('<h6 class="leave-comment" style="color:#116184;">Trả lời bình luận</h6>');
-            $(".submit-comment").val("Gửi trả lời").css("background-color", "#116184");
-            $(".submit-comment").css("background-color", "#116184")
-        });
+        $(document).ready(function () {
+            $('.Reply-section').slideToggle();
 
+            $(".btn-Reply").click(function () {
+                //Lấy id của comment
+                var $clickedButton = $(this);
+                var commentId = $clickedButton.data('comment-id');
+                $('#comment-id').val(commentId);
+                //Hiệu ứng cuộn
+
+                var arrayId = $(".users-list .Reply-section");
+                for (var i = 0; i < arrayId.length; i++) {
+                    if ($(arrayId[i]).attr('id') == commentId) {
+                        $("#" +$(arrayId[i]).attr('id')).slideToggle();
+                    }
+                }
+
+
+                //$('.Reply-section').slideToggle();
+                //$('html, body').animate({
+                //    scrollTop: parseInt($(".Reply-sec").offset().top)
+                //}, 2000);
+                //Thế chỗ
+                //var commentName = $clickedButton.data('comment-name');
+                //$("h6.leave-comment").replaceWith('<h6 class="leave-comment" style="color:#116184;">Trả lời ' + commentName + '</h6>');
+                //$(".submit-comment").val("Gửi trả lời");
+                //$(".submit-comment").css("background-color", "#116184")
+            });
+        });
 
 
     </script>

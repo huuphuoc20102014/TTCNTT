@@ -68,22 +68,31 @@ namespace TTCNTT.Controllers
             return View(model);
         }
 
+        public class listData
+        {
+            public String FkProductId { get; set; }
+            public String MyName { get; set; }
+            public String MyEmail { get; set; }
+            public String MyPhone { get; set; }
+            public String MyContent { get; set; }
+            public String FkProductCommentId { get; set; }
+        }
 
         [HttpPost]
         [Route("NewProductComment")]
-        public async Task<IActionResult> NewProductComment(string fkProductId, string name, string email, string phone, string content, string fkProductCommentId)
+        public async Task<IActionResult> NewProductComment([FromBody]listData ListData)
         {
             ProductComment comment = new ProductComment();
 
             try
             {
                 comment.Id = Guid.NewGuid().ToString();
-                comment.FkProductId = fkProductId;
-                comment.Name = name;
-                comment.Email = email;
-                comment.Phone = phone;
-                comment.Comment = content;
-                comment.FkProductCommentId = fkProductCommentId;
+                comment.FkProductId = ListData.FkProductId;
+                comment.Name = ListData.MyName;
+                comment.Email = ListData.MyEmail;
+                comment.Phone = ListData.MyEmail;
+                comment.Comment = ListData.MyContent;
+                comment.FkProductCommentId = ListData.FkProductCommentId;
                 comment.IsRead = false;
                 comment.CreatedBy = "Customer";
                 comment.CreatedDate = DateTime.Now;
