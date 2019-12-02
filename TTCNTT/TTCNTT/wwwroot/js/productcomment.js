@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-    $(".submit-comment").click(function () {
+    $(".button-comment").click(function () {
 
         var fkProductId = $('#fk_ProductId');
         var yourName = $('#name');
@@ -30,7 +30,7 @@
                 else {
                     //Load lại chỗ danh sách comment
                     $(".users-list").load(" .users-list > *");
-
+                    
 
 
                     //Xóa tất cả dữ liệu trong ô nhập
@@ -64,7 +64,7 @@
         });
     });
 
-    $(".button-comment").click(function () {
+    $(".button-reply").click(function () {
 
         var fkProductId = $('#fk_ProductId');
         var myName = $('#' + $('#comment-id').val()).find('.MyName');
