@@ -119,18 +119,18 @@
                                     <form id="CommentForm" method="post">
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <input id="name" type="text" placeholder="Họ tên" class="text-field-box borderd smoke-white ">
+                                                <input id="name" type="text" placeholder="Họ tên*" class="text-field-box borderd smoke-white ">
                                             </div>
                                             <div class="col-md-4">
-                                                <input id="email" type="email" placeholder="Email" class="text-field-box borderd smoke-white ">
+                                                <input id="email" type="email" placeholder="Email*" class="text-field-box borderd smoke-white ">
                                             </div>
                                             <div class="col-md-4">
-                                                <input id="phone" type="text" placeholder="Số điện thoại" class="text-field-box borderd smoke-white ">
+                                                <input id="phone" type="text" placeholder="Số điện thoại*" class="text-field-box borderd smoke-white ">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="container">
-                                                <textarea id="content" class="text-field-box borderd smoke-white" placeholder="Nội dung bình luận"></textarea>
+                                                <textarea id="content" class="text-field-box borderd smoke-white" placeholder="Nội dung bình luận*"></textarea>
                                                 <input type="button" class="button-medium button-comment" value="Gửi bình luận" />
                                             </div>
                                         </div>
@@ -228,7 +228,6 @@ Content Area End -->
         var _urlComment = '@Url.Action("NewProductComment", "Product")';
         var _urlProductSearch = '@Url.Action("ProductSearch", "san-pham")';
     </script>
-
     <script src="~/js/productcomment.js"></script>
     <script src="~/js/ProductSearch.js"></script>
     <script>
