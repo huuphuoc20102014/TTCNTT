@@ -36,6 +36,9 @@
 </head>
 <body>
 
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v5.0"></script>
+
     @{
         var headerModel = await TTCNTT.Helpers.SettingValueHelper.GetValueSetting(context);
         <partial name="_header" model="headerModel" />

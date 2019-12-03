@@ -68,49 +68,6 @@ namespace TTCNTT.Controllers
             return View(model);
         }
 
-        public class listData
-        {
-            public String FkProductId { get; set; }
-            public String MyName { get; set; }
-            public String MyEmail { get; set; }
-            public String MyPhone { get; set; }
-            public String MyContent { get; set; }
-            public String FkProductCommentId { get; set; }
-        }
-
-        [HttpPost]
-        [Route("NewProductComment")]
-        public async Task<IActionResult> NewProductComment([FromBody]listData ListData)
-        {
-            ProductComment comment = new ProductComment();
-
-            try
-            {
-                comment.Id = Guid.NewGuid().ToString();
-                comment.FkProductId = ListData.FkProductId;
-                comment.Name = ListData.MyName;
-                comment.Email = ListData.MyEmail;
-                comment.Phone = ListData.MyEmail;
-                comment.Comment = ListData.MyContent;
-                comment.FkProductCommentId = ListData.FkProductCommentId;
-                comment.IsRead = false;
-                comment.CreatedBy = "Customer";
-                comment.CreatedDate = DateTime.Now;
-                comment.RowStatus = 0;
-
-                _dbContext.ProductComment.Add(comment);
-                await _dbContext.SaveChangesAsync();
-                TempData["NewsComment"] = "Đăng thành công.";
-
-                return Json(true);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { errorMessage = ex.ToString() });
-            }
-
-        }
-
         [Route("ProductSearch")]
         public async Task<IActionResult> ProductSearch(string search)
         {
@@ -131,5 +88,50 @@ namespace TTCNTT.Controllers
 
             return View(model);
         }
+
+        #region NewProductComment
+        //public class listData
+        //{
+        //    public String FkProductId { get; set; }
+        //    public String MyName { get; set; }
+        //    public String MyEmail { get; set; }
+        //    public String MyPhone { get; set; }
+        //    public String MyContent { get; set; }
+        //    public String FkProductCommentId { get; set; }
+        //}
+
+        //[HttpPost]
+        //[Route("NewProductComment")]
+        //public async Task<IActionResult> NewProductComment([FromBody]listData ListData)
+        //{
+        //    ProductComment comment = new ProductComment();
+
+        //    try
+        //    {
+        //        comment.Id = Guid.NewGuid().ToString();
+        //        comment.FkProductId = ListData.FkProductId;
+        //        comment.Name = ListData.MyName;
+        //        comment.Email = ListData.MyEmail;
+        //        comment.Phone = ListData.MyEmail;
+        //        comment.Comment = ListData.MyContent;
+        //        comment.FkProductCommentId = ListData.FkProductCommentId;
+        //        comment.IsRead = false;
+        //        comment.CreatedBy = "Customer";
+        //        comment.CreatedDate = DateTime.Now;
+        //        comment.RowStatus = 0;
+
+        //        _dbContext.ProductComment.Add(comment);
+        //        await _dbContext.SaveChangesAsync();
+        //        TempData["NewsComment"] = "Đăng thành công.";
+
+        //        return Json(true);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { errorMessage = ex.ToString() });
+        //    }
+
+        //}
+        #endregion
     }
 }

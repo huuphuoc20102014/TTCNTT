@@ -8,63 +8,50 @@
         var yourPhone = $('#phone');
         var yourContent = $('#content');
 
-        //if (!yourName.val() || !yourEmail.val() || !yourPhone.val() || !yourContent.val()) {
-        //    alert('trong');
-        //}
-        //else {
-            var dataArray = {
-                FkProductId: fkProductId.val(),
-                MyName: yourName.val(),
-                MyEmail: yourEmail.val(),
-                MyPhone: yourPhone.val(),
-                MyContent: yourContent.val()
-            };
+        var dataArray = {
+            FkProductId: fkProductId.val(),
+            MyName: yourName.val(),
+            MyEmail: yourEmail.val(),
+            MyPhone: yourPhone.val(),
+            MyContent: yourContent.val()
+        };
 
-            $.ajax({
-                url: _urlComment,
-                type: 'POST',
-                data: JSON.stringify(dataArray),
-                dataType: 'json',
-                contentType: 'application/json; charset=utf-8',
-                success: function (data) {
-                    if (data.errorMessage) {
-                        console.log(data.errorMessage);
-                        alert('Lỗi');
-                    }
-                    else {
-                        //Refresh Comment
-                        $(".blog-comment-sec").load(" .blog-comment-sec > *");
+        $.ajax({
+            url: _urlComment,
+            type: 'POST',
+            data: JSON.stringify(dataArray),
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.errorMessage) {
+                    console.log(data.errorMessage);
+                    alert('Lỗi');
+                }
+                else {
+                    //Refresh Comment
+                    $(".blog-comment-sec").load(" .blog-comment-sec > *");
 
-                        //Empty input
-                        //yourName.val('');
-                        //yourEmail.val('');
-                        //yourPhone.val('');
-                        //yourContent.val('');
+                    //Re-register event
+                    $(document).on('click', '.btn-Reply', function () {
 
-                        //Re-register event
-                        $(document).on('click', '.btn-Reply', function () {
+                        //Get id of comment
+                        var $clickedButton = $(this);
+                        var commentId = $clickedButton.data('comment-id');
+                        $('#comment-id').val(commentId);
 
-                            //Get id of comment
-                            var $clickedButton = $(this);
-                            var commentId = $clickedButton.data('comment-id');
-                            $('#comment-id').val(commentId);
-
-                            //Reply
-                            var arrayId = $(".users-list .Reply-section");
-                            for (var i = 0; i < arrayId.length; i++) {
-                                if ($(arrayId[i]).attr('id') == commentId) {
-                                    $("#" + $(arrayId[i]).attr('id')).slideToggle();
-                                }
+                        //Reply
+                        var arrayId = $(".users-list .Reply-section");
+                        for (var i = 0; i < arrayId.length; i++) {
+                            if ($(arrayId[i]).attr('id') == commentId) {
+                                $("#" + $(arrayId[i]).attr('id')).slideToggle();
                             }
+                        }
 
-                        });
+                    });
 
-                    }
-                },
-            });
-        //};
-
-
+                }
+            },
+        });
     });
 
     $(".button-reply").click(function () {

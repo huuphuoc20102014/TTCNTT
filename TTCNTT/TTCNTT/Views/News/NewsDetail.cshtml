@@ -54,58 +54,9 @@
                             <!-- Start:Comment Area-->
                             <div class="blog-comment-sec">
                                 <h4>Bình Luận</h4>
-                                <ul class="users-list">
-                                    <li>
-                                        <!-- hình ảnh -->
-                                        @*<div class="user-pic">
-                                                <img src="~/template/img/testimonial-2.jpg" alt="">
-                                            </div>*@
-                                        @if (Model.listNewsComment.Count() != 0)
-                                        {
-                                            @foreach (var item in Model.listNewsComment)
-                                            {
-                                                <div class="user-comment">
-                                                    <h6>@item.Name</h6>
-                                                    <span>@item.CreatedDate</span>
-                                                    <p>@item.Comment.</p>
-                                                    @*<p><a href="#">Phản hồi</a></p>*@
-                                                </div>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <p style="text-align:center; font-size:18px;">(Hãy là người bình luận đầu tiên)</p>
-                                        }
 
-                                    </li>
-                                </ul>
+                                    <div class="fb-comments" data-href="http://localhost:60938" data-width="730" data-numposts="5"></div>
 
-                                <!-- Start:Leave Repaly -->
-                                <div class="Reply-sec">
-                                    <input id="fk_NewsId" type="hidden" value="@Model.news.Id" />
-                                    <h6>Để lại bình luận</h6>
-                                    <p>Email và số điện thoại của bạn sẽ được giữ bí mật.</p>
-                                    <form id="CommentForm" asp-action="NewsComment" method="post">
-                                        <input asp-for="fkNewsId" type="hidden" value="@Model.news.Id" />
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <input asp-for="Name" type="text" placeholder="Họ tên" class="text-field-box borderd smoke-white ">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input asp-for="Email" type="email" placeholder="Email" class="text-field-box borderd smoke-white ">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input asp-for="Phone" type="text" placeholder="Số điện thoại" class="text-field-box borderd smoke-white ">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="container">
-                                                <textarea asp-for="Content" class="text-field-box borderd smoke-white" placeholder="Nội dung bình luận"></textarea>
-                                                <button type="submit" class="button-medium submit-comment">Gửi bình luận</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
                                 <!-- End:Leave Repaly -->
                             </div>
                             <!-- End:Comment Area-->
