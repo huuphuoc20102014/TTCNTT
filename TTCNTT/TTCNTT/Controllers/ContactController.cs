@@ -33,18 +33,26 @@ namespace TTCNTT.Controllers
             return View(model);
         }
 
+        public class ListInform
+        {
+            public String Name { get; set; }
+            public String Email { get; set; }
+            public String Phone { get; set; }
+            public String Content { get; set; }
+        }
+
         [HttpPost]
-        public async Task<IActionResult> NewContact([FromForm] ContactViewModel vmItem)
+        public async Task<IActionResult> NewContact([FromBody] ListInform Item)
         {
             Contact contact = new Contact();
 
             try
             {
                 contact.Id = Guid.NewGuid().ToString();
-                contact.Name = vmItem.Name;
-                contact.Email = vmItem.Email;
-                contact.Phone = vmItem.Phone;
-                contact.Body = vmItem.Body;
+                contact.Name = Item.Name;
+                contact.Email = Item.Email;
+                contact.Phone = Item.Phone;
+                contact.Body = Item.Content;
                 contact.IsRead = false;
                 contact.CreatedBy = "Customer";
                 contact.CreatedDate = DateTime.Now;
@@ -107,46 +115,49 @@ namespace TTCNTT.Controllers
             }
         }
 
-        //public async Task<IActionResult> TestSendMail(string email = "truongpq197@gmail.com", string subject = "Test gửi mail", string message = "<h1>Nội dung</h1>")
-        //{
-        //    try
-        //    {
-        //        // Credentials
-        //        var credentials = new NetworkCredential(_emailSettings.Sender, _emailSettings.Password);
+        #region TestSendMail
+            //public async Task<IActionResult> TestSendMail(string email = "truongpq197@gmail.com", string subject = "Test gửi mail", string message = "<h1>Nội dung</h1>")
+            //{
+            //    try
+            //    {
+            //        // Credentials
+            //        var credentials = new NetworkCredential(_emailSettings.Sender, _emailSettings.Password);
 
-        //        // Mail message
-        //        var mail = new MailMessage()
-        //        {
-        //            From = new MailAddress(_emailSettings.Sender, _emailSettings.SenderName),
-        //            Subject = subject,
-        //            Body = message,
-        //            IsBodyHtml = true
-        //        };
+            //        // Mail message
+            //        var mail = new MailMessage()
+            //        {
+            //            From = new MailAddress(_emailSettings.Sender, _emailSettings.SenderName),
+            //            Subject = subject,
+            //            Body = message,
+            //            IsBodyHtml = true
+            //        };
 
-        //        mail.To.Add(new MailAddress(email));
+            //        mail.To.Add(new MailAddress(email));
 
-        //        // Smtp client
-        //        var client = new SmtpClient()
-        //        {
-        //            Port = _emailSettings.MailPort,
-        //            DeliveryMethod = SmtpDeliveryMethod.Network,
-        //            UseDefaultCredentials = false,
-        //            Host = _emailSettings.MailServer,
-        //            EnableSsl = _emailSettings.EnableSSL,
-        //            Credentials = credentials
-        //        };
+            //        // Smtp client
+            //        var client = new SmtpClient()
+            //        {
+            //            Port = _emailSettings.MailPort,
+            //            DeliveryMethod = SmtpDeliveryMethod.Network,
+            //            UseDefaultCredentials = false,
+            //            Host = _emailSettings.MailServer,
+            //            EnableSsl = _emailSettings.EnableSSL,
+            //            Credentials = credentials
+            //        };
 
-        //        // Send it...         
-        //        await client.SendMailAsync(mail);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // TODO: handle exception
-        //        throw new InvalidOperationException(ex.Message);
-        //    }
+            //        // Send it...         
+            //        await client.SendMailAsync(mail);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        // TODO: handle exception
+            //        throw new InvalidOperationException(ex.Message);
+            //    }
 
-        //    return View();
-        //}
+            //    return View();
+            //}
+        #endregion
+
 
     }
 }

@@ -1,40 +1,24 @@
 ﻿$(document).ready(function () {
 
-    var yourName = $('#contact-name');
-    var yourEmail = $('#contact-email');
-    var yourTelephone = $('#contact-number');
-    var yourMessage = $('#contact-msg');
-
     $("#contact-submit").click(function () {
+        var yourName = $('#Name');
+        var yourEmail = $('#Email');
+        var yourTelephone = $('#Phone');
+        var yourMessage = $('#Body');
+
+        var listContact = {
+            Name: yourName.val(),
+            Email: yourEmail.val(),
+            Phone: yourTelephone.val(),
+            Content: yourMessage.val()
+        };
+
         $.ajax({
             url: _urlContact,
             type: 'POST',
-            data: {
-                name: yourName.val(),
-                email: yourEmail.val(),
-                phone: yourTelephone.val(),
-                content: yourMessage.val()
-            },
+            data: JSON.stringify(listContact),
             dataType: 'json',
-            error: function (jqXHR, exception) {
-                var msg = '';
-                if (jqXHR.status === 0) {
-                    msg = 'Not connect.\n Verify Network.';
-                } else if (jqXHR.status == 404) {
-                    msg = 'Requested page not found. [404]';
-                } else if (jqXHR.status == 500) {
-                    msg = 'Internal Server Error [500].';
-                } else if (exception === 'parsererror') {
-                    msg = 'Requested JSON parse failed.';
-                } else if (exception === 'timeout') {
-                    msg = 'Time out error.';
-                } else if (exception === 'abort') {
-                    msg = 'Ajax request aborted.';
-                } else {
-                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                }
-                alert(msg);
-            },
+            contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 if (data.errorMessage) {
                     console.log(data.errorMessage);
@@ -42,13 +26,7 @@
                     $(".col-md-12").append($('<div id="contact-failed"> Lỗi...!, gửi thất bại, mời bạn thử lại sau.</div>'));
                 }
                 else {
-                    //$(".content-area").load(location.href + " .content-area>*", "");
-                    yourName.val('');
-                    yourEmail.val('');
-                    yourTelephone.val('');
-                    yourMessage.val('');
-
-                    $(".col-md-12").append($('<div id="contact-success">Gửi thành công!</div>'));
+                    $(".content-area").load(location.href + " .content-area>*", "");
                 }
             },
         });

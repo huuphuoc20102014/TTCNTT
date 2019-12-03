@@ -29,31 +29,25 @@
                     <h1>@Model.setting.CONTACT</h1>
                 </div>
                 <div class="form-sec">
-                    <form id="ContactForm" asp-action="NewContact" method="post">
+                    <form id="ContactForm" method="post">
                         <div class="col-md-4">
-                            <input asp-for="Name" type="text" placeholder="Tên của bạn" class="tt-text-field-box">
+                            <input id="Name" type="text" placeholder="Tên của bạn" class="tt-text-field-box">
                         </div>
                         <div class="col-md-4">
-                            <input asp-for="Email" type="email" placeholder="Email" class="tt-text-field-box">
+                            <input id="Email" type="email" placeholder="Email" class="tt-text-field-box">
                         </div>
                         <div class="col-md-4">
-                            <input asp-for="Phone" type="text" placeholder="Số điện thoại" class="tt-text-field-box">
+                            <input id="Phone" type="text" placeholder="Số điện thoại" class="tt-text-field-box">
                         </div>
                         <div class="col-md-12">
-                            @*<input asp-for="Body" type="text" placeholder="Nội dung" class="tt-text-field-box">*@
-                            <textarea asp-for="Body" class="tt-text-field-box" placeholder="Nội dung"></textarea>
-                            <button type="submit" class="button-medium">Gửi ngay</button>
+                            <textarea id="Body" class="text-field-box" placeholder="Nội dung"></textarea>
+                            @*<button id="contact-submit" type="submit" class="button-medium">Gửi ngay</button>*@
+                            <input id="contact-submit" type="submit" class="button-medium" value="Gửi ngay" />
                         </div>
                         @if (TempData["LienHe"] != null)
                         {
                             <div id="contact-success">
                                 @TempData["LienHe"]
-                            </div>
-                        }
-                        else
-                        {
-                            <div id="contact-failed">
-                                Lỗi...!, gửi thất bại, mời bạn thử lại sau.
                             </div>
                         }
                         <div class="error-item">
@@ -77,9 +71,9 @@
 </section>
 
 @section scripts{
-    @*<script>
+    <script>
         var _urlContact = '@Url.Action("NewContact", "Contact")';
-    </script>*@
-    @*<script src="~/js/contact.js"></script>*@
+    </script>
+    <script src="~/js/contact.js"></script>
     <script src="~/js/Validate/Validate-Contact.js"></script>
 }
