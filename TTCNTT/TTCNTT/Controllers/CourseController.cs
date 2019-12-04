@@ -56,7 +56,7 @@ namespace TTCNTT.Controllers
             CourseViewModel model = new CourseViewModel();
             model.course = await _dbContext.Course.FirstOrDefaultAsync(h => h.Slug_Name == id);
             model.courseType = await _dbContext.CourseType.FirstOrDefaultAsync(p => p.Id == model.course.FkCourseTypeId);
-            model.listCourse = await _dbContext.Course.Where(h => h.FkCourseTypeId == model.courseType.Id).OrderByDescending(h => h.CreatedDate).ToListAsync();
+            model.listCourse = await _dbContext.Course.Where(h => h.FkCourseTypeId == model.courseType.Id && h.Id != model.course.Id).OrderByDescending(h => h.CreatedDate).ToListAsync();
             model.listCourseType1 = await _dbContext.CourseType.ToListAsync();
 
             model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);

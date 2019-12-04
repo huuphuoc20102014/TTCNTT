@@ -40,7 +40,7 @@ namespace TTCNTT.Controllers
         {
             EmployeeViewModel model = new EmployeeViewModel();
             model.employee = await _dbContext.Employee.FirstOrDefaultAsync(h => h.Id == id);
-            model.listEmployee = await _dbContext.Employee.Where(p => p.Fk_EmplyeeId == "ET03").ToListAsync();
+            model.listEmployee = await _dbContext.Employee.Where(p => p.Fk_EmplyeeId == "ET03" && p.Id != model.employee.Id).ToListAsync();
 
             model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
 

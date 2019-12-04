@@ -40,7 +40,7 @@ namespace TTCNTT.Controllers
         {
             ServiceViewModel model = new ServiceViewModel();
             model.service = await _dbContext.Service.FirstOrDefaultAsync(h => h.Slug_Name == id);
-            model.listService = await _dbContext.Service.OrderByDescending(h => h.CreatedDate).ToListAsync();
+            model.listService = await _dbContext.Service.Where(h => h.Id != model.service.Id).OrderByDescending(h => h.CreatedDate).ToListAsync();
             model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
 
             return View(model);

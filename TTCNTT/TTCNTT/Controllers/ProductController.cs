@@ -41,9 +41,8 @@ namespace TTCNTT.Controllers
             ProductViewModel model = new ProductViewModel();
             model.product = await _dbContext.Product.FirstOrDefaultAsync(h => h.Slug_Name == id);
             model.category = await _dbContext.Category.FirstOrDefaultAsync(h => h.Id == model.product.FkProductId);
-            model.listProduct = await _dbContext.Product.Where(h => h.FkProductId == model.category.Id).OrderByDescending(h => h.CreatedDate).ToListAsync();
+            model.listProduct = await _dbContext.Product.Where(h => h.FkProductId == model.category.Id && h.Id != model.product.Id).OrderByDescending(h => h.CreatedDate).ToListAsync();
             model.listCategory = await _dbContext.Category.ToListAsync();
-            model.listProductComment = await _dbContext.ProductComment.Where(h => h.FkProductId == model.product.Id).OrderBy(h => h.CreatedDate).ToListAsync();
 
             model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
 

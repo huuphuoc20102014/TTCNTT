@@ -56,8 +56,7 @@ namespace TTCNTT.Controllers
             model.news = await _dbContext.News.SingleOrDefaultAsync(h => h.Slug_Title == id);
             model.newsType = await _dbContext.NewsType.Where(h => h.Id == model.news.FkNewsTypeId).FirstOrDefaultAsync();
             model.listNewsType = await _dbContext.NewsType.ToListAsync();
-            model.listNews = await _dbContext.News.Where(h => h.FkNewsTypeId == model.newsType.Id).OrderByDescending(h => h.CreatedDate).ToListAsync();
-            model.listNewsComment = await _dbContext.NewsComment.Where(h => h.FkNewsId == model.news.Id).OrderBy(h => h.CreatedDate).ToListAsync();
+            model.listNews = await _dbContext.News.Where(h => h.FkNewsTypeId == model.newsType.Id && h.Id != model.news.Id).OrderByDescending(h => h.CreatedDate).ToListAsync();
 
             model.setting = model.setting = await SettingHelper.ReadServerOptionAsync(_dbContext);
 
