@@ -52,7 +52,15 @@
                                         <div class="info-text-holder">
                                             <h6><a href="~/tin-tuc/chi-tiet/@item.Slug_Title">@item.Title.</a></h6>
                                             <span><a href="~/tin-tuc/chi-tiet/@item.Slug_Title">@item.CreatedDate</a></span>
-                                            <p>@item.ShortDescription_Html. </p>
+                                            @if (@item.ShortDescription_Html.Length >= 100)
+                                            {
+                                                <p>@item.ShortDescription_Html.Substring(0, 100)...</p>
+                                            }
+                                            else
+                                            {
+                                                <p>@item.ShortDescription_Html...</p>
+
+                                            }
                                             <a href="~/tin-tuc/chi-tiet/@item.Slug_Title" class="button-medium">ĐỌC TIẾP</a>
                                         </div>
                                     </div>

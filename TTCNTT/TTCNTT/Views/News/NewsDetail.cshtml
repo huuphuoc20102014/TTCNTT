@@ -92,8 +92,16 @@
                                                     </div>
                                                     <div class="col-md-7">
                                                         <div class="text">
-                                                            <p>@item.Title</p>
-                                                            <p>@item.ShortDescription_Html</p>
+                                                            <p class="news-related-title">@item.Title</p>
+                                                            @if (@item.ShortDescription_Html.Length >= 85)
+                                                            {
+                                                                <p>@item.ShortDescription_Html.Substring(0, 85)...</p>
+                                                            }
+                                                            else
+                                                            {
+                                                                <p>@item.ShortDescription_Html...</p>
+
+                                                            }
                                                         </div>
                                                     </div>
                                                 </a>

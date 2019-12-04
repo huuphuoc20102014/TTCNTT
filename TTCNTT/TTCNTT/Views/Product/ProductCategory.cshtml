@@ -53,7 +53,15 @@
                                         <div class="info-text-holder">
                                             <h6><a href="~/san-pham/chi-tiet/@item.Slug_Name">@item.Name.</a></h6>
                                             <span><a href="~/san-pham/chi-tiet/@item.Slug_Name">@item.CreatedDate</a></span>
-                                            <p>@item.ShortDescription_Html. </p>
+                                            @if (@item.ShortDescription_Html.Length >= 100)
+                                            {
+                                                <p>@item.ShortDescription_Html.Substring(0, 100)...</p>
+                                            }
+                                            else
+                                            {
+                                                <p>@item.ShortDescription_Html...</p>
+
+                                            }
                                             <a href="~/san-pham/chi-tiet/@item.Slug_Name" class="button-medium">XEM THÊM</a>
                                         </div>
                                     </div>

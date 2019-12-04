@@ -74,3 +74,7 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+.news-related-title{
+    font-size: large;
+    font-weight:bold;
+}

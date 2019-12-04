@@ -55,7 +55,15 @@
                                                 <h6>@item.Specialize</h6>
                                                 <h5><a href="~/giang-vien/chi-tiet/@item.Id">@item.Name</a> </h5>
                                                 <hr>
-                                                <p id="tt-employee-detail">@item.ShortDescription_Html. </p>
+                                                @if (@item.ShortDescription_Html.Length >= 100)
+                                                {
+                                                    <p>@item.ShortDescription_Html.Substring(0, 100)...</p>
+                                                }
+                                                else
+                                                {
+                                                    <p>@item.ShortDescription_Html...</p>
+
+                                                }
 
                                             </div>
 
