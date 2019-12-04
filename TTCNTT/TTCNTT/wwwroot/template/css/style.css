@@ -3615,6 +3615,10 @@ input[type="text"] {
 	float: left;
     margin-bottom: 10px;
 }
+input[type="number"] {
+	float: left;
+	margin-bottom: 10px;
+}
 label i {
 	margin-right: 10px;
 }

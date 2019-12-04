@@ -65,21 +65,31 @@ namespace TTCNTT.Controllers
             return View(model);
         }
 
+        public class RegisterInform
+        {
+            public String Name { get; set; }
+            public String Email { get; set; }
+            public String Phone { get; set; }
+            public String Member { get; set; }
+            public String Content { get; set; }
+            public String CourseId { get; set; }
+        }
+
         [HttpPost]
         [Route("CourseRegister")]
-        public async Task<IActionResult> CourseRegister(string name, string email, string phone, int membercount, string content, string fkcourseid)
+        public async Task<IActionResult> CourseRegister([FromBody] RegisterInform register)
         {
             Contact contact = new Contact();
 
             try
             {
                 contact.Id = Guid.NewGuid().ToString();
-                contact.Name = name;
-                contact.Email = email;
-                contact.Phone = phone;
-                contact.CourseMember = membercount;
-                contact.Body = content;
-                contact.FkCourseId = fkcourseid;
+                contact.Name = register.Name;
+                contact.Email = register.Email;
+                contact.Phone = register.Phone;
+                contact.CourseMember = Int32.Parse(register.Member);
+                contact.Body = register.Content;
+                contact.FkCourseId = register.CourseId;
                 contact.CreatedBy = "Customer";
                 contact.CreatedDate = DateTime.Now;
                 contact.RowStatus = 0;

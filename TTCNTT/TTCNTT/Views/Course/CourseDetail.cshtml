@@ -61,29 +61,30 @@
                                     <input id="fk_CourseId" type="hidden" value="@Model.course.Id" />
                                     <h5>Điền thông tin vào mẫu dưới đây</h5>
                                     <p style="text-align:center;">(Thông tin của bạn sẽ được giữ bí mật).</p>
-                                    <form>
+                                    <form id="RegisterForm">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <input id="Name" type="text" placeholder="Họ tên" class="text-field-box borderd smoke-white ">
+                                                <input id="Name" name="Name" type="text" placeholder="Họ tên*" class="text-field-box borderd smoke-white ">
                                             </div>
                                             <div class="col-md-6">
-                                                <input id="Email" type="text" placeholder="Email" class="text-field-box borderd smoke-white ">
+                                                <input id="Email" name="Email" type="text" placeholder="Email*" class="text-field-box borderd smoke-white ">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <input id="Phone" type="text" placeholder="Số điện thoại" class="text-field-box borderd smoke-white ">
+                                                <input id="Phone" name="Phone" type="number" placeholder="Số điện thoại*" class="text-field-box borderd smoke-white " min="0" maxlength="20" onkeydown="return event.keyCode !== 69" oninput="validity.valid||(value='');">
                                             </div>
                                             <div class="col-md-6">
-                                                <input id="member" type="text" placeholder="Số người học" class="text-field-box borderd smoke-white ">
+                                                <input id="member" name="member" type="number" placeholder="Số người học*" class="text-field-box borderd smoke-white " min="1" maxlength="20" onkeydown="return event.keyCode !== 69" oninput="validity.valid||(value='');">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="container">
-                                                <textarea id="Content" class="text-field-box borderd smoke-white" placeholder="Nội dung đăng ký"></textarea>
-                                                <button type="submit" id="contact-submit" class="button-medium submit-comment">Đăng ký</button>
+                                                <textarea id="Content" name="Content" class="text-field-box borderd smoke-white" placeholder="Nội dung đăng ký*"></textarea>
+                                                <input type="submit" id="contact-submit" class="button-medium submit-comment" value="Đăng ký" />
                                             </div>
                                         </div>
+                                        <i>(*): Bắt buộc</i>
                                         @if (TempData["CourseRegister"] != null)
                                         {
                                             <div id="contact-success">
