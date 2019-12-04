@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - TT Công Nghệ Thông Tin</title>
+    <title>@ViewData["Title"] - Trung Tâm Công Nghệ Thông Tin</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 
@@ -12,27 +12,14 @@
     <link rel="shortcut icon" href="~/template/img/favicon.ico">
 
     <!-- Core CSS -->
-    <link type="text/css" rel="stylesheet" href="~/template/css/bootstrap.css"><!-- Bootstrap -->
-    <link type="text/css" rel="stylesheet" href="~/template/css/animate.min.css"><!-- Animation -->
-    <link type="text/css" rel="stylesheet" href="~/template/css/flexslider.css"><!-- FlexSlider CSS -->
-    <link type="text/css" rel="stylesheet" href="~/template/css/style.css"><!-- Light Theme Core CSS -->
-
+    <link href="~/template/css/bootstrap.css" rel="stylesheet" />
     <link href="~/template/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-    <!-- font-awesome -->
-    <link href="~/template/fontawesome-free-5.11.2-web/css/fontawesome.min.css" rel="stylesheet" />
-    <link href="~/template/fontawesome-free-5.11.2-web/css/all.min.css" rel="stylesheet" />
-    <link href="~/template/fontawesome-free-5.11.2-web/css/brands.min.css" rel="stylesheet" />
-    <link href="~/template/fontawesome-free-5.11.2-web/css/regular.min.css" rel="stylesheet" />
-    <link href="~/template/fontawesome-free-5.11.2-web/css/solid.min.css" rel="stylesheet" />
-    <link href="~/template/fontawesome-free-5.11.2-web/css/svg-with-js.min.css" rel="stylesheet" />
-    <link href="~/template/fontawesome-free-5.11.2-web/css/v4-shims.min.css" rel="stylesheet" />
+    <link href="~/template/css/animate.min.css" rel="stylesheet" />
+    <link href="~/template/css/flexslider.css" rel="stylesheet" />
+    <link href="~/template/css/style.css" rel="stylesheet" />
+
     <link href="~/css/Validate.css" rel="stylesheet" /><!--Validate-->
     @RenderSection("Css", false)
-
-    <!-- Google Fonts here -->
-    @*<link href="~/template/css/fonts/poppins.css" rel='stylesheet' type='text/css'>
-        <link href="~/template/css/fonts/open-sans.css" type='text/css'>
-        <link href="~/template/css/fonts/lato.css" rel='stylesheet' type='text/css'>*@
 </head>
 <body>
 
@@ -60,18 +47,18 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     <!-- lbr JS -->
-    <script type="text/javascript" src="~/template/js/jquery.js"></script>
-    <script type="text/javascript" src="~/template/js/jquery.particleground.js"></script><!-- Particle Header Js -->
-    <script type="text/javascript" src="~/template/js/particle.js"></script><!-- Particle Header Js -->
-    <script type="text/javascript" src="~/template/js/owl.carousel.js"></script><!-- Owl Carousel Js -->
-    <script type="text/javascript" src="~/template/js/owl-carousel-settings.js"></script><!-- Owl Carousel Settings Js -->
-    <script type="text/javascript" src="~/template/js/jquery.flexslider.js"></script><!-- Flexslider Settings Js -->
-    <script type="text/javascript" src="~/template/js/mini-grid.js"></script><!-- Mini Master Grid Js -->
-    <script type="text/javascript" src="~/template/js/settings.js"></script><!-- Settings Js -->
-    <script type="text/javascript" src="~/template/js/bootstrap.js"></script><!-- Bootstrap Js -->
-    <script type="text/javascript" src="~/template/js/featherlight.min.js"></script><!-- Feather-Lightbox (projects) Js -->
-    <script type="text/javascript" src="~/template/js/forms.js"></script><!-- Form Js -->
-    <script type="text/javascript" src="~/template/js/animation.js"></script><!-- Animation Js -->
+    <script src="~/template/js/jquery.js"></script>
+    <script src="~/template/js/jquery.particleground.js"></script><!-- Particle Header Js -->
+    <script src="~/template/js/particle.js"></script><!-- Particle Header Js -->
+    <script src="~/template/js/owl.carousel.js"></script><!-- Owl Carousel Js -->
+    <script src="~/template/js/owl-carousel-settings.js"></script><!-- Owl Carousel Settings Js -->
+    <script src="~/template/js/jquery.flexslider.js"></script><!-- Flexslider Settings Js -->
+    <script src="~/template/js/mini-grid.js"></script><!-- Mini Master Grid Js -->
+    <script src="~/template/js/settings.js"></script><!-- Settings Js -->
+    <script src="~/template/js/bootstrap.js"></script><!-- Bootstrap Js -->
+    <script src="~/template/js/featherlight.min.js"></script><!-- Feather-Lightbox (projects) Js -->
+    <script src="~/template/js/forms.js"></script><!-- Form Js -->
+    <script src="~/template/js/animation.js"></script><!-- Animation Js -->
     <!-- CustomerRegister -->
     <script>
         var _urlCustomerRegister = '@Url.Action("NewCustomerRegister", "Home")';
@@ -79,8 +66,9 @@
     <script src="~/js/CustomerRegister.js"></script>
 
     <!-- Validate -->
-    <script src="~/js/Validate/additional-methods.min.js"></script>
-    <script src="~/js/Validate/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
 
     @RenderSection("Scripts", required: false)
 </body>
